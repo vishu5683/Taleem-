@@ -1,4 +1,13 @@
 import "./App.css";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import RoutesWrapper from "./Router";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { store,
+  //  persistor
+   } from "./Redux/store";
+   import { Toaster } from 'react-hot-toast';
+import "bootstrap/dist/css/bootstrap.min.css";
 import Footer from "./components/footer/footer";
 // import LoginForm from './components/login form';
 import Navbar from "./components/navbar/navbar";
@@ -21,9 +30,22 @@ import NotificationPage from "./components/notifications/notifiactionpage";
 function App() {
   return (
     <>
+      <Provider store={store}>
+        <div>
+      <BrowserRouter 
+      // basename="/taleem_dev/"
+      >
+          <Routes>
+            <Route path="/*" element={<RoutesWrapper />}></Route>
+          </Routes>
+        </BrowserRouter>
+      </div>
+      <Toaster/>
+
+      </Provider>
       {/* <LoginForm/> */}
-      <Navbar />
-<NotificationPage/>
+      {/* <Navbar /> */}
+{/* <NotificationPage/> */}
       {/* <Join />
       <Steps />
       <FeaturesCarousel />
@@ -33,7 +55,7 @@ function App() {
       <Review/>
       <FAQ /> */}
 
-      <Footer />
+      {/* <Footer /> */}
       {/* footer links 
       <PrivacyPolicy/>  
     <Terms/>
