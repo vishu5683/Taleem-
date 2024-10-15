@@ -17,12 +17,14 @@ import ContactUs from "./components/policies and links/contactus";
 import LastBanner from "./components/contact us comps/lastbanner";
 import GetInTouch from "./components/contact us comps/Getintouch";
 import NotificationPage from "./components/notifications/notifiactionpage";
+import LoggedInNavbar from "./components/navbar/loggedInnavbar";
 
 function App() {
   return (
     <>
       {/* <LoginForm/> */}
-      <Navbar />
+      {/* <Navbar /> */}
+      <LoggedInNavbar/>
 <NotificationPage/>
       {/* <Join />
       <Steps />
