@@ -1,0 +1,99 @@
+import React from 'react';
+import { Box, Typography, Button } from '@mui/material';
+import playstore from "../../assets/download app/Frame 418195.png";
+import AppleStore from "../../assets/download app/Frame 418196.png";
+import girlImg from "../../assets/download app/woman-showing-smartphone-with-blank-screen 1 (2).svg";
+
+const AppDownload = () => {
+  return (
+    <Box
+      sx={{
+        background: 'conic-gradient(from 188.1deg at 54.37% 60.18%, #E0E3E2 -47.45deg, #EBEBEB 223.33deg, #D5DBDC 278.67deg, #E0E3E2 312.55deg, #EBEBEB 583.33deg)',
+        padding: '40px',
+       
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        position: 'relative',
+        height: 'auto', // Adjust height based on content
+        flexDirection: { xs: 'column', md: 'row' }, // Stack in column for mobile, row for desktop
+      }}
+    >
+      {/* Left side text */}
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'flex-start',
+          maxWidth: { xs: '100%', md: '50%' }, // Full width on mobile, 50% on desktop
+          padding: '20px',
+          textAlign: { xs: 'center', md: 'left' }, // Center text on mobile
+        }}
+      >
+        <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 2 }}>
+          Unlock a world of learning with<br/> the Taleem app
+        </Typography>
+        <Typography variant="body1" sx={{ mb: 2, color:"#737373", fontWeight:"400", fontSize:"20px" }}>
+          Download now and take the next step in your educational<br/> journey with Taleem!
+        </Typography>
+        <Typography variant="h6" sx={{ mb: 2 }}>
+          Download App From:
+        </Typography>
+        <Box sx={{ display: 'flex', gap: '10px', justifyContent: { xs: 'center', md: 'flex-start' } }}>
+          <Button
+            sx={{
+              width: { xs: '180px', md: '259px' }, // Smaller width on mobile
+              height: { xs: '60px', md: '80px' }, // Smaller height on mobile
+              padding: '20px 0 0 0',
+              borderRadius: '18px',
+              backgroundImage: `url(${playstore})`,
+              backgroundSize: 'cover',
+            }}
+          />
+          <Button
+            sx={{
+              width: { xs: '180px', md: '259px' }, // Smaller width on mobile
+              height: { xs: '60px', md: '80px' }, // Smaller height on mobile
+              padding: '20px ',
+              borderRadius: '18px',
+              backgroundImage: `url(${AppleStore})`,
+              backgroundSize: 'cover',
+            }}
+          />
+        </Box>
+      </Box>
+
+      {/* Right side image */}
+      <Box
+        sx={{
+          position: 'relative',
+          width: { xs: '80%', md: '50%' }, // Smaller width on mobile
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          mt: { xs: 3, md: 0 }, // Add margin on top for mobile view
+        }}
+      >
+        <Box
+          component="img"
+          src={girlImg}
+          alt="Girl with smartphone"
+          sx={{
+            width: { xs: '100%', md: '80%' }, // Decrease width on larger screens and responsive on mobile
+            height: { xs: 'auto', md: '300px' }, // Adjust height for larger screens, auto on mobile
+            objectFit: 'contain',
+           
+          }}
+        />
+      </Box>
+    </Box>
+  );
+};
+
+export default AppDownload;
+
+
+ok do covert possible styles inline to external 
+to reduce my code 
+only possible styles without affect UI ,, do not affect any coloring position any thing u don't have permission to do changes in to code , 
