@@ -8,7 +8,7 @@ import { useTheme } from '@mui/material/styles';
 const NotificationPage = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
-  const isMediumScreen = useMediaQuery(theme.breakpoints.down('md'));
+
 
   const notifications = [
     { message: "100 Riyals money added in your wallet", time: "today", type: "wallet" },
@@ -47,7 +47,7 @@ const NotificationPage = () => {
             display: 'flex',
             flexDirection: isSmallScreen ? 'column' : 'row',
             alignItems: 'center',
-            width: isSmallScreen ? '100%' : '1140px',
+            width: isSmallScreen ? '100%' : '1100px',
             height: isSmallScreen ? 'auto' : '104px',
             borderRadius: '18px',
             border: '1px solid #E6E6E6',

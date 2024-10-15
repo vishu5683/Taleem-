@@ -26,7 +26,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import LastBanner from "./components/contact us comps/lastbanner";
 // import GetInTouch from "./components/contact us comps/Getintouch";
 // import NotificationPage from "./components/notifications/notifiactionpage";
-
+// import LoggedInNavbar from "./components/navbar/loggedInnavbar";
 function App() {
   return (
     <>
@@ -46,6 +46,7 @@ function App() {
       {/* <LoginForm/> */}
       {/* <Navbar /> */}
 {/* <NotificationPage/> */}
+ {/* <LoggedInNavbar/> */}
       {/* <Join />
       <Steps />
       <FeaturesCarousel />
