@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Typography, Link } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom'; // Use RouterLink from react-router-dom for navigation
 import footerLogo from '../../assets/footer/Taleem Logo.png';
 import linkedinIcon from '../../assets/footer/linkedin.png';
 import xIcon from '../../assets/footer/x.png';
@@ -87,7 +88,8 @@ const Footer = () => {
           {['My Class', 'Academic', 'Recreational', 'Up Coming Class'].map((text) => (
             <Link
               key={text}
-              href="#"
+              component={RouterLink} // Use RouterLink for navigation
+              to={`/${text.replace(/\s+/g, '').toLowerCase()}`} // Dynamic route based on text
               underline="none"
               sx={{
                 color: '#FFFFFF',
@@ -117,7 +119,8 @@ const Footer = () => {
           {['Terms of Service', 'Privacy Policy', 'Contact Us'].map((text) => (
             <Link
               key={text}
-              href="#"
+              component={RouterLink} // Use RouterLink for navigation
+              to={`/${text.replace(/\s+/g, '').toLowerCase()}`} // Define the exact route path
               underline="none"
               sx={{
                 color: '#FFFFFF',

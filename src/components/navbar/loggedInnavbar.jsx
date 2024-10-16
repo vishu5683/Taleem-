@@ -17,19 +17,12 @@ import { Menu as MenuIcon, Notifications, ExpandMore } from '@mui/icons-material
 import logo from '../../assets/navbar/nav logo.png';
 import avatarImage from '../../assets/navbar/image.png';
 import DropdownProfileMenu from './DropdownProfileMenu';
+import NotificationPopup from './NotificationPopup.jsx'; // Import the NotificationPopup component
 
 const LoggedInNavbar = () => {
-  const [anchorElPrices, setAnchorElPrices] = useState(null);
   const [anchorElLanguage, setAnchorElLanguage] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  const handleOpenPrices = (event) => {
-    setAnchorElPrices(event.currentTarget);
-  };
-
-  const handleClosePrices = () => {
-    setAnchorElPrices(null);
-  };
+  const [notificationsOpen, setNotificationsOpen] = useState(false); // New state for notification popup
 
   const handleOpenLanguage = (event) => {
     setAnchorElLanguage(event.currentTarget);
@@ -41,6 +34,10 @@ const LoggedInNavbar = () => {
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const toggleNotifications = () => {
+    setNotificationsOpen(!notificationsOpen); // Toggle notification popup
   };
 
   const drawer = (
@@ -61,6 +58,12 @@ const LoggedInNavbar = () => {
       </List>
     </Box>
   );
+
+  // Dummy notifications data
+  const notifications = [
+    { title: 'Booking Confirmed', description: 'Your booking has been confirmed.' },
+    { title: 'New Offer', description: '50% off on your next trip!' },
+  ];
 
   return (
     <AppBar
@@ -112,24 +115,14 @@ const LoggedInNavbar = () => {
             Home
           </Typography>
 
-          {/* Prices Dropdown */}
-          <Box>
-            <Typography
-              variant="body1"
-              onClick={handleOpenPrices}
-              sx={{ fontWeight: 400, fontSize: '16px', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
-            >
-            My Bookings
-             
-            </Typography>
-       
-          </Box>
-
           <Typography variant="body1" sx={{ fontWeight: 400, fontSize: '16px', cursor: 'pointer' }}>
-          Schedule
+            My Bookings
           </Typography>
 
-          {/* Language Dropdown */}
+          <Typography variant="body1" sx={{ fontWeight: 400, fontSize: '16px', cursor: 'pointer' }}>
+            Schedule
+          </Typography>
+
           <Box>
             <Typography
               variant="body1"
@@ -153,6 +146,7 @@ const LoggedInNavbar = () => {
         {/* Desktop Notification & User Menu */}
         <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: '16px', alignItems: 'center' }}>
           <IconButton
+            onClick={toggleNotifications} // Show notification popup when clicked
             sx={{
               backgroundColor: '#40A39B',
               color: '#FFFFFF',
@@ -187,6 +181,9 @@ const LoggedInNavbar = () => {
       >
         {drawer}
       </Drawer>
+
+      {/* Notification Popup */}
+      <NotificationPopup open={notificationsOpen} onClose={toggleNotifications} notifications={notifications} />
     </AppBar>
   );
 };

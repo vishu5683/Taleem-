@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   Box,
   Typography,
@@ -9,8 +9,39 @@ import {
   IconButton,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import { useNavigate } from 'react-router-dom';
 
 const OtpScreen = ({ open, handleClose }) => {
+  const navigate = useNavigate();
+  const otpRefs = useRef([]); // Create a ref array to store OTP input references
+  const [otp, setOtp] = React.useState(Array(6).fill("")); // Initialize OTP state
+
+  const handleChange = (index, value) => {
+    if (value.length <= 1) {
+      const newOtp = [...otp];
+      newOtp[index] = value;
+      setOtp(newOtp);
+      
+      // Move focus to the next input field
+      if (value && index < otp.length - 1) {
+        otpRefs.current[index + 1].focus();
+      }
+    }
+  };
+
+  const handleKeyDown = (e, index) => {
+    // Handle backspace to shift focus to the previous input field
+    if (e.key === 'Backspace' && index > 0 && !otp[index]) {
+      otpRefs.current[index - 1].focus();
+    }
+  };
+
+  const handleVerify = () => {
+    // Here you can add any OTP verification logic
+    // For now, we'll just navigate to /home
+    navigate('/home');
+  };
+
   return (
     <Modal
       open={open}
@@ -74,10 +105,14 @@ const OtpScreen = ({ open, handleClose }) => {
           justifyContent="center"
           mb={{ xs: 5, sm: 9 }}
         >
-          {[...Array(6)].map((_, index) => (
+          {otp.map((digit, index) => (
             <TextField
               key={index}
+              value={digit}
               inputProps={{ maxLength: 1, style: { textAlign: 'center' } }}
+              onChange={(e) => handleChange(index, e.target.value)}
+              onKeyDown={(e) => handleKeyDown(e, index)}
+              ref={(el) => (otpRefs.current[index] = el)} // Assign ref to each input
               sx={{
                 width: { xs: '40px', sm: '54px' },
                 height: { xs: '44px', sm: '48px' },
@@ -112,6 +147,7 @@ const OtpScreen = ({ open, handleClose }) => {
         {/* Verify OTP Button */}
         <Button
           fullWidth
+          onClick={handleVerify}
           sx={{
             backgroundColor: '#40A39B',
             color: 'white',

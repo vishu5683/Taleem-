@@ -1,7 +1,7 @@
 // Layout.jsx
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import Header from '../components/navbar/navbar';
+import Header from '../components/navbar/loggedInnavbar';
 import Footer from '../components/footer/footer';
 // import NavBar from '../Pages/NavBar/NavBar';
 
