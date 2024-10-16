@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import pic1 from "../../assets/join section/image 36.svg";
 import pic2 from "../../assets/join section/image.svg";
-// import LoginWithStudent from '../login screens/LoginWithStudent';
+import LoginWithStudent from '../login screens/LoginWithStudent';
 import './Join.css';
 // import OtpScreen from '../login screens/OtpScreen';
 // import LoginWithStudent from '../login screens/LoginWithEmail';
@@ -138,10 +138,10 @@ const Join = () => {
       </Box>
 
       {/* Modal Component */}
-      {/* <LoginWithStudent open={open} handleClose={handleClose} /> */}
+      <LoginWithStudent open={open} handleClose={handleClose} />
       {/* <OtpScreen open={open} handleClose={handleClose} /> */}
         {/* <LoginWithStudent open={open} handleClose={handleClose} /> */}
-        <SignUp open={open} handleClose={handleClose} />
+        {/* <SignUp open={open} handleClose={handleClose} /> */}
     </Box>
   );
 };
