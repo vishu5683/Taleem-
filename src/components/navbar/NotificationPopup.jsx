@@ -65,7 +65,7 @@ const NotificationPopup = React.memo(({ open, onClose }) => {
 
             {/* Notification text */}
             <Box sx={{ flexGrow: 1, position: 'relative' }}>
-              <Typography variant="body1" sx={{ fontWeight: 550 }}>
+              <Typography variant="body1" sx={{ fontWeight: 550, mb: 0.5 }}>
                 {notification.title}
               </Typography>
               {/* "Today" text aligned to bottom right */}
@@ -78,7 +78,6 @@ const NotificationPopup = React.memo(({ open, onClose }) => {
                   color: '#737373',
                   fontSize: '12px',
                   fontWeight: 400,
-                  ml: '10px',
                 }}
               >
                 Today

@@ -5,6 +5,7 @@ const LandingPage = lazy(() => import("../components/pages/LandingPage"));
 const Terms = lazy(() => import("../components/policies and links/terms"));
 const PrivacyPolicy = lazy(() => import("../components/policies and links/privacypolicy"));
 const ContactUs = lazy(() => import("../components/policies and links/contactus"));
+const myclass = lazy(() => import("../components/my class/myclass"));
 
 const ROUTES = [
   {
@@ -40,6 +41,13 @@ const ROUTES = [
     path: "/contactus",
     id: 4,
     Component: ContactUs,
+    isPrivate: false,
+  },
+  {
+    name: "My Class",
+    path: "/myclass",
+    id: 4,
+    Component: myclass,
     isPrivate: false,
   },
 ];
