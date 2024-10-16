@@ -3,10 +3,8 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import RoutesWrapper from "./Router";
 import { Provider } from "react-redux";
 // import { PersistGate } from "redux-persist/integration/react";
-import { store,
-  //  persistor
-   } from "./Redux/store";
-   import { Toaster } from 'react-hot-toast';
+import { store, persistor } from "./Redux/store";
+import { Toaster } from "react-hot-toast";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import Footer from "./components/footer/footer";
 // // import LoginForm from './components/login form';
@@ -17,7 +15,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import FeaturesCarousel from "./components/features/features";
 // import Packages from "./components/packages/packages";
 // import Explore from "./components/explore/Explore";
-
 // import Review from "./components/rating/rating";
 // import AppDownload from "./components/download app/appdownload";
 // import Terms from "./components/policies and links/terms";
@@ -28,25 +25,26 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import NotificationPage from "./components/notifications/notifiactionpage";
 // import LoggedInNavbar from "./components/navbar/loggedInnavbar";
 function App() {
+const baseName = process.env.NODE_ENV === 'development' ? '/' : '/taleem/taleem_dev/';;
   return (
     <>
       <Provider store={store}>
         <div>
-      <BrowserRouter 
-      // basename="/taleem_dev/"
-      >
-          <Routes>
-            <Route path="/*" element={<RoutesWrapper />}></Route>
-          </Routes>
-        </BrowserRouter>
-      </div>
-      <Toaster/>
-
+          <BrowserRouter
+          // "homepage": "http://54.245.144.158/taleem_dev/",
+          basename={baseName}
+          >
+            <Routes>
+              <Route path="/*" element={<RoutesWrapper />}></Route>
+            </Routes>
+          </BrowserRouter>
+        </div>
+        <Toaster />
       </Provider>
       {/* <LoginForm/> */}
       {/* <Navbar /> */}
-{/* <NotificationPage/> */}
- {/* <LoggedInNavbar/> */}
+      {/* <NotificationPage/> */}
+      {/* <LoggedInNavbar/> */}
       {/* <Join />
       <Steps />
       <FeaturesCarousel />

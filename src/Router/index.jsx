@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import PrivateRoute from "./privateRoute";
 import ROUTES from "./routes";
 import Layout from "../layouts";
-
+// logoutLayout
 function RoutesWrapper() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
