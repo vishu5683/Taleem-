@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from "react";
 
-const Home= lazy(() => import("../components/explore/Explore"));
+const Home= lazy(() => import("../components/pages/LoginHomepage"));
+const LandingPage = lazy(() => import("../components/pages/LandingPage"));
 
 const ROUTES = [
     {
@@ -14,7 +15,7 @@ const ROUTES = [
       name: "Home",
       path: "/",
       id: 0,
-      Component: Home,
+      Component: LandingPage,
       isPrivate: false,
     },
 ]
