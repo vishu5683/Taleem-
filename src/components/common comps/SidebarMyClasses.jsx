@@ -2,6 +2,8 @@ import React from 'react';
 import { Box, MenuItem, Typography, Divider, Avatar } from '@mui/material';
 import { ChevronRight } from '@mui/icons-material';
 import avatarImage from '../../assets/navbar/image.png'; // Ensure the path is correct
+// import "../faq/faq"
+// import 
 
 const SidebarMyClasses = () => {
   const menuItems = [
