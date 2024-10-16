@@ -2,6 +2,7 @@
   "name": "taleem",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://54.245.144.158/taleem/taleem_dev",
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
