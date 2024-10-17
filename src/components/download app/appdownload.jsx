@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Box, Typography, Link } from "@mui/material";
-import girlImg from "../../assets/download app/woman-showing-smartphone-with-blank-screen 1 (2).svg";
+import bgimg from "../../assets/download app/Banner.png";
 import playstore from "../../assets/download app/Frame 418195.png";
 import AppleStore from "../../assets/download app/Frame 418196.png";
 
@@ -8,8 +8,13 @@ const AppDownload = () => {
   return (
     <Box
       sx={{
-        background: "linear-gradient(135deg, #f0f0f0 30%, #e6e6e6 100%)",
+        backgroundImage: `url(${bgimg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
         p: { xs: 3, md: 4 }, // More padding for larger screens
+        height: { xs: "auto", md: "500px" }, // Set a fixed height for larger screens
+        display: "flex",
+        alignItems: "center", // Center content vertically
       }}
     >
       <Grid container spacing={4} alignItems="center">
@@ -106,30 +111,9 @@ const AppDownload = () => {
           </Box>
         </Grid>
 
-        {/* Right Side - Image Section (30%) */}
-        <Grid item xs={12} md={5}>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "100%",
-              mt: { xs: 4, md: 0 }, // Add margin-top on mobile
-            }}
-          >
-            <img
-              src={girlImg}
-              alt="Girl with smartphone"
-              style={{
-                width: "100%",
-                maxWidth: "400px", // Ensure image doesn't overflow on smaller screens
-                height: "auto",
-                objectFit: "contain",
-           
-              }}
-            />
-          </Box>
-        </Grid>
+        {/* Right Side - Empty (30%) */}
+        {/* We have removed the image section here */}
+        <Grid item xs={12} md={5} />
       </Grid>
     </Box>
   );

@@ -1,11 +1,12 @@
-import React from 'react';
-import { Box, MenuItem, Typography, Divider, Avatar } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, MenuItem, Typography, Divider, Avatar, Modal } from '@mui/material';
 import { ChevronRight } from '@mui/icons-material';
 import avatarImage from '../../assets/navbar/image.png'; // Ensure the path is correct
-// import "../faq/faq"
-// import 
+import ManageProfileModal from '../my class/manageprofile'; // Import the modal component
 
 const SidebarMyClasses = () => {
+  const [openModal, setOpenModal] = useState(false);
+
   const menuItems = [
     'My Classes',
     'My Calendar',
@@ -15,6 +16,15 @@ const SidebarMyClasses = () => {
     'Rating & Feedbacks',
     'Contact Us',
   ];
+
+  // Function to handle modal open and close
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
 
   return (
     <Box
@@ -70,7 +80,10 @@ const SidebarMyClasses = () => {
               fontWeight: 500,
               color: '#333333',
               gap: '8px',
+              cursor: 'pointer',
             }}
+            // Open modal if 'Manage Profile' is clicked
+            onClick={item === 'Manage Profile' ? handleOpenModal : () => {}} // Pass valid function
           >
             {item}
             <ChevronRight />
@@ -78,6 +91,19 @@ const SidebarMyClasses = () => {
           <Divider sx={{ backgroundColor: 'rgba(217, 217, 217, 1)', width: '80%', margin: 'auto' }} />
         </Box>
       ))}
+
+      {/* Manage Profile Modal */}
+      <Modal
+        open={openModal}
+        onClose={handleCloseModal} // Make sure onClose works
+        aria-labelledby="manage-profile-modal"
+        aria-describedby="manage-profile-modal-description"
+      >
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+          {/* Pass the handleCloseModal function to ManageProfileModal */}
+          <ManageProfileModal onClose={handleCloseModal} />
+        </Box>
+      </Modal>
     </Box>
   );
 };

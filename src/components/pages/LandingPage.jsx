@@ -1,6 +1,7 @@
 // pages/LandingPage.jsx
 import React, { lazy, Suspense } from "react";
 import { Box, CircularProgress } from "@mui/material";
+import HeroSection from "../hero section/herosection";
 
 // Lazy load the components based on the directory structure you provided
 const Navbar = lazy(() => import("../navbar/navbar"));
@@ -32,7 +33,7 @@ const LandingPage = () => {
     >
       {/* Navbar */}
       {/* <Navbar /> */}
-
+<HeroSection/>
       {/* Join Section */}
       <Join />
 

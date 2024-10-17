@@ -97,3 +97,132 @@ export default AppDownload;
 ok do covert possible styles inline to external 
 to reduce my code 
 only possible styles without affect UI ,, do not affect any coloring position any thing u don't have permission to do changes in to code , 
+
+
+
+
+
+import React, { useState } from 'react';
+import { Box, Typography, Grid, InputBase, Button } from '@mui/material';
+import { styled } from '@mui/system';
+import SearchIcon from '@mui/icons-material/Search';
+import bgimg from '../../assets/hero sec/Banner1.png';
+
+// Styled component for background image
+const HeroSectionWrapper = styled(Box)(({ theme }) => ({
+  backgroundImage: `url(${bgimg})`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  height: '500px', // Default height for larger screens
+  display: 'flex',
+  alignItems: 'center',
+  paddingLeft: '45px', // Reduced left padding for desktop
+  [theme.breakpoints.down('md')]: {
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'top',
+    height: 'auto',
+    padding: '20px', // Adjusted padding for mobile
+  },
+}));
+
+// Styled search box
+const SearchBox = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  width: '400px', // Width for desktop
+  height: '50px', // Height for desktop
+  padding: '4px 8px', // Padding for desktop
+  gap: '5px',
+  borderRadius: '8px',
+  backgroundColor: '#fff',
+  boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+  marginTop: '20px',
+  [theme.breakpoints.down('md')]: {
+    width: '80%', // Full width on mobile
+    height: '40px', // Reduced height for mobile
+    padding: '2px 6px', // Smaller padding for mobile
+    marginTop: '10px', // Reduced top margin for mobile
+  },
+}));
+
+// Styled search button
+const SearchButton = styled(Button)(({ theme }) => ({
+  width: '100px', // Width for desktop
+  height: '40px', // Height for desktop
+  padding: '10px 12px', // Padding for desktop
+  borderRadius: '8px',
+  textTransform: 'none',
+  backgroundColor: '#40A39B',
+  color: '#fff',
+  '&:hover': {
+    backgroundColor: '#37a393',
+  },
+  [theme.breakpoints.down('md')]: {
+    display: 'none', // Hide button on mobile
+  },
+}));
+
+const HeroSection = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = () => {
+    // Add your search logic here
+    console.log('Search triggered:', searchQuery);
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
+  return (
+    <HeroSectionWrapper>
+      <Grid container justifyContent="flex-start">
+        <Grid item xs={12} md={6}>
+          <Box sx={{ color: 'black', padding: { xs: '0', sm: '0', md: '0' } }}>
+            <Typography
+              variant="h2"
+              fontWeight="bold"
+              fontSize={{ xs: '22px', sm: '28px', md: '36px' }} // Desktop font size reverted
+              lineHeight="1.2"
+            >
+              Connect with your <br />
+              Perfect Tutor <br />
+              for learning.
+            </Typography>
+            <Typography
+              variant="body1"
+              fontWeight={400}
+              fontSize={{ xs: '12px', sm: '14px', md: '16px' }} // Desktop font size reverted
+              mt={1} // Margin-top adjustment
+            >
+              Accelerate your professional growth with <br />
+              1:1 expert guidance of <br />
+              28,409+ tutors in our community.
+            </Typography>
+
+            {/* Search Box */}
+            <SearchBox>
+              <SearchIcon style={{ marginRight: '5px', color: 'black' }} />
+              <InputBase
+                placeholder="Search Tutor, Subject, Courses, etc."
+                fullWidth
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyPress={handleKeyPress} // Trigger search on Enter key press
+                sx={{
+                  fontSize: { xs: '12px', sm: '14px', md: '14px' }, // Desktop font size reverted
+                }}
+              />
+              <SearchButton onClick={handleSearch}>Search</SearchButton>
+            </SearchBox>
+          </Box>
+        </Grid>
+      </Grid>
+    </HeroSectionWrapper>
+  );
+};
+
+export default HeroSection;

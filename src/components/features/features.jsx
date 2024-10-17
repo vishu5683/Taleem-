@@ -47,7 +47,8 @@ const FeaturesCarousel = () => {
           justifyContent: 'center',
           alignItems: 'center',
           position: 'relative',
-          marginTop: '40px',
+          marginTop: '20px',  // Reduced margin between heading and carousel
+    
           flexDirection: { xs: 'column', md: 'row' },  // Row layout for larger screens, column for small
         }}
       >
@@ -58,9 +59,9 @@ const FeaturesCarousel = () => {
           alt="Left Image"
           sx={{
             display: { xs: 'none', md: 'block' },  // Hide on small screens, show on medium and above
-            width: '406.08px',
-            height: '311.91px',
-            opacity: currentImage === 0 ? '100%' : '65%',
+            width: '306.08px',
+            height: '275.91px',
+            opacity: currentImage === 0 ? '100%' : '90%',
             transition: 'opacity 0.5s',
           }}
         />
@@ -71,8 +72,8 @@ const FeaturesCarousel = () => {
           src={images[currentImage]}
           alt="Center Image"
           sx={{
-            width: { xs: '300px', md: '507.59px' },  // Responsive sizing
-            height: { xs: '230px', md: '389.89px' },
+            width: { xs: '300px', md: '430px' },  // Responsive sizing
+            height: { xs: '230px', md: '361.89px' },
             borderRadius: '12px',
             transition: 'all 0.5s ease-in-out',
           }}
@@ -85,9 +86,9 @@ const FeaturesCarousel = () => {
           alt="Right Image"
           sx={{
             display: { xs: 'none', md: 'block' },  // Hide on small screens, show on medium and above
-            width: '406.08px',
-            height: '311.91px',
-            opacity: currentImage === 2 ? '100%' : '65%',
+            width: '306.08px',
+            height: '275.91px',
+            opacity: currentImage === 2 ? '100%' : '90%',
             transition: 'opacity 0.5s',
           }}
         />
@@ -99,8 +100,8 @@ const FeaturesCarousel = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          gap: '24px',
-          marginTop: '24px',
+          gap: '50px',  // Reduced gap between arrows
+          marginTop: '16px',  // Reduced margin between carousel and arrows
         }}
       >
         {/* Left Arrow (No Circle, Green Color) */}
@@ -118,11 +119,11 @@ const FeaturesCarousel = () => {
         <IconButton
           onClick={handleNext}
           sx={{
-            width: '48px',
-            height: '48px',
+            width: '37px',
+            height: '33px',
             borderRadius: '50%',
             backgroundColor: '#FFFFFF',  // White background
-            border: '2px solid #000000',  // Black border
+            border: '0.75px solid #000000',  // Black border
             color: '#40A39B',  // Primary Green arrow color
             '&:hover': {
               backgroundColor: '#F0F0F0',

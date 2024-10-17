@@ -4,6 +4,10 @@ import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SchoolIcon from '@mui/icons-material/School';
 
+import img1 from "../../assets/homepage/12.svg"; // Importing the images
+import img2 from "../../assets/homepage/34.svg";
+import img3 from "../../assets/homepage/56.svg";
+
 const MainPage = () => {
   return (
     <Grid
@@ -75,7 +79,7 @@ const MainPage = () => {
           </Box>
         </Box>
 
-        {/* Right side Join Now button (at the bottom-right for all sizes) */}
+        {/* Right side Join Now button */}
         <Button
           variant="contained"
           sx={{
@@ -95,12 +99,35 @@ const MainPage = () => {
         </Button>
       </Box>
 
+      {/* Images Section - Three images in a row with proper gaps */}
+      <Grid 
+        container 
+        spacing={3}  // Adjust spacing between images
+        justifyContent="center" 
+        sx={{ mb: 4 }}
+      >
+        {[img1, img2, img3].map((img, index) => (
+          <Grid item xs={12} sm={6} md={4} key={index} display="flex" justifyContent="center">
+            <Box
+              component="img"
+              src={img}
+              alt={`Image ${index + 1}`}
+              sx={{
+                width: { xs: '80%', sm: '90%', md: '237.56px' }, // Responsive widths
+                height: 'auto', // Maintain aspect ratio
+                borderRadius: '11.75px',
+              }}
+            />
+          </Grid>
+        ))}
+      </Grid>
+
       {/* Upcoming Classes Section */}
       <Typography variant="h5" fontWeight="bold" mb={4} textAlign="center">
         Upcoming Class
       </Typography>
 
-      {/* Class Banner 2 (Identical to Banner 1) */}
+      {/* Class Banner 2 */}
       <Box
         sx={{
           backgroundColor: 'white',
@@ -143,7 +170,7 @@ const MainPage = () => {
           </Box>
         </Box>
 
-        {/* Right side Join Now button (at the bottom-right for all sizes) */}
+        {/* Right side Join Now button */}
         <Button
           variant="contained"
           sx={{

@@ -1,43 +1,32 @@
 import React from 'react';
-import {
-  Box,
-  Typography,
-  Modal,
-  FormControl,
-  Select,
-  MenuItem,
-  TextField,
-  Button,
-} from '@mui/material';
+import { Box, Typography, Modal, FormControl, Select, MenuItem, TextField, Button } from '@mui/material';
 
 const SignUp = ({ open, handleClose }) => {
-  const [gender, setGender] = React.useState('');
+  const [role, setRole] = React.useState('student');
   const [fullName, setFullName] = React.useState('');
   const [mobileNumber, setMobileNumber] = React.useState('');
   const [email, setEmail] = React.useState('');
-  const [role, setRole] = React.useState('student');
+  const [gender, setGender] = React.useState('');
+  const handleChange = (event) => setRole(event.target.value);
 
   const handleGenderChange = (event) => setGender(event.target.value);
-  const handleRoleChange = (event) => setRole(event.target.value);
 
   return (
-    <Modal open={open} onClose={(event, reason) => reason !== 'backdropClick' && handleClose()}>
+    <Modal open={open} onClose={(event, reason) => reason !== "backdropClick" && handleClose()}>
       <Box
         sx={{
           position: 'absolute',
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: { xs: '90%', sm: '50%', md: '60%' },
-          maxHeight: '90vh',
-          overflowY: 'auto',
+          width: { xs: '85%', sm: '600px', md: '720px' },
           bgcolor: 'white',
-          borderRadius: '8px',
-          boxShadow: 24,
-          p: { xs: 3, sm: 4 },
+          borderRadius: '12px',
+          p: { xs: 0, sm: 3 },
           textAlign: 'center',
         }}
       >
+        {/* Cancel Button */}
         <Box
           onClick={handleClose}
           sx={{
@@ -62,7 +51,7 @@ const SignUp = ({ open, handleClose }) => {
             fontFamily: 'Metropolis',
             fontSize: { xs: '20px', sm: '24px' },
             fontWeight: 700,
-            mb: '16px',
+            mb: '1px',
           }}
         >
           Create your Account
@@ -72,24 +61,22 @@ const SignUp = ({ open, handleClose }) => {
             fontFamily: 'Metropolis',
             fontSize: { xs: '16px', sm: '18px' },
             color: '#737373',
-            mb: '24px',
+            mb: '10px',
           }}
         >
           Let’s continue your learning journey together
         </Typography>
-
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 3 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 1 }}>
           <Typography sx={{ fontSize: '16px', color: '#737373', mr: 1 }}>Continue as</Typography>
-          <FormControl variant="outlined" sx={{ minWidth: '105px' }}>
+          <FormControl variant="outlined" sx={{ minWidth: '100px' }}>
             <Select
               value={role}
-              onChange={handleRoleChange}
-              displayEmpty
+              onChange={handleChange}
               sx={{
-                fontSize: '18px',
+                fontSize: '14px',
                 color: '#737373',
                 background: 'linear-gradient(105.04deg, #C6FFC9 -25.33%, #D4EBFF 100%)',
-                borderRadius: '70px',
+                borderRadius: '50px',
                 height: '32px',
                 '& .MuiOutlinedInput-notchedOutline': { border: 'none' },
               }}
@@ -101,53 +88,78 @@ const SignUp = ({ open, handleClose }) => {
           </FormControl>
         </Box>
 
-        <Box sx={{ textAlign: 'left' }}>
-          <Typography sx={{ fontSize: '18px', fontWeight: 500, mb: 1 }}>Full Name*</Typography>
+        {/* Full Name */}
+        <Box sx={{ width: '420px', mx: 'auto', textAlign: 'left', mb: 2 }}>
+          <Typography sx={{ fontSize: '16px', fontWeight: 700, color: '#000000', mb: 1 }}>
+            Full Name*
+          </Typography>
           <TextField
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             placeholder="Enter your full name"
             fullWidth
-            sx={{ mb: 2, borderRadius: '6px', border: '1px solid #ccc' }}
+            sx={{
+              height: "37px",
+              borderRadius: '6px',
+              '& .MuiOutlinedInput-root': { borderRadius: '6px' },
+            }}
           />
+        </Box>
 
-          <Typography sx={{ fontSize: '18px', fontWeight: 500, mb: 1 }}>Mobile Number*</Typography>
+        {/* Mobile Number */}
+        <Box sx={{ width: '420px', mx: 'auto', textAlign: 'left', mb: 2 }}>
+          <Typography sx={{ fontSize: '16px', fontWeight: 700, color: '#000000', mb: 2 }}>
+            Mobile Number*
+          </Typography>
           <TextField
             value={mobileNumber}
             onChange={(e) => setMobileNumber(e.target.value)}
             placeholder="Enter your mobile number"
             fullWidth
-            sx={{ mb: 2, borderRadius: '6px', border: '1px solid #ccc' }}
+            sx={{
+              height: "37px",
+              borderRadius: '6px',
+              '& .MuiOutlinedInput-root': { borderRadius: '6px' },
+            }}
           />
+        </Box>
 
-          <Typography sx={{ fontSize: '18px', fontWeight: 500, mb: 1 }}>Email ID*</Typography>
+        {/* Email ID (Optional) */}
+        <Box sx={{ width: '420px', mx: 'auto', textAlign: 'left', mb: 2 }}>
+          <Typography sx={{ fontSize: '16px', fontWeight: 700, color: '#000000', mb: 1 }}>
+          Email ID (Optional)
+          </Typography>
           <TextField
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email ID"
+            placeholder="Enter your email id"
             fullWidth
-            sx={{ mb: 2, borderRadius: '6px', border: '1px solid #ccc' }}
+            sx={{
+              height: "37px",
+              borderRadius: '6px',
+              '& .MuiOutlinedInput-root': { borderRadius: '6px' },
+            }}
           />
+        </Box>
 
-          <Typography sx={{ fontSize: '18px', fontWeight: 500, mb: 1 }}>Gender*</Typography>
-          <FormControl fullWidth sx={{ mb: 3 }}>
+        {/* Gender */}
+        <Box sx={{ width: '420px', mx: 'auto', textAlign: 'left', mb: 2 }}>
+          <Typography sx={{ fontSize: '16px', fontWeight: 700, color: '#000000', mb: 2 }}>
+            Gender
+          </Typography>
+          <FormControl fullWidth>
             <Select
               value={gender}
               onChange={handleGenderChange}
-              displayEmpty
               sx={{
-                fontSize: '16px',
-                color: '#737373',
-                backgroundColor: '#FFFFFF',
+                height: "40px",
                 borderRadius: '6px',
-                height: '48px',
-                '& .MuiOutlinedInput-notchedOutline': { border: '1px solid #ccc' },
+                color:"#737373",
+                '& .MuiOutlinedInput-root': { borderRadius: '6px' },
               }}
-              inputProps={{ 'aria-label': 'Select Gender' }}
+              displayEmpty
             >
-              <MenuItem value="" disabled>
-                Select Gender
-              </MenuItem>
+              <MenuItem value="" disabled>Select your gender</MenuItem>
               <MenuItem value="male">Male</MenuItem>
               <MenuItem value="female">Female</MenuItem>
               <MenuItem value="other">Other</MenuItem>
@@ -155,30 +167,46 @@ const SignUp = ({ open, handleClose }) => {
           </FormControl>
         </Box>
 
-        <Typography sx={{ fontSize: '16px', color: '#737373', mb: 2 }}>
-          By Signing up, you agree with our <br/>Terms of Services & Privacy Policy
-        </Typography>
-
-        <Button
-          onClick={() => console.log('Get Started')}
-          fullWidth
+        {/* Terms and Conditions */}
+        <Typography
           sx={{
-            mb: 2,
-            backgroundColor: '#40A39B',
-            color: 'white',
-            borderRadius: '12px',
-            padding: '12px',
-            fontWeight: 700,
-            width: '100%',
-            '&:hover': { backgroundColor: '#359487' },
+            fontSize: '14px',
+            color: '#737373',
+            mt: 1,
           }}
         >
-          Get Started
-        </Button>
+   By Signing up you are agree with <br/>
+   our <span style={{fontSize:"16px",fontWeight:"500"}}>Terms of Services & Privacy Policy</span>
+        </Typography>
 
-        <Typography sx={{ fontSize: '14px', color: '#737373', mt: 2 }}>
+        {/* Submit Button */}
+        <Button
+          onClick={() => console.log('Create Account')}
+          sx={{
+            mt: 1,
+            backgroundColor: '#40A39B',
+            color: 'white',
+            borderRadius: '8px',
+            padding: '10px',
+            fontWeight: 500,
+            width: "420px",
+            height: "48px",
+            textTransform: 'none',
+          }}
+        >
+       Get Started
+        </Button>
+        <Typography
+          sx={{
+            fontSize: '16px',
+            fontWeight: 400,
+            color: '#737373',
+            mt: 1,
+            cursor: 'pointer',
+          }}
+        >
           Don't have an account?{' '}
-          <span style={{ color: '#40A39B', cursor: 'pointer' }}>Log In</span>
+          <span style={{ color: '#40A39B' }}>Log In</span>
         </Typography>
       </Box>
     </Modal>

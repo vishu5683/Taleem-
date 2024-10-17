@@ -24,7 +24,8 @@ const Packages = () => {
           color: '#000000',
         }}
       >
-        What are the Packages we offer?
+     What are the <span style={{ color: '#40A39B' }}>Packages</span> we offer?
+
       </Typography>
 
       {/* Packages Box with Buttons */}
@@ -36,7 +37,7 @@ const Packages = () => {
           justifyContent: 'center',
           alignItems: 'center',
           gap: '16px',
-          marginTop: '20px', // Add some gap between heading and the box
+          marginTop: '22px', // Add some gap between heading and the box
           borderTop: '1px solid #40A39B', // Top border only, Primary Green
           border: '1px solid #40A39B', // Primary green border around buttons
           borderRadius: '8px', // Border radius for a smoother look
@@ -52,6 +53,9 @@ const Packages = () => {
             padding: '14px 16px',
             gap: '8px',
             borderRadius: '8px',
+            fontWeight: 700, 
+            fontSize: '24px', 
+            textTransform: 'none',
             backgroundColor: selected === 'online' ? '#40A39B' : 'transparent',
             color: selected === 'online' ? '#FFFFFF' : '#40A39B',
             opacity: selected === 'online' ? 1 : 0.7,
@@ -74,6 +78,9 @@ const Packages = () => {
             padding: '14px 16px',
             gap: '8px',
             borderRadius: '8px',
+            fontWeight: 700, 
+            fontSize: '24px', 
+            textTransform: 'none',
             backgroundColor: selected === 'offline' ? '#40A39B' : 'transparent',
             color: selected === 'offline' ? '#FFFFFF' : '#40A39B',
             opacity: selected === 'offline' ? 1 : 0.7,
@@ -93,7 +100,7 @@ const Packages = () => {
         sx={{
           display: 'flex',
           justifyContent: 'center',
-          gap: '24px', // Gap between the boxes
+          gap: '120px', // Gap between the boxes
           marginTop: '40px', // Space between the buttons and the packages
           flexWrap: 'wrap', // Ensure responsiveness on smaller screens
         }}

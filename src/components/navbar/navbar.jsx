@@ -168,7 +168,7 @@ const Navbar = () => {
               onClose={handleCloseLanguage}
             >
               <MenuItem onClick={handleCloseLanguage}>English</MenuItem>
-              <MenuItem onClick={handleCloseLanguage}>French</MenuItem>
+              <MenuItem onClick={handleCloseLanguage}>Arabic</MenuItem>
             </Menu>
           </Box>
         </Box>
@@ -183,6 +183,9 @@ const Navbar = () => {
               padding: '14px 16px',
               borderRadius: '8px',
               borderColor: '#EBBE49',
+              textTransform: 'none',
+              fontWeight: 500, // Font weight set to 500
+              fontSize: '16px', // Font size set to 16px
               color: '#EBBE49',
             }}
           >
@@ -196,6 +199,11 @@ const Navbar = () => {
               padding: '14px 16px',
               borderRadius: '8px',
               backgroundColor: '#40A39B',
+              textTransform: 'none',
+              fontWeight: 500, // Font weight set to 500
+              fontSize: '16px', // Font size set to 16px
+
+       
               color: '#FFFFFF',
               '&:hover': {
                 backgroundColor: '#37a393',
