@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MyClassLayout from "../my class/MyClassLayout";
+import MyClassLayout from "../my classes dashboard/MyClassLayout";
 import calIcon from "../../assets/schedule classes/cal.png";
 import watchIcon from "../../assets/schedule classes/watch.png";
 import profileIcon from "../../assets/schedule classes/profile.png";

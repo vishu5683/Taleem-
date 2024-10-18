@@ -3,7 +3,7 @@ import { Box, MenuItem, Typography, Divider, Avatar, Modal } from '@mui/material
 import { ChevronRight } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import avatarImage from '../../assets/navbar/image.png'; // Ensure the path is correct
-import ManageProfileModal from '../my class/manageprofile'; // Import the modal component
+import ManageProfileModal from '../my classes dashboard/manageprofile'; // Import the modal component
 
 const SidebarMyClasses = () => {
   const [openModal, setOpenModal] = useState(false);

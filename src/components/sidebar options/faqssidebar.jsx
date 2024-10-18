@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MyClassLayout from '../my class/MyClassLayout';
+import MyClassLayout from '../my classes dashboard/MyClassLayout';
 
 const FaqSidebar = () => {
   const [expanded, setExpanded] = useState(false);

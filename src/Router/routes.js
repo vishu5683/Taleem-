@@ -7,14 +7,14 @@ const LandingPage = lazy(() => import("../components/pages/LandingPage"));
 const Terms = lazy(() => import("../components/policies and links/terms"));
 const PrivacyPolicy = lazy(() => import("../components/policies and links/privacypolicy"));
 const ContactUs = lazy(() => import("../components/policies and links/contactus"));
-const myclass = lazy(() => import("../components/my class/myclass"));
+const myclass = lazy(() => import("../components/my classes dashboard/myclass"));
 
 // Lazy imports for new components
 const FaqSidebar = lazy(() => import("../components/sidebar options/faqssidebar")); // Assuming correct file path
-const AddAccountModal = lazy(() => import("../components/my class/AddAccountModal"));
-const ManageProfileModal = lazy(() => import("../components/my class/manageprofile"));
-const Profile = lazy(() => import("../components/my class/profile"));
-const ProfileUpdate = lazy(() => import("../components/my class/updateprofile"));
+const AddAccountModal = lazy(() => import("../components/my classes dashboard/AddAccountModal"));
+const ManageProfileModal = lazy(() => import("../components/my classes dashboard/manageprofile"));
+const Profile = lazy(() => import("../components/my classes dashboard/profile"));
+const ProfileUpdate = lazy(() => import("../components/Academic/tutorlisting"));
 
 const ROUTES = [
   {
