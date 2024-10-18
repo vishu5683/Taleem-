@@ -1,54 +1,30 @@
-// import React from 'react';
-// import MyClassLayout from './MyClassLayout';
-
-// const MyClass = () => {
-//   return (
-//     <div>
-//       <MyClassLayout content={<div>hii</div>} />
-//     </div>
-//   );
-// };
-
-// export default MyClass;
 import React, { useState } from 'react';
 import MyClassLayout from './MyClassLayout'; // Update path as necessary
 import Profile from './profile';
 import ProfileUpdate from './updateprofile';
+import FaqSidebar from '../sidebar options/faqssidebar';
 
 const App = () => {
-  const [isEditing, setIsEditing] = useState(false);
+  const [currentContent, setCurrentContent] = useState(<ProfileUpdate />); // Default to ProfileUpdate on load
 
-  // Function to handle edit button click
+  // Function to switch to ProfileUpdate
   const handleEditClick = () => {
-    setIsEditing(true);
+    setCurrentContent(<ProfileUpdate onSaveOrCancel={handleSaveOrCancel} />);
   };
 
-  // Function to handle save or cancel in ProfileUpdate
+  // Function to switch back to Profile or another component (e.g., after saving or canceling in ProfileUpdate)
   const handleSaveOrCancel = () => {
-    setIsEditing(false);
+    setCurrentContent(<Profile onEdit={handleEditClick} />);
+  };
+
+  // Function to switch to FAQs
+  const handleShowFaqs = () => {
+    setCurrentContent(<FaqSidebar />);
   };
 
   return (
-    <MyClassLayout content={isEditing ? <ProfileUpdate onSaveOrCancel={handleSaveOrCancel} /> : <Profile onEdit={handleEditClick} />} />
+    <MyClassLayout content={<ProfileUpdate/>} /> 
   );
 };
 
 export default App;
-
-
-
-// import React from 'react';
-// import MyClassLayout from './MyClassLayout'; // Update path as necessary
-// import Profile from './profile';
-// import ProfileUpdate from './updateprofile';
-
-
-// const App = () => {
-//   return (
-//     <MyClassLayout content={<ProfileUpdate />} />
-//   );
-// };
-
-// export default App;
-
-

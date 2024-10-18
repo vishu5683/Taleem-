@@ -3,9 +3,12 @@ import { Box, TextField, MenuItem, InputAdornment, Avatar, Typography } from '@m
 import ProfileBanner from '../common comps/profilebanners'; // Import the ProfileBanner component
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import profileImage from '../../assets/profile/image.svg'; // Import the profile image
+import MyClassLayout from './MyClassLayout';
 
 const ProfileUpdate = () => {
     return (
+
+        <MyClassLayout>
         <Box>
             {/* Profile Banner with profile image overlapping */}
             <ProfileBanner>
@@ -154,6 +157,7 @@ const ProfileUpdate = () => {
                 </Box>
             </Box>
         </Box>
+        </MyClassLayout>
     );
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, TextField, Button, IconButton, useMediaQuery } from '@mui/material';
+import { Typography, TextField, Button, IconButton, useMediaQuery ,Box} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 const AddAccountModal = ({ onClose }) => {
@@ -13,6 +13,7 @@ const AddAccountModal = ({ onClose }) => {
   };
 
   return (
+
     <div
       id="modal-background"
       style={{
@@ -47,7 +48,7 @@ const AddAccountModal = ({ onClose }) => {
         </Typography>
 
         {/* Full Name Input */}
-        <Typography variant="body1" sx={{ fontWeight: 500, marginBottom: '8px' }}>
+        <Typography variant="body1" sx={{ fontWeight: 500, marginBottom: '8px',fontSize:"18px" }}>
           Full Name
         </Typography>
         <TextField
@@ -55,27 +56,40 @@ const AddAccountModal = ({ onClose }) => {
           fullWidth
           defaultValue="Naseem Chikitani" // Prefilled value
           sx={{
-            marginBottom: '20px',
+            marginBottom: '60px',
           }}
         />
 
         {/* Save Profile Button */}
-        <Button
-          variant="contained"
-          fullWidth
-          sx={{
-            backgroundColor: '#40A39B',
-            color: '#fff',
-            fontWeight: 600,
-            borderRadius: '12px',
-            padding: '10px',
-            '&:hover': {
-              backgroundColor: '#368e82', // Slightly darker on hover
-            },
-          }}
-        >
-          Save Profile
-        </Button>
+        <Box
+  sx={{
+    display: 'flex',
+    justifyContent: 'center', // Centers horizontally
+    alignItems: 'center', // Centers vertically
+   // Takes full viewport height for vertical centering (optional)
+  }}
+>
+  <Button
+    variant="contained"
+    fullWidth={false} // No need for fullWidth since we are controlling width
+    sx={{
+      backgroundColor: '#40A39B',
+      color: '#fff',
+      fontWeight: 500,
+      fontSize:"16px",
+      borderRadius: '12px',
+      width: '315px',
+      height: '48px',
+      padding: '10px',
+      '&:hover': {
+        backgroundColor: '#368e82', // Slightly darker on hover
+      },
+    }}
+  >
+    Save Profile
+  </Button>
+</Box>
+
 
         {/* Close Button */}
         <IconButton

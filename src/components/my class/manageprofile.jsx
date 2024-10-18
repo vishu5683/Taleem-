@@ -4,7 +4,7 @@ import { Box, Typography, Avatar, IconButton, useMediaQuery } from '@mui/materia
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
-import AddAccountModal from './AddAccountModal.jsx'; // Assuming you have this modal component
+import AddAccountModal from './AddAccountModal'; // Assuming you have this modal component
 
 const ProfileCard = ({ name, email }) => (
   <Box
@@ -13,7 +13,7 @@ const ProfileCard = ({ name, email }) => (
       maxWidth: '860px',
       height: '140px',
       borderRadius: '18px',
-      border: '1px solid ',
+      border: '1px solid #E6E6E6',
       display: 'flex',
       alignItems: 'center',
       padding: '10px',
@@ -51,17 +51,18 @@ const ManageProfileModal = ({ onClose }) => {
     }
   };
 
-  // Open AddAccountModal and close ManageProfileModal
+  // Open AddAccountModal without closing ManageProfileModal
   const handleAddAccountClick = () => {
     setShowAddAccountModal(true);
-    onClose();
   };
 
   return (
     <>
+    
+
       {/* Manage Profile Modal */}
       <div
-        id="modal-background" // Added ID for identifying background click
+        id="modal-background"
         onClick={handleBackgroundClick}
         style={{
           position: 'fixed',
@@ -90,7 +91,6 @@ const ManageProfileModal = ({ onClose }) => {
           }}
           onClick={(e) => e.stopPropagation()} // Prevent closing on content click
         >
-          {/* Top left heading */}
           <Typography variant="h5" sx={{ fontWeight: 700, marginBottom: '20px' }}>
             Manage Profile
           </Typography>
@@ -108,8 +108,10 @@ const ManageProfileModal = ({ onClose }) => {
               alignItems: 'center',
               justifyContent: 'flex-start', // Left aligned
               marginTop: '40px',
+              cursor: 'pointer',
+      
             }}
-            onClick={handleAddAccountClick} // Close and open AddAccountModal
+            onClick={handleAddAccountClick} // Open AddAccountModal
           >
             <Box
               sx={{
@@ -121,7 +123,6 @@ const ManageProfileModal = ({ onClose }) => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 color: '#fff',
-                cursor: 'pointer',
               }}
             >
               <AddIcon sx={{ fontSize: '40px' }} />
@@ -154,7 +155,10 @@ const ManageProfileModal = ({ onClose }) => {
       </div>
 
       {/* Conditionally render AddAccountModal */}
-      {showAddAccountModal && <AddAccountModal onClose={() => setShowAddAccountModal(false)} />}
+      {showAddAccountModal && (
+        <AddAccountModal onClose={() => setShowAddAccountModal(false)} />
+      )}
+      
     </>
   );
 };

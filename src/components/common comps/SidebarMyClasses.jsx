@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import { Box, MenuItem, Typography, Divider, Avatar, Modal } from '@mui/material';
 import { ChevronRight } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import avatarImage from '../../assets/navbar/image.png'; // Ensure the path is correct
 import ManageProfileModal from '../my class/manageprofile'; // Import the modal component
 
 const SidebarMyClasses = () => {
   const [openModal, setOpenModal] = useState(false);
+  const navigate = useNavigate(); // Hook to handle navigation
 
   const menuItems = [
-    'My Classes',
-    'My Calendar',
-    'Manage Profile',
-    'Terms of Services',
-    'FAQs',
-    'Rating & Feedbacks',
-    'Contact Us',
+    { label: 'My Classes', route: '/myclasses' },
+    { label: 'My Calendar', route: '/mycalendar' },
+    { label: 'Manage Profile', action: 'openModal' },
+    { label: 'Terms of Services', route: '/termsofservice' },
+    { label: 'FAQs', route: '/faq' },
+    { label: 'Rating & Feedbacks', route: '/feedbacks' },
+    { label: 'Contact Us', route: '/contactus' },
   ];
 
   // Function to handle modal open and close
@@ -24,6 +26,15 @@ const SidebarMyClasses = () => {
 
   const handleCloseModal = () => {
     setOpenModal(false);
+  };
+
+  // Handle item clicks
+  const handleItemClick = (item) => {
+    if (item.route) {
+      navigate(item.route); // Navigate to the respective route
+    } else if (item.action === 'openModal') {
+      handleOpenModal(); // Open the modal for "Manage Profile"
+    }
   };
 
   return (
@@ -62,6 +73,7 @@ const SidebarMyClasses = () => {
               marginTop: '8px',
               color: '#4A90E2',
             }}
+            onClick={() => navigate('/profile')} // Navigate to the profile page
           >
             <Typography sx={{ fontSize: { xs: '12px', sm: '14px' }, fontWeight: 500 }}>View Profile</Typography>
             <ChevronRight sx={{ marginLeft: '4px' }} />
@@ -82,10 +94,9 @@ const SidebarMyClasses = () => {
               gap: '8px',
               cursor: 'pointer',
             }}
-            // Open modal if 'Manage Profile' is clicked
-            onClick={item === 'Manage Profile' ? handleOpenModal : () => {}} // Pass valid function
+            onClick={() => handleItemClick(item)} // Handle item click based on the item
           >
-            {item}
+            {item.label}
             <ChevronRight />
           </MenuItem>
           <Divider sx={{ backgroundColor: 'rgba(217, 217, 217, 1)', width: '80%', margin: 'auto' }} />

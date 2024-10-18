@@ -3,7 +3,7 @@ import { Box, Typography, Breadcrumbs, Link } from '@mui/material';
 import PromotionalBanner from '../common comps/promotionalbanner';
 import SidebarMyClasses from '../common comps/SidebarMyClasses';
 
-const MyClassLayout = ({ content }) => {
+const MyClassLayout = ({ children }) => {
   return (
     <Box
       sx={{
@@ -28,17 +28,45 @@ const MyClassLayout = ({ content }) => {
         <PromotionalBanner />
 
         {/* Breadcrumb */}
-        <Breadcrumbs sx={{ color: '#737373', marginBottom: '16px' }}>
-          <Link underline="hover" color="inherit" href="/">
+        <Breadcrumbs
+          separator=">"
+          sx={{
+            color: '#737373',
+            marginBottom: '8px',
+            fontSize: '13px',
+            fontWeight: 400,
+          }}
+        >
+          <Link underline="hover" color="inherit" href="/" sx={{ fontSize: '13px', fontWeight: 400 }}>
             Home
           </Link>
-          <Typography color="#737373">Class</Typography>
+          <Typography color="#737373" sx={{ fontSize: '13px', fontWeight: 400 }}>
+            Class
+          </Typography>
         </Breadcrumbs>
 
         {/* Main Layout */}
-        <Box sx={{ display: 'flex', gap: '16px' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: {
+              xs: 'column', // For mobile and small screens (xs breakpoint)
+              md: 'row', // For medium and larger screens
+            },
+            gap: '86px',
+          }}
+        >
           {/* Sidebar */}
-          <SidebarMyClasses />
+          <Box
+            sx={{
+              width: {
+                xs: '100%', // Full width on small screens
+                md: '300px', // Sidebar width on larger screens
+              },
+            }}
+          >
+            <SidebarMyClasses />
+          </Box>
 
           {/* Content Area */}
           <Box
@@ -46,11 +74,11 @@ const MyClassLayout = ({ content }) => {
               flexGrow: 1,
               backgroundColor: '#fff',
               borderRadius: '8px',
-         
               boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+              padding: '16px', // Add padding for content area
             }}
           >
-            {content}
+            {children}
           </Box>
         </Box>
       </Box>

@@ -3,9 +3,12 @@ import { Box, Button, Typography, Divider } from '@mui/material';
 import { Phone, Mail } from '@mui/icons-material'; 
 import ProfileBanner from '../common comps/profilebanners'; 
 import profileImage from "../../assets/profile/image.svg";
+import MyClassLayout from './MyClassLayout';
 
 const Profile = ({ onEdit }) => {
   return (
+    <MyClassLayout>
+
     <Box>
       <ProfileBanner>
         <Box
@@ -75,6 +78,7 @@ const Profile = ({ onEdit }) => {
         <Divider sx={{ width: '100%', backgroundColor: '#D9D9D9', marginBottom: '20px' }} />
       </Box>
     </Box>
+    </MyClassLayout>
   );
 };
 
