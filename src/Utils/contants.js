@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getToken } from '.';
 
-const API_URL = 'http://54.245.144.158:5080/api/v1/user/';
+const API_URL = 'https://techugoapps.com:3454/user/api/v1/';
 // export const BASE_URL ='http://54.245.144.158:5080';
 
 export const apiErrorCode = {
@@ -57,7 +57,7 @@ $axios.interceptors.request.use(
 const constants = {
   apiErrorCode,
   // API_URL: process.env.REACT_APP_API_URL,
-  API_URL:"http://54.245.144.158:5080/api/v1/user/",
+  API_URL:"https://techugoapps.com:3454/user/api/v1/",
   apiSuccessCode,
   axios: $axios,
 };
