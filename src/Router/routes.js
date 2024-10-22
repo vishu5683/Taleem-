@@ -27,7 +27,7 @@ const FaqSidebar = lazy(() => import("../components/sidebar options/faqssidebar"
 const AddAccountModal = lazy(() => import("../components/my classes dashboard/AddAccountModal"));
 const ManageProfileModal = lazy(() => import("../components/my classes dashboard/manageprofile"));
 const Profile = lazy(() => import("../components/my classes dashboard/profile"));
-const ProfileUpdate = lazy(() => import("../components/my classes dashboard/updateprofile"));
+const ProfileUpdate = lazy(() => import("../components/Academic/categories"));
 
 const ROUTES = [
   {

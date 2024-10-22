@@ -71,7 +71,8 @@ const Academic = () => {
             textAlign: "left",
           }}
         >
-          Home &gt; Academic &gt; Choose your grade
+          Home &gt; Academic &gt;{' '}
+          <span style={{ fontWeight: 700 }}>Choose your grade</span>
         </Typography>
 
         {/* Promotional Banner */}

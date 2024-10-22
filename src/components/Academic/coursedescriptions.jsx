@@ -5,8 +5,6 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import banner from '../../assets/course card/banner.png';
 import girl from '../../assets/course card/girl.png';
-import appleStore from '../../assets/course card/apple.png';
-import playStore from '../../assets/course card/playstore.png';
 
 const CourseDescriptions = () => {
   return (
@@ -86,30 +84,7 @@ const CourseDescriptions = () => {
           </Typography>
         </Box>
      
-        {/* Right Side - Download App Section */}
-        <Box
-  sx={{
-    width: '353px',
-    backgroundColor: 'rgba(248, 248, 248, 1)',
-    borderRadius: '12px',
-    padding: '20px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',  // Centers content horizontally
-  }}
->
-  <Typography variant="h6" sx={{ fontWeight: 600, marginBottom: '16px' }}>
-    Download App From
-  </Typography>
-  
-  {/* Apple Store Image */}
-  <Box component="img" src={appleStore} alt="Apple Store" sx={{ width: '234px', height: '78px', marginBottom: '20px' }} />
-  
-  {/* Play Store Image */}
-  <Box component="img" src={playStore} alt="Play Store" sx={{ width: '234px', height: '78px' }} />
-  
-</Box>
+      
 
       </Box>
 
@@ -137,7 +112,7 @@ const CourseDescriptions = () => {
           alt="Tutor"
           sx={{
             width: '85px',
-            height: '78px',
+            height: '92px',
             borderRadius: '8px',
           }}
         />
