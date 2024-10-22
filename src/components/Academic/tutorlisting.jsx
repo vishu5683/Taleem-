@@ -8,6 +8,7 @@ import tutor1 from "../../assets/explore/Rectangle 52398 (1).svg";
 import tutor2 from "../../assets/explore/Rectangle 52398 (3).svg";
 import tutor3 from "../../assets/explore/Rectangle 52398.svg";
 import FilterModal from './filter';
+import { useNavigate } from 'react-router-dom';  // Import useNavigate
 
 const TutorListing = () => {
   const tutors = [
@@ -28,8 +29,14 @@ const TutorListing = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+  const navigate = useNavigate();  // Initialize navigate hook
 
+  const handleViewAll = () => {
+    navigate('/tutorlistingext');  // Navigate to the /tutorlisting route
+  };
   return (
+
+    
     <Box sx={{ padding: '20px' }}>
       <Box sx={{ maxWidth: '1145px', margin: '0 auto' }}>
         <Typography
@@ -148,6 +155,8 @@ const TutorListing = () => {
 
         <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
           <Button
+
+onClick={handleViewAll}
             sx={{
               width: '272px',
               height: '48px',
@@ -155,6 +164,7 @@ const TutorListing = () => {
               color: '#FFFFFF',
               borderRadius: '8px',
               border: '1px solid #40A39B',
+           
               textTransform: 'none',
               fontWeight: 600,
               padding: '14px 16px',

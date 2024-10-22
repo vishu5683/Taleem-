@@ -2,29 +2,22 @@ import React, { useState } from 'react';
 import { Box, Typography, Modal, IconButton, Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
-const PaymentModal = () => {
+const PaymentModal = (isOpen, onClose) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
-    <div>
-      {/* Button to open modal */}
-      <Button
-        variant="contained"
-        onClick={handleOpen}
-        sx={{ margin: '20px' }}
-      >
-        Open Payment Modal
-      </Button>
+  
+   
 
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-title"
-        aria-describedby="modal-description"
-      >
+    <Modal
+    open={isOpen}  
+    onClose={onClose} 
+    aria-labelledby="modal-title"
+    aria-describedby="modal-description"
+  >
         <Box
           sx={{
             position: 'absolute',
@@ -77,7 +70,7 @@ const PaymentModal = () => {
           </Typography>
         </Box>
       </Modal>
-    </div>
+  
   );
 };
 

@@ -1,11 +1,20 @@
 import React from 'react';
 import { Box, Typography, Card, CardMedia } from '@mui/material';
-import StarIcon from '@mui/icons-material/Star'; // Import MUI Star Icon
+import StarIcon from '@mui/icons-material/Star';
+import { useNavigate } from 'react-router-dom'; // Import the useNavigate hook
 import RectangleImage from "../../assets/course card/Rectangle 52398.svg"; // Import your image
 
 const CoursesCard = () => {
+  const navigate = useNavigate(); // Initialize navigate hook
+
+  // Function to handle card click and navigation
+  const handleCardClick = () => {
+    navigate('/coursedescriptions'); // Navigate to the /coursedescriptions page
+  };
+
   return (
     <Card
+      onClick={handleCardClick} // Attach the click handler to the card
       sx={{
         width: '367.09px',
         height: '300.93px',
@@ -15,7 +24,8 @@ const CoursesCard = () => {
         display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden',
-       
+        cursor: 'pointer', // Change cursor to indicate clickability
+        '&:hover': { boxShadow: 4 }, // Add a hover effect for better UX
       }}
     >
       {/* Image Section */}

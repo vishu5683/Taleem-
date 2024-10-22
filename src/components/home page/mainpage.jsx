@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Box, Typography, Button } from '@mui/material';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import { useNavigate } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SchoolIcon from '@mui/icons-material/School';
 
@@ -9,6 +10,13 @@ import img2 from "../../assets/homepage/34.svg";
 import img3 from "../../assets/homepage/56.svg";
 
 const MainPage = () => {
+  const navigate = useNavigate();  // Initialize navigate hook
+  
+  // Function to handle navigation based on the route
+  const handleImageClick = (route) => {
+    navigate(route);  // Navigate to the specified route
+  };
+
   return (
     <Grid
       container
@@ -20,7 +28,7 @@ const MainPage = () => {
       {/* Promotional Banner */}
       <Box
         sx={{
-          backgroundColor: '#D4EBFF',
+          backgroundColor: '#D9D9D9',
           width: { xs: '100%', sm: '90%', md: '1145px' },
           height: '98px',
           borderRadius: '12px',
@@ -99,23 +107,25 @@ const MainPage = () => {
         </Button>
       </Box>
 
-      {/* Images Section - Three images in a row with proper gaps */}
       <Grid 
         container 
         spacing={3}  // Adjust spacing between images
         justifyContent="center" 
         sx={{ mb: 4 }}
       >
-        {[img1, img2, img3].map((img, index) => (
+        {/* Map through images and attach appropriate routes */}
+        {[{ img: img1, route: '/academic' }, { img: img2, route: null }, { img: img3, route: '/coursedetails' }].map((item, index) => (
           <Grid item xs={12} sm={6} md={4} key={index} display="flex" justifyContent="center">
             <Box
               component="img"
-              src={img}
+              src={item.img}
               alt={`Image ${index + 1}`}
+              onClick={() => item.route && handleImageClick(item.route)}  // Call handleImageClick with the corresponding route
               sx={{
                 width: { xs: '80%', sm: '90%', md: '237.56px' }, // Responsive widths
                 height: 'auto', // Maintain aspect ratio
                 borderRadius: '11.75px',
+                cursor: 'pointer',  // Indicate it's clickable
               }}
             />
           </Grid>

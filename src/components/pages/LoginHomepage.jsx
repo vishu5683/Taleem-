@@ -4,7 +4,7 @@ import TutorMainPage from '../home page/tutorMain'
 const LoginHomepage = () => {
   return (
   <>
-  <TutorMainPage/>
+  <MainPage/>
   
   </>
   )

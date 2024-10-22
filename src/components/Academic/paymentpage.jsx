@@ -7,14 +7,32 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import img from '../../assets/bookurtutor/img.png';
-import BookNowModal from './booknowmodal';
+import PaymentModal from './paymentgatewaymodel';
+import BookingSuccessful from './bookingsuccessful';
 
-const BookYourTutor = () => {
+
+const BookYourTutorPayment = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showPaymentModal, setShowPaymentModal] = useState(false); // Tracks PaymentModal visibility
+  const [showBookingSuccessModal, setShowBookingSuccessModal] = useState(false); // Tracks BookingSuccessful visibility
   const [selectedPayment, setSelectedPayment] = useState('');
-  
-  const handleOpenModal = () => setIsModalOpen(true);
-  const handleCloseModal = () => setIsModalOpen(false);
+
+  const handleOpenModal = () => {
+    setShowPaymentModal(true); // Show PaymentModal first
+    setIsModalOpen(true); // Keep track if any modal is open
+
+    // Automatically close PaymentModal and open BookingSuccessful modal after 3-4 seconds
+    setTimeout(() => {
+      setShowPaymentModal(false);
+      setShowBookingSuccessModal(true);
+    }, 3000); // 3000 milliseconds (3 seconds)
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false); // Close all modals
+    setShowPaymentModal(false);
+    setShowBookingSuccessModal(false);
+  };
 
   const handlePaymentSelect = (method) => {
     setSelectedPayment(method);
@@ -26,7 +44,7 @@ const BookYourTutor = () => {
         display: 'flex',
         flexDirection: { xs: 'column', md: 'row' },
         justifyContent: 'space-between',
-        padding: '20px',
+        padding: '20px 50px',
         paddingBottom: '40px',
       }}
     >
@@ -231,9 +249,11 @@ const BookYourTutor = () => {
         </Box>
       </Box>
 
-      {isModalOpen && <BookNowModal onClose={handleCloseModal}>This is comp</BookNowModal>}
+       {/* Modals */}
+       {showPaymentModal && <PaymentModal isOpen={isModalOpen} onClose={handleCloseModal} />}
+      {showBookingSuccessModal && <BookingSuccessful isOpen={isModalOpen} onClose={handleCloseModal} />}
     </Box>
   );
 };
 
-export default BookYourTutor;
+export default BookYourTutorPayment;

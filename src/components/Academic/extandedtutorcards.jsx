@@ -4,8 +4,14 @@ import img from '../../assets/bookurtutor/img.png';
 import icon1 from '../../assets/bookurtutor/icon1.png';
 import icon2 from '../../assets/bookurtutor/icon2.png';
 import star from '../../assets/bookurtutor/star.png';
-
+import { useNavigate } from 'react-router-dom';
 const Extandedtutorcards = () => {
+
+  const navigate = useNavigate();  // Initialize navigate hook
+
+  const handleNextClick = () => {
+    navigate('/bookyourtutor');  
+  };
   return (
     <Card
       sx={{
@@ -109,6 +115,7 @@ const Extandedtutorcards = () => {
           {/* Button */}
           <Button
             variant="outlined"
+            onClick={handleNextClick}
             sx={{
               width: '214px',
               height: '48px',

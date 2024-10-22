@@ -3,6 +3,7 @@ import { Box, Typography, IconButton, Button } from '@mui/material';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import CloseIcon from '@mui/icons-material/Close';
+import { useNavigate } from 'react-router-dom';
 
 const BookNowModal = ({ onClose }) => {
   // Calendar Data
@@ -25,6 +26,11 @@ const BookNowModal = ({ onClose }) => {
   const handlePrev = () => setSelectedDayIndex((prev) => (prev === 0 ? daysOfMonth.length - 1 : prev - 1));
   const handleNext = () => setSelectedDayIndex((prev) => (prev === daysOfMonth.length - 1 ? 0 : prev + 1));
   const handleClose = () => onClose && onClose(); // Close the modal if the onClose prop is provided
+  const navigate = useNavigate();  // Initialize navigate hook
+
+  const handleSaveClick = () => {
+    navigate('/bookyourtutorpayment');  // Navigate to the /tutorlisting route
+  };
 
   return (
     <Box
@@ -160,6 +166,7 @@ const BookNowModal = ({ onClose }) => {
       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
         <Button
           variant="contained"
+          onClick={handleSaveClick} 
           sx={{
             width: 328,
             height: 44,

@@ -5,6 +5,7 @@ import PromotionalBanner from "../common comps/promotionalbanner";
 import boardIcon from "../../assets/academic/board.png";
 import universityIcon from "../../assets/academic/university.svg";
 import monitorIcon from "../../assets/academic/monitor.svg";
+import { useNavigate } from 'react-router-dom';  // Import useNavigate
 
 const grades = [
   { label: "Primary", icon: boardIcon },
@@ -50,6 +51,11 @@ const TitleSection = ({ title, description }) => (
 const Academic = () => {
   const [selectedGrade, setSelectedGrade] = useState(null);
   const [selectedClass, setSelectedClass] = useState(null);
+  const navigate = useNavigate();  // Initialize navigate hook
+
+  const handleNextClick = () => {
+    navigate('/tutorlisting');  // Navigate to the /tutorlisting route
+  };
 
   return (
     <Box sx={{ padding: "20px" }}>
@@ -257,21 +263,22 @@ const Academic = () => {
             Back
           </Button>
           <Button
-            variant="contained"
-            sx={{
-              width: "164px",
-              height: "48px",
-              padding: "14px 16px",
-              gap: "8px",
-              borderRadius: "8px",
-              backgroundColor: "#40A39B",
-              fontWeight: 600,
-              fontSize: "14px",
-              textTransform: "none",
-            }}
-          >
-            Next
-          </Button>
+      variant="contained"
+      onClick={handleNextClick}  // Navigate on button click
+      sx={{
+        width: "164px",
+        height: "48px",
+        padding: "14px 16px",
+        gap: "8px",
+        borderRadius: "8px",
+        backgroundColor: "#40A39B",
+        fontWeight: 600,
+        fontSize: "14px",
+        textTransform: "none",
+      }}
+    >
+      Next
+    </Button>
         </Box>
       </Box>
     </Box>

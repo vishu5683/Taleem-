@@ -9,6 +9,7 @@ import img2 from '../../assets/bookurtutor/img2.png';
 import img from '../../assets/bookurtutor/img.png';
 import BookNowModal from './booknowmodal';
 
+
 const BookYourTutor = () => {
   const [classType, setClassType] = useState('');
   const [sessionType, setSessionType] = useState('');
@@ -35,7 +36,7 @@ const BookYourTutor = () => {
         display: 'flex',
         flexDirection: { xs: 'column', md: 'row' }, // Stacks on smaller screens
         justifyContent: 'space-between',
-        padding: '20px',
+        padding: '20px 70px',
         paddingBottom: '40px',
       }}
     >
