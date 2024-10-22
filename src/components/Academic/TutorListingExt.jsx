@@ -4,7 +4,45 @@ import SearchIcon from '@mui/icons-material/Search';
 import TuneIcon from '@mui/icons-material/Tune';
 import PromotionalBanner from '../common comps/promotionalbanner';
 import FilterModal from './filter';
-import Extandedtutorcards from './extandedtutorcards'; // Ensure this component exists
+import Extandedtutorcards from './extandedtutorcards';
+
+// const  Extandedtutorcards  = () => {
+//   return (
+//     <Card
+//       sx={{
+//         width: '1140px',
+//         height: '247px',
+//         borderRadius: '12px',
+//         boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+//         display: 'flex',
+//         marginBottom: '20px',
+//       }}
+//     >
+//       <CardContent sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '16px' }}>
+//         <Typography variant="h6" sx={{ fontWeight: 600, fontSize: '20px', marginBottom: '8px' }}>
+//           Tutor Name
+//         </Typography>
+//         <Typography variant="body2" sx={{ fontSize: '14px', color: '#737373', marginBottom: '16px' }}>
+//           Tutor Description or Specialization
+//         </Typography>
+//         <Button
+//           sx={{
+//             width: '147px',
+//             height: '40px',
+//             backgroundColor: '#40A39B',
+//             color: '#FFFFFF',
+//             borderRadius: '8px',
+//             textTransform: 'none',
+//             fontWeight: 600,
+//             '&:hover': { backgroundColor: '#359c87' },
+//           }}
+//         >
+//           Contact Tutor
+//         </Button>
+//       </CardContent>
+//     </Card>
+//   );
+// };
 
 const TutorListingExt = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

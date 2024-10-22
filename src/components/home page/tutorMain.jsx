@@ -50,7 +50,7 @@ const TutorMainPage = () => {
         }}
       >
         <Typography variant="h6" fontWeight="bold" textAlign="center">
-          Hello Tutor
+          Hello Tutor<span>Hello there</span>
         </Typography>
         <Button
           variant="contained"

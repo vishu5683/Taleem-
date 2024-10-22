@@ -56,13 +56,14 @@ const loginApiCall = (
         } else {
           errorCallback(error.response);
         }
-      } else if (!error.response) {
-        let payload = {
-          statusCode: -1,
-          message: 'Please try again later',
-        };
-        errorCallback(payload);
-      }
+      } 
+      // else if (!error.response) {
+      //   let payload = {
+      //     statusCode: -1,
+      //     message: 'Please try again later',
+      //   };
+      //   errorCallback(payload);
+      // }
     });
 };
 
@@ -90,13 +91,14 @@ const deleteApiCall = (
         } else {
           errorCallback(error.response);
         }
-      } else if (!error.response) {
-        let payload = {
-          statusCode: -1,
-          message: 'Please try again later',
-        };
-        errorCallback(payload);
       }
+      //  else if (!error.response) {
+      //   let payload = {
+      //     statusCode: -1,
+      //     message: 'Please try again later',
+      //   };
+      //   errorCallback(payload);
+      // }
     });
 };
 
@@ -142,14 +144,15 @@ const postApiCall = (
           };
           errorCallback(payload);
         }
-      } else if (!error.response) {
-        let payload= {
-          statusCode: -1,
-          payload:{},
-          message: 'Please try again later',
-        };
-        errorCallback(payload);
-      }
+      } 
+      // else if (!error.response) {
+      //   let payload= {
+      //     statusCode: -1,
+      //     payload:{},
+      //     message: 'Please try again later',
+      //   };
+      //   errorCallback(payload);
+      // }
     });
 };
 
