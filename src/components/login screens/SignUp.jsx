@@ -68,7 +68,7 @@ const SignUp = ({ open, handleClose ,isStudent}) => {
             fontFamily: 'Metropolis',
             fontSize: { xs: '16px', sm: '18px' },
             color: '#737373',
-            mb: '10px',
+            mb: '12px',
           }}
         >
           Let’s continue your learning journey together
@@ -100,8 +100,8 @@ const SignUp = ({ open, handleClose ,isStudent}) => {
         </Box>
 
         {/* Full Name */}
-        <Box sx={{ width: '420px', mx: 'auto', textAlign: 'left', mb: 2 }}>
-          <Typography sx={{ fontSize: '16px', fontWeight: 700, color: '#000000', mb: 1 }}>
+        <Box sx={{ width: '420px', mx: 'auto', textAlign: 'left', mb: 3 }}>
+          <Typography sx={{ fontSize: '16px', fontWeight: 700, color: '#000000', mb: 2 }}>
             Full Name*
           </Typography>
           <TextField
@@ -118,8 +118,8 @@ const SignUp = ({ open, handleClose ,isStudent}) => {
         </Box>
 
         {/* Mobile Number */}
-        <Box sx={{ width: '420px', mx: 'auto', textAlign: 'left', mb: 2 }}>
-          <Typography sx={{ fontSize: '16px', fontWeight: 700, color: '#000000', mb: 2 }}>
+        <Box sx={{ width: '420px', mx: 'auto', textAlign: 'left', mb: 3 }}>
+          <Typography sx={{ fontSize: '16px', fontWeight: 700, color: '#000000', mb: 1 }}>
             Mobile Number*
           </Typography>
           <TextField
@@ -136,7 +136,7 @@ const SignUp = ({ open, handleClose ,isStudent}) => {
         </Box>
 
         {/* Email ID (Optional) */}
-        <Box sx={{ width: '420px', mx: 'auto', textAlign: 'left', mb: 2 }}>
+        <Box sx={{ width: '420px', mx: 'auto', textAlign: 'left', mb: 3 }}>
           <Typography sx={{ fontSize: '16px', fontWeight: 700, color: '#000000', mb: 1 }}>
           Email ID (Optional)
           </Typography>
@@ -155,7 +155,7 @@ const SignUp = ({ open, handleClose ,isStudent}) => {
 
         {/* Gender */}
         <Box sx={{ width: '420px', mx: 'auto', textAlign: 'left', mb: 2 }}>
-          <Typography sx={{ fontSize: '16px', fontWeight: 700, color: '#000000', mb: 2 }}>
+          <Typography sx={{ fontSize: '16px', fontWeight: 700, color: '#000000', mb: 1 }}>
             Gender
           </Typography>
           <FormControl fullWidth>
@@ -183,7 +183,7 @@ const SignUp = ({ open, handleClose ,isStudent}) => {
           sx={{
             fontSize: '14px',
             color: '#737373',
-            mt: 1,
+            mt: 2,
           }}
         >
    By Signing up you are agree with <br/>
