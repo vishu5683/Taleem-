@@ -25,14 +25,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import NotificationPage from "./components/notifications/notifiactionpage";
 // import LoggedInNavbar from "./components/navbar/loggedInnavbar";
 function App() {
-const baseName = process.env.NODE_ENV === 'development' ? '/' : '/taleem/taleem_dev/';;
+const baseName = process.env.NODE_ENV === 'development' ? '/' : '/taleem/taleem_dev/';
   return (
     <>
       <Provider store={store}>
         <div>
           <BrowserRouter
-          // "homepage": "http://54.245.144.158/taleem_dev/",
-          basename={baseName}
+          // basename={baseName}
           >
             <Routes>
               <Route path="/*" element={<RoutesWrapper />}></Route>

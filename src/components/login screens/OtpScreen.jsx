@@ -11,7 +11,7 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from 'react-router-dom';
 
-const OtpScreen = ({ open, handleClose }) => {
+const OtpScreen = ({ open, handleClose ,isStudent}) => {
   const navigate = useNavigate();
   const otpRefs = useRef([]); // Create a ref array to store OTP input references
   const [otp, setOtp] = React.useState(Array(6).fill("")); // Initialize OTP state
