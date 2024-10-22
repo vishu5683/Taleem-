@@ -226,3 +226,171 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
+
+import React from 'react';
+import img1 from '../../assets/bookurtutor/img1.png'
+import img2 from '../../assets/bookurtutor/img2.png'
+import img from '../../assets/bookurtutor/img.png'
+
+const BookYourTutor = () => {
+  return (
+    <div className="p-4 space-y-6">
+      {/* Breadcrumb */}
+      <div className="text-sm text-gray-600">
+        Home &gt; Recreational &gt; Tutors Listing &gt; Tutors Details &gt; Book Tutor
+      </div>
+
+      <div className="flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-6">
+        {/* Booking Form */}
+        <div className="bg-white p-6  space-y-6 flex-1">
+          <h1 className="text-2xl font-bold text-gray-800">Book your Tutor</h1>
+
+          {/* Class Type */}
+          <div>
+            <h2 className="text-xl font-semibold text-gray-700 mb-2">Select class type</h2>
+            <div className="space-x-4">
+              <button className="bg-gray-100 px-4 py-2 rounded-md cursor-pointer hover:bg-[rgba(64,163,155,1)]"> <img src={img1} alt="" />Online</button>
+              <button className="bg-gray-100 px-4 py-2 rounded-md cursor-pointer hover:bg-[rgba(64,163,155,1)]"><img src={img2} alt="" />Face to Face</button>
+            </div>
+          </div>
+
+          {/* Session */}
+          <div>
+            <h2 className="text-xl font-semibold text-gray-700 mb-2">Select session</h2>
+            <div className="space-x-4">
+            <button className="bg-gray-100 px-4 py-2 rounded-3xl cursor-pointer hover:bg-[rgba(64,163,155,1)]">
+  Individual
+</button>
+<button className="bg-gray-100 px-4 py-2 rounded-3xl cursor-pointer hover:bg-[rgba(64,163,155,1)]">
+  Group
+</button>
+            </div>
+          </div>
+
+          {/* Package Start Date */}
+          <div>
+            <h2 className="text-xl font-semibold text-gray-700 mb-2">Select package starting date</h2>
+            <input 
+    type="date" 
+    className="bg-gray-100 px-4 py-2 rounded-md cursor-pointer"
+  />
+          </div>
+
+          {/* Available Package */}
+          <div>
+  <h2 className="text-xl font-semibold text-gray-700 mb-2">Available packages</h2>
+  <div className="space-y-4">
+    
+    {/* 1 week */}
+    <label className="flex items-center space-x-2">
+      <input
+        type="radio"
+        name="package"
+        value="1week"
+        className="form-radio h-4 w-4 text-blue-600"
+      />
+      <div>
+        <span>1 week</span>
+        {/* Nested Hours Dropdown */}
+        <select className="ml-2 bg-gray-100 px-2 py-1 rounded-md text-sm">
+          <option value="1hr">1 hr</option>
+          <option value="2hr">2 hrs</option>
+          <option value="3hr">3 hrs</option>
+        </select>
+      </div>
+    </label>
+
+    {/* 2 weeks */}
+    <label className="flex items-center space-x-2">
+      <input
+        type="radio"
+        name="package"
+        value="2weeks"
+        className="form-radio h-4 w-4 text-blue-600"
+      />
+      <div>
+        <span>2 weeks</span>
+        {/* Nested Hours Dropdown */}
+        <select className="ml-2 bg-gray-100 px-2 py-1 rounded-md text-sm">
+          <option value="1hr">1 hr per week</option>
+          <option value="2hr">2 hrs per week</option>
+          <option value="3hr">3 hrs per week</option>
+        </select>
+      </div>
+    </label>
+
+    {/* 3 weeks */}
+    <label className="flex items-center space-x-2">
+      <input
+        type="radio"
+        name="package"
+        value="3weeks"
+        className="form-radio h-4 w-4 text-blue-600"
+      />
+      <div>
+        <span>3 weeks</span>
+        {/* Nested Hours Dropdown */}
+        <select className="ml-2 bg-gray-100 px-2 py-1 rounded-md text-sm">
+          <option value="1hr">1 hr per week</option>
+          <option value="2hr">2 hrs per week</option>
+          <option value="3hr">3 hrs per week</option>
+        </select>
+      </div>
+    </label>
+
+  </div>
+</div>
+
+
+          {/* Availability */}
+          <div>
+            <h2 className="text-xl font-semibold text-gray-700 mb-2">Select availability</h2>
+            <select className="ml-2 bg-gray-100 px-2 py-1 rounded-md text-sm">
+          <option value="1hr">1 hr per week</option>
+          <option value="2hr">2 hrs per week</option>
+          <option value="3hr">3 hrs per week</option>
+        </select>
+          </div>
+
+          {/* Instruction */}
+          <div>
+            <h2 className="text-xl font-semibold text-gray-700 mb-2">Instruction</h2>
+            <p className="text-gray-600">
+              Please join your class link before the class starts.
+            </p>
+          </div>
+        </div>
+
+        {/* Tutor Info and Payment */}
+        <div className="bg-white p-6  space-y-4 w-full lg:w-[40%]">
+            <div>
+            <div className="flex justify-between text-sm text-gray-600 flex-col bg-[rgb(220,229,255)] p-4">
+                <img src={img} alt=""  className='w-12'/>
+            <span>Name</span>
+            <span>University</span>
+            <span>Location</span>
+            <span>Expertise</span>
+            <span>Experience</span>
+          </div>
+          <div className='mt-10 border-[1px] p-10'>
+          <div className="flex flex-col items-center text-gray-800 gap-4">
+            <span>Total Payable Amount:</span>
+            <span className="font-bold text-xl">120 Riyal</span>
+          </div>
+          <div className="flex justify-center mt-4">
+            <button className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700">
+              Book Now
+            </button>
+          </div>
+            </div>
+            </div>
+          
+         
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default BookYourTutor;
