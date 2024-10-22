@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Typography, Modal, FormControl, Select, MenuItem, TextField, Button } from '@mui/material';
 import dividerLine from "../../assets/modal/Group 1000004577.png";
 import googleLogo from "../../assets/modal/image 10.png";
 
-const LoginWithEmail = ({ open, handleClose, openPhoneNumberLogin }) => {
+const LoginWithEmail = ({ open, handleClose, openPhoneNumberLogin,isStudent }) => {
   const [role, setRole] = React.useState('student');
   const [email, setEmail] = React.useState('');
+
+  useEffect(() => {
+    if (isStudent) {
+      setRole("student");
+    } else {
+      setRole("tutor");
+    }
+  }, [isStudent]);
 
   const handleChange = (event) => setRole(event.target.value);
   const handleEmailChange = (event) => setEmail(event.target.value);
@@ -82,8 +90,12 @@ const LoginWithEmail = ({ open, handleClose, openPhoneNumberLogin }) => {
               }}
               inputProps={{ 'aria-label': 'Select Role' }}
             >
-              <MenuItem value="student">Student</MenuItem>
-              <MenuItem value="parent">Parent</MenuItem>
+               {isStudent ? (
+                    <MenuItem value="student">Student</MenuItem>
+                ) : (
+                  <MenuItem value="tutor">Tutor</MenuItem>
+                )}
+                {isStudent && (<MenuItem value="parent">Parent</MenuItem>)}
             </Select>
           </FormControl>
         </Box>

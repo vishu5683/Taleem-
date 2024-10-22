@@ -10,7 +10,7 @@ import SignUp from '../login screens/SignUp';
 
 const Join = () => {
   const [open, setOpen] = useState(false);
-
+  const [isStudent,setStudent]=useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -72,7 +72,9 @@ const Join = () => {
               Student / Parent
             </Typography>
             <Button
-              onClick={handleOpen}
+              onClick={()=>{handleOpen();
+                setStudent(true)
+              }}
               sx={{
                 width: { xs: '160px', sm: '207px' },
                 height: '48px',
@@ -130,6 +132,9 @@ const Join = () => {
                   backgroundColor: '#358F86',
                 },
               }}
+              onClick={()=>{handleOpen();
+                setStudent(false)
+              }}
             >
               Get Started
             </Button>
@@ -138,7 +143,7 @@ const Join = () => {
       </Box>
 
       {/* Modal Component */}
-      <LoginWithStudent open={open} handleClose={handleClose} />
+      <LoginWithStudent open={open} handleClose={handleClose} isStudent={isStudent}/>
       {/* <OtpScreen open={open} handleClose={handleClose} /> */}
         {/* <LoginWithStudent open={open} handleClose={handleClose} /> */}
         {/* <SignUp open={open} handleClose={handleClose} /> */}

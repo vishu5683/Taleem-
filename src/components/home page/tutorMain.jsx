@@ -8,7 +8,7 @@ import img1 from "../../assets/homepage/12.svg"; // Importing the images
 import img2 from "../../assets/homepage/34.svg";
 import img3 from "../../assets/homepage/56.svg";
 
-const MainPage = () => {
+const TutorMainPage = () => {
   return (
     <Grid
       container
@@ -34,6 +34,41 @@ const MainPage = () => {
         <Typography variant="h6" fontWeight="bold" textAlign="center">
           Promotional Banner
         </Typography>
+      </Box>
+
+      <Box
+        sx={{
+          backgroundColor: '#D4EBFF',
+          width: { xs: '100%', sm: '90%', md: '1145px' },
+          height: '98px',
+          borderRadius: '12px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          mb: 4,
+          padding: { xs: '0 16px', sm: '0 32px' }, // Responsive padding
+        }}
+      >
+        <Typography variant="h6" fontWeight="bold" textAlign="center">
+          Hello Tutor
+        </Typography>
+        <Button
+          variant="contained"
+          sx={{
+            backgroundColor: '#40A39B',
+            borderRadius: '8px',
+            textTransform: 'none',
+            fontWeight: '500',
+            height: '36px',
+            position: { xs: 'static', md: 'absolute' }, // Responsive button positioning
+            bottom: '16px',
+            right: '16px',
+            width: '100%', // Full width on mobile
+            maxWidth: { md: '228px' }, // Max width on larger screens
+          }}
+        >
+          Setup Now
+        </Button>
       </Box>
 
       {/* Class Banner 1 */}
@@ -193,4 +228,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default TutorMainPage;

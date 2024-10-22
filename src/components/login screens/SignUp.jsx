@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Typography, Modal, FormControl, Select, MenuItem, TextField, Button } from '@mui/material';
 
-const SignUp = ({ open, handleClose }) => {
+const SignUp = ({ open, handleClose ,isStudent}) => {
   const [role, setRole] = React.useState('student');
   const [fullName, setFullName] = React.useState('');
   const [mobileNumber, setMobileNumber] = React.useState('');
@@ -10,6 +10,13 @@ const SignUp = ({ open, handleClose }) => {
   const handleChange = (event) => setRole(event.target.value);
 
   const handleGenderChange = (event) => setGender(event.target.value);
+  useEffect(() => {
+    if (isStudent) {
+      setRole("student");
+    } else {
+      setRole("tutor");
+    }
+  }, [isStudent]);
 
   return (
     <Modal open={open} onClose={(event, reason) => reason !== "backdropClick" && handleClose()}>
@@ -82,8 +89,12 @@ const SignUp = ({ open, handleClose }) => {
               }}
               inputProps={{ 'aria-label': 'Select Role' }}
             >
-              <MenuItem value="student">Student</MenuItem>
-              <MenuItem value="parent">Parent</MenuItem>
+             {isStudent ? (
+                    <MenuItem value="student">Student</MenuItem>
+                ) : (
+                  <MenuItem value="tutor">Tutor</MenuItem>
+                )}
+                {isStudent && (<MenuItem value="parent">Parent</MenuItem>)}
             </Select>
           </FormControl>
         </Box>
