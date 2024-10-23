@@ -181,7 +181,9 @@ const Join = () => {
         handleClose={() => setSignUpOpen(false)}
         isStudent={isStudent}
         data={data}
-        setData={setData} />
+        setData={setData} 
+         otpOpen={otpOpen}
+         setOtpOpen={setOtpOpen}/>
     </Box>
   );
 };
