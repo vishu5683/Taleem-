@@ -21,13 +21,13 @@ const BookYourTutor = lazy(() => import("../components/Academic/bookyourtutor"))
 const BookYourTutorPayment = lazy(() => import("../components/Academic/paymentpage"));
 const TutorListing = lazy(() => import("../components/Academic/tutorlisting"));
 const TutorListingExt = lazy(() => import("../components/Academic/TutorListingExt"));
-
+const F2FSession = lazy(() => import("../components/Academic/f2fsessions"));
 // Lazy imports for your other new components
 const FaqSidebar = lazy(() => import("../components/sidebar options/faqssidebar"));
 const AddAccountModal = lazy(() => import("../components/my classes dashboard/AddAccountModal"));
 const ManageProfileModal = lazy(() => import("../components/my classes dashboard/manageprofile"));
 const Profile = lazy(() => import("../components/my classes dashboard/profile"));
-const ProfileUpdate = lazy(() => import("../components/Academic/categories"));
+const ProfileUpdate = lazy(() => import("../components/Academic/f2fsessions"));
 
 const ROUTES = [
   {
@@ -193,6 +193,13 @@ const ROUTES = [
     path: "/tutorlistingext",
     id: 22,
     Component: TutorListingExt,
+    isPrivate: false,
+  },
+  {
+    name: "f2fsessions",
+    path: "/facetofaceSessions",
+    id: 23,
+    Component: F2FSession,
     isPrivate: false,
   },
 ];

@@ -111,7 +111,7 @@ const MainPage = () => {
         container 
         spacing={3}  // Adjust spacing between images
         justifyContent="center" 
-        sx={{ mb: 4 }}
+        sx={{ mb: 4 ,width: "92%"}}
       >
         {/* Map through images and attach appropriate routes */}
         {[{ img: img1, route: '/academic' }, { img: img2, route: null }, { img: img3, route: '/coursedetails' }].map((item, index) => (
@@ -122,7 +122,8 @@ const MainPage = () => {
               alt={`Image ${index + 1}`}
               onClick={() => item.route && handleImageClick(item.route)}  // Call handleImageClick with the corresponding route
               sx={{
-                width: { xs: '80%', sm: '90%', md: '237.56px' }, // Responsive widths
+                width: { xs: '100%', sm: '80%', md: '70%' }, // Responsive widths based on screen size
+                maxWidth: '250px', // Prevents the image from becoming too large on bigger screens
                 height: 'auto', // Maintain aspect ratio
                 borderRadius: '11.75px',
                 cursor: 'pointer',  // Indicate it's clickable

@@ -18,8 +18,11 @@ import img1 from '../../assets/bookurtutor/img1.png';
 import img2 from '../../assets/bookurtutor/img2.png';
 import img from '../../assets/bookurtutor/img.png';
 import BookNowModal from './booknowmodal';
+import MyLocationIcon from '@mui/icons-material/MyLocation';
+import pic1 from '../../assets/bookurtutor/pic1.png';
+import pic2 from '../../assets/bookurtutor/pic2.png';
 
-const BookYourTutor = () => {
+const F2fsessions = () => {
   const [classType, setClassType] = useState('');
   const [sessionType, setSessionType] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -41,7 +44,6 @@ const BookYourTutor = () => {
     fontSize: '14px',
   });
   const navigate = useNavigate();
-
   return (
     <Box
       sx={{
@@ -187,7 +189,85 @@ const BookYourTutor = () => {
           </AccordionDetails>
         </Accordion>
 
-      
+        {/* Meeting Points */}
+        <Typography sx={{ fontWeight: 500, fontSize: { xs: '18px', md: '20px' }, mt: 3 }}>Select Availability</Typography>
+        <Box sx={{ display: 'flex', gap: '12px', mt: 3, flexDirection: { xs: 'column', md: 'row' } }}>
+          <Box
+            onClick={() => setClassType('your-meeting-point')}
+            sx={{
+              width: { xs: '100%', md: '340px' },
+              height: '78px',
+              padding: '8px 12px',
+              gap: '4px',
+              borderRadius: '6px',
+              backgroundColor: classType === 'your-meeting-point' ? '#40A39B' : '#FFFFFF',
+              border: '1px solid #E6E6E6',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'start',
+            }}
+          >
+            <img src={pic1} alt="pic1" style={{ width: '40px', height: '40px' }} />
+            <Typography sx={{ color: classType === 'your-meeting-point' ? '#FFFFFF' : '#737373', fontWeight: 500 }}>
+              Your Meeting Point
+            </Typography>
+          </Box>
+
+          <Box
+            onClick={() => setClassType('tutor-meeting-point')}
+            sx={{
+              width: { xs: '100%', md: '340px' },
+              height: '78px',
+              padding: '8px 12px',
+              gap: '4px',
+              borderRadius: '6px',
+              backgroundColor: classType === 'tutor-meeting-point' ? '#40A39B' : '#FFFFFF',
+              border: '1px solid #E6E6E6',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'start',
+            }}
+          >
+            <img src={pic2} alt="pic2" style={{ width: '40px', height: '40px' }} />
+            <Typography sx={{ color: classType === 'tutor-meeting-point' ? '#FFFFFF' : '#737373', fontWeight: 500 }}>
+              Tutor Meeting Point
+            </Typography>
+          </Box>
+        </Box>
+
+        {/* Address Input */}
+        <Box sx={{ display: 'flex', alignItems: 'center', mt: 3, gap: '12px', flexDirection: { xs: 'column', md: 'row' } }}>
+          <TextField
+            placeholder="Address"
+            fullWidth
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <LocationOnIcon sx={{ color: '#40A39B' }} />
+                </InputAdornment>
+              ),
+              style: { borderRadius: '6px', border: '1px solid #E6E6E6' },
+            }}
+            sx={{ height: '44px', mb: { xs: '10px', md: '0px' } }}
+          />
+          <Button
+            sx={{
+              width: { xs: '100%', md: '60%' },
+              height: '44px',
+              backgroundColor: '#FFFFFF',
+              borderRadius: '52px',
+              border: '1px solid #E6E6E6',
+              display: 'flex',
+              justifyContent: 'center',
+              color: '#40A39B',
+            }}
+          >
+            Use Current Location
+            <MyLocationIcon sx={{ marginLeft: '5px', color: '#40A39B' }} />
+          </Button>
+        </Box>
 
         {/* Instructions */}
         <Typography sx={{ fontWeight: 500, fontSize: { xs: '18px', md: '20px' }, color: '#000000', mt: 3 }}>
@@ -278,4 +358,4 @@ const BookYourTutor = () => {
   );
 };
 
-export default BookYourTutor;
+export default F2fsessions;

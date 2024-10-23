@@ -20,7 +20,7 @@ const categories = [
   { text: 'Photography', img: businessIcon },
   { text: 'Meditation ', img: aiIcon },
   { text: 'Poetry', img: bioIcon },
-  { text: 'Painiting', img: productIcon },
+  { text: 'Painting', img: productIcon },
   { text: 'Photography', img: uiuxIcon },
   { text: 'Dance', img: dataSciIcon },
 ];
@@ -60,8 +60,7 @@ const Categories = () => {
           variant="outlined"
           placeholder="Search here..."
           sx={{
-            width: '1142px',
-       
+            width: { xs: '100%', sm: '100%', md: '1142px' }, // Responsive width: full-width on mobile, fixed width on desktop
             backgroundColor: '#F5F5F5',
             borderRadius: '6px',
             marginBottom: '25px',
@@ -111,7 +110,7 @@ const Categories = () => {
             <Grid item xs={12} sm={6} md={4} key={index}>
               <Box
                 sx={{
-                  width: '370px',
+                  width: '100%', // Adjusted to be responsive
                   height: 'auto',
                   backgroundColor: '#D4EBFF',
                   borderRadius: '8px',
