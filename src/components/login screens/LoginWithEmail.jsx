@@ -18,10 +18,13 @@ const LoginWithEmail = ({
   open,
   handleClose,
   openPhoneNumberLogin,
-  isStudent,data,setData,
-  otpOpen,setOtpOpen
+  isStudent,
+  data,
+  setData,
+  otpOpen,
+  setOtpOpen,
 }) => {
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   const [role, setRole] = React.useState("student");
   const [email, setEmail] = React.useState("");
 
@@ -33,7 +36,7 @@ const LoginWithEmail = ({
       case 2:
         setRole("parent");
         break;
-      case 2:
+      case 3:
         setRole("tutor");
         break;
       default:
@@ -53,11 +56,17 @@ const LoginWithEmail = ({
     };
     if (email) {
       handleClose();
-      dispatch(sendMobileOtpSignup((payload),
-       (res) => {
-        setData({token:res?.data?.data?.token,user:isStudent,type:"login",ismob:false,data:email})
-      }));
-      // sendMobileOtpSignup
+      dispatch(
+        sendMobileOtpSignup(payload, (res) => {
+          setData({
+            token: res?.data?.data?.token,
+            user: isStudent,
+            type: "login",
+            ismob: false,
+            data: email,
+          });
+        })
+      );
       setOtpOpen(true);
     } else {
       alert("Please enter a mail id");
@@ -75,10 +84,10 @@ const LoginWithEmail = ({
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: { xs: "85%", sm: "600px", md: "720px" },
+          width: { xs: "90%", sm: "600px", md: "720px" },
           bgcolor: "white",
           borderRadius: "12px",
-          p: { xs: 3, sm: 4 },
+          p: { xs: 2, sm: 4 },
           textAlign: "center",
         }}
       >
@@ -109,9 +118,9 @@ const LoginWithEmail = ({
         <Typography
           sx={{
             fontFamily: "Metropolis",
-            fontSize: { xs: "20px", sm: "24px" },
+            fontSize: { xs: "18px", sm: "24px" },
             fontWeight: 700,
-            mb: "12px",
+            mb: { xs: "10px", sm: "12px" },
           }}
         >
           Log In
@@ -119,39 +128,46 @@ const LoginWithEmail = ({
         <Typography
           sx={{
             fontFamily: "Metropolis",
-            fontSize: { xs: "16px", sm: "18px" },
+            fontSize: { xs: "14px", sm: "18px" },
             color: "#737373",
-            mb: "20px",
+            mb: { xs: "15px", sm: "20px" },
           }}
         >
           Let’s continue your learning journey together
         </Typography>
 
+        {/* Role Select */}
         <Box
           sx={{
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            mb: 2,
+            mb: { xs: 1, sm: 2 },
+            flexDirection: { xs: "column", sm: "row" },
           }}
         >
-          <Typography sx={{ fontSize: "16px", color: "#737373", mr: 1 }}>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", sm: "16px" },
+              color: "#737373",
+              mr: { xs: 0, sm: 1 },
+              mb: { xs: 1, sm: 0 },
+            }}
+          >
             Continue as
           </Typography>
           <FormControl variant="outlined" sx={{ minWidth: "100px" }}>
-            {/*  */}
-
             {isStudent !== 3 ? (
               <Select
                 value={role}
                 onChange={handleChange}
                 sx={{
-                  fontSize: "16px",
+                  fontSize: { xs: "14px", sm: "16px" },
                   color: "#737373",
                   background:
                     "linear-gradient(105.04deg, #C6FFC9 -25.33%, #D4EBFF 100%)",
                   borderRadius: "50px",
-                  height: "32px",
+                  height: { xs: "28px", sm: "32px" },
                   "& .MuiOutlinedInput-notchedOutline": { border: "none" },
                 }}
                 inputProps={{ "aria-label": "Select Role" }}
@@ -163,14 +179,13 @@ const LoginWithEmail = ({
               <Select
                 value={role}
                 onChange={handleChange}
-                defaultValue={"tutor"}
                 sx={{
-                  fontSize: "16px",
+                  fontSize: { xs: "14px", sm: "16px" },
                   color: "#737373",
                   background:
                     "linear-gradient(105.04deg, #EBBE49 -25.33%, #FFC7C6 100%)",
                   borderRadius: "50px",
-                  height: "32px",
+                  height: { xs: "28px", sm: "32px" },
                   "& .MuiOutlinedInput-notchedOutline": { border: "none" },
                 }}
                 inputProps={{ "aria-label": "Select Role" }}
@@ -181,11 +196,18 @@ const LoginWithEmail = ({
           </FormControl>
         </Box>
 
-        {/* Email Label and Input */}
-        <Box sx={{ width: "420px", mx: "auto", textAlign: "left", mb: 3 }}>
+        {/* Email Input */}
+        <Box
+          sx={{
+            width: { xs: "100%", sm: "420px" },
+            mx: "auto",
+            textAlign: "left",
+            mb: { xs: 2, sm: 3 },
+          }}
+        >
           <Typography
             sx={{
-              fontSize: "16px",
+              fontSize: { xs: "14px", sm: "16px" },
               fontWeight: 700,
               color: "#000000",
               mb: 1,
@@ -209,17 +231,18 @@ const LoginWithEmail = ({
           />
         </Box>
 
+        {/* Get Started Button */}
         <Button
           onClick={handleGetStarted}
           sx={{
-            mb: 2,
+            mb: { xs: 1.5, sm: 2 },
             backgroundColor: "#40A39B",
             color: "white",
             borderRadius: "8px",
             padding: "10px",
             fontWeight: 700,
-            width: "420px",
-            height: "52px",
+            width: { xs: "100%", sm: "420px" },
+            height: { xs: "48px", sm: "52px" },
             textTransform: "none",
           }}
         >
@@ -229,20 +252,22 @@ const LoginWithEmail = ({
         <Typography
           onClick={openPhoneNumberLogin}
           sx={{
-            fontSize: "16px",
+            fontSize: { xs: "14px", sm: "16px" },
             color: "#000",
             fontWeight: 500,
             cursor: "pointer",
-            mb: 2,
+            mb: { xs: 1, sm: 2 },
           }}
         >
           Login with Phone number
         </Typography>
 
-        <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+        {/* Divider */}
+        <Box sx={{ display: "flex", justifyContent: "center", mb: { xs: 1, sm: 2 } }}>
           <img src={dividerLine} alt="divider line" style={{ width: "60%" }} />
         </Box>
 
+        {/* Google Login */}
         <Button
           onClick={() => console.log("Login with Google")}
           sx={{
@@ -251,11 +276,11 @@ const LoginWithEmail = ({
             border: "1px solid #E6E6E6",
             borderRadius: "8px",
             padding: "10px",
-            width: "420px",
+            width: { xs: "100%", sm: "420px" },
             height: "48px",
             textTransform: "none",
             fontWeight: 500,
-            fontSize: "16px",
+            fontSize: { xs: "14px", sm: "16px" },
           }}
         >
           <img
@@ -266,9 +291,10 @@ const LoginWithEmail = ({
           Login with Google
         </Button>
 
+        {/* Sign Up */}
         <Typography
           sx={{
-            fontSize: "18px",
+            fontSize: { xs: "16px", sm: "18px" },
             fontWeight: 400,
             color: "#737373",
             mt: 2,
