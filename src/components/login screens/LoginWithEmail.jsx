@@ -53,9 +53,10 @@ const LoginWithEmail = ({
     };
     if (email) {
       handleClose();
-      dispatch(sendMobileOtpSignup(payload), (res) => {
-        setData(res?.data?.token);
-      });
+      dispatch(sendMobileOtpSignup((payload),
+       (res) => {
+        setData({token:res?.data?.data?.token,user:isStudent,type:"login",ismob:false,data:email})
+      }));
       // sendMobileOtpSignup
       setOtpOpen(true);
     } else {

@@ -300,6 +300,7 @@ const SignUp = ({
           if (val?.data?.data?.token !== "") {
             localStorage.setItem("token", val?.data?.data?.token);
             localStorage.setItem("user", isStudent);
+            setData({token:val?.data?.data?.token,user:isStudent,type:"signup",ismob:true,data:values?.mobile_no})
             // navigate("/home");
           }
           setOtpOpen(true);

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import {
   Box,
   Typography,
@@ -10,6 +10,9 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { verifyMobileOtpLogin } from "../../Redux/Actions";
+import toast from "react-hot-toast";
 
 const OtpScreen = ({
   open,
@@ -21,8 +24,14 @@ const OtpScreen = ({
   setOtpOpen,
 }) => {
   const navigate = useNavigate();
+  const dispatch=useDispatch();
   const otpRefs = useRef([]); // Create a ref array to store OTP input references
-  const [otp, setOtp] = React.useState(Array(6).fill("")); // Initialize OTP state
+  const [otp, setOtp] = React.useState(Array(4).fill("")); // Initialize OTP state
+
+  useEffect(()=>{
+    console.log(data)
+
+  },[])
 
   const handleChange = (index, value) => {
     if (value.length <= 1) {
@@ -45,9 +54,23 @@ const OtpScreen = ({
   };
 
   const handleVerify = () => {
-    // Here you can add any OTP verification logic
-    // For now, we'll just navigate to /home
+    console.log(data,"HERE")
+    let payload={
+    otp: "1234",
+    type: data?.ismob ? "mobile_no" : "email",
+    field_value: data?.data,
+    action: data?.type,
+    token: data?.token // recieved in sendOtp api
+  }
+
+  dispatch(verifyMobileOtpLogin(payload,(res)=>{if(res?.status==200){
     navigate("/home", { isStudent });
+  }else{
+   }}))
+    
+    // Here you can add any OTP verification logic
+    // For now, we'll just navigate to /home 
+    
   };
 
   return (

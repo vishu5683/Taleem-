@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import pic1 from "../../assets/join section/image 36.svg";
 import pic2 from "../../assets/join section/image.svg";
@@ -148,7 +148,6 @@ const Join = () => {
           </Box>
         </Box>
       </Box>
-
       {/* Modal Component */}
       <LoginWithStudent
         open={open}
@@ -163,12 +162,14 @@ const Join = () => {
         loginWithEmailOpen={loginWithEmailOpen}
         setLoginWithEmailOpen={setLoginWithEmailOpen}
       />
-      <OtpScreen  open={otpOpen}
+      <OtpScreen
+        open={otpOpen}
         handleClose={() => setOtpOpen(false)}
         isStudent={isStudent}
         data={data}
-        setData={setData} />
-       <LoginWithEmail
+        setData={setData}
+      />
+      <LoginWithEmail
         open={loginWithEmailOpen}
         handleClose={() => setLoginWithEmailOpen(false)}
         isStudent={isStudent}
@@ -177,13 +178,15 @@ const Join = () => {
         otpOpen={otpOpen}
         setOtpOpen={setOtpOpen}
       />
-      <SignUp     open={signUpOpen}
+      <SignUp
+        open={signUpOpen}
         handleClose={() => setSignUpOpen(false)}
         isStudent={isStudent}
         data={data}
-        setData={setData} 
-         otpOpen={otpOpen}
-         setOtpOpen={setOtpOpen}/>
+        setData={setData}
+        otpOpen={otpOpen}
+        setOtpOpen={setOtpOpen}
+      />
     </Box>
   );
 };

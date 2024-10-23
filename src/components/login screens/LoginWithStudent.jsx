@@ -68,11 +68,19 @@ const LoginWithStudent = ({
     };
     if (mobileNumber.length === 10) {
       handleClose();
-      dispatch(sendMobileOtpSignup(payload), (res) => {
-        setData(res?.data?.token);
-      });
+      dispatch(sendMobileOtpSignup((payload), 
+      (res) => {
+
+        setData({
+          token: res?.data?.data?.token,
+          user: isStudent,
+          type: "login",
+          ismob: true,
+          data: mobileNumber,
+        });
+        setOtpOpen(true);
+      }));
       // sendMobileOtpSignup
-      setOtpOpen(true);
     } else {
       alert("Please enter a valid 10-digit mobile number");
     }

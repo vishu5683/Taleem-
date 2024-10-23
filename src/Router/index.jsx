@@ -15,9 +15,9 @@ function RoutesWrapper() {
             element={
               <Layout>
                 {isPrivate ? (
-                  // <PrivateRoute>
+                  <PrivateRoute>
                     <Component />
-                  // </PrivateRoute>
+                  </PrivateRoute>
                 ) : (
                   <Component />
                 )}

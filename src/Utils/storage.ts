@@ -2,7 +2,7 @@
  * To get token value from the storage
  * @returns return token
  */
-export const getAccessToken = () => localStorage.getItem('accessToken');
+export const getAccessToken = () => localStorage.getItem('token');
 
 /**
  * To set token value in the storage
