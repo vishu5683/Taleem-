@@ -7,25 +7,24 @@ export const sendMobileOtpSignup = (value, callback) => {
       `${Utils.EndPoint.sendMobileOtpSignup}`,
       value,
       (responseData) => {
+        console.log(responseData);
         dispatch({
           type: Utils.actionName.sendMobileOtpSignup,
           payload: { ...value, Response: responseData?.data },
         });
         if (responseData?.status == 200) {
-          if (responseData?.data?.statusCode == 200) {
-            toast.success(`${responseData?.data?.APICODERESULT}`, {
-              position: "top-right",
-            });
-            callback(responseData);
-          } else {
-            toast.error(`${responseData?.data?.APICODERESULT}`, {
-              position: "top-right",
-            });
-          }
+          callback(responseData);
+          toast.success(`${responseData?.data?.message}`, {
+            position: "top-right",
+          });
+        } else {
+          toast.error(`${responseData?.data?.message}`, {
+            position: "top-right",
+          });
         }
       },
       (error) => {
-        toast.error(`${error?.payload?.APICODERESULT}`, {
+        toast.error(`${error?.payload?.message}`, {
           position: "top-right",
         });
       }
@@ -76,16 +75,14 @@ export const signup = (value, callback) => {
           payload: { ...value, Response: responseData?.data },
         });
         if (responseData?.status == 200) {
-          if (responseData?.data?.status == true) {
-            toast.success(`${responseData?.data?.message}`, {
-              position: "top-right",
-            });
-            callback(responseData);
-          } else {
-            toast.error(`${responseData?.data?.message}`, {
-              position: "top-right",
-            });
-          }
+          toast.success(`${responseData?.data?.message}`, {
+            position: "top-right",
+          });
+          callback(responseData);
+        } else {
+          toast.error(`${responseData?.data?.message}`, {
+            position: "top-right",
+          });
         }
       },
       (error) => {
@@ -181,20 +178,18 @@ export const verifyMobileOtpLogin = (value, callback) => {
           payload: { ...value, Response: responseData?.data },
         });
         if (responseData?.status == 200) {
-          if (responseData?.data?.statusCode == 200) {
-            toast.success(`${responseData?.data?.APICODERESULT}`, {
-              position: "top-right",
-            });
-            callback(responseData);
-          } else {
-            toast.error(`${responseData?.data?.APICODERESULT}`, {
-              position: "top-right",
-            });
-          }
+          toast.success(`${responseData?.data?.message}`, {
+            position: "top-right",
+          });
+          callback(responseData);
+        } else {
+          toast.error(`${responseData?.data?.message}`, {
+            position: "top-right",
+          });
         }
       },
       (error) => {
-        toast.error(`${error?.payload?.APICODERESULT}`, {
+        toast.error(`${error?.payload?.message}`, {
           position: "top-right",
         });
       }

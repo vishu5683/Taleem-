@@ -14,19 +14,44 @@ import googleLogo from "../../assets/modal/image 10.png";
 import OtpScreen from "./OtpScreen";
 import SignUp from "./SignUp";
 import LoginWithEmail from "./LoginWithEmail";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { sendMobileOtpSignup } from "../../Redux/Actions";
 
-const LoginWithStudent = ({ open, handleClose, isStudent }) => {
-  const [role, setRole] = useState("student");
+const LoginWithStudent = ({
+  open,
+  handleClose,
+  isStudent,
+  data,
+  setData,
+  otpOpen,
+  setOtpOpen,
+  signUpOpen,
+  setSignUpOpen,
+  loginWithEmailOpen,
+  setLoginWithEmailOpen,
+}) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [role, setRole] = useState(isStudent == 3 ? "tutor" : "student");
   const [mobileNumber, setMobileNumber] = useState("");
-  const [otpOpen, setOtpOpen] = useState(false);
-  const [signUpOpen, setSignUpOpen] = useState(false);
-  const [loginWithEmailOpen, setLoginWithEmailOpen] = useState(false);
+  // const [otpOpen, setOtpOpen] = useState(false);
+  // const [signUpOpen, setSignUpOpen] = useState(false);
+  // const [loginWithEmailOpen, setLoginWithEmailOpen] = useState(false);
 
   useEffect(() => {
-    if (isStudent) {
-      setRole("student");
-    } else {
-      setRole("tutor");
+    switch (isStudent) {
+      case 1:
+        setRole("student");
+        break;
+      case 2:
+        setRole("parent");
+        break;
+      case 3:
+        setRole("tutor");
+        break;
+      default:
+        setRole("student");
     }
   }, [isStudent]);
 
@@ -35,9 +60,27 @@ const LoginWithStudent = ({ open, handleClose, isStudent }) => {
     setMobileNumber(event.target.value);
 
   const handleGetStarted = () => {
+    let payload = {
+      type: "mobile_no",
+      field_value: mobileNumber,
+      country_code: "91",
+      action: "login",
+    };
     if (mobileNumber.length === 10) {
       handleClose();
-      setOtpOpen(true);
+      dispatch(sendMobileOtpSignup((payload), 
+      (res) => {
+
+        setData({
+          token: res?.data?.data?.token,
+          user: isStudent,
+          type: "login",
+          ismob: true,
+          data: mobileNumber,
+        });
+        setOtpOpen(true);
+      }));
+      // sendMobileOtpSignup
     } else {
       alert("Please enter a valid 10-digit mobile number");
     }
@@ -129,27 +172,42 @@ const LoginWithStudent = ({ open, handleClose, isStudent }) => {
               Continue as
             </Typography>
             <FormControl variant="outlined" sx={{ minWidth: "100px" }}>
-              <Select
-                value={role}
-                onChange={handleChange}
-                sx={{
-                  fontSize: "16px",
-                  color: "#737373",
-                  background:
-                    "linear-gradient(105.04deg, #C6FFC9 -25.33%, #D4EBFF 100%)",
-                  borderRadius: "50px",
-                  height: "32px",
-                  "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                }}
-                inputProps={{ "aria-label": "Select Role" }}
-              >
-                {isStudent ? (
-                    <MenuItem value="student">Student</MenuItem>
-                ) : (
+              {isStudent !== 3 ? (
+                <Select
+                  value={role}
+                  onChange={handleChange}
+                  sx={{
+                    fontSize: "16px",
+                    color: "#737373",
+                    background:
+                      "linear-gradient(105.04deg, #C6FFC9 -25.33%, #D4EBFF 100%)",
+                    borderRadius: "50px",
+                    height: "32px",
+                    "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                  }}
+                  inputProps={{ "aria-label": "Select Role" }}
+                >
+                  <MenuItem value="student">Student</MenuItem>
+                  <MenuItem value="parent">Parent</MenuItem>
+                </Select>
+              ) : (
+                <Select
+                  value={role}
+                  onChange={handleChange}
+                  sx={{
+                    fontSize: "16px",
+                    color: "#737373",
+                    background:
+                      "linear-gradient(105.04deg, #EBBE49 -25.33%, #FFC7C6 100%)",
+                    borderRadius: "50px",
+                    height: "32px",
+                    "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                  }}
+                  inputProps={{ "aria-label": "Select Role" }}
+                >
                   <MenuItem value="tutor">Tutor</MenuItem>
-                )}
-                {isStudent && (<MenuItem value="parent">Parent</MenuItem>)}
-              </Select>
+                </Select>
+              )}
             </FormControl>
           </Box>
 
@@ -259,17 +317,31 @@ const LoginWithStudent = ({ open, handleClose, isStudent }) => {
       </Modal>
 
       {/* OTP Screen Modal */}
-      <OtpScreen open={otpOpen} handleClose={() => setOtpOpen(false)} isStudent={isStudent}/>
+      {/* <OtpScreen
+        open={otpOpen}
+        handleClose={() => setOtpOpen(false)}
+        isStudent={isStudent}
+        data={data}
+        setData={setData}
+      /> */}
 
       {/* Sign Up Modal */}
-      <SignUp open={signUpOpen} handleClose={() => setSignUpOpen(false)} isStudent={isStudent}/>
+      {/* <SignUp
+        open={signUpOpen}
+        handleClose={() => setSignUpOpen(false)}
+        isStudent={isStudent}
+        data={data}
+        setData={setData}
+      /> */}
 
       {/* Login with Email Modal */}
-      <LoginWithEmail
+      {/* <LoginWithEmail
         open={loginWithEmailOpen}
         handleClose={() => setLoginWithEmailOpen(false)}
         isStudent={isStudent}
-      />
+        data={data}
+        setData={setData}
+      /> */}
     </>
   );
 };

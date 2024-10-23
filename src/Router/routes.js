@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import MyClasses from "../components/sidebar options/myclasses";
-
+const NotFound=lazy(() => import("../components/notfound"));
 // Lazy imports for your existing components
 const Home = lazy(() => import("../components/pages/LoginHomepage"));
 const LandingPage = lazy(() => import("../components/pages/LandingPage"));
@@ -38,10 +38,17 @@ const ROUTES = [
     isPrivate: false,
   },
   {
-    name: "Home",
+    name: "LandingPage",
     path: "/",
     id: 1,
     Component: LandingPage,
+    isPrivate: false,
+  },
+  {
+    name: "NotFound",
+    path: "*",
+    id: 1,
+    Component: NotFound,
     isPrivate: false,
   },
   {

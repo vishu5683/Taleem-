@@ -1,10 +1,10 @@
 const EndPoint = {
-    sendMobileOtpSignup : "sendMobileOtpSignup",
+    sendMobileOtpSignup : "send-otp",
     verifyMobileOtpSignup:"verifyMobileOtpSignup",
     signup:"sign-up",
     login:"emailLogin",
     sendMobileOtpLogin:"sendMobileOtpLogin",
-    verifyMobileOtpLogin:"verifyMobileOtpLogin",
+    verifyMobileOtpLogin:"verify-otp",
     forgetPassword:"forgetPassword",
     getCategoryWithProduct:"getCategoryWithProduct",
     Home:"Home",

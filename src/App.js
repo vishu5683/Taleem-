@@ -31,7 +31,7 @@ const baseName = process.env.NODE_ENV === 'development' ? '/' : '/taleem/taleem_
       <Provider store={store}>
         <div>
           <BrowserRouter
-          // basename={baseName}
+          basename={baseName}
           >
             <Routes>
               <Route path="/*" element={<RoutesWrapper />}></Route>
