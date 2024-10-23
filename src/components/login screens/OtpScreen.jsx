@@ -39,7 +39,7 @@ const OtpScreen = ({ open, handleClose ,isStudent}) => {
   const handleVerify = () => {
     // Here you can add any OTP verification logic
     // For now, we'll just navigate to /home
-    navigate('/home');
+    navigate('/home',{isStudent});
   };
 
   return (

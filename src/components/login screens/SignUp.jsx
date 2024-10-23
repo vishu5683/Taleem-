@@ -255,7 +255,7 @@ const SignUp = ({ open, handleClose, isStudent }) => {
     email: '',
     mobile_no: '',
     gender: '',
-    user_type: isStudent ? '1' : '3',
+    user_type: isStudent==1 ? "1" : (isStudent==2 ? "2" : "3")  ,
     dob: '',
     country_code: '91'
   };
@@ -279,6 +279,7 @@ const SignUp = ({ open, handleClose, isStudent }) => {
       dispatch(signup(values,(val)=>{
        if(val?.data?.data?.token!==""){
         localStorage.setItem('token', val?.data?.data?.token);
+        localStorage.setItem('user', isStudent);
         navigate('/home');
        }
       }));

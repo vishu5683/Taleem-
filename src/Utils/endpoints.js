@@ -1,5 +1,5 @@
 const EndPoint = {
-    sendMobileOtpSignup : "sendMobileOtpSignup",
+    sendMobileOtpSignup : "send-otp",
     verifyMobileOtpSignup:"verifyMobileOtpSignup",
     signup:"sign-up",
     login:"emailLogin",
