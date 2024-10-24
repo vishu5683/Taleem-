@@ -36,18 +36,19 @@ const TutorListingExt = () => {
   return (
     <Box sx={{ padding: '20px' }}>
       <Box sx={{ maxWidth: '1145px', margin: '0 auto' }}>
-        <Typography
-          variant="body2"
-          sx={{
-            fontWeight: 400,
-            fontSize: '12px',
-            color: '#737373',
-            marginBottom: '16px',
-            textAlign: 'left',
-          }}
-        >
-          Home &gt; Academic &gt; Tutors Listing
-        </Typography>
+      <Typography
+  variant="body2"
+  sx={{
+    fontWeight: 400,
+    fontSize: '12px',
+    color: '#737373',
+    marginBottom: '16px',
+    textAlign: 'left',
+  }}
+>
+  Home &gt; Academic &gt;{' '}
+  <span style={{ fontWeight: 700, color: 'black' }}>Tutors Listing</span>
+</Typography>
 
         <PromotionalBanner
           sx={{

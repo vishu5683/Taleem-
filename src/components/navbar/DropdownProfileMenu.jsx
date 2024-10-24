@@ -113,7 +113,9 @@ const DropdownProfileMenu = ({ userName, userEmail }) => {
                 color: '#333333',
                 gap: '8px',
               }}
-              onClick={() => handleNavigation(menuRoutes[item])} // Map items to corresponding routes
+              onClick={() => {
+                handleNavigation(menuRoutes[item]); // Map items to corresponding routes
+              }}
             >
               {item}
               <ChevronRight />

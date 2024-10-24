@@ -1,34 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Typography, InputBase, Button } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import TuneIcon from '@mui/icons-material/Tune';
 import PromotionalBanner from '../common comps/promotionalbanner';
 import CoursesCard from '../cards/coursescard';
+import FilterModal from './filter';
 
+const CourseDetails = () => {
+  // State to control the modal open/close
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-const coursedetails = () => {
+  // Functions to handle modal open and close
   const handleOpenModal = () => {
-    // Add modal open logic here
-    console.log('Open filter modal');
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
-    <Box sx={{ padding: '20px' }}>
+    <Box sx={{ padding: { xs: '10px', sm: '20px' } }}>
       <Box sx={{ maxWidth: '1145px', margin: '0 auto' }}>
         {/* Breadcrumbs */}
         <Typography
-  variant="body2"
-  sx={{
-    fontWeight: 400,
-    fontSize: '12px',
-    color: '#737373',
-    marginBottom: '16px',
-    textAlign: 'left',
-  }}
->
-  Home &gt; All Courses &gt;{' '}
-  <span style={{ fontWeight: 700 }}>Course Listing</span>
-</Typography>
+          variant="body2"
+          sx={{
+            fontWeight: 400,
+            fontSize: { xs: '10px', sm: '12px' },
+            color: '#737373',
+            marginBottom: '16px',
+            textAlign: 'left',
+          }}
+        >
+          Home &gt; All Courses &gt;{' '}
+          <span style={{ fontWeight: 700 }}>Course Listing</span>
+        </Typography>
 
         {/* Promotional Banner */}
         <PromotionalBanner
@@ -36,7 +43,7 @@ const coursedetails = () => {
             width: '100%',
             backgroundColor: '#F5F5F5',
             borderRadius: '12px',
-            padding: '16px',
+            padding: { xs: '8px', sm: '16px' },
             marginBottom: '25px',
           }}
         />
@@ -45,6 +52,7 @@ const coursedetails = () => {
         <Box
           sx={{
             display: 'flex',
+            flexDirection: { xs: 'column', sm: 'row' },
             justifyContent: 'space-between',
             alignItems: 'center',
             gap: '16px',
@@ -62,6 +70,8 @@ const coursedetails = () => {
               gap: '8px',
               borderRadius: '8px',
               border: '1px solid #E6E6E6',
+              width: '100%', // Ensure full width on mobile
+              marginBottom: { xs: '10px', sm: '0px' }, // Space between search and filter on mobile
             }}
           >
             <SearchIcon sx={{ color: '#000000', marginRight: '8px' }} />
@@ -81,7 +91,7 @@ const coursedetails = () => {
           <Button
             onClick={handleOpenModal}
             sx={{
-              width: '147px',
+              width: { xs: '100%', sm: '147px' }, // Full width on mobile, fixed width on larger screens
               height: '56px',
               padding: '6px 10px',
               gap: '8px',
@@ -107,7 +117,7 @@ const coursedetails = () => {
           variant="h6"
           sx={{
             fontWeight: 700,
-            fontSize: '24px',
+            fontSize: { xs: '18px', sm: '24px' },
             color: '#333',
             marginBottom: '20px',
             textAlign: 'left',
@@ -116,11 +126,15 @@ const coursedetails = () => {
           Courses
         </Typography>
 
-        {/* Courses Grid - 3 in a Row */}
+        {/* Courses Grid */}
         <Box
           sx={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
+            gridTemplateColumns: {
+              xs: 'repeat(1, 1fr)', // 1 card per row on mobile
+              sm: 'repeat(2, 1fr)', // 2 cards per row on tablet
+              md: 'repeat(3, 1fr)', // 3 cards per row on desktop
+            },
             gap: '20px', // Adjust gap between cards
           }}
         >
@@ -128,14 +142,16 @@ const coursedetails = () => {
           <CoursesCard />
           <CoursesCard />
           <CoursesCard />
-
           <CoursesCard />
           <CoursesCard />
           <CoursesCard />
         </Box>
       </Box>
+
+      {/* Filter Modal */}
+      {isModalOpen && <FilterModal open={isModalOpen} handleClose={handleCloseModal} />}
     </Box>
   );
 };
 
-export default coursedetails;
+export default CourseDetails;

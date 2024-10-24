@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AppBar, Toolbar, Typography, Menu, MenuItem, Button, Box, IconButton, Drawer, List, ListItem, ListItemText } from '@mui/material';
 import { Menu as MenuIcon, ExpandMore } from '@mui/icons-material';
+import { Link } from 'react-router-dom';  // Import Link from react-router-dom
 import logo from '../../assets/navbar/nav logo.png';
 
 const Navbar = () => {
@@ -31,13 +32,13 @@ const Navbar = () => {
   const drawer = (
     <Box sx={{ width: 250, padding: '16px' }}>
       <List>
-        <ListItem button>
+        <ListItem button component={Link} to="/">
           <ListItemText primary="Home" />
         </ListItem>
         <ListItem button>
           <ListItemText primary="Prices" />
         </ListItem>
-        <ListItem button>
+        <ListItem button component={Link} to="/contactus">
           <ListItemText primary="Contact Us" />
         </ListItem>
         <ListItem button>
@@ -102,17 +103,19 @@ const Navbar = () => {
       >
         {/* Logo at the Start */}
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Box
-            component="img"
-            src={logo}
-            alt="Logo"
-            sx={{
-              width: '139px',
-              height: '63px',
-              padding: '8px 21px',
-              borderRadius: '8px 0 0 0',
-            }}
-          />
+          <Link to="/">
+            <Box
+              component="img"
+              src={logo}
+              alt="Logo"
+              sx={{
+                width: '139px',
+                height: '63px',
+                padding: '8px 21px',
+                borderRadius: '8px 0 0 0',
+              }}
+            />
+          </Link>
         </Box>
 
         {/* Desktop Navigation Links */}
@@ -124,7 +127,12 @@ const Navbar = () => {
             color: '#737373',
           }}
         >
-          <Typography variant="body1" sx={{ fontWeight: 700, fontSize: '16px', lineHeight: '20px', cursor: 'pointer' }}>
+          <Typography
+            variant="body1"
+            component={Link}
+            to="/home"
+            sx={{ fontWeight: 700, fontSize: '16px', lineHeight: '20px', cursor: 'pointer', textDecoration: 'none', color: 'inherit' }}
+          >
             Home
           </Typography>
 
@@ -148,7 +156,12 @@ const Navbar = () => {
             </Menu>
           </Box>
 
-          <Typography variant="body1" sx={{ fontWeight: 400, fontSize: '16px', lineHeight: '20px', cursor: 'pointer' }}>
+          <Typography
+            variant="body1"
+            component={Link}
+            to="/contactus"
+            sx={{ fontWeight: 400, fontSize: '16px', lineHeight: '20px', cursor: 'pointer', textDecoration: 'none', color: 'inherit' }}
+          >
             Contact Us
           </Typography>
 
@@ -184,8 +197,8 @@ const Navbar = () => {
               borderRadius: '8px',
               borderColor: '#EBBE49',
               textTransform: 'none',
-              fontWeight: 500, // Font weight set to 500
-              fontSize: '16px', // Font size set to 16px
+              fontWeight: 500,
+              fontSize: '16px',
               color: '#EBBE49',
             }}
           >
@@ -200,10 +213,8 @@ const Navbar = () => {
               borderRadius: '8px',
               backgroundColor: '#40A39B',
               textTransform: 'none',
-              fontWeight: 500, // Font weight set to 500
-              fontSize: '16px', // Font size set to 16px
-
-       
+              fontWeight: 500,
+              fontSize: '16px',
               color: '#FFFFFF',
               '&:hover': {
                 backgroundColor: '#37a393',
