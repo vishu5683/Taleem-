@@ -81,7 +81,7 @@ const LoginWithEmail = ({
       <Box
         sx={{
           position: "absolute",
-          top: "50%",
+          top: "50%", 
           left: "50%",
           transform: "translate(-50%, -50%)",
           width: { xs: "90%", sm: "600px", md: "720px" },
@@ -252,8 +252,8 @@ const LoginWithEmail = ({
         <Typography
           onClick={openPhoneNumberLogin}
           sx={{
-            fontSize: { xs: "14px", sm: "16px" },
-            color: "#000",
+            fontSize: "16px",
+            color: "#40A39B",
             fontWeight: 500,
             cursor: "pointer",
             mb: { xs: 1, sm: 2 },

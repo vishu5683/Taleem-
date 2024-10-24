@@ -9,6 +9,9 @@ import "./Join.css";
 import SignUp from "../login screens/SignUp";
 import LoginWithEmail from "../login screens/LoginWithEmail";
 import OtpScreen from "../login screens/OtpScreen";
+import TutorsInfo from "../registerTutot/tutorInfo";
+import UploadDocument from "../registerTutot/uploadDocs";
+import WelcomeScreen from "../registerTutot/welcomeScreen";
 
 const Join = () => {
   const [open, setOpen] = useState(false);
@@ -19,6 +22,20 @@ const Join = () => {
   const [otpOpen, setOtpOpen] = useState(false);
   const [signUpOpen, setSignUpOpen] = useState(false);
   const [loginWithEmailOpen, setLoginWithEmailOpen] = useState(false);
+  const [tutorsInfoOpen, setTutorsInfoOpen] = useState(false); // state for TutorsInfo
+  const [uploadDocumentOpen, setUploadDocumentOpen] = useState(false); // state for UploadDocument
+  const [welcomeScreenOpen, setWelcomeScreenOpen] = useState(false); // state for WelcomeScreen
+
+  const handleTutorsInfoSubmit = () => {
+    setTutorsInfoOpen(false); // Close the TutorsInfo popup
+    setUploadDocumentOpen(true); // Open the UploadDocument popup
+  };
+
+  const handleUploadDocumentSubmit = () => {
+    setUploadDocumentOpen(false); // Close the UploadDocument popup
+    setWelcomeScreenOpen(true); // Open the WelcomeScreen popup
+  };
+
   return (
     <Box className="join-container">
       {/* Get Started Heading */}
@@ -168,10 +185,15 @@ const Join = () => {
         isStudent={isStudent}
         data={data}
         setData={setData}
+        tutorsInfoOpen={() => setTutorsInfoOpen(true)}
       />
       <LoginWithEmail
         open={loginWithEmailOpen}
         handleClose={() => setLoginWithEmailOpen(false)}
+        openPhoneNumberLogin={() => {
+          setLoginWithEmailOpen(false);
+          setOpen(true);
+        }}
         isStudent={isStudent}
         data={data}
         setData={setData}
@@ -186,6 +208,29 @@ const Join = () => {
         setData={setData}
         otpOpen={otpOpen}
         setOtpOpen={setOtpOpen}
+        handleSubmit={() => {
+          setSignUpOpen(false);
+        }}
+      />
+      <TutorsInfo
+        open={tutorsInfoOpen}
+        handleClose={() => setTutorsInfoOpen(false)}
+        handleSubmit={handleTutorsInfoSubmit} // New popup for TutorsInfo
+        data={data}
+        setData={setData}
+        uploadDocumentOpen={()=>{setUploadDocumentOpen(true)}}
+      />
+      <UploadDocument
+        open={uploadDocumentOpen}
+        handleClose={() => {setUploadDocumentOpen(false);setWelcomeScreenOpen(true)}}
+        handleSubmit={handleUploadDocumentSubmit} // New popup for UploadDocument
+        data={data}
+        setData={setData}
+        
+      />
+      <WelcomeScreen
+        open={welcomeScreenOpen}
+        handleClose={() => setWelcomeScreenOpen(false)} // New popup for WelcomeScreen
       />
     </Box>
   );
