@@ -14,6 +14,15 @@ const FilterModal = ({ open, handleClose }) => {
     });
   };
 
+  // Handler for the Cancel button to reset the selections and close the modal
+  const handleCancel = () => {
+    setCheckedItems({
+      English: false,
+      Arabic: false,
+    });
+    handleClose();
+  };
+
   return (
     <Dialog open={open} onClose={handleClose} PaperProps={{ style: { width: 625, height: 691 } }}>
       <DialogContent sx={{ p: 0 }}>
@@ -81,9 +90,39 @@ const FilterModal = ({ open, handleClose }) => {
           </Box>
         </Box>
 
-        {/* Apply button at the bottom-right corner */}
-        <Box display="flex" justifyContent="flex-end" p={2}>
-          <Button variant="contained" sx={{ backgroundColor: '#40A39B', color: '#fff', width: '263px', height: '48px', padding: '14px 16px', borderRadius: '8px' }}>
+        {/* Apply and Cancel buttons at the bottom-right corner */}
+        <Box display="flex" justifyContent="flex-end" p={2} gap={2}>
+          <Button
+            onClick={handleCancel}
+            variant="outlined"
+            sx={{
+              color: '#40A39B',
+              borderColor: '#40A39B',
+              width: '120px',
+              height: '48px',
+              padding: '14px 16px',
+              borderRadius: '8px',
+              '&:hover': {
+                borderColor: '#368b85',
+              },
+            }}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: '#40A39B',
+              color: '#fff',
+              width: '120px',
+              height: '48px',
+              padding: '14px 16px',
+              borderRadius: '8px',
+              '&:hover': {
+                backgroundColor: '#368b85',
+              },
+            }}
+          >
             Apply
           </Button>
         </Box>

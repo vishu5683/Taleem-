@@ -6,46 +6,9 @@ import PromotionalBanner from '../common comps/promotionalbanner';
 import FilterModal from './filter';
 import Extandedtutorcards from './extandedtutorcards';
 
-// const  Extandedtutorcards  = () => {
-//   return (
-//     <Card
-//       sx={{
-//         width: '1140px',
-//         height: '247px',
-//         borderRadius: '12px',
-//         boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
-//         display: 'flex',
-//         marginBottom: '20px',
-//       }}
-//     >
-//       <CardContent sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '16px' }}>
-//         <Typography variant="h6" sx={{ fontWeight: 600, fontSize: '20px', marginBottom: '8px' }}>
-//           Tutor Name
-//         </Typography>
-//         <Typography variant="body2" sx={{ fontSize: '14px', color: '#737373', marginBottom: '16px' }}>
-//           Tutor Description or Specialization
-//         </Typography>
-//         <Button
-//           sx={{
-//             width: '147px',
-//             height: '40px',
-//             backgroundColor: '#40A39B',
-//             color: '#FFFFFF',
-//             borderRadius: '8px',
-//             textTransform: 'none',
-//             fontWeight: 600,
-//             '&:hover': { backgroundColor: '#359c87' },
-//           }}
-//         >
-//           Contact Tutor
-//         </Button>
-//       </CardContent>
-//     </Card>
-//   );
-// };
-
 const TutorListingExt = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [visibleCards, setVisibleCards] = useState(3); // Initially showing 3 cards
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -54,6 +17,21 @@ const TutorListingExt = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+
+  const handleViewAll = () => {
+    // Increase the number of visible cards (infinite scroll-like behavior)
+    setVisibleCards((prevVisibleCards) => prevVisibleCards + 3); // Load 3 more cards on click
+  };
+
+  // Sample tutor cards data (you can replace this with your actual data)
+  const tutorCards = [
+    <Extandedtutorcards />,
+    <Extandedtutorcards />,
+    <Extandedtutorcards />,
+    <Extandedtutorcards />,
+    <Extandedtutorcards />,
+    <Extandedtutorcards />,
+  ];
 
   return (
     <Box sx={{ padding: '20px' }}>
@@ -154,31 +132,33 @@ const TutorListingExt = () => {
 
         {/* Tutor Cards */}
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          <Extandedtutorcards />
-          <Extandedtutorcards />
-          <Extandedtutorcards />
+          {tutorCards.slice(0, visibleCards)} {/* Display only visible cards */}
         </Box>
 
-        <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
-          <Button
-            sx={{
-              width: '272px',
-              height: '48px',
-              backgroundColor: '#40A39B',
-              color: '#FFFFFF',
-              borderRadius: '8px',
-              border: '1px solid #40A39B',
-              textTransform: 'none',
-              fontWeight: 600,
-              padding: '14px 16px',
-              gap: '8px',
-              opacity: 1,
-              '&:hover': { backgroundColor: '#40A39B' },
-            }}
-          >
-            View All
-          </Button>
-        </Box>
+        {/* Show 'View All' button only if there are more cards to display */}
+        {visibleCards < tutorCards.length && (
+          <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
+            <Button
+              onClick={handleViewAll}
+              sx={{
+                width: '272px',
+                height: '48px',
+                backgroundColor: '#40A39B',
+                color: '#FFFFFF',
+                borderRadius: '8px',
+                border: '1px solid #40A39B',
+                textTransform: 'none',
+                fontWeight: 600,
+                padding: '14px 16px',
+                gap: '8px',
+                opacity: 1,
+                '&:hover': { backgroundColor: '#40A39B' },
+              }}
+            >
+              View All
+            </Button>
+          </Box>
+        )}
       </Box>
 
       {isModalOpen && <FilterModal open={isModalOpen} handleClose={handleCloseModal} />}
