@@ -66,11 +66,12 @@ const OtpScreen = ({
     dispatch(
       verifyMobileOtpLogin(payload, (res) => {
         if (res?.status == 200) {
-          if(data?.type!=="signup"){
-          navigate("/home", { isStudent });
-          }else{
-            handleClose()
-            tutorsInfoOpen()
+          
+          if (data?.type == "signup" && data?.user == 3) {
+            handleClose();
+            tutorsInfoOpen();
+          } else {
+            navigate("/home", { isStudent });
           }
         } else {
         }

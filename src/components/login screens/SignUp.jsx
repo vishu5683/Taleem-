@@ -60,22 +60,23 @@ const SignUp = ({
 
       dispatch(
         signup(values, (val) => {
+          console.log(val,"resss")
           if (val?.data?.data?.token !== "") {
             localStorage.setItem("token", val?.data?.data?.token);
             localStorage.setItem("user", isStudent);
             setData({token:val?.data?.data?.token,user:isStudent,type:"signup",ismob:true,data:values?.mobile_no})
             // navigate("/home");
+            setOtpOpen(true);
+            handleClose()
           }
-          setOtpOpen(true);
-          handleClose()
         })
       );
 
       // Re-enable the submit button after 5 seconds
       setTimeout(() => {
         setIsSubmitting(false);
-        setOtpOpen(true);
-          handleClose()
+        // setOtpOpen(true);
+        //   handleClose()
       }, 5000);
     },
   });

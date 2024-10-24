@@ -50,8 +50,15 @@ const LoginWithStudent = ({
   }, [isStudent]);
 
   const handleChange = (event) => setRole(event.target.value);
-  const handleMobileNumberChange = (event) =>
-    setMobileNumber(event.target.value);
+  const handleMobileNumberChange = (event) => {
+    if (!isNaN(event.target.value)) {
+      if (event.target.value < 0) {
+        setMobileNumber(0);
+      } else {
+        setMobileNumber(event.target.value);
+      }
+    }
+  };
 
   const handleGetStarted = () => {
     let payload = {
@@ -62,16 +69,18 @@ const LoginWithStudent = ({
     };
     if (mobileNumber.length === 10) {
       handleClose();
-      dispatch(sendMobileOtpSignup(payload, (res) => {
-        setData({
-          token: res?.data?.data?.token,
-          user: isStudent,
-          type: "login",
-          ismob: true,
-          data: mobileNumber,
-        });
-        setOtpOpen(true);
-      }));
+      dispatch(
+        sendMobileOtpSignup(payload, (res) => {
+          setData({
+            token: res?.data?.data?.token,
+            user: isStudent,
+            type: "login",
+            ismob: true,
+            data: mobileNumber,
+          });
+          setOtpOpen(true);
+        })
+      );
     } else {
       alert("Please enter a valid 10-digit mobile number");
     }
@@ -123,7 +132,9 @@ const LoginWithStudent = ({
               cursor: "pointer",
             }}
           >
-            <Typography sx={{ color: "#5F6368", fontWeight: "bold", fontSize: "16px" }}>
+            <Typography
+              sx={{ color: "#5F6368", fontWeight: "bold", fontSize: "16px" }}
+            >
               ×
             </Typography>
           </Box>
@@ -202,7 +213,14 @@ const LoginWithStudent = ({
           </Box>
 
           {/* Mobile Number Input */}
-          <Box sx={{ width: { xs: "100%", sm: "420px" }, mx: "auto", textAlign: "left", mb: 3 }}>
+          <Box
+            sx={{
+              width: { xs: "100%", sm: "420px" },
+              mx: "auto",
+              textAlign: "left",
+              mb: 3,
+            }}
+          >
             <Typography
               sx={{
                 fontSize: "16px",
@@ -215,6 +233,7 @@ const LoginWithStudent = ({
             </Typography>
             <TextField
               value={mobileNumber}
+              min={0}
               onChange={handleMobileNumberChange}
               placeholder="Enter your mobile number"
               fullWidth
