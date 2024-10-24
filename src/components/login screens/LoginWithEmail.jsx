@@ -72,7 +72,7 @@ const LoginWithEmail = ({
       <Box
         sx={{
           position: "absolute",
-          top: "50%",
+          top: "50%", 
           left: "50%",
           transform: "translate(-50%, -50%)",
           width: { xs: "85%", sm: "600px", md: "720px" },
@@ -230,7 +230,7 @@ const LoginWithEmail = ({
           onClick={openPhoneNumberLogin}
           sx={{
             fontSize: "16px",
-            color: "#000",
+            color: "#40A39B",
             fontWeight: 500,
             cursor: "pointer",
             mb: 2,

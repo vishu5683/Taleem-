@@ -22,16 +22,16 @@ const OtpScreen = ({
   setData,
   otpOpen,
   setOtpOpen,
+  tutorsInfoOpen,
 }) => {
   const navigate = useNavigate();
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   const otpRefs = useRef([]); // Create a ref array to store OTP input references
   const [otp, setOtp] = React.useState(Array(4).fill("")); // Initialize OTP state
 
-  useEffect(()=>{
-    console.log(data)
-
-  },[])
+  useEffect(() => {
+    console.log(data);
+  }, []);
 
   const handleChange = (index, value) => {
     if (value.length <= 1) {
@@ -54,23 +54,31 @@ const OtpScreen = ({
   };
 
   const handleVerify = () => {
-    console.log(data,"HERE")
-    let payload={
-    otp: "1234",
-    type: data?.ismob ? "mobile_no" : "email",
-    field_value: data?.data,
-    action: data?.type,
-    token: data?.token // recieved in sendOtp api
-  }
+    console.log(data, "HERE");
+    let payload = {
+      otp: "1234",
+      type: data?.ismob ? "mobile_no" : "email",
+      field_value: data?.data,
+      action: data?.type,
+      token: data?.token, // recieved in sendOtp api
+    };
 
-  dispatch(verifyMobileOtpLogin(payload,(res)=>{if(res?.status==200){
-    navigate("/home", { isStudent });
-  }else{
-   }}))
-    
+    dispatch(
+      verifyMobileOtpLogin(payload, (res) => {
+        if (res?.status == 200) {
+          if(data?.type!=="signup"){
+          navigate("/home", { isStudent });
+          }else{
+            handleClose()
+            tutorsInfoOpen()
+          }
+        } else {
+        }
+      })
+    );
+
     // Here you can add any OTP verification logic
-    // For now, we'll just navigate to /home 
-    
+    // For now, we'll just navigate to /home
   };
 
   return (
