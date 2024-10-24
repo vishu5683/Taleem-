@@ -5,7 +5,8 @@ import CalendarTodayIcon from '@mui/icons-material/CalendarMonth';
 import LanguageIcon from '@mui/icons-material/Language';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import PromotionalBanner from '../common comps/promotionalbanner';
-
+import girilImage from "../../assets/schedule classes/girl.png"; // Import the image
+import CheckIcon from '@mui/icons-material/Check';
 // Reusable component for class details items
 const ClassDetailItem = ({ icon: Icon, label, value }) => (
   <Box display="flex" alignItems="center">
@@ -30,7 +31,7 @@ const CustomDivider = () => (
   />
 );
 
-const ClassDetails = () => {
+const StatusTutor = () => {
   const [expandedAccordion, setExpandedAccordion] = useState(false);
 
   const handleAccordionToggle = (index) => {
@@ -96,15 +97,13 @@ const ClassDetails = () => {
           variant="h6"
           sx={{
             fontWeight: 600,
-            fontSize: { xs: '16px', sm: '18px' },
-            marginBottom: '20px',
           }}
         >
           Algebra for Primary Students (Grade - 6th)
         </Typography>
 
-        {/* Class Details in a single row */}
-        <Grid container spacing={2} sx={{ alignItems: 'center', marginBottom: '24px' }}>
+        {/* Class Details */}
+        <Grid container spacing={2} sx={{ alignItems: 'center', marginBottom: '24px',gap:"10px" }}>
           <Grid item xs={12} sm={6} md="auto">
             <ClassDetailItem icon={SchoolIcon} label="Category" value="Academic" />
           </Grid>
@@ -128,62 +127,89 @@ const ClassDetails = () => {
         Please join your class link before the class starts.
       </Typography>
 
-      {/* Package Details Section */}
+      {/* Package Details */}
       <Typography variant="body1" sx={{ fontWeight: 700, mb: 2 }}>
         Package Details
       </Typography>
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'start',
-          mb: 5,
-        }}
-      >
-        {/* Package */}
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'start', mb: 5 }}>
         <Box sx={{ textAlign: 'start', mr: 3 }}>
           <Typography sx={{ color: '#737373', fontWeight: 400 }}>Package</Typography>
           <Typography sx={{ fontWeight: 500, color: '#000' }}>1 Week</Typography>
         </Box>
         <CustomDivider />
-
-        {/* Class Type */}
         <Box sx={{ textAlign: 'start', mr: 2 }}>
           <Typography sx={{ color: '#737373', fontWeight: 400 }}>Class Type</Typography>
           <Typography sx={{ fontWeight: 500, color: '#000' }}>Online</Typography>
         </Box>
         <CustomDivider />
-
-        {/* Booking ID */}
         <Box sx={{ textAlign: 'start' }}>
           <Typography sx={{ color: '#737373', fontWeight: 400 }}>Booking ID</Typography>
           <Typography sx={{ fontWeight: 500, color: '#000' }}>1000546565</Typography>
         </Box>
         <CustomDivider />
-
-        {/* Date */}
         <Box sx={{ textAlign: 'start' }}>
           <Typography sx={{ color: '#737373', fontWeight: 400 }}>Date</Typography>
           <Typography sx={{ fontWeight: 500, color: '#000' }}>08 Aug 2024, 10:40 AM</Typography>
         </Box>
         <CustomDivider />
-
-        {/* Payment Mode */}
         <Box sx={{ textAlign: 'start' }}>
           <Typography sx={{ color: '#737373', fontWeight: 400 }}>Payment Mode</Typography>
           <Typography sx={{ fontWeight: 500, color: '#000' }}>Card</Typography>
         </Box>
         <CustomDivider />
-
-        {/* Status */}
         <Box sx={{ textAlign: 'start' }}>
           <Typography sx={{ color: '#737373', fontWeight: 400 }}>Status</Typography>
           <Typography sx={{ fontWeight: 500, color: '#000' }}>Completed</Typography>
         </Box>
       </Box>
 
-      {/* Schedule */}
+      {/* Members Section */}
       <Typography variant="body1" sx={{ fontWeight: 700, mb: 2 }}>
+        Members
+      </Typography>
+
+      <Grid container spacing={3}>
+        {/* Member 1 */}
+        <Grid item xs={12} sm={6} md={4}>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <img
+              src={girilImage}
+              alt="Daniela Chikitani"
+              style={{ width: '42px', height: '42px', marginRight: '16px' }}
+            />
+            <Box>
+              <Typography sx={{ fontWeight: 500, fontSize: '14px', color: '#000' }}>
+                Daniela Chikitani
+              </Typography>
+              <Typography sx={{ fontWeight: 400, fontSize: '12px', color: '#737373' }}>
+                Grade: Secondary (10th)
+              </Typography>
+            </Box>
+          </Box>
+        </Grid>
+
+        {/* Member 2 */}
+        <Grid item xs={12} sm={6} md={4}>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <img
+              src={girilImage}
+              alt="John Doe"
+              style={{ width: '42px', height: '42px', marginRight: '16px' }}
+            />
+            <Box>
+              <Typography sx={{ fontWeight: 500, fontSize: '14px', color: '#000' }}>
+                John Doe
+              </Typography>
+              <Typography sx={{ fontWeight: 400, fontSize: '12px', color: '#737373' }}>
+                Grade: Secondary (10th)
+              </Typography>
+            </Box>
+          </Box>
+        </Grid>
+      </Grid>
+
+      {/* Schedule */}
+      <Typography variant="body1" sx={{ fontWeight: 700, mb: 2, mt: 5 }}>
         Schedule
       </Typography>
 
@@ -232,27 +258,82 @@ const ClassDetails = () => {
         </Accordion>
       ))}
 
-      {/* Start Class Button */}
-      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 10,mt:8 }}>
-        <Button
-          variant="contained"
-          sx={{
-            backgroundColor: '#40A39B',
-            color: '#fff',
-            width: { xs: '100%', sm: '319px' },
-            height: '48px',
-            padding: '14px 16px',
-            borderRadius: '8px',
-            '&:hover': {
-              backgroundColor: '#368b85',
-            },
-          }}
-        >
-          Join Class
-        </Button>
-      </Box>
+
+
+{/* Status Section */}
+<Typography variant="body1" sx={{ fontWeight: 700, mb: 2, mt: 5 }}>
+  Status
+</Typography>
+
+{/* Tick Circle and Text: Tutors has reached the location */}
+<Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+  {/* Tick Circle */}
+  <Box
+    sx={{
+      width: '20px',
+      height: '20px',
+      borderRadius: '50%',
+      backgroundColor: '#40A39B', // Green background
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginRight: '12px',
+    }}
+  >
+    <CheckIcon sx={{ color: 'white', fontSize: '14px' }} /> {/* MUI Tick Icon */}
+  </Box>
+  {/* Text */}
+  <Typography sx={{ fontWeight: 400, fontSize: '12px', color: '#000' }}>
+    Tutors has reached the location
+  </Typography>
+</Box>
+
+{/* Dotted Circle and Text: Tutors has started the class */}
+<Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+  {/* Dotted Circle */}
+  <Box
+    sx={{
+      width: '20px',
+      height: '20px',
+      borderRadius: '50%',
+      border: '1px dashed #40A39B', // Border with dashed style
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginRight: '12px',
+    }}
+  />
+  {/* Text */}
+  <Typography sx={{ fontWeight: 400, fontSize: '12px', color: '#000' }}>
+    Tutors has started the class
+  </Typography>
+</Box>
+
+{/* Dotted Circle and Text: Tutors has completed the session */}
+<Box sx={{ display: 'flex', alignItems: 'center',mb:10 }}>
+  {/* Dotted Circle */}
+  <Box
+    sx={{
+      width: '20px',
+      height: '20px',
+      borderRadius: '50%',
+      border: '1px dashed #40A39B', // Border with dashed style
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginRight: '12px',
+    }}
+  />
+  {/* Text */}
+  <Typography sx={{ fontWeight: 400, fontSize: '12px', color: '#000' }}>
+    Tutors has completed the session
+  </Typography>
+</Box>
+
+
+   
     </Box>
   );
 };
 
-export default ClassDetails;
+export default StatusTutor;

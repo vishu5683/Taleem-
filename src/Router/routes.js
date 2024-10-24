@@ -29,7 +29,7 @@ const AddAccountModal = lazy(() => import("../components/my classes dashboard/Ad
 const ManageProfileModal = lazy(() => import("../components/my classes dashboard/manageprofile"));
 const Profile = lazy(() => import("../components/my classes dashboard/profile"));
 const ProfileUpdate = lazy(() => import("../components/my classes dashboard/updateprofile"));
-const TestUI= lazy(() => import("../components/sidebar options/ClassDetails"));
+const TestUI= lazy(() => import("../components/Academic/TutorDetails"));
 
 
 const ROUTES = [
