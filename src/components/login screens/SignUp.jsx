@@ -60,22 +60,23 @@ const SignUp = ({
 
       dispatch(
         signup(values, (val) => {
+          console.log(val,"resss")
           if (val?.data?.data?.token !== "") {
             localStorage.setItem("token", val?.data?.data?.token);
             localStorage.setItem("user", isStudent);
             setData({token:val?.data?.data?.token,user:isStudent,type:"signup",ismob:true,data:values?.mobile_no})
             // navigate("/home");
+            setOtpOpen(true);
+            handleClose()
           }
-          setOtpOpen(true);
-          handleClose()
         })
       );
 
       // Re-enable the submit button after 5 seconds
       setTimeout(() => {
         setIsSubmitting(false);
-        setOtpOpen(true);
-          handleClose()
+        // setOtpOpen(true);
+        //   handleClose()
       }, 5000);
     },
   });
@@ -96,6 +97,8 @@ const SignUp = ({
           borderRadius: "12px",
           p: { xs: 0, sm: 3 },
           textAlign: "center",
+          maxHeight: "90vh", // Set max height to 80% of the viewport
+          overflowY: "auto",
         }}
       >
         {/* Cancel Button */}
@@ -146,7 +149,7 @@ const SignUp = ({
         {/* Form */}
         <form onSubmit={formik.handleSubmit}>
           {/* Full Name */}
-          <Box sx={{ width: "420px", mx: "auto", textAlign: "left", mb: 3 }}>
+          <Box sx={{overflowY: "auto", maxHeight: "60vh", width: "420px", mx: "auto", textAlign: "left", mb: 3 }}>
             <Typography
               sx={{
                 fontSize: "16px",

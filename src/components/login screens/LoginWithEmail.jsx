@@ -54,7 +54,9 @@ const LoginWithEmail = ({
       country_code: "91",
       action: "login",
     };
-    if (email) {
+    var re = /\S+@\S+\.\S+/;
+  
+    if (email && re.test(email)) {
       handleClose();
       dispatch(
         sendMobileOtpSignup(payload, (res) => {
@@ -69,7 +71,7 @@ const LoginWithEmail = ({
       );
       setOtpOpen(true);
     } else {
-      alert("Please enter a mail id");
+      alert("Please enter a valid mail id");
     }
   };
 

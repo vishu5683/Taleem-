@@ -6,6 +6,7 @@ import {
   sendMobileOtpSignupReducer,
   sendMobileOtpLoginReducer,
   verifyMobileOtpLoginReducer,
+  expertiseReducer,
   
 } from "./Reducers";
 import loginFormReducer from "./Reducers/signupFormReducer";
@@ -22,6 +23,7 @@ let reducers = {
   getCategoryWithProductReducer,
   HomeReducer,
   productReducer,
+  expertiseReducer,
 };
 
 const rootReducer = combineReducers({

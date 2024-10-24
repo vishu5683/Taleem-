@@ -75,10 +75,16 @@ export const signup = (value, callback) => {
           payload: { ...value, Response: responseData?.data },
         });
         if (responseData?.status == 200) {
+          if(responseData?.data?.status){
           toast.success(`${responseData?.data?.message}`, {
             position: "top-right",
           });
           callback(responseData);
+        }else{
+          toast.error(`${responseData?.data?.message}`, {
+            position: "top-right",
+          });
+        }
         } else {
           toast.error(`${responseData?.data?.message}`, {
             position: "top-right",
@@ -228,6 +234,34 @@ export const forgetPassword = (value, callback) => {
     );
   };
 };
+
+// expertise:"expertise",
+// qualifications:"qualifications",
+// grades:"grades",
+// curriculums:"curriculums",
+export const expertise = () => {
+   return (dispatch) => {
+     Utils.api.getApiCall(
+       Utils.EndPoint.expertise,
+       "",
+       (resData) => {
+         console.log(resData,"resData")
+         if (resData.status === 200) {
+           dispatch({
+             type: Utils.actionName.expertise,
+             payload: {
+               expertiseData: resData.data,
+             },
+           });
+         } else {
+         }
+       },
+       (error) => {
+       }
+     );
+   };
+ }
+
 
 export const setFormData = (data) => ({
   type: Utils.actionName.SET_FORM_DATA,

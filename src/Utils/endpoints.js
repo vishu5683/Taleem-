@@ -9,5 +9,11 @@ const EndPoint = {
     getCategoryWithProduct:"getCategoryWithProduct",
     Home:"Home",
     getProduct:"getProduct",
+
+    //list from admin
+    expertise:"expertise",
+    qualifications:"qualifications",
+    grades:"grades",
+    curriculums:"curriculums",
 };
 export default EndPoint;

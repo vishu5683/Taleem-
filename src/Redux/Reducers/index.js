@@ -1,6 +1,15 @@
 import Utils from "../../Utils";
-const { sendMobileOtpSignup, verifyMobileOtpSignup, signup ,login,verifyMobileOtpLogin,sendMobileOtpLogin,forgetPassword} = Utils.actionName;
+const { sendMobileOtpSignup,expertise, verifyMobileOtpSignup, signup ,login,verifyMobileOtpLogin,sendMobileOtpLogin,forgetPassword} = Utils.actionName;
 let initialState = [];
+
+export const expertiseReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case expertise:
+      return { ...state, ...action.payload };
+    default:
+      return state;
+  }
+};
 
 export const verifyMobileOtpSignupReducer = (state = initialState, action) => {
   switch (action.type) {
