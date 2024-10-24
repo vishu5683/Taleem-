@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { Box, Typography, Paper, Divider, Avatar, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const NotificationPopup = React.memo(({ open, onClose }) => {
   const popupRef = useRef(null); // Create a ref to track the popup
+  const navigate = useNavigate();
 
   // Close popup on click outside
   useEffect(() => {
@@ -29,6 +31,8 @@ const NotificationPopup = React.memo(({ open, onClose }) => {
 
   const getBallColor = (index) => (index % 2 === 0 ? '#FFC7C6' : '#C6FFC9');
   const getAvatarLetter = (index) => (index % 2 === 0 ? 'Y' : 'W');
+
+
 
   return (
     <Paper
@@ -101,9 +105,13 @@ const NotificationPopup = React.memo(({ open, onClose }) => {
           borderRadius: '0px 0px 14px 14px', // Rounded bottom corners
         }}
       >
-        <Button variant="text" sx={{ color: '#000', fontWeight: 500 }}>
-          View All Notifications
-        </Button>
+       <Button 
+      variant="text" 
+      sx={{ color: '#000', fontWeight: 500 }} 
+      onClick={() => navigate('/notifications')}
+    >
+      View All Notifications
+    </Button>
       </Box>
     </Paper>
   );

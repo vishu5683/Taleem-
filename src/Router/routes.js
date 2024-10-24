@@ -8,6 +8,7 @@ const Terms = lazy(() => import("../components/policies and links/terms"));
 const PrivacyPolicy = lazy(() => import("../components/policies and links/privacypolicy"));
 const ContactUs = lazy(() => import("../components/policies and links/contactus"));
 const myclass = lazy(() => import("../components/my classes dashboard/myclass"));
+const NotificationPage = lazy(() => import("../components/notifications/notifiactionpage"));
 
 // Lazy imports for academic components
 const Academic = lazy(() => import("../components/Academic/Academic"));
@@ -27,7 +28,9 @@ const FaqSidebar = lazy(() => import("../components/sidebar options/faqssidebar"
 const AddAccountModal = lazy(() => import("../components/my classes dashboard/AddAccountModal"));
 const ManageProfileModal = lazy(() => import("../components/my classes dashboard/manageprofile"));
 const Profile = lazy(() => import("../components/my classes dashboard/profile"));
-const ProfileUpdate = lazy(() => import("../components/Academic/f2fsessions"));
+const ProfileUpdate = lazy(() => import("../components/my classes dashboard/updateprofile"));
+const TestUI= lazy(() => import("../components/sidebar options/ClassDetails"));
+
 
 const ROUTES = [
   {
@@ -56,6 +59,13 @@ const ROUTES = [
     path: "/termsofservice",
     id: 2,
     Component: Terms,
+    isPrivate: false,
+  },
+  {
+    name: "Test UI",
+    path: "/testui",
+    id: 2,
+    Component: TestUI ,
     isPrivate: false,
   },
   {
@@ -207,6 +217,13 @@ const ROUTES = [
     path: "/facetofaceSessions",
     id: 23,
     Component: F2FSession,
+    isPrivate: false,
+  },
+  {
+    name: "Notifications",
+    path: "/notifications",
+    id: 23,
+    Component: NotificationPage,
     isPrivate: false,
   },
 ];

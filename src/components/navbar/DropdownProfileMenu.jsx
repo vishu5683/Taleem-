@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Box, IconButton, Menu, MenuItem, Typography, Divider, Avatar } from '@mui/material';
+import { Box, Menu, MenuItem, Typography, Divider, Avatar } from '@mui/material';
 import { ExpandMore, ChevronRight } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for routing
 import avatarImage from '../../assets/navbar/image.png';
 
 const DropdownProfileMenu = ({ userName, userEmail }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate(); // Initialize the navigate hook
 
   const handleOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -13,6 +15,25 @@ const DropdownProfileMenu = ({ userName, userEmail }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleNavigation = (route) => {
+    // Close the modal first
+    handleClose();
+    
+    // Navigate to the selected route
+    navigate(route);
+  };
+
+  // Define the menuItems array here
+  const menuItems = [
+    'Manage Profile',
+    'Wallet',
+    'Terms of Services',
+    'FAQs',
+    'Rating & Feedbacks',
+    'Contact Us',
+    'Log Out',
+  ];
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -40,7 +61,7 @@ const DropdownProfileMenu = ({ userName, userEmail }) => {
         sx={{
           '& .MuiPaper-root': {
             width: { xs: '320px', sm: '360px' }, // Responsive width
-            height: 'auto',
+            height: '70%',
             top: '96px !important',
             right: '0 !important',  // Align to the right side of the screen
             background: 'linear-gradient(105.04deg, #C6FFC9 -25.33%, #D4EBFF 100%)',
@@ -72,6 +93,7 @@ const DropdownProfileMenu = ({ userName, userEmail }) => {
                 marginTop: '8px',
                 color: '#4A90E2',
               }}
+              onClick={() => handleNavigation('/profile')} // Navigate to profile
             >
               <Typography sx={{ fontSize: '14px', fontWeight: 500 }}>View Profile</Typography>
               <ChevronRight sx={{ marginLeft: '4px' }} />
@@ -91,6 +113,7 @@ const DropdownProfileMenu = ({ userName, userEmail }) => {
                 color: '#333333',
                 gap: '8px',
               }}
+              onClick={() => handleNavigation(menuRoutes[item])} // Map items to corresponding routes
             >
               {item}
               <ChevronRight />
@@ -103,14 +126,15 @@ const DropdownProfileMenu = ({ userName, userEmail }) => {
   );
 };
 
-const menuItems = [
-  'Manage Profile',
-  'Wallet',
-  'Terms of Services',
-  'FAQs',
-  'Rating & Feedbacks',
-  'Contact Us',
-  'Log Out',
-];
+// Mapping menu items to routes
+const menuRoutes = {
+  'Manage Profile': '/profileupdate',
+  'Wallet': '/wallet', // This route can be modified based on your wallet path
+  'Terms of Services': '/termsofservice',
+  'FAQs': '/faq',
+  'Rating & Feedbacks': '/feedback', // Modify as per your feedback route
+  'Contact Us': '/contactus',
+  'Log Out': '/', // Log out route (assuming '/' is the home page after logout)
+};
 
 export default DropdownProfileMenu;

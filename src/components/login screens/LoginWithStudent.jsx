@@ -11,9 +11,6 @@ import {
 } from "@mui/material";
 import dividerLine from "../../assets/modal/Group 1000004577.png";
 import googleLogo from "../../assets/modal/image 10.png";
-import OtpScreen from "./OtpScreen";
-import SignUp from "./SignUp";
-import LoginWithEmail from "./LoginWithEmail";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { sendMobileOtpSignup } from "../../Redux/Actions";
@@ -33,11 +30,8 @@ const LoginWithStudent = ({
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [role, setRole] = useState(isStudent == 3 ? "tutor" : "student");
+  const [role, setRole] = useState(isStudent === 3 ? "tutor" : "student");
   const [mobileNumber, setMobileNumber] = useState("");
-  // const [otpOpen, setOtpOpen] = useState(false);
-  // const [signUpOpen, setSignUpOpen] = useState(false);
-  // const [loginWithEmailOpen, setLoginWithEmailOpen] = useState(false);
 
   useEffect(() => {
     switch (isStudent) {
@@ -68,9 +62,7 @@ const LoginWithStudent = ({
     };
     if (mobileNumber.length === 10) {
       handleClose();
-      dispatch(sendMobileOtpSignup((payload), 
-      (res) => {
-
+      dispatch(sendMobileOtpSignup(payload, (res) => {
         setData({
           token: res?.data?.data?.token,
           user: isStudent,
@@ -80,7 +72,6 @@ const LoginWithStudent = ({
         });
         setOtpOpen(true);
       }));
-      // sendMobileOtpSignup
     } else {
       alert("Please enter a valid 10-digit mobile number");
     }
@@ -108,7 +99,7 @@ const LoginWithStudent = ({
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: { xs: "85%", sm: "600px", md: "720px" },
+            width: { xs: "90%", sm: "600px", md: "720px" },
             bgcolor: "white",
             borderRadius: "12px",
             p: { xs: 3, sm: 4 },
@@ -132,9 +123,7 @@ const LoginWithStudent = ({
               cursor: "pointer",
             }}
           >
-            <Typography
-              sx={{ color: "#5F6368", fontWeight: "bold", fontSize: "16px" }}
-            >
+            <Typography sx={{ color: "#5F6368", fontWeight: "bold", fontSize: "16px" }}>
               ×
             </Typography>
           </Box>
@@ -160,6 +149,7 @@ const LoginWithStudent = ({
             Let’s continue your learning journey together
           </Typography>
 
+          {/* Role Selector */}
           <Box
             sx={{
               display: "flex",
@@ -211,8 +201,8 @@ const LoginWithStudent = ({
             </FormControl>
           </Box>
 
-          {/* Mobile Number Label and Input */}
-          <Box sx={{ width: "420px", mx: "auto", textAlign: "left", mb: 3 }}>
+          {/* Mobile Number Input */}
+          <Box sx={{ width: { xs: "100%", sm: "420px" }, mx: "auto", textAlign: "left", mb: 3 }}>
             <Typography
               sx={{
                 fontSize: "16px",
@@ -248,7 +238,7 @@ const LoginWithStudent = ({
               borderRadius: "8px",
               padding: "10px",
               fontWeight: 700,
-              width: "420px",
+              width: { xs: "100%", sm: "420px" },
               height: "52px",
               textTransform: "none",
             }}
@@ -269,6 +259,7 @@ const LoginWithStudent = ({
             Login with Email
           </Typography>
 
+          {/* Divider */}
           <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
             <img
               src={dividerLine}
@@ -277,6 +268,7 @@ const LoginWithStudent = ({
             />
           </Box>
 
+          {/* Google Login Button */}
           <Button
             onClick={() => console.log("Login with Google")}
             sx={{
@@ -285,7 +277,7 @@ const LoginWithStudent = ({
               border: "1px solid #E6E6E6",
               borderRadius: "8px",
               padding: "10px",
-              width: "420px",
+              width: { xs: "100%", sm: "420px" },
               height: "48px",
               textTransform: "none",
               fontWeight: 500,
@@ -315,33 +307,6 @@ const LoginWithStudent = ({
           </Typography>
         </Box>
       </Modal>
-
-      {/* OTP Screen Modal */}
-      {/* <OtpScreen
-        open={otpOpen}
-        handleClose={() => setOtpOpen(false)}
-        isStudent={isStudent}
-        data={data}
-        setData={setData}
-      /> */}
-
-      {/* Sign Up Modal */}
-      {/* <SignUp
-        open={signUpOpen}
-        handleClose={() => setSignUpOpen(false)}
-        isStudent={isStudent}
-        data={data}
-        setData={setData}
-      /> */}
-
-      {/* Login with Email Modal */}
-      {/* <LoginWithEmail
-        open={loginWithEmailOpen}
-        handleClose={() => setLoginWithEmailOpen(false)}
-        isStudent={isStudent}
-        data={data}
-        setData={setData}
-      /> */}
     </>
   );
 };
