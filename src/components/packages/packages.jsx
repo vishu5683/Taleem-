@@ -151,6 +151,8 @@ const Packages = () => {
               sx={{
                 width: '207px',
                 height: '48px',
+                fontWeight: 500,
+                fontSize:"16px",
                 backgroundColor: '#40A39B', // Primary green background
                 color: '#FFFFFF', // White text
                 borderRadius: '8px ',

@@ -1,10 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { Box, Typography, Paper, Divider, Avatar, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const NotificationPopup = React.memo(({ open, onClose }) => {
   const popupRef = useRef(null); // Create a ref to track the popup
   const navigate = useNavigate();
+  const location = useLocation(); // Track the current route
+  const previousLocationRef = useRef(location); // Ref to store previous location
 
   // Close popup on click outside
   useEffect(() => {
@@ -23,6 +25,14 @@ const NotificationPopup = React.memo(({ open, onClose }) => {
     };
   }, [open, onClose]);
 
+  // Close popup on route change
+  useEffect(() => {
+    if (open && previousLocationRef.current !== location) {
+      onClose(); // Close popup when the route changes
+    }
+    previousLocationRef.current = location; // Update previous location after the change
+  }, [location, open, onClose]);
+
   if (!open) return null;
 
   const notifications = Array(4).fill({
@@ -31,8 +41,6 @@ const NotificationPopup = React.memo(({ open, onClose }) => {
 
   const getBallColor = (index) => (index % 2 === 0 ? '#FFC7C6' : '#C6FFC9');
   const getAvatarLetter = (index) => (index % 2 === 0 ? 'Y' : 'W');
-
-
 
   return (
     <Paper
@@ -47,6 +55,8 @@ const NotificationPopup = React.memo(({ open, onClose }) => {
         borderRadius: '8px',
         zIndex: 1000,
         overflow: 'hidden', // Prevent content overflow
+        // Prevent any unexpected shifting of the popup
+        transition: 'top 0.3s ease-in-out, right 0.3s ease-in-out',
       }}
     >
       {/* Notifications */}
@@ -105,13 +115,16 @@ const NotificationPopup = React.memo(({ open, onClose }) => {
           borderRadius: '0px 0px 14px 14px', // Rounded bottom corners
         }}
       >
-       <Button 
-      variant="text" 
-      sx={{ color: '#000', fontWeight: 500 }} 
-      onClick={() => navigate('/notifications')}
-    >
-      View All Notifications
-    </Button>
+        <Button
+          variant="text"
+          sx={{ color: '#000', fontWeight: 500 }}
+          onClick={() => {
+            onClose(); // Close popup before navigating
+            navigate('/notifications'); // Navigate to notifications page
+          }}
+        >
+          View All Notifications
+        </Button>
       </Box>
     </Paper>
   );

@@ -40,7 +40,7 @@ const CourseCategories = () => {
           }}
         >
           Home &gt; Academic &gt;{' '}
-          <span style={{ fontWeight: 700 }}>Choose your grade</span>
+          <span style={{ fontWeight: 700 ,color:"black"}}>Choose your grade</span>
         </Typography>
 
         {/* Promotional Banner */}

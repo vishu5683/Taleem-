@@ -14,15 +14,18 @@ import {
   ListItemText,
 } from '@mui/material';
 import { Menu as MenuIcon, Notifications, ExpandMore } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import logo from '../../assets/navbar/nav logo.png';
 import avatarImage from '../../assets/navbar/image.png';
 import DropdownProfileMenu from './DropdownProfileMenu';
-import NotificationPopup from './NotificationPopup.jsx'; // Import the NotificationPopup component
+import NotificationPopup from './NotificationPopup.jsx';
 
 const LoggedInNavbar = () => {
   const [anchorElLanguage, setAnchorElLanguage] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [notificationsOpen, setNotificationsOpen] = useState(false); // New state for notification popup
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
+
+  const navigate = useNavigate(); // Initialize navigate
 
   const handleOpenLanguage = (event) => {
     setAnchorElLanguage(event.currentTarget);
@@ -37,13 +40,28 @@ const LoggedInNavbar = () => {
   };
 
   const toggleNotifications = () => {
-    setNotificationsOpen(!notificationsOpen); // Toggle notification popup
+    setNotificationsOpen(!notificationsOpen);
+  };
+
+  const closeModals = () => {
+    setNotificationsOpen(false);
+    setAnchorElLanguage(null); // Close language menu
+  };
+
+  const handleLogoClick = () => {
+    closeModals();
+    navigate('/'); // Route to home
+  };
+
+  const handleHomeClick = () => {
+    closeModals();
+    navigate('/home'); // Route to home page
   };
 
   const drawer = (
     <Box sx={{ width: 250, padding: '16px' }}>
       <List>
-        <ListItem button>
+        <ListItem button onClick={handleHomeClick}>
           <ListItemText primary="Home" />
         </ListItem>
         <ListItem button>
@@ -59,7 +77,6 @@ const LoggedInNavbar = () => {
     </Box>
   );
 
-  // Dummy notifications data
   const notifications = [
     { title: 'Booking Confirmed', description: 'Your booking has been confirmed.' },
     { title: 'New Offer', description: '50% off on your next trip!' },
@@ -88,7 +105,7 @@ const LoggedInNavbar = () => {
         }}
       >
         {/* Logo */}
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center' }} onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
           <Box
             component="img"
             src={logo}
@@ -111,7 +128,7 @@ const LoggedInNavbar = () => {
             color: '#737373',
           }}
         >
-          <Typography variant="body1" sx={{ fontWeight: 700, fontSize: '16px', cursor: 'pointer' }}>
+          <Typography variant="body1" sx={{ fontWeight: 700, fontSize: '16px', cursor: 'pointer' }} onClick={handleHomeClick}>
             Home
           </Typography>
 
@@ -137,8 +154,8 @@ const LoggedInNavbar = () => {
               open={Boolean(anchorElLanguage)}
               onClose={handleCloseLanguage}
             >
-              <MenuItem onClick={handleCloseLanguage}>English</MenuItem>
-              <MenuItem onClick={handleCloseLanguage}>French</MenuItem>
+              <MenuItem onClick={closeModals}>English</MenuItem>
+              <MenuItem onClick={closeModals}>French</MenuItem>
             </Menu>
           </Box>
         </Box>
@@ -146,7 +163,7 @@ const LoggedInNavbar = () => {
         {/* Desktop Notification & User Menu */}
         <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: '16px', alignItems: 'center' }}>
           <IconButton
-            onClick={toggleNotifications} // Show notification popup when clicked
+            onClick={toggleNotifications}
             sx={{
               backgroundColor: '#40A39B',
               color: '#FFFFFF',
@@ -161,7 +178,7 @@ const LoggedInNavbar = () => {
             <Notifications />
           </IconButton>
           <Avatar alt="Naseem" src={avatarImage} sx={{ marginLeft: '8px' }} />
-          <DropdownProfileMenu userName="Naseem" />
+          <DropdownProfileMenu userName="Naseem" onClose={closeModals} />
         </Box>
 
         {/* Mobile Menu Icon */}
