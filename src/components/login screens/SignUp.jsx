@@ -97,6 +97,8 @@ const SignUp = ({
           borderRadius: "12px",
           p: { xs: 0, sm: 3 },
           textAlign: "center",
+          maxHeight: "90vh", // Set max height to 80% of the viewport
+          overflowY: "auto",
         }}
       >
         {/* Cancel Button */}
@@ -147,7 +149,7 @@ const SignUp = ({
         {/* Form */}
         <form onSubmit={formik.handleSubmit}>
           {/* Full Name */}
-          <Box sx={{ width: "420px", mx: "auto", textAlign: "left", mb: 3 }}>
+          <Box sx={{overflowY: "auto", maxHeight: "60vh", width: "420px", mx: "auto", textAlign: "left", mb: 3 }}>
             <Typography
               sx={{
                 fontSize: "16px",
