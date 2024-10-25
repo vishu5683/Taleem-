@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Menu, MenuItem, Typography, Divider, Avatar } from '@mui/material';
 import { ExpandMore, ChevronRight } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for routing
+import { useLocation, useNavigate } from 'react-router-dom'; // Import useNavigate for routing
 import avatarImage from '../../assets/navbar/image.png';
 
 const DropdownProfileMenu = ({ userName, userEmail }) => {
-  const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate(); // Initialize the navigate hook
+  const location = useLocation();
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -16,6 +17,8 @@ const DropdownProfileMenu = ({ userName, userEmail }) => {
     setAnchorEl(null);
   };
 
+
+
   const handleNavigation = (route) => {
     // Close the modal first
     handleClose();
@@ -23,6 +26,10 @@ const DropdownProfileMenu = ({ userName, userEmail }) => {
     // Navigate to the selected route
     navigate(route);
   };
+
+  useEffect(() => {
+    handleClose()
+  }, [location.pathname]);
 
   // Define the menuItems array here
   const menuItems = [
