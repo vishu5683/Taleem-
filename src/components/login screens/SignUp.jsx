@@ -14,6 +14,8 @@ import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { signup } from "../../Redux/Actions";
 import { useNavigate } from "react-router-dom";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 const SignUp = ({
   open,
@@ -28,7 +30,7 @@ const SignUp = ({
   const navigate = useNavigate();
   // State to disable the submit button
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const [countryCode, setCountryCode] = useState("91");
   // Initial values for the form
   const initialValues = {
     name: "",
@@ -45,8 +47,8 @@ const SignUp = ({
     name: Yup.string().required("Full name is required"),
     email: Yup.string().email("Invalid email format").optional(),
     mobile_no: Yup.string()
-      .required("Mobile number is required")
-      .matches(/^[0-9]{10}$/, "Must be exactly 10 digits"),
+      .required("Mobile number is required"),
+      // .matches(/^[0-9]{10}$/, "Must be exactly 10 digits"),
     gender: Yup.string().required("Please select a gender"),
     dob: Yup.string().required("Date of birth is required"),
   });
@@ -57,17 +59,23 @@ const SignUp = ({
     validationSchema,
     onSubmit: (values) => {
       setIsSubmitting(true); // Disable the submit button after submission
-
+      values.country_code = countryCode;
       dispatch(
         signup(values, (val) => {
-          console.log(val,"resss")
+          console.log(val, "resss");
           if (val?.data?.data?.token !== "") {
             localStorage.setItem("token", val?.data?.data?.token);
             localStorage.setItem("user", isStudent);
-            setData({token:val?.data?.data?.token,user:isStudent,type:"signup",ismob:true,data:values?.mobile_no})
+            setData({
+              token: val?.data?.data?.token,
+              user: isStudent,
+              type: "signup",
+              ismob: true,
+              data: values?.mobile_no,
+            });
             // navigate("/home");
             setOtpOpen(true);
-            handleClose()
+            handleClose();
           }
         })
       );
@@ -149,7 +157,16 @@ const SignUp = ({
         {/* Form */}
         <form onSubmit={formik.handleSubmit}>
           {/* Full Name */}
-          <Box sx={{overflowY: "auto", maxHeight: "60vh", width: "420px", mx: "auto", textAlign: "left", mb: 3 }}>
+          <Box
+            sx={{
+              overflowY: "auto",
+              maxHeight: "60vh",
+              width: "420px",
+              mx: "auto",
+              textAlign: "left",
+              mb: 3,
+            }}
+          >
             <Typography
               sx={{
                 fontSize: "16px",
@@ -188,26 +205,53 @@ const SignUp = ({
             >
               Mobile Number*
             </Typography>
-            <TextField
-              name="mobile_no"
+            <PhoneInput
+              country={"in"}
               value={formik.values.mobile_no}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
+              onChange={(phone, country) => {
+
+                setCountryCode(country.dialCode);
+                formik.setFieldValue(
+                  "mobile_no",
+                  phone
+                  // .replace(/^[0-9]{2}/, "")
+                );
+              }}
+              inputProps={{
+                name: "mobile_no",
+                required: true,
+                onBlur: formik.handleBlur,
+              }}
               placeholder="Enter your mobile number"
               fullWidth
-              error={
-                formik.touched.mobile_no && Boolean(formik.errors.mobile_no)
-              }
-              helperText={formik.touched.mobile_no && formik.errors.mobile_no}
-              sx={{
+              inputStyle={{
+                width: "100%",
                 borderRadius: "6px",
-                "& .MuiOutlinedInput-root": { borderRadius: "6px" },
+                height: "3.5rem",
+                borderColor:
+                  formik.touched.mobile_no && formik.errors.mobile_no
+                    ? "red"
+                    : "#ced4da",
+              }}
+              containerStyle={{
+                borderRadius: "6px",
+                width: "100%",
+                height: "3.5rem",
+                borderRadius: "6px",
+                borderColor: "rgb(206, 212, 218)",
+                font: "inherit",
+                letterSpacing: "inherit",
+                boxSizing: "content-box",
               }}
             />
+            {formik.touched.mobile_no && formik.errors.mobile_no && (
+              <Typography sx={{ color: "red", fontSize: "12px", mt: 1 }}>
+                {formik.errors.mobile_no}
+              </Typography>
+            )}
           </Box>
-
           {/* Email ID (Optional) */}
-          <Box sx={{ width: "420px", mx: "auto", textAlign: "left", mb: 3 }}>
+          {/* <Box sx={{ width: "420px", mx: "auto", textAlign: "left", mb: 3 }}>
             <Typography
               sx={{
                 fontSize: "16px",
@@ -232,7 +276,7 @@ const SignUp = ({
                 "& .MuiOutlinedInput-root": { borderRadius: "6px" },
               }}
             />
-          </Box>
+          </Box> */}
 
           {/* Gender */}
           <Box sx={{ width: "420px", mx: "auto", textAlign: "left", mb: 2 }}>
@@ -254,7 +298,7 @@ const SignUp = ({
                 onBlur={formik.handleBlur}
                 displayEmpty
                 sx={{
-                  height: "40px",
+                  height: "3.5rem",
                   borderRadius: "6px",
                   color: "#737373",
                   "& .MuiOutlinedInput-root": { borderRadius: "6px" },
@@ -330,9 +374,3 @@ const SignUp = ({
 };
 
 export default SignUp;
-
-
-
-
-
-

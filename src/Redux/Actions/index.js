@@ -15,17 +15,17 @@ export const sendMobileOtpSignup = (value, callback) => {
         if (responseData?.status == 200) {
           callback(responseData);
           toast.success(`${responseData?.data?.message}`, {
-            position: "top-right",
+            position: "top-center",
           });
         } else {
           toast.error(`${responseData?.data?.message}`, {
-            position: "top-right",
+            position: "top-center",
           });
         }
       },
       (error) => {
         toast.error(`${error?.payload?.message}`, {
-          position: "top-right",
+          position: "top-center",
         });
       }
     );
@@ -45,19 +45,19 @@ export const verifyMobileOtpSignup = (value, callback) => {
         if (responseData?.status == 200) {
           if (responseData?.data?.statusCode == 200) {
             toast.success(`${responseData?.data?.APICODERESULT}`, {
-              position: "top-right",
+              position: "top-center",
             });
             callback(responseData);
           } else {
             toast.error(`${responseData?.data?.APICODERESULT}`, {
-              position: "top-right",
+              position: "top-center",
             });
           }
         }
       },
       (error) => {
         toast.error(`${error?.payload?.APICODERESULT}`, {
-          position: "top-right",
+          position: "top-center",
         });
       }
     );
@@ -77,23 +77,23 @@ export const signup = (value, callback) => {
         if (responseData?.status == 200) {
           if(responseData?.data?.status){
           toast.success(`${responseData?.data?.message}`, {
-            position: "top-right",
+            position: "top-center",
           });
           callback(responseData);
         }else{
           toast.error(`${responseData?.data?.message}`, {
-            position: "top-right",
+            position: "top-center",
           });
         }
         } else {
           toast.error(`${responseData?.data?.message}`, {
-            position: "top-right",
+            position: "top-center",
           });
         }
       },
       (error) => {
         toast.error(`${error?.payload?.message}`, {
-          position: "top-right",
+          position: "top-center",
         });
       }
     );
@@ -113,7 +113,7 @@ export const login = (value, callback) => {
         if (responseData?.status == 200) {
           if (responseData?.data?.statusCode == 200) {
             toast.success(`${responseData?.data?.APICODERESULT}`, {
-              position: "top-right",
+              position: "top-center",
             });
             localStorage.setItem(
               "accessToken",
@@ -127,14 +127,14 @@ export const login = (value, callback) => {
             callback(responseData);
           } else {
             toast.error(`${responseData?.data?.APICODERESULT}`, {
-              position: "top-right",
+              position: "top-center",
             });
           }
         }
       },
       (error) => {
         toast.error(`${error?.payload?.APICODERESULT}`, {
-          position: "top-right",
+          position: "top-center",
         });
       }
     );
@@ -154,19 +154,19 @@ export const sendMobileOtpLogin = (value, callback) => {
         if (responseData?.status == 200) {
           if (responseData?.data?.statusCode == 200) {
             toast.success(`${responseData?.data?.APICODERESULT}`, {
-              position: "top-right",
+              position: "top-center",
             });
             callback(responseData);
           } else {
             toast.error(`${responseData?.data?.APICODERESULT}`, {
-              position: "top-right",
+              position: "top-center",
             });
           }
         }
       },
       (error) => {
         toast.error(`${error?.payload?.APICODERESULT}`, {
-          position: "top-right",
+          position: "top-center",
         });
       }
     );
@@ -185,18 +185,18 @@ export const verifyMobileOtpLogin = (value, callback) => {
         });
         if (responseData?.status == 200) {
           toast.success(`${responseData?.data?.message}`, {
-            position: "top-right",
+            position: "top-center",
           });
           callback(responseData);
         } else {
           toast.error(`${responseData?.data?.message}`, {
-            position: "top-right",
+            position: "top-center",
           });
         }
       },
       (error) => {
         toast.error(`${error?.payload?.message}`, {
-          position: "top-right",
+          position: "top-center",
         });
       }
     );
@@ -216,19 +216,19 @@ export const forgetPassword = (value, callback) => {
         if (responseData?.status == 200) {
           if (responseData?.data?.statusCode == 200) {
             toast.success(`${responseData?.data?.APICODERESULT}`, {
-              position: "top-right",
+              position: "top-center",
             });
             callback(responseData);
           } else {
             toast.error(`${responseData?.data?.APICODERESULT}`, {
-              position: "top-right",
+              position: "top-center",
             });
           }
         }
       },
       (error) => {
         toast.error(`${error?.payload?.APICODERESULT}`, {
-          position: "top-right",
+          position: "top-center",
         });
       }
     );
