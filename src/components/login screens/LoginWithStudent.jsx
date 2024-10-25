@@ -557,7 +557,7 @@ const LoginWithStudent = ({
             Mobile Number
           </Typography>
           <PhoneInput
-            country={countryCode} // Set default country code
+            country={"in"} // Set default country code
             value={mobileNumber}
             onChange={(phone) => {
               setMobileNumber(phone);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -14,13 +14,14 @@ import {
   ListItemText,
 } from '@mui/material';
 import { Menu as MenuIcon, Notifications, ExpandMore } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useLocation, useNavigate } from 'react-router-dom'; // Import useNavigate
 import logo from '../../assets/navbar/nav logo.png';
 import avatarImage from '../../assets/navbar/image.png';
 import DropdownProfileMenu from './DropdownProfileMenu';
 import NotificationPopup from './NotificationPopup.jsx';
 
 const LoggedInNavbar = () => {
+  const location = useLocation();
   const [anchorElLanguage, setAnchorElLanguage] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
@@ -57,6 +58,12 @@ const LoggedInNavbar = () => {
     closeModals();
     navigate('/home'); // Route to home page
   };
+
+
+  useEffect(() => {
+    closeModals();
+    setAnchorElLanguage(null);
+  }, [location.pathname]);
 
   const drawer = (
     <Box sx={{ width: 250, padding: '16px' }}>
@@ -200,7 +207,7 @@ const LoggedInNavbar = () => {
       </Drawer>
 
       {/* Notification Popup */}
-      <NotificationPopup open={notificationsOpen} onClose={toggleNotifications} notifications={notifications} />
+      <NotificationPopup open={notificationsOpen} onClose={toggleNotifications} notifications={notifications} setNotificationsOpen={setNotificationsOpen}/>
     </AppBar>
   );
 };

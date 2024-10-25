@@ -25,6 +25,11 @@ const NotificationPopup = React.memo(({ open, onClose }) => {
     };
   }, [open, onClose]);
 
+  
+  useEffect(() => {
+    onClose()
+  }, [location.pathname]);
+
   // Close popup on route change
   useEffect(() => {
     if (open && previousLocationRef.current !== location) {
