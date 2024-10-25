@@ -5,12 +5,14 @@ import PromotionalBanner from "../common comps/promotionalbanner";
 import boardIcon from "../../assets/academic/board.png";
 import universityIcon from "../../assets/academic/university.svg";
 import monitorIcon from "../../assets/academic/monitor.svg";
+import Pic1 from "../../assets/academic/fi_1274998.svg";
+import Pic2 from "../../assets/academic/fi_9119089.svg";
 import { useNavigate } from 'react-router-dom';  // Import useNavigate
 
 const grades = [
   { label: "Primary", icon: boardIcon },
-  { label: "Middle", icon: monitorIcon },
-  { label: "Secondary", icon: universityIcon },
+  { label: "Middle", icon: Pic1 },
+  { label: "Secondary", icon: Pic2 },
   { label: "University", icon: universityIcon },
 ];
 
@@ -91,44 +93,55 @@ const Academic = () => {
           title="Choose your Grade"
           description="From Primary to University, Tailored Tutoring for Every Stage"
         />
-        <Box sx={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "20px" }}>
-          {grades.map((grade, index) => (
-            <Box
-              key={index}
-              onClick={() => setSelectedGrade(grade.label)}
-              sx={{
-                width: "268px",
-                height: "70px",
-                backgroundColor: "#C6FFC9",
-                border: `2px solid ${
-                  selectedGrade === grade.label ? "#40A39B" : "transparent"
-                }`,
-                borderRadius: "8px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                padding: "0 16px",
-                cursor: "pointer",
-                transition: "border-color 0.3s",
-              }}
-            >
-              <Box
-                sx={{
-                  width: "10px", // Reduced the size here
-                  height: "10px",
-                  borderRadius: "50%",
-                  backgroundColor: selectedGrade === grade.label ? "#40A39B" : "#FFFFFF",
-                  border: selectedGrade === grade.label ? "none" : "1px solid #E6E6E6",
-                }}
-              />
-              <img src={grade.icon} alt={grade.label} style={{ width: "24px", height: "24px" }} />
-              <Typography variant="body1" sx={{ fontWeight: 400, fontSize: "14px", color: "#000000" }}>
-                {grade.label}
-              </Typography>
-              <ExpandMoreIcon sx={{ color: "#737373", width: "20px", height: "20px" }} />
-            </Box>
-          ))}
-        </Box>
+<Box sx={{ display: "flex", gap: "4px", flexWrap: "wrap", marginBottom: "20px" }}>
+  {grades.map((grade, index) => (
+    <Box
+      key={index}
+      onClick={() => setSelectedGrade(grade.label)}
+      sx={{
+        width: "268px",
+        height: "70px",
+        backgroundColor: "#C6FFC9",
+        border: `2px solid ${selectedGrade === grade.label ? "#40A39B" : "transparent"}`,
+        borderRadius: "8px",
+        display: "flex",
+        alignItems: "center",
+        padding: "0 12px",
+        cursor: "pointer",
+        transition: "border-color 0.3s",
+        gap: "10px",
+        justifyContent: "flex-start", // Ensure elements are packed together
+      }}
+    >
+      <Box
+        sx={{
+          width: "20px",
+          height: "20px",
+          borderRadius: "50%",
+          backgroundColor: selectedGrade === grade.label ? "#40A39B" : "#FFFFFF",
+          border: selectedGrade === grade.label ? "2px solid #FFFFFF" : "1px solid #6C6C6C",
+        }}
+      />
+      <img src={grade.icon} alt={grade.label} style={{ width: "24px", height: "24px" }} />
+      <Typography
+        variant="body1"
+        sx={{ fontWeight: 500, fontSize: "16px", color: "#000000" }}
+      >
+        {grade.label}
+      </Typography>
+      <ExpandMoreIcon
+        sx={{
+          color: "#737373",
+          width: "20px",
+          height: "20px",
+          marginLeft: "auto", // Push arrow to the left but keep space
+        }}
+      />
+    </Box>
+  ))}
+</Box>
+
+
 
         {/* Class Selection */}
         <TitleSection title="Select Class" description="Choose the appropriate class for your grade" />
@@ -205,44 +218,55 @@ const Academic = () => {
           title="Choose your Curriculum"
           description="From Primary to University, Tailored Tutoring for Every Stage"
         />
-        <Box sx={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-          {grades.map((grade, index) => (
-            <Box
-              key={index}
-              onClick={() => setSelectedGrade(grade.label)}
-              sx={{
-                width: "268px",
-                height: "70px",
-                backgroundColor: "#C6FFC9",
-                border: `2px solid ${
-                  selectedGrade === grade.label ? "#40A39B" : "transparent"
-                }`,
-                borderRadius: "8px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                padding: "0 16px",
-                cursor: "pointer",
-                transition: "border-color 0.3s",
-              }}
-            >
-              <Box
-                sx={{
-                  width: "12px",
-                  height: "12px",
-                  borderRadius: "44px",
-                  backgroundColor: selectedGrade === grade.label ? "#40A39B" : "#FFFFFF",
-                  border: selectedGrade === grade.label ? "none" : "1px solid #E6E6E6",
-                }}
-              />
-              <img src={grade.icon} alt={grade.label} style={{ width: "24px", height: "24px" }} />
-              <Typography variant="body1" sx={{ fontWeight: 400, fontSize: "14px", color: "#000000" }}>
-                {grade.label}
-              </Typography>
-              <ExpandMoreIcon sx={{ color: "#737373", width: "20px", height: "20px" }} />
-            </Box>
-          ))}
-        </Box>
+<Box sx={{ display: "flex", gap: "4px", flexWrap: "wrap", marginBottom: "20px" }}>
+  {grades.map((grade, index) => (
+    <Box
+      key={index}
+      onClick={() => setSelectedGrade(grade.label)}
+      sx={{
+        width: "268px",
+        height: "70px",
+        backgroundColor: "#C6FFC9",
+        border: `2px solid ${selectedGrade === grade.label ? "#40A39B" : "transparent"}`,
+        borderRadius: "8px",
+        display: "flex",
+        alignItems: "center",
+        padding: "0 12px",
+        cursor: "pointer",
+        transition: "border-color 0.3s",
+        gap: "8px",
+        justifyContent: "flex-start", // Ensure elements are packed together
+      }}
+    >
+      <Box
+        sx={{
+          width: "20px",
+          height: "20px",
+          borderRadius: "50%",
+          backgroundColor: selectedGrade === grade.label ? "#40A39B" : "#FFFFFF",
+          border: selectedGrade === grade.label ? "2px solid #FFFFFF" : "1px solid #6C6C6C",
+        }}
+      />
+      <img src={grade.icon} alt={grade.label} style={{ width: "24px", height: "24px" }} />
+      <Typography
+        variant="body1"
+        sx={{ fontWeight: 500, fontSize: "16px", color: "#000000" }}
+      >
+        {grade.label}
+      </Typography>
+      <ExpandMoreIcon
+        sx={{
+          color: "#737373",
+          width: "20px",
+          height: "20px",
+          marginLeft: "auto", // Push arrow to the left but keep space
+        }}
+      />
+    </Box>
+  ))}
+</Box>
+
+
 
         {/* Action Buttons */}
         <Box sx={{ display: "flex", justifyContent: "flex-end", gap: "16px", marginTop: "70px" }}>

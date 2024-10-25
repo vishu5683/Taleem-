@@ -19,7 +19,7 @@ const BookNowModal = ({ onClose }) => {
     { time: '12:00 PM - 1:00 PM', isBooked: true },
     { time: '1:15 PM - 2:15 PM', isBooked: false },
     { time: '2:30 PM - 3:30 PM', isBooked: true },
-    { time: '3:45 PM - 4:45 PM', isBooked: false },
+ 
   ];
 
   // Handlers
@@ -76,40 +76,45 @@ const BookNowModal = ({ onClose }) => {
       {/* Calendar Slider */}
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 2 }}>
         <IconButton onClick={handlePrev}>
-          <KeyboardArrowLeftIcon sx={{ fontSize: 40, color: '#40A39B' }} />
+          <KeyboardArrowLeftIcon sx={{ fontSize: 40, color: '#40A39B',width:"20px",height:"20px" }} />
         </IconButton>
 
         <Box sx={{ display: 'flex', gap: 1 }}>
           {daysOfMonth.map((day, index) => (
-            <Box
-              key={index}
-              sx={{
-                width: 41,
-                height: 50,
-                borderRadius: 1,
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                border: '1px solid',
-                borderImageSource: 'linear-gradient(105.04deg, #EBBE49 -25.33%, #FFC7C6 100%)',
-                background: index === selectedDayIndex
-                  ? 'linear-gradient(102.58deg, #40A39B -18.44%, #C6FFC9 100%)'
-                  : '#FFFFFF',
-                color: index === selectedDayIndex ? '#FFFFFF' : '#737373',
-                fontWeight: index === selectedDayIndex ? 600 : 400,
-                cursor: 'pointer',
-              }}
-              onClick={() => setSelectedDayIndex(index)}
-            >
-              <Typography sx={{ fontSize: 10 }}>{daysOfWeek[index]}</Typography>
-              <Typography sx={{ fontSize: 18, fontWeight: 700 }}>{day}</Typography>
+     <Box
+     key={index}
+     sx={{
+       width: "42px",        // Updated width
+       height: "51px",       // Updated height
+       top: "403px",         // Optional positioning if necessary
+       left: "699px",        // Optional positioning if necessary
+       border: "1px ",  // Border defined
+       borderImageSource: "linear-gradient(105.04deg, #EBBE49 -25.33%, #FFC7C6 100%)",  // Border color gradient
+       background: index === selectedDayIndex
+         ? "linear-gradient(102.58deg, #40A39B -18.44%, #C6FFC9 100%)"  // Updated background when selected
+         : "#FFFFFF",        // White background when not selected
+       borderRadius: 1,
+       display: 'flex',
+       flexDirection: 'column',
+       justifyContent: 'center',
+       alignItems: 'center',
+       color: index === selectedDayIndex ? '#FFFFFF' : '#737373',  // Text color based on selection
+       fontWeight: index === selectedDayIndex ? 600 : 400,         // Font weight based on selection
+       cursor: 'pointer',
+     }}
+     onClick={() => setSelectedDayIndex(index)}
+   >
+              <Typography sx={{ fontSize: 12 , fontWeight: 500,color:"black"}}>{daysOfWeek[index]}</Typography>
+              <Typography variant="h6" sx={{ fontSize: "17px", fontWeight: 700, color: "black" }}>
+  {day}
+</Typography>
+
             </Box>
           ))}
         </Box>
 
         <IconButton onClick={handleNext}>
-          <KeyboardArrowRightIcon sx={{ fontSize: 40, color: '#40A39B' }} />
+          <KeyboardArrowRightIcon sx={{ fontSize: 40, color: '#40A39B',width:"20px",height:"20px" }} />
         </IconButton>
       </Box>
 
@@ -139,10 +144,10 @@ const BookNowModal = ({ onClose }) => {
             onClick={() => !slot.isBooked && setSelectedSlotIndex(index)}
           >
             {!slot.isBooked && selectedSlotIndex !== index && (
-              <Box sx={{ width: 20, height: 20, borderRadius: '50%', border: '1px solid #737373', opacity: 0.5 }} />
+              <Box sx={{ width: 20, height: 20, borderRadius: '50%', border: '1px solid #737373'}} />
             )}
 
-            <Typography sx={{ color: slot.isBooked ? '#737373' : '#000', fontWeight: 500 }}>
+            <Typography sx={{ color: slot.isBooked ? '#737373' : '#000', fontWeight: 600,fontSize: 14 }}>
               {slot.time}
             </Typography>
 
