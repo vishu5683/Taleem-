@@ -4,8 +4,9 @@ import SchoolIcon from '@mui/icons-material/School';
 import CalendarTodayIcon from '@mui/icons-material/CalendarMonth';
 import LanguageIcon from '@mui/icons-material/Language';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import PromotionalBanner from '../common comps/promotionalbanner';
-import girilImage from "../../assets/schedule classes/girl.png"; // Import the image
+import girilImage from "../../assets/schedule classes/girl.png";
 
 // Reusable component for class details items
 const ClassDetailItem = ({ icon: Icon, label, value }) => (
@@ -26,16 +27,21 @@ const CustomDivider = () => (
       width: '1px',
       height: '36px',
       mx: 1,
-      ml: 10,
+      ml: 6,
     }}
   />
 );
 
 const ClassDetailF2F = () => {
   const [expandedAccordion, setExpandedAccordion] = useState(false);
+  const navigate = useNavigate(); // Hook for navigation
 
   const handleAccordionToggle = (index) => {
     setExpandedAccordion((prevIndex) => (prevIndex === index ? false : index));
+  };
+
+  const handleJoinClass = () => {
+    navigate('/statustutor'); // Navigate to /statustutor on button click
   };
 
   const accordionData = [
@@ -89,7 +95,8 @@ const ClassDetailF2F = () => {
           border: '1px solid #ccc',
           background: 'linear-gradient(105.04deg, #C6FFC9 -25.33%, #D4EBFF 100%)',
           padding: { xs: '16px', sm: '24px' },
-          mb: 5,
+          mb:2
+       
         }}
       >
         {/* Class Title */}
@@ -103,7 +110,7 @@ const ClassDetailF2F = () => {
         </Typography>
 
         {/* Class Details */}
-        <Grid container spacing={2} sx={{ alignItems: 'center', marginBottom: '24px',gap:"10px" }}>
+        <Grid container spacing={2} sx={{ alignItems: 'center', gap: '10px', marginBottom: '6px' ,    mt:0.1 }}>
           <Grid item xs={12} sm={6} md="auto">
             <ClassDetailItem icon={SchoolIcon} label="Category" value="Academic" />
           </Grid>
@@ -132,35 +139,23 @@ const ClassDetailF2F = () => {
         Package Details
       </Typography>
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'start', mb: 5 }}>
-        <Box sx={{ textAlign: 'start', mr: 3 }}>
-          <Typography sx={{ color: '#737373', fontWeight: 400 }}>Package</Typography>
-          <Typography sx={{ fontWeight: 500, color: '#000' }}>1 Week</Typography>
-        </Box>
-        <CustomDivider />
-        <Box sx={{ textAlign: 'start', mr: 2 }}>
-          <Typography sx={{ color: '#737373', fontWeight: 400 }}>Class Type</Typography>
-          <Typography sx={{ fontWeight: 500, color: '#000' }}>Online</Typography>
-        </Box>
-        <CustomDivider />
-        <Box sx={{ textAlign: 'start' }}>
-          <Typography sx={{ color: '#737373', fontWeight: 400 }}>Booking ID</Typography>
-          <Typography sx={{ fontWeight: 500, color: '#000' }}>1000546565</Typography>
-        </Box>
-        <CustomDivider />
-        <Box sx={{ textAlign: 'start' }}>
-          <Typography sx={{ color: '#737373', fontWeight: 400 }}>Date</Typography>
-          <Typography sx={{ fontWeight: 500, color: '#000' }}>08 Aug 2024, 10:40 AM</Typography>
-        </Box>
-        <CustomDivider />
-        <Box sx={{ textAlign: 'start' }}>
-          <Typography sx={{ color: '#737373', fontWeight: 400 }}>Payment Mode</Typography>
-          <Typography sx={{ fontWeight: 500, color: '#000' }}>Card</Typography>
-        </Box>
-        <CustomDivider />
-        <Box sx={{ textAlign: 'start' }}>
-          <Typography sx={{ color: '#737373', fontWeight: 400 }}>Status</Typography>
-          <Typography sx={{ fontWeight: 500, color: '#000' }}>Completed</Typography>
-        </Box>
+        {/* Content with Divider */}
+        {[
+          { label: 'Package', value: '1 Week' },
+          { label: 'Class Type', value: 'Online' },
+          { label: 'Booking ID', value: '1000546565' },
+          { label: 'Date', value: '08 Aug 2024, 10:40 AM' },
+          { label: 'Payment Mode', value: 'Card' },
+          { label: 'Status', value: 'Completed' },
+        ].map((item, idx) => (
+          <React.Fragment key={idx}>
+            <Box sx={{ textAlign: 'start', mr: 3 }}>
+              <Typography sx={{ color: '#737373', fontWeight: 400 }}>{item.label}</Typography>
+              <Typography sx={{ fontWeight: 500, color: '#000' }}>{item.value}</Typography>
+            </Box>
+            {idx !== 5 && <CustomDivider />}
+          </React.Fragment>
+        ))}
       </Box>
 
       {/* Members Section */}
@@ -169,43 +164,25 @@ const ClassDetailF2F = () => {
       </Typography>
 
       <Grid container spacing={3}>
-        {/* Member 1 */}
-        <Grid item xs={12} sm={6} md={4}>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <img
-              src={girilImage}
-              alt="Daniela Chikitani"
-              style={{ width: '42px', height: '42px', marginRight: '16px' }}
-            />
-            <Box>
-              <Typography sx={{ fontWeight: 500, fontSize: '14px', color: '#000' }}>
-                Daniela Chikitani
-              </Typography>
-              <Typography sx={{ fontWeight: 400, fontSize: '12px', color: '#737373' }}>
-                Grade: Secondary (10th)
-              </Typography>
-            </Box>
-          </Box>
-        </Grid>
-
-        {/* Member 2 */}
-        <Grid item xs={12} sm={6} md={4}>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <img
-              src={girilImage}
-              alt="John Doe"
-              style={{ width: '42px', height: '42px', marginRight: '16px' }}
-            />
-            <Box>
-              <Typography sx={{ fontWeight: 500, fontSize: '14px', color: '#000' }}>
-                John Doe
-              </Typography>
-              <Typography sx={{ fontWeight: 400, fontSize: '12px', color: '#737373' }}>
-                Grade: Secondary (10th)
-              </Typography>
-            </Box>
-          </Box>
-        </Grid>
+        {[{ name: 'Daniela Chikitani', grade: 'Secondary (10th)' }, { name: 'John Doe', grade: 'Secondary (10th)' }].map(
+          (member, idx) => (
+            <Grid item xs={12} sm={6} md={4} key={idx}>
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <img
+                  src={girilImage}
+                  alt={member.name}
+                  style={{ width: '42px', height: '42px', marginRight: '16px' }}
+                />
+                <Box>
+                  <Typography sx={{ fontWeight: 500, fontSize: '14px', color: '#000' }}>{member.name}</Typography>
+                  <Typography sx={{ fontWeight: 400, fontSize: '12px', color: '#737373' }}>
+                    Grade: {member.grade}
+                  </Typography>
+                </Box>
+              </Box>
+            </Grid>
+          )
+        )}
       </Grid>
 
       {/* Schedule */}
@@ -223,7 +200,7 @@ const ClassDetailF2F = () => {
             width: '100%',
             borderRadius: '6px',
             border: '1px solid #E6E6E6',
-            marginBottom: '12px', // gap between accordions
+            marginBottom: '12px',
           }}
         >
           <AccordionSummary
@@ -246,6 +223,7 @@ const ClassDetailF2F = () => {
               display: 'flex',
               flexDirection: 'column',
               gap: '12px',
+              position: 'relative', // For button positioning
             }}
           >
             <Typography sx={{ fontWeight: 500, fontSize: '14px', color: '#000' }}>
@@ -254,6 +232,24 @@ const ClassDetailF2F = () => {
             <Typography sx={{ fontWeight: 500, fontSize: '14px', color: '#000' }}>
               Class Link: {item.link}
             </Typography>
+            <Button
+              variant="contained"
+              onClick={handleJoinClass}
+              sx={{
+                position: 'absolute',
+                bottom: '8px',
+                right: '8px',
+                backgroundColor: '#40A39B',
+                color: '#fff',
+                padding: '6px 12px',
+                borderRadius: '8px',
+                '&:hover': {
+                  backgroundColor: '#368b85',
+                },
+              }}
+            >
+              Join
+            </Button>
           </AccordionDetails>
         </Accordion>
       ))}
@@ -262,6 +258,7 @@ const ClassDetailF2F = () => {
       <Box sx={{ display: 'flex', justifyContent: 'center', mb: 10, mt: 8 }}>
         <Button
           variant="contained"
+          onClick={handleJoinClass}
           sx={{
             backgroundColor: '#40A39B',
             color: '#fff',

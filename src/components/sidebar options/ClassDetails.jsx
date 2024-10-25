@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Add this import for navigation
 import { Box, Typography, Grid, Button, Divider, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import SchoolIcon from '@mui/icons-material/School';
 import CalendarTodayIcon from '@mui/icons-material/CalendarMonth';
@@ -11,7 +12,7 @@ const ClassDetailItem = ({ icon: Icon, label, value }) => (
   <Box display="flex" alignItems="center">
     <Icon sx={{ color: '#EBBE49', marginRight: '8px' }} />
     <Typography variant="body1" sx={{ fontWeight: 400, fontSize: '12px', color: '#737373' }}>
-      {label} : {value}
+      {label}: {value}
     </Typography>
   </Box>
 );
@@ -32,9 +33,14 @@ const CustomDivider = () => (
 
 const ClassDetails = () => {
   const [expandedAccordion, setExpandedAccordion] = useState(false);
+  const navigate = useNavigate(); // For navigation on button click
 
   const handleAccordionToggle = (index) => {
     setExpandedAccordion((prevIndex) => (prevIndex === index ? false : index));
+  };
+
+  const handleJoinClass = () => {
+    navigate('/classeslink');
   };
 
   const accordionData = [
@@ -88,7 +94,7 @@ const ClassDetails = () => {
           border: '1px solid #ccc',
           background: 'linear-gradient(105.04deg, #C6FFC9 -25.33%, #D4EBFF 100%)',
           padding: { xs: '16px', sm: '24px' },
-          mb: 5,
+          mb:2
         }}
       >
         {/* Class Title */}
@@ -96,15 +102,15 @@ const ClassDetails = () => {
           variant="h6"
           sx={{
             fontWeight: 600,
-            fontSize: { xs: '16px', sm: '18px' },
-            marginBottom: '20px',
+          fontSize: { xs: '16px', sm: '18px' },
+     
           }}
         >
           Algebra for Primary Students (Grade - 6th)
         </Typography>
 
         {/* Class Details in a single row */}
-        <Grid container spacing={2} sx={{ alignItems: 'center', marginBottom: '24px' }}>
+        <Grid container spacing={2} sx={{ alignItems: 'center', marginBottom: '6px' ,    mt:0.1}}>
           <Grid item xs={12} sm={6} md="auto">
             <ClassDetailItem icon={SchoolIcon} label="Category" value="Academic" />
           </Grid>
@@ -140,42 +146,36 @@ const ClassDetails = () => {
           mb: 5,
         }}
       >
-        {/* Package */}
         <Box sx={{ textAlign: 'start', mr: 3 }}>
           <Typography sx={{ color: '#737373', fontWeight: 400 }}>Package</Typography>
           <Typography sx={{ fontWeight: 500, color: '#000' }}>1 Week</Typography>
         </Box>
         <CustomDivider />
 
-        {/* Class Type */}
         <Box sx={{ textAlign: 'start', mr: 2 }}>
           <Typography sx={{ color: '#737373', fontWeight: 400 }}>Class Type</Typography>
           <Typography sx={{ fontWeight: 500, color: '#000' }}>Online</Typography>
         </Box>
         <CustomDivider />
 
-        {/* Booking ID */}
         <Box sx={{ textAlign: 'start' }}>
           <Typography sx={{ color: '#737373', fontWeight: 400 }}>Booking ID</Typography>
           <Typography sx={{ fontWeight: 500, color: '#000' }}>1000546565</Typography>
         </Box>
         <CustomDivider />
 
-        {/* Date */}
         <Box sx={{ textAlign: 'start' }}>
           <Typography sx={{ color: '#737373', fontWeight: 400 }}>Date</Typography>
           <Typography sx={{ fontWeight: 500, color: '#000' }}>08 Aug 2024, 10:40 AM</Typography>
         </Box>
         <CustomDivider />
 
-        {/* Payment Mode */}
         <Box sx={{ textAlign: 'start' }}>
           <Typography sx={{ color: '#737373', fontWeight: 400 }}>Payment Mode</Typography>
           <Typography sx={{ fontWeight: 500, color: '#000' }}>Card</Typography>
         </Box>
         <CustomDivider />
 
-        {/* Status */}
         <Box sx={{ textAlign: 'start' }}>
           <Typography sx={{ color: '#737373', fontWeight: 400 }}>Status</Typography>
           <Typography sx={{ fontWeight: 500, color: '#000' }}>Completed</Typography>
@@ -228,29 +228,28 @@ const ClassDetails = () => {
             <Typography sx={{ fontWeight: 500, fontSize: '14px', color: '#000' }}>
               Class Link: {item.link}
             </Typography>
+
+            {/* Join Class Button inside each accordion */}
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <Button
+                onClick={handleJoinClass}
+                sx={{
+                  fontWeight: 600,
+                  fontSize: '14px',
+                  color: '#fff',
+                  backgroundColor: '#40A39B',
+                  textTransform: 'capitalize',
+                  padding: '8px 16px',
+                  borderRadius: '6px',
+                  '&:hover': { backgroundColor: '#359387' },
+                }}
+              >
+                Join 
+              </Button>
+            </Box>
           </AccordionDetails>
         </Accordion>
       ))}
-
-      {/* Start Class Button */}
-      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 10,mt:8 }}>
-        <Button
-          variant="contained"
-          sx={{
-            backgroundColor: '#40A39B',
-            color: '#fff',
-            width: { xs: '100%', sm: '319px' },
-            height: '48px',
-            padding: '14px 16px',
-            borderRadius: '8px',
-            '&:hover': {
-              backgroundColor: '#368b85',
-            },
-          }}
-        >
-          Join Class
-        </Button>
-      </Box>
     </Box>
   );
 };

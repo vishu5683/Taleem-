@@ -30,6 +30,11 @@ const ManageProfileModal = lazy(() => import("../components/my classes dashboard
 const Profile = lazy(() => import("../components/my classes dashboard/profile"));
 const ProfileUpdate = lazy(() => import("../components/my classes dashboard/updateprofile"));
 const TestUI= lazy(() => import("../components/Academic/TutorDetails"));
+const StatusTutor = lazy(() => import("../components/sidebar options/StatusTutor"));
+const ReviewPopup = lazy(() => import("../components/sidebar options/ReviewPopup"));
+const ClassesLink = lazy(() => import("../components/sidebar options/ClassesLink"));
+const ClassDetails = lazy(() => import("../components/sidebar options/ClassDetails"));
+const ClassDetailF2F = lazy(() => import("../components/sidebar options/ClassDetailF2F"));
 
 
 const ROUTES = [
@@ -52,6 +57,41 @@ const ROUTES = [
     path: "*",
     id: 1,
     Component: NotFound,
+    isPrivate: false,
+  },
+  {
+    name: "Status Tutor",
+    path: "/statustutor",
+    id: 3,
+    Component: StatusTutor,
+    isPrivate: false,
+  },
+  {
+    name: "Review Popup",
+    path: "/reviewpopup",
+    id: 4,
+    Component: ReviewPopup,
+    isPrivate: false,
+  },
+  {
+    name: "Classes Link",
+    path: "/classeslink",
+    id: 5,
+    Component: ClassesLink,
+    isPrivate: false,
+  },
+  {
+    name: "Class Details",
+    path: "/classdetails",
+    id: 6,
+    Component: ClassDetails,
+    isPrivate: false,
+  },
+  {
+    name: "Class Detail F2F",
+    path: "/classdetailf2f",
+    id: 7,
+    Component: ClassDetailF2F,
     isPrivate: false,
   },
   {

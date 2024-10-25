@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MyClassLayout from "../my classes dashboard/MyClassLayout";
 import calIcon from "../../assets/schedule classes/cal.png";
@@ -36,71 +37,86 @@ const IconText = ({ icon, text, value, alt, iconStyle = {} }) => (
 );
 
 // ClassBox component to display each class
-const ClassBox = ({ title, categories, time, session, teacher }) => (
-  <Box
-    sx={{
-      width: "744px",
-      backgroundColor: "#FFFFFF",
-      border: "1px solid #E6E6E6",
-      borderRadius: "12px",
-      padding: "16px",
-      display: "flex",
-      flexDirection: "column",
-      gap: "11px",
-      marginBottom: "20px",
-    }}
-  >
-    {/* Title and Category Tags */}
-    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-      <Typography variant="h6" sx={{ fontWeight: 600, fontSize: "18px" }}>
-        {title}
-      </Typography>
+const ClassBox = ({ title, categories, time, session, teacher, selectedTab }) => {
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
-      {/* Category Tags */}
-      <Box sx={{ display: "flex", gap: "8px" }}>
-        {categories.map((category, index) => (
-          <Box
-            key={index}
-            sx={{
-              padding: "5px 16px",
-              borderRadius: "17px",
-              border: "1px solid",
-              borderImageSource: "linear-gradient(102.58deg, #40A39B -18.44%, #C6FFC9 100%)",
-              background: "linear-gradient(105.04deg, #C6FFC9 -25.33%, #D4EBFF 100%)",
-              fontWeight: 400,
-              fontSize: "12px",
-              color: "#40A39B",
-            }}
-          >
-            {category}
-          </Box>
-        ))}
+  // Navigate to specific path based on the selected tab
+  const handleClick = () => {
+    if (selectedTab === "Face to Face") {
+      navigate("/classdetailf2f");
+    } else {
+      navigate("/classdetails");
+    }
+  };
+
+  return (
+    <Box
+      onClick={handleClick} // Add onClick to navigate
+      sx={{
+        width: "744px",
+        backgroundColor: "#FFFFFF",
+        border: "1px solid #E6E6E6",
+        borderRadius: "12px",
+        padding: "16px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "11px",
+        marginBottom: "20px",
+        cursor: "pointer", // Add pointer cursor
+      }}
+    >
+      {/* Title and Category Tags */}
+      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <Typography variant="h6" sx={{ fontWeight: 600, fontSize: "18px" }}>
+          {title}
+        </Typography>
+
+        {/* Category Tags */}
+        <Box sx={{ display: "flex", gap: "8px" }}>
+          {categories.map((category, index) => (
+            <Box
+              key={index}
+              sx={{
+                padding: "5px 16px",
+                borderRadius: "17px",
+                border: "1px solid",
+                borderImageSource: "linear-gradient(102.58deg, #40A39B -18.44%, #C6FFC9 100%)",
+                background: "linear-gradient(105.04deg, #C6FFC9 -25.33%, #D4EBFF 100%)",
+                fontWeight: 400,
+                fontSize: "12px",
+                color: "#40A39B",
+              }}
+            >
+              {category}
+            </Box>
+          ))}
+        </Box>
+      </Box>
+
+      {/* Time and Session Info */}
+      <Box sx={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+        <IconText icon={calIcon} text="Time" value={time} alt="Calendar" />
+        <IconText icon={watchIcon} text="Session" value={session} alt="Watch" />
+      </Box>
+
+      {/* Divider line */}
+      <Box sx={{ width: "100%", height: "3px", backgroundColor: "rgba(240, 240, 240, 1)", marginBottom: "7px" }} />
+
+      {/* Profile Section */}
+      <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        <img src={profileIcon} alt="Profile" style={{ width: "32px", height: "32px" }} />
+        <Box>
+          <Typography variant="h4" sx={{ fontWeight: 500, fontSize: "14px" }}>
+            {teacher.name}
+          </Typography>
+          <Typography variant="h6" sx={{ color: "#737373", fontWeight: 400, fontSize: "12px" }}>
+            {teacher.role}
+          </Typography>
+        </Box>
       </Box>
     </Box>
-
-    {/* Time and Session Info */}
-    <Box sx={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-      <IconText icon={calIcon} text="Time" value={time} alt="Calendar" />
-      <IconText icon={watchIcon} text="Session" value={session} alt="Watch" />
-    </Box>
-
-    {/* Divider line */}
-    <Box sx={{ width: "100%", height: "3px", backgroundColor: "rgba(240, 240, 240, 1)", marginBottom: "7px" }} />
-
-    {/* Profile Section */}
-    <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
-      <img src={profileIcon} alt="Profile" style={{ width: "32px", height: "32px" }} />
-      <Box>
-        <Typography variant="h4" sx={{ fontWeight: 500, fontSize: "14px" }}>
-          {teacher.name}
-        </Typography>
-        <Typography variant="h6" sx={{ color: "#737373", fontWeight: 400, fontSize: "12px" }}>
-          {teacher.role}
-        </Typography>
-      </Box>
-    </Box>
-  </Box>
-);
+  );
+};
 
 const MyClasses = () => {
   const [selectedTab, setSelectedTab] = useState("All");
@@ -176,6 +192,7 @@ const MyClasses = () => {
             time={classInfo.time}
             session={classInfo.session}
             teacher={classInfo.teacher}
+            selectedTab={selectedTab} // Pass the selectedTab to ClassBox
           />
         ))}
       </Box>

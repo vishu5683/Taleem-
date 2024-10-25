@@ -40,7 +40,7 @@ const MyClassLayout = ({ children }) => {
           <Link underline="hover" color="inherit" href="/" sx={{ fontSize: '13px', fontWeight: 400 }}>
             Home
           </Link>
-          <Typography color="#737373" sx={{ fontSize: '13px', fontWeight: 400 }}>
+          <Typography color="#737373" sx={{ fontSize: '13px', fontWeight: 600,color:"black" }}>
             Class
           </Typography>
         </Breadcrumbs>
