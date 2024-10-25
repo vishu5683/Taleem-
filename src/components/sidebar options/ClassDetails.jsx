@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Add this import for navigation
+import { useNavigate } from 'react-router-dom';
 import { Box, Typography, Grid, Button, Divider, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import SchoolIcon from '@mui/icons-material/School';
 import CalendarTodayIcon from '@mui/icons-material/CalendarMonth';
@@ -9,15 +9,15 @@ import PromotionalBanner from '../common comps/promotionalbanner';
 
 // Reusable component for class details items
 const ClassDetailItem = ({ icon: Icon, label, value }) => (
-  <Box display="flex" alignItems="center">
-    <Icon sx={{ color: '#EBBE49', marginRight: '8px' }} />
-    <Typography variant="body1" sx={{ fontWeight: 400, fontSize: '12px', color: '#737373' }}>
+  <Box display="flex" alignItems="center" sx={{ flexDirection: { xs: 'column', sm: 'row' }, textAlign: { xs: 'center', sm: 'start' } }}>
+    <Icon sx={{ color: '#EBBE49', mr: { sm: '8px' }, mb: { xs: '4px', sm: '0' } }} />
+    <Typography variant="body1" sx={{ fontWeight: 400, fontSize: { xs: '12px', sm: '14px' }, color: '#737373' }}>
       {label}: {value}
     </Typography>
   </Box>
 );
 
-// Reusable divider with margin-left
+// Custom Divider with responsive adjustments
 const CustomDivider = () => (
   <Divider
     orientation="vertical"
@@ -25,15 +25,16 @@ const CustomDivider = () => (
       backgroundColor: '#D9D9D9',
       width: '1px',
       height: '36px',
-      mx: 1,
-      ml: 10,
+      mx: 5,
+      ml: { xs: 0, sm: 3 },
+      display: { xs: 'none', sm: 'inline-flex' },
     }}
   />
 );
 
 const ClassDetails = () => {
   const [expandedAccordion, setExpandedAccordion] = useState(false);
-  const navigate = useNavigate(); // For navigation on button click
+  const navigate = useNavigate();
 
   const handleAccordionToggle = (index) => {
     setExpandedAccordion((prevIndex) => (prevIndex === index ? false : index));
@@ -63,30 +64,28 @@ const ClassDetails = () => {
 
   return (
     <Box sx={{ maxWidth: '1145px', margin: '20px auto', px: { xs: 2, sm: 3, md: 4 } }}>
-      {/* Promotional Banner */}
       <PromotionalBanner
         sx={{
           width: '100%',
           backgroundColor: '#F5F5F5',
           borderRadius: '12px',
-          padding: '16px',
+          padding: { xs: '12px', sm: '16px' },
           marginBottom: '25px',
         }}
       />
 
-      {/* Class Details Heading */}
       <Typography
         variant="h4"
         sx={{
           fontWeight: 700,
           fontSize: { xs: '20px', sm: '24px' },
           marginBottom: '20px',
+          textAlign: { xs: 'center', sm: 'left' },
         }}
       >
         Class Details
       </Typography>
 
-      {/* Class Information Box */}
       <Box
         sx={{
           width: '100%',
@@ -94,23 +93,21 @@ const ClassDetails = () => {
           border: '1px solid #ccc',
           background: 'linear-gradient(105.04deg, #C6FFC9 -25.33%, #D4EBFF 100%)',
           padding: { xs: '16px', sm: '24px' },
-          mb:2
+          mb: 2,
         }}
       >
-        {/* Class Title */}
         <Typography
           variant="h6"
           sx={{
             fontWeight: 600,
-          fontSize: { xs: '16px', sm: '18px' },
-     
+            fontSize: { xs: '16px', sm: '18px' },
+            textAlign: { xs: 'center', sm: 'left' },
           }}
         >
           Algebra for Primary Students (Grade - 6th)
         </Typography>
 
-        {/* Class Details in a single row */}
-        <Grid container spacing={2} sx={{ alignItems: 'center', marginBottom: '6px' ,    mt:0.1}}>
+        <Grid container spacing={2} sx={{ alignItems: 'center', mt: 0.1 }}>
           <Grid item xs={12} sm={6} md="auto">
             <ClassDetailItem icon={SchoolIcon} label="Category" value="Academic" />
           </Grid>
@@ -126,7 +123,6 @@ const ClassDetails = () => {
         </Grid>
       </Box>
 
-      {/* Instructions */}
       <Typography variant="body1" sx={{ fontWeight: 700, mb: 2 }}>
         Instructions
       </Typography>
@@ -134,16 +130,18 @@ const ClassDetails = () => {
         Please join your class link before the class starts.
       </Typography>
 
-      {/* Package Details Section */}
       <Typography variant="body1" sx={{ fontWeight: 700, mb: 2 }}>
         Package Details
       </Typography>
+
       <Box
         sx={{
           display: 'flex',
-          alignItems: 'center',
+          flexDirection: { xs: 'column', sm: 'row' },
+       
           justifyContent: 'start',
           mb: 5,
+          gap: { xs: 2, sm: 0 },
         }}
       >
         <Box sx={{ textAlign: 'start', mr: 3 }}>
@@ -182,12 +180,10 @@ const ClassDetails = () => {
         </Box>
       </Box>
 
-      {/* Schedule */}
       <Typography variant="body1" sx={{ fontWeight: 700, mb: 2 }}>
         Schedule
       </Typography>
 
-      {/* Accordion List */}
       {accordionData.map((item, index) => (
         <Accordion
           key={index}
@@ -197,7 +193,7 @@ const ClassDetails = () => {
             width: '100%',
             borderRadius: '6px',
             border: '1px solid #E6E6E6',
-            marginBottom: '12px', // gap between accordions
+            marginBottom: '12px',
           }}
         >
           <AccordionSummary
@@ -209,7 +205,7 @@ const ClassDetails = () => {
               gap: '4px',
             }}
           >
-            <Typography sx={{ fontWeight: 400, fontSize: '14px', color: '#737373' }}>
+            <Typography sx={{ fontWeight: 400, fontSize: { xs: '14px', sm: '16px' }, color: '#737373' }}>
               {item.date}
             </Typography>
           </AccordionSummary>
@@ -229,7 +225,6 @@ const ClassDetails = () => {
               Class Link: {item.link}
             </Typography>
 
-            {/* Join Class Button inside each accordion */}
             <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
               <Button
                 onClick={handleJoinClass}
@@ -244,7 +239,7 @@ const ClassDetails = () => {
                   '&:hover': { backgroundColor: '#359387' },
                 }}
               >
-                Join 
+                Join
               </Button>
             </Box>
           </AccordionDetails>

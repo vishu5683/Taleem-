@@ -103,7 +103,7 @@ const StatusTutor = () => {
         </Typography>
 
         {/* Class Details */}
-        <Grid container spacing={2} sx={{ alignItems: 'center', marginBottom: '24px',gap:"10px" }}>
+        <Grid container spacing={2} sx={{ alignItems: 'center', marginBottom: '6px' ,    mt:0.1,gap:"10px" }}>
           <Grid item xs={12} sm={6} md="auto">
             <ClassDetailItem icon={SchoolIcon} label="Category" value="Academic" />
           </Grid>

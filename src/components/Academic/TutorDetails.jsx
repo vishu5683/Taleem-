@@ -1,18 +1,14 @@
 import React from 'react';
-import { Box, Typography, Divider, Card, Button } from '@mui/material';
+import { Box, Typography, Divider, Card, Button, Avatar } from '@mui/material';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
+import StarBorderIcon from '@mui/icons-material/Star';
 import girl from '../../assets/course card/girl.png';
-import Avatar from '@mui/material/Avatar';
+import pic1 from "../../assets/schedule classes/Ellipse 36 (1).svg";
 
 const TutorDetails = () => {
   return (
-    <Box
-      sx={{
-        padding: { xs: '10px 20px', sm: '20px 50px', md: '20px 100px' },
-      }}
-    >
+    <Box sx={{ padding: { xs: '10px 20px', sm: '20px 50px', md: '20px 100px' } }}>
       {/* Breadcrumbs */}
       <Typography
         variant="body2"
@@ -20,7 +16,7 @@ const TutorDetails = () => {
           fontWeight: 400,
           fontSize: { xs: '10px', md: '12px' },
           color: '#737373',
-          marginBottom: '8px', // reduced margin between breadcrumb and content
+          marginBottom: '8px',
           textAlign: 'left',
         }}
       >
@@ -31,8 +27,8 @@ const TutorDetails = () => {
       {/* Tutor Card */}
       <Card
         sx={{
-          width: { xs: '100%', md: '763px' },
-          height: { xs: 'auto', md: '173px' },
+          width: '100%',
+          maxWidth: '763px',
           borderRadius: '12px',
           background: 'linear-gradient(105.04deg, #C6FFC9 -25.33%, #D4EBFF 100%)',
           padding: '20px',
@@ -40,7 +36,7 @@ const TutorDetails = () => {
           flexDirection: { xs: 'column', md: 'row' },
           justifyContent: 'space-between',
           alignItems: 'center',
-          position: 'relative', // allow positioning of button
+          position: 'relative',
           marginBottom: '20px',
         }}
       >
@@ -53,66 +49,40 @@ const TutorDetails = () => {
             width: { xs: '60px', md: '85px' },
             height: { xs: '60px', md: '92px' },
             borderRadius: '8px',
+            mb: { xs: 2, md: 0 }
           }}
         />
 
         {/* Tutor Info */}
-        <Box sx={{ flexGrow: 1, marginLeft: { xs: '0', md: '10px' }, textAlign: { xs: 'center', md: 'left' } }}>
-          <Typography variant="h6" sx={{ fontWeight: 600 }}>
-            Daniela Chikitani
-          </Typography>
+        <Box sx={{ flexGrow: 1, ml: { xs: 0, md: 2 }, textAlign: { xs: 'center', md: 'left' } }}>
+          <Typography variant="h6" sx={{ fontWeight: 600 }}>Daniela Chikitani</Typography>
 
-          {/* Tutor Additional Info */}
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: { xs: 'column', md: 'row' },
-              alignItems: { xs: 'center', md: 'flex-start' },
-              gap: '10px',
-              marginTop: '8px',
-            }}
-          >
+          <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: 'center', gap: 1, mt: 1 }}>
             <BusinessCenterIcon sx={{ color: '#F3C623' }} />
-            <Typography variant="body2" sx={{ color: '#333' }}>
-              Music Tutors in University
-            </Typography>
+            <Typography variant="body2" sx={{ color: '#333' }}>Music Tutors in University</Typography>
           </Box>
 
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: { xs: 'column', md: 'row' },
-              alignItems: { xs: 'center', md: 'flex-start' },
-              gap: '10px',
-              marginTop: '8px',
-            }}
-          >
+          <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: 'center', gap: 1, mt: 1 }}>
             <LocationOnIcon sx={{ color: '#F3C623' }} />
-            <Typography variant="body2" sx={{ color: '#333' }}>
-              Doha, Qatar
-            </Typography>
+            <Typography variant="body2" sx={{ color: '#333' }}>Doha, Qatar</Typography>
             <Divider orientation="vertical" flexItem sx={{ backgroundColor: '#E6E6E6', display: { xs: 'none', md: 'block' } }} />
-            <StarBorderIcon sx={{ color: '#EBBE49', fontSize: '20px' }} /> {/* Changed star color and size */}
-            <Typography variant="body2" sx={{ color: '#333' }}>
-              4.0 Rating | 128 Reviews
-            </Typography>
+            <StarBorderIcon sx={{ color: '#EBBE49', fontSize: '20px' }} />
+            <Typography variant="body2" sx={{ color: '#333' }}>4.0 Rating | 128 Reviews</Typography>
           </Box>
         </Box>
 
-        {/* Action Buttons */}
+        {/* Action Button */}
         <Button
           variant="contained"
           sx={{
             position: 'absolute',
-            top: '10px',
-            right: '10px', // Button at top-right corner
+            bottom: '10px',
+            right: '10px',
             backgroundColor: '#40A39B',
             color: '#ffffff',
             fontWeight: 500,
             textTransform: 'none',
-            '&:hover': {
-              backgroundColor: '#359c87',
-            },
+            '&:hover': { backgroundColor: '#359c87' },
             width: { xs: 'auto', md: '150px' },
           }}
         >
@@ -122,108 +92,55 @@ const TutorDetails = () => {
 
       {/* About Section */}
       <Box sx={{ marginBottom: '20px' }}>
-        <Typography variant="h6" sx={{ fontWeight: 600, marginBottom: '10px' }}>
-          About
-        </Typography>
-        <Typography
-          variant="body2"
-          sx={{
-            color: '#878787',
-            lineHeight: '1.5',
-            width: '100%', // Remove width restriction
-          }}
-        >
-          Teaching Philosophy: Ms. Doe believes in making math accessible and enjoyable for all students. She uses a variety of<br/>
-          teaching methods to cater to different learning styles and encourages students Teaching Philosophy: Ms. Doe believes in<br/>
-          making math accessible and enjoyable for all students. She uses a variety of teaching methods to cater to different<br/>
+        <Typography variant="h6" sx={{ fontWeight: 600, marginBottom: '10px' }}>About</Typography>
+        <Typography variant="body2" sx={{ color: '#878787', lineHeight: '1.5' }}>
+          Teaching Philosophy: Ms. Doe believes in making math accessible and enjoyable for all students. She uses a variety of<br />
+          teaching methods to cater to different learning styles and encourages students Teaching Philosophy: Ms. Doe believes in<br />
+          making math accessible and enjoyable for all students. She uses a variety of teaching methods to cater to different<br />
           learning styles and encourages students.
         </Typography>
       </Box>
 
       {/* Reviews Section */}
       <Box>
-        <Typography variant="h6" sx={{ fontWeight: 600, marginBottom: '10px' }}>
-          Reviews
-        </Typography>
+        <Typography variant="h6" sx={{ fontWeight: 600, marginBottom: '10px' }}>Reviews</Typography>
 
         {/* Review Card */}
-        <Card
-          sx={{
-            width: '560px',
-            height: '206px',
-            borderRadius: '9px',
-            backgroundColor: '#D4EBFF',
-            padding: '20px',
-            marginBottom: '16px',
-          }}
-        >
-          <Box display="flex" alignItems="center">
-            <Avatar sx={{ width: '64px', height: '64px', borderRadius: '50%' }}>V</Avatar>
-            <Box sx={{ marginLeft: '16px' }}>
-              <Typography variant="body1" sx={{ fontWeight: 600 }}>
-                Vania Roy
-              </Typography>
-              <Typography variant="body2" sx={{ color: '#737373' }}>
-                3 days ago
-              </Typography>
-            </Box>
-            <Box sx={{ marginLeft: 'auto', textAlign: 'right' }}>
-              <Typography variant="body1" sx={{ fontWeight: 600 }}>
-                Excellent (4.5)
-              </Typography>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                {[...Array(3)].map((_, i) => (
-                  <StarBorderIcon key={i} sx={{ color: '#EBBE49', fontSize: '20px' }} />
-                ))}
-                {[...Array(2)].map((_, i) => (
-                  <StarBorderIcon key={i} sx={{ color: '#E6E6E6', fontSize: '20px' }} />
-                ))}
+        {[{ name: 'Vania Roy', rating: 4.5, date: '3 days ago', comment: 'I really enjoyed Calculus 101. The instructor explained difficult concepts in a way that was easy to understand, and the course materials were very helpful.' },
+          { name: 'John Doe', rating: 4.0, date: '1 week ago', comment: 'The tutor was great at helping me understand the subject better. I feel more confident now!' }]
+          .map((review, index) => (
+            <Card
+              key={index}
+              sx={{
+                width: '100%',
+                maxWidth: '560px',
+                borderRadius: '9px',
+                backgroundColor: '#D4EBFF',
+                padding: '20px',
+                marginBottom: '16px',
+              }}
+            >
+              <Box display="flex" alignItems="center">
+                <Avatar src={pic1} sx={{ width: '64px', height: '64px', borderRadius: '50%' }} />
+                <Box sx={{ ml: 2 }}>
+                  <Typography variant="body1" sx={{ fontWeight: 600 }}>{review.name}</Typography>
+                  <Typography variant="body2" sx={{ color: '#737373' }}>{review.date}</Typography>
+                </Box>
+                <Box sx={{ ml: 'auto', textAlign: 'right' }}>
+                  <Typography variant="body1" sx={{ fontWeight: 600 }}>{review.rating === 4.5 ? 'Excellent' : 'Very Good'} ({review.rating})</Typography>
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    {[...Array(Math.floor(review.rating))].map((_, i) => (
+                      <StarBorderIcon key={i} sx={{ color: '#EBBE49', fontSize: '20px' }} />
+                    ))}
+                    {[...Array(5 - Math.floor(review.rating))].map((_, i) => (
+                      <StarBorderIcon key={i} sx={{ color: '#E6E6E6', fontSize: '20px' }} />
+                    ))}
+                  </Box>
+                </Box>
               </Box>
-            </Box>
-          </Box>
-          <Typography variant="body2" sx={{ marginTop: '16px', color: '#878787' }}>
-            I really enjoyed Calculus 101. The instructor explained difficult concepts in a way that was easy to understand, and the
-            course materials were very helpful.
-          </Typography>
-        </Card>
-
-        {/* Add another review card */}
-        <Card
-          sx={{
-            width: '560px',
-            height: '206px',
-            borderRadius: '9px',
-            backgroundColor: '#D4EBFF',
-            padding: '20px',
-            marginBottom: '16px',
-          }}
-        >
-          <Box display="flex" alignItems="center">
-            <Avatar sx={{ width: '64px', height: '64px', borderRadius: '50%' }}>J</Avatar>
-            <Box sx={{ marginLeft: '16px' }}>
-              <Typography variant="body1" sx={{ fontWeight: 600 }}>
-                John Doe
-              </Typography>
-              <Typography variant="body2" sx={{ color: '#737373' }}>
-                1 week ago
-              </Typography>
-            </Box>
-            <Box sx={{ marginLeft: 'auto', textAlign: 'right' }}>
-              <Typography variant="body1" sx={{ fontWeight: 600 }}>
-                Very Good (4.0)
-              </Typography>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                {[...Array(4)].map((_, i) => (
-                  <StarBorderIcon key={i} sx={{ color: '#EBBE49', fontSize: '20px' }} />
-                ))}
-                <StarBorderIcon sx={{ color: '#E6E6E6', fontSize: '20px' }} />
-              </Box>
-            </Box>
-          </Box>
-          <Typography variant="body2" sx={{ marginTop: '16px', color: '#878787' }}>
-            The tutor was great at helping me understand the subject better. I feel more confident now!
-          </Typography>
-        </Card>
+              <Typography variant="body2" sx={{ mt: 2, color: '#878787' }}>{review.comment}</Typography>
+            </Card>
+          ))}
       </Box>
     </Box>
   );
