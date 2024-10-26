@@ -55,7 +55,7 @@ const NotificationPopup = React.memo(({ open, onClose }) => {
         position: 'absolute',
         top: '96px',
         right: { xs: '16px', sm: '174px' }, // Responsive right position
-        width: { xs: '100%', sm: '360px' }, // Full width on mobile
+        width: { xs: '100%', sm: '398px' }, // Full width on mobile
         backgroundColor: 'white',
         borderRadius: '8px',
         zIndex: 1000,
@@ -75,8 +75,9 @@ const NotificationPopup = React.memo(({ open, onClose }) => {
                 width: '42px',
                 height: '42px',
                 mr: 2,
-                fontSize: '18px',
-                fontWeight: 600,
+                fontSize: '14px',
+                fontWeight: 550,
+                color:"black"
               }}
             >
               {getAvatarLetter(index)}
@@ -84,7 +85,7 @@ const NotificationPopup = React.memo(({ open, onClose }) => {
 
             {/* Notification text */}
             <Box sx={{ flexGrow: 1, position: 'relative' }}>
-              <Typography variant="body1" sx={{ fontWeight: 550, mb: 0.5 }}>
+              <Typography variant="body1" sx={{ fontWeight: 550, mb: 0.5,mr: 10 }}>
                 {notification.title}
               </Typography>
               {/* "Today" text aligned to bottom right */}
@@ -120,16 +121,27 @@ const NotificationPopup = React.memo(({ open, onClose }) => {
           borderRadius: '0px 0px 14px 14px', // Rounded bottom corners
         }}
       >
-        <Button
-          variant="text"
-          sx={{ color: '#000', fontWeight: 500 }}
-          onClick={() => {
-            onClose(); // Close popup before navigating
-            navigate('/notifications'); // Navigate to notifications page
-          }}
-        >
-          View All Notifications
-        </Button>
+     <Button
+  variant="text"
+  sx={{ 
+    color: '#000', 
+    fontWeight: 600, 
+    fontSize: 14,
+    justifyContent: 'flex-start', // Align text to the left
+    textAlign: 'left', // Ensures text aligns to the left inside the button
+    display: 'flex', // Flexbox layout
+    width: '100%', // Full width for alignment consistency
+    paddingLeft: 2, // Add some left padding for spacing if needed
+    textTransform : "none"
+  }}
+  onClick={() => {
+    onClose(); // Close popup before navigating
+    navigate('/notifications'); // Navigate to notifications page
+  }}
+>
+  View All Notifications
+</Button>
+
       </Box>
     </Paper>
   );

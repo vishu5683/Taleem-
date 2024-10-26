@@ -2,17 +2,17 @@ import React from 'react';
 import { Box, Grid, Typography, Button, TextField, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
-import aiIcon from "../../assets/category/11024170_color_palette_drawing_painting_artist_icon 1.png";
-import bioIcon from "../../assets/category/8893835_dancer_actress_girl_movie_actor_icon 1.png";
-import businessIcon from "../../assets/category/camera-sharp.png";
-import dataSciIcon from "../../assets/category/fi_2906496.png";
+import aiIcon from "../../assets/category/ai.png";
+import bioIcon from "../../assets/category/bio.png";
+import businessIcon from "../../assets/category/business.png";
+import dataSciIcon from "../../assets/category/data sci.png";
 import dataIcon from "../../assets/category/data.png";
 import financeIcon from "../../assets/category/finance.png";
 import marketingIcon from "../../assets/category/marketing.png";
 import productIcon from "../../assets/category/prodduct.png";
 import uiuxIcon from "../../assets/category/ui ux.png";
 import PromotionalBanner from '../common comps/promotionalbanner';
-
+import { useNavigate } from 'react-router-dom';
 const categories = [
   { text: 'Music', img: financeIcon },
   { text: 'Arts & Craft', img: dataIcon },
@@ -26,6 +26,10 @@ const categories = [
 ];
 
 const Categories = () => {
+
+  const navigate = useNavigate();
+
+
   return (
     <Box sx={{ padding: '20px', position: 'relative' }}>
       <Box sx={{ maxWidth: '1145px', margin: '0 auto' }}>
@@ -169,19 +173,20 @@ const Categories = () => {
           Cancel
         </Button>
         <Button
-          variant="contained"
-          sx={{
-            width: '164px',
-            height: '48px',
-            padding: '14px 16px',
-            borderRadius: '8px',
-            backgroundColor: '#40A39B',
-            color: '#fff',
-            marginRight: '75px',
-          }}
-        >
-          Continue
-        </Button>
+      variant="contained"
+      sx={{
+        width: '164px',
+        height: '48px',
+        padding: '14px 16px',
+        borderRadius: '8px',
+        backgroundColor: '#40A39B',
+        color: '#fff',
+        marginRight: '75px',
+      }}
+      onClick={() => navigate('/tutorlisting')}  // Navigate to Tutor Listing page
+    >
+      Continue
+    </Button>
       </Box>
     </Box>
   );

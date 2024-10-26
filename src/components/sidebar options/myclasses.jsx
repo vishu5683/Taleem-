@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MyClassLayout from "../my classes dashboard/MyClassLayout";
 import calIcon from "../../assets/schedule classes/cal.png";
@@ -25,7 +25,6 @@ const classes = [
   },
 ];
 
-// Reusable component for displaying icons with text
 const IconText = ({ icon, text, value, alt, iconStyle = {} }) => (
   <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
     <img src={icon} alt={alt} style={{ width: "19px", height: "19px", ...iconStyle }} />
@@ -36,11 +35,9 @@ const IconText = ({ icon, text, value, alt, iconStyle = {} }) => (
   </Box>
 );
 
-// ClassBox component to display each class
 const ClassBox = ({ title, categories, time, session, teacher, selectedTab }) => {
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate();
 
-  // Navigate to specific path based on the selected tab
   const handleClick = () => {
     if (selectedTab === "Face to Face") {
       navigate("/classdetailf2f");
@@ -51,9 +48,9 @@ const ClassBox = ({ title, categories, time, session, teacher, selectedTab }) =>
 
   return (
     <Box
-      onClick={handleClick} // Add onClick to navigate
+      onClick={handleClick}
       sx={{
-        width: "744px",
+        width: { xs: '100%', sm: '100%', md: '744px' },
         backgroundColor: "#FFFFFF",
         border: "1px solid #E6E6E6",
         borderRadius: "12px",
@@ -62,17 +59,14 @@ const ClassBox = ({ title, categories, time, session, teacher, selectedTab }) =>
         flexDirection: "column",
         gap: "11px",
         marginBottom: "20px",
-        cursor: "pointer", // Add pointer cursor
+        cursor: "pointer",
       }}
     >
-      {/* Title and Category Tags */}
-      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <Typography variant="h6" sx={{ fontWeight: 600, fontSize: "18px" }}>
+      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap" }}>
+        <Typography variant="h6" sx={{ fontWeight: 600, fontSize: { xs: "16px", md: "18px" } }}>
           {title}
         </Typography>
-
-        {/* Category Tags */}
-        <Box sx={{ display: "flex", gap: "8px" }}>
+        <Box sx={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
           {categories.map((category, index) => (
             <Box
               key={index}
@@ -83,7 +77,7 @@ const ClassBox = ({ title, categories, time, session, teacher, selectedTab }) =>
                 borderImageSource: "linear-gradient(102.58deg, #40A39B -18.44%, #C6FFC9 100%)",
                 background: "linear-gradient(105.04deg, #C6FFC9 -25.33%, #D4EBFF 100%)",
                 fontWeight: 400,
-                fontSize: "12px",
+                fontSize: { xs: "10px", md: "12px" },
                 color: "#40A39B",
               }}
             >
@@ -93,23 +87,20 @@ const ClassBox = ({ title, categories, time, session, teacher, selectedTab }) =>
         </Box>
       </Box>
 
-      {/* Time and Session Info */}
       <Box sx={{ display: "flex", flexDirection: "column", gap: "8px" }}>
         <IconText icon={calIcon} text="Time" value={time} alt="Calendar" />
         <IconText icon={watchIcon} text="Session" value={session} alt="Watch" />
       </Box>
 
-      {/* Divider line */}
       <Box sx={{ width: "100%", height: "3px", backgroundColor: "rgba(240, 240, 240, 1)", marginBottom: "7px" }} />
 
-      {/* Profile Section */}
       <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
         <img src={profileIcon} alt="Profile" style={{ width: "32px", height: "32px" }} />
         <Box>
-          <Typography variant="h4" sx={{ fontWeight: 500, fontSize: "14px" }}>
+          <Typography variant="h4" sx={{ fontWeight: 500, fontSize: { xs: "12px", md: "14px" } }}>
             {teacher.name}
           </Typography>
-          <Typography variant="h6" sx={{ color: "#737373", fontWeight: 400, fontSize: "12px" }}>
+          <Typography variant="h6" sx={{ color: "#737373", fontWeight: 400, fontSize: { xs: "10px", md: "12px" } }}>
             {teacher.role}
           </Typography>
         </Box>
@@ -123,21 +114,11 @@ const MyClasses = () => {
 
   return (
     <MyClassLayout>
-      <Box sx={{ padding: "20px" }}>
-        {/* Title */}
-        <Typography
-          variant="h4"
-          sx={{
-            fontWeight: 600,
-            fontSize: "16px",
-            color: "#000000",
-            marginBottom: "20px",
-          }}
-        >
+      <Box sx={{ padding: { xs: "10px", md: "20px" } }}>
+        <Typography variant="h4" sx={{ fontWeight: 600, fontSize: "16px", color: "#000000", marginBottom: "20px" }}>
           My Classes
         </Typography>
 
-        {/* Tabs Section */}
         <Box
           sx={{
             display: "flex",
@@ -145,10 +126,11 @@ const MyClasses = () => {
             width: "100%",
             maxWidth: "800px",
             marginBottom: "20px",
+            flexWrap: "wrap",
             alignItems: "center",
           }}
         >
-          <Box sx={{ display: "flex", gap: "10px" }}>
+          <Box sx={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
             {tabs.map((tab, index) => (
               <Box
                 key={index}
@@ -166,6 +148,7 @@ const MyClasses = () => {
                   cursor: "pointer",
                   fontWeight: 400,
                   height: "38px",
+                  fontSize: { xs: "12px", md: "14px" },
                 }}
               >
                 {tab}
@@ -173,8 +156,7 @@ const MyClasses = () => {
             ))}
           </Box>
 
-          {/* Calendar Icon with Today Dropdown */}
-          <Box sx={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer" }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer", marginTop: { xs: "10px", md: "0" } }}>
             <img src={calIcon} alt="Calendar" style={{ width: "17px", height: "19px" }} />
             <Typography variant="body1" sx={{ fontSize: "14px", fontWeight: 400 }}>
               Today
@@ -183,7 +165,6 @@ const MyClasses = () => {
           </Box>
         </Box>
 
-        {/* Class Boxes */}
         {classes.map((classInfo, index) => (
           <ClassBox
             key={index}
@@ -192,7 +173,7 @@ const MyClasses = () => {
             time={classInfo.time}
             session={classInfo.session}
             teacher={classInfo.teacher}
-            selectedTab={selectedTab} // Pass the selectedTab to ClassBox
+            selectedTab={selectedTab}
           />
         ))}
       </Box>

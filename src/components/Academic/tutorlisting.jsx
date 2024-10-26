@@ -9,7 +9,7 @@ import tutor2 from "../../assets/explore/Rectangle 52398 (3).svg";
 import tutor3 from "../../assets/explore/Rectangle 52398.svg";
 import FilterModal from './filter';
 import { useNavigate } from 'react-router-dom';  // Import useNavigate
-
+import { Link } from 'react-router-dom';
 const TutorListing = () => {
   const tutors = [
     { imageSrc: tutor1, name: 'Fenton Martin' },
@@ -40,18 +40,25 @@ const TutorListing = () => {
     <Box sx={{ padding: '20px' }}>
       <Box sx={{ maxWidth: '1145px', margin: '0 auto' }}>
       <Typography
-  variant="body2"
-  sx={{
-    fontWeight: 400,
-    fontSize: '12px',
-    color: '#737373',
-    marginBottom: '16px',
-    textAlign: 'left',
-  }}
->
-  Home &gt; Academic &gt;{' '}
-  <span style={{ fontWeight: 700, color: 'black' }}>Tutors Listing</span>
-</Typography>
+      variant="body2"
+      sx={{
+        fontWeight: 400,
+        fontSize: '12px',
+        color: '#737373',
+        marginBottom: '16px',
+        textAlign: 'left',
+      }}
+    >
+      <Link to="/" style={{ textDecoration: 'none', color: '#737373' }}>
+        Home
+      </Link>{' '}
+      &gt;{' '}
+      <Link to="/academic" style={{ textDecoration: 'none', color: '#737373' }}>
+        Academic
+      </Link>{' '}
+      &gt;{' '}
+      <span style={{ fontWeight: 700, color: 'black' }}>Tutors Listing</span>
+    </Typography>
 
 
         <PromotionalBanner

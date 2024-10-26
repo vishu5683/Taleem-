@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -23,26 +24,28 @@ import pic1 from '../../assets/bookurtutor/pic1.png';
 import pic2 from '../../assets/bookurtutor/pic2.png';
 
 const F2fsessions = () => {
-  const [classType, setClassType] = useState('');
+  
   const [sessionType, setSessionType] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState('');
   const [expanded, setExpanded] = useState(false);
-
+  const [classType, setClassType] = useState('face-to-face'); 
   const handleOpenModal = () => setIsModalOpen(true); // Function to open the modal
   const handleCloseModal = () => setIsModalOpen(false); // Function to close the modal
   const handleAccordionChange = (panel) => (event, isExpanded) => setExpanded(isExpanded ? panel : false);
 
-  const buttonStyle = (active, width = '100%', height = '38px', borderRadius = '54px') => ({
-    width,
-    height,
+  const buttonStyle = (active, width = '110px', height = '38px', borderRadius = '54px') => ({
+    width,                      // Fixed width: 110px by default
+    height,                     // Default height: 38px
     backgroundColor: active ? '#40A39B' : '#FFFFFF',
-    borderRadius,
+    borderRadius,               // Border radius: 54px by default
     padding: '3px 16px',
     border: '1px solid #E6E6E6',
     color: active ? '#FFFFFF' : '#737373',
     fontSize: '14px',
+    textTransform: 'none',      // No text transformation
   });
+  
   const navigate = useNavigate();
   return (
     <Box
@@ -57,10 +60,24 @@ const F2fsessions = () => {
       {/* Left Side Content */}
       <Box sx={{ width: { xs: '100%', md: '60%' }, padding: { xs: '10px', md: '20px' } }}>
         {/* Breadcrumb */}
-        <Typography variant="body2">
-          Home &gt; Recreational &gt; Tutors Listing &gt; Tutors Details &gt; <strong>Book Tutor</strong>
-        </Typography>
-
+        <Typography variant="body2" sx={{ fontWeight: 400, fontSize: '12px' }}>
+      <Link to="/" style={{ textDecoration: 'none', color: '#737373' }}>
+        Home
+      </Link>{' '}
+      &gt;{' '}
+      <Link to="/recreational" style={{ textDecoration: 'none', color: '#737373' }}>
+        Recreational
+      </Link>{' '}
+      &gt;{' '}
+      <Link to="/tutors-listing" style={{ textDecoration: 'none', color: '#737373' }}>
+        Tutors Listing
+      </Link>{' '}
+      &gt;{' '}
+      <Link to="/tutors-details" style={{ textDecoration: 'none', color: '#737373' }}>
+        Tutors Details
+      </Link>{' '}
+      &gt; <strong>Book Tutor</strong>
+    </Typography>
         {/* Title */}
         <Typography sx={{ fontWeight: 700, fontSize: { xs: '20px', md: '24px' }, mt: 2 }}>Book your Tutor</Typography>
 
@@ -97,6 +114,7 @@ const F2fsessions = () => {
                 fontWeight: 400,
                 fontSize: { xs: '14px', md: '16px' },
                 color: classType === type ? '#FFFFFF' : '#737373',
+                textTransform: 'none', // Ensure no text transformation
               }}
             >
               {label}
@@ -108,75 +126,129 @@ const F2fsessions = () => {
         {/* Select Session */}
         <Typography sx={{ fontWeight: 500, fontSize: '20px', mt: 3 }}>Select Session</Typography>
         <Box sx={{ display: 'flex', gap: '12px', mt: 2 }}>
-          {['individual', 'group'].map((type) => (
-            <Button key={type} onClick={() => setSessionType(type)} sx={buttonStyle(sessionType === type)}>
-              {type.charAt(0).toUpperCase() + type.slice(1)}
-            </Button>
-          ))}
-        </Box>
+      {['Individual', 'Group'].map((type) => (
+        <Button key={type} onClick={() => setSessionType(type)} sx={buttonStyle(sessionType === type)}>
+          {type} {/* Text remains unchanged without transformation */}
+        </Button>
+      ))}
+    </Box>
 
         {/* Select Package Starting Date */}
         <Typography sx={{ fontWeight: 500, fontSize: { xs: '18px', md: '20px' }, mt: 3 }}>Select Package Starting Date</Typography>
         <Box sx={{ display: 'flex', alignItems: 'center', mt: 2 }}>
-          <TextField
-            fullWidth
-            placeholder="08 / 08 / 2024"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <CalendarMonthIcon sx={{ width: '22.67px', height: '25.49px' }} />
-                </InputAdornment>
-              ),
-              style: { borderRadius: '6px', padding: '8px 12px', border: '1px solid #E6E6E6' },
-            }}
-            sx={{ width: '100%', height: '38px', borderRadius: '6px', border: 'none' }}
-          />
-        </Box>
+  <TextField
+    fullWidth
+    placeholder="08 / 08 / 2024"
+    InputProps={{
+      startAdornment: (
+        <InputAdornment position="start">
+          <CalendarMonthIcon sx={{ width: '22.67px', height: '25.49px' }} />
+        </InputAdornment>
+      ),
+      style: { borderRadius: '6px', padding: '4px 12px', border: '1px solid #E6E6E6' },
+    }}
+    inputProps={{
+      style: { fontSize: '16px', fontWeight: 400 }  // Placeholder font size and weight
+    }}
+    sx={{
+      width: '688px',             // Fixed width
+      height: '48px',             // Fixed height
+      borderRadius: '6px',        // Border radius
+      border: '1px  #E6E6E6' // Border
+    }}
+  />
+</Box>
 
-        {/* Available Package */}
-        <Typography sx={{ fontWeight: 500, fontSize: { xs: '18px', md: '20px' }, color: '#000000', mt: 7 }}>Available Package</Typography>
-        <Box sx={{ display: 'flex', gap: '12px', mt: 2, alignItems: 'center' }}>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%' }}>
-            {['1-week', '2-week', 'monthly'].map((packageType, index) => (
-              <Box key={packageType} sx={{ display: 'flex', alignItems: 'center', mb: '10px', width: '100%' }}>
-                <Box
-                  onClick={() => setSelectedPackage(packageType)}
-                  sx={{
-                    width: '20px',
-                    height: '20px',
-                    borderRadius: '50%',
-                    border: `1px solid ${selectedPackage === packageType ? '#40A39B' : '#6C6C6C'}`,
-                    backgroundColor: selectedPackage === packageType ? '#40A39B' : '#FFFFFF',
-                    cursor: 'pointer',
-                    marginRight: '10px',
-                  }}
-                />
-                <Accordion
-                  expanded={expanded === `panel${index}`}
-                  onChange={handleAccordionChange(`panel${index}`)}
-                  sx={{
-                    flex: 1,
-                    width: '100%', // Adjust width for responsiveness
-                    borderRadius: '6px',
-                    border: '1px solid transparent',
-                    mb: '5px',
-                  }}
-                >
-                  <AccordionSummary
-                    expandIcon={expanded === `panel${index}` ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                  >
-                    <Typography sx={{ fontWeight: 500 }}>{`${packageType.replace('-', ' ')} Package`}</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Typography>
-                      Duration: <span style={{ color: '#000000' }}>{packageType === '1-week' ? '26 Aug - 30 Aug' : packageType === '2-week' ? '2 Sep - 16 Sep' : '1 Oct - 31 Oct'}</span>
-                    </Typography>
-                  </AccordionDetails>
-                </Accordion>
-              </Box>
-            ))}
-          </Box>
-        </Box>
+ {/* Available Package */}
+<Typography sx={{ fontWeight: 500, fontSize: { xs: '18px', md: '20px' }, color: '#000000', mt: 5 }}>
+  Available Package
+</Typography>
+<Box sx={{ display: 'flex', gap: '12px', mt: 2, alignItems: 'center' }}>
+  <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%' }}>
+    {['1-week', '2-week', 'monthly'].map((packageType, index) => (
+      <Box key={packageType} sx={{ display: 'flex', alignItems: 'center', mb: '10px', width: '100%' }}>
+        {/* Selection Circle */}
+        <Box
+  onClick={() => setSelectedPackage(packageType)}
+  sx={{
+    width: '20px',
+    height: '20px',
+    borderRadius: '50%',
+    border: `1px solid ${selectedPackage === packageType ? '#6C6C6C' : '#40A39B'}`,
+    backgroundColor: '#FFFFFF', // White layer as background for unselected
+    cursor: 'pointer',
+    marginRight: '10px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }}
+>
+  {selectedPackage === packageType && (
+    <Box
+      sx={{
+        width: '12px',
+        height: '12px',
+        borderRadius: '50%',
+        backgroundColor: '#FFFFFF', // White inner layer
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Box
+        sx={{
+          width: '8px',
+          height: '8px',
+          borderRadius: '50%',
+          backgroundColor: '#40A39B', // Green center circle
+        }}
+      />
+    </Box>
+  )}
+</Box>
+
+
+        
+        {/* Accordion Component */}
+        <Accordion
+          expanded={expanded === `panel${index}`}
+          onChange={handleAccordionChange(`panel${index}`)}
+          sx={{
+            flex: 1,
+            width: '100%',
+            borderRadius: '6px',
+            border: '1px solid transparent',
+            mb: '5px',
+          }}
+        >
+          <AccordionSummary
+            expandIcon={expanded === `panel${index}` ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            sx={{
+              '& .MuiTypography-root': {
+                fontWeight: expanded === `panel${index}` ? 500 : 400,
+                fontSize: '14px',
+                color: expanded === `panel${index}` ? '#000000' : '#737373',
+              }
+            }}
+          >
+            <Typography>{`${packageType.replace('-', ' ')} Package`}</Typography>
+          </AccordionSummary>
+
+          {/* Accordion Details */}
+          <AccordionDetails>
+            <Typography sx={{ fontWeight: 400, fontSize: '14px', color: '#737373' }}>
+              Duration: <span style={{ color: '#000000' }}>
+                {packageType === '1-week' ? '26 Aug - 30 Aug' : packageType === '2-week' ? '2 Sep - 16 Sep' : '1 Oct - 31 Oct'}
+              </span>
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+      </Box>
+    ))}
+
+  </Box>
+</Box>
+
 
         {/* Select Availability */}
         <Typography sx={{ fontWeight: 500, fontSize: { xs: '18px', md: '20px' }, mt: 3 }}>Select Availability</Typography>
@@ -274,22 +346,25 @@ const F2fsessions = () => {
           Instructions
         </Typography>
         <Box
-          component="input"
-          sx={{
-            width: '100%',
-            height: '70px',
-            padding: '8px 12px',
-            borderRadius: '6px',
-            border: '1px solid #E6E6E6',
-            fontWeight: 400,
-            fontSize: '18px',
-            color: '#737373',
-            textAlign: 'start',
-          }}
-          value="Please join your class link before the class starts."
-          readOnly
-        />
-      </Box>
+  sx={{
+    width: '100%',
+    height: '70px',
+    padding: '8px 12px',
+    borderRadius: '6px',
+    border: '1px solid #E6E6E6',
+    fontWeight: 400,
+    fontSize: '18px',
+    color: '#737373',
+    display: 'flex',
+    alignItems: 'flex-start',
+    backgroundColor: '#FfFfFf', // Optional background color to look like input
+  }}
+>
+  <Typography sx={{ color: '#737373' }}>
+    Please join your class link before the class starts.
+  </Typography>
+</Box>
+</Box>
 
       {/* Right Side Content */}
       <Box sx={{ width: { xs: '100%', md: '35%' }, display: 'flex', flexDirection: 'column', gap: '16px', mt: { xs: '30px', md: '70px' } }}>

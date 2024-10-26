@@ -11,6 +11,8 @@ import marketingIcon from "../../assets/category/marketing.png";
 import productIcon from "../../assets/category/prodduct.png";
 import uiuxIcon from "../../assets/category/ui ux.png";
 import PromotionalBanner from '../common comps/promotionalbanner';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const categories = [
   { text: 'Finance', img: financeIcon },
@@ -25,24 +27,30 @@ const categories = [
 ];
 
 const CourseCategories = () => {
+
+  const navigate = useNavigate();
+
+
   return (
     <Box sx={{ padding: '20px', position: 'relative' }}>
       <Box sx={{ maxWidth: '1145px', margin: '0 auto' }}>
         {/* Breadcrumbs */}
         <Typography
-          variant="body2"
-          sx={{
-            fontWeight: 400,
-            fontSize: '12px',
-            color: '#737373',
-            marginBottom: '16px',
-            textAlign: 'left',
-          }}
-        >
-          Home &gt; Academic &gt;{' '}
-          <span style={{ fontWeight: 700 ,color:"black"}}>Choose your grade</span>
-        </Typography>
-
+      variant="body2"
+      sx={{
+        fontWeight: 400,
+        fontSize: '12px',
+        color: '#737373',
+        marginBottom: '16px',
+        textAlign: 'left',
+      }}
+    >
+      <Link to="/" style={{ textDecoration: 'none', color: '#737373' }}>
+        Home
+      </Link>{' '}
+      &gt; Academic &gt;{' '}
+      <span style={{ fontWeight: 700, color: 'black' }}>Choose your grade</span>
+    </Typography>
         {/* Promotional Banner */}
         <PromotionalBanner
           sx={{
@@ -147,19 +155,20 @@ const CourseCategories = () => {
           Cancel
         </Button>
         <Button
-          variant="contained"
-          sx={{
-            width: '164px',
-            height: '48px',
-            padding: '14px 16px',
-            borderRadius: '8px',
-            backgroundColor: '#40A39B',
-            color: '#fff',
-             marginRight:"75px"
-          }}
-        >
-          Continue
-        </Button>
+      variant="contained"
+      sx={{
+        width: '164px',
+        height: '48px',
+        padding: '14px 16px',
+        borderRadius: '8px',
+        backgroundColor: '#40A39B',
+        color: '#fff',
+        marginRight: '75px',
+      }}
+      onClick={() => navigate('/coursedetails')}
+    >
+      Continue
+    </Button>
       </Box>
     </Box>
   );

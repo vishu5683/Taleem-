@@ -5,7 +5,7 @@ import TuneIcon from '@mui/icons-material/Tune';
 import PromotionalBanner from '../common comps/promotionalbanner';
 import CoursesCard from '../cards/coursescard';
 import FilterModal from './filter';
-
+import { Link } from 'react-router-dom';
 const CourseDetails = () => {
   // State to control the modal open/close
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,18 +24,25 @@ const CourseDetails = () => {
       <Box sx={{ maxWidth: '1145px', margin: '0 auto' }}>
         {/* Breadcrumbs */}
         <Typography
-          variant="body2"
-          sx={{
-            fontWeight: 400,
-            fontSize: { xs: '10px', sm: '12px' },
-            color: '#737373',
-            marginBottom: '16px',
-            textAlign: 'left',
-          }}
-        >
-          Home &gt; All Courses &gt;{' '}
-          <span style={{ fontWeight: 700 }}>Course Listing</span>
-        </Typography>
+      variant="body2"
+      sx={{
+        fontWeight: 400,
+        fontSize: { xs: '10px', sm: '12px' },
+        color: '#737373',
+        marginBottom: '16px',
+        textAlign: 'left',
+      }}
+    >
+      <Link to="/" style={{ textDecoration: 'none', color: '#737373' }}>
+        Home
+      </Link>{' '}
+      &gt;{' '}
+      <Link to="/courses" style={{ textDecoration: 'none', color: '#737373' }}>
+        All Courses
+      </Link>{' '}
+      &gt;{' '}
+      <span style={{ fontWeight: 700 }}>Course Listing</span>
+    </Typography>
 
         {/* Promotional Banner */}
         <PromotionalBanner
