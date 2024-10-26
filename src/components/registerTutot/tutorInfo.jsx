@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -15,18 +15,27 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  curriculums,
+  expertise,
+  grades,
+  qualifications,
+} from "../../Redux/Actions";
+import Utils from "../../Utils";
 
-const TutorsInfo = ({ open, handleClose,uploadDocumentOpen }) => {
-    const dispatch=useDispatch();
+const TutorsInfo = ({
+  open,
+  handleClose,
+  uploadDocumentOpen,
+  tutorsData,
+  setTutorsData,
+}) => {
+  const dispatch = useDispatch();
+  const token = localStorage.getItem("token");
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
-  // Dropdown options
-  const qualificationsOptions = ["Bachelors", "Masters", "PhD", "Diploma"];
-  const gradesOptions = ["Grade 1", "Grade 2", "Grade 3", "Grade 4"];
-  const expertiseOptions = ["Mathematics", "Science", "English", "History"];
-  
+
   const initialValues = {
     qualifications: [],
     occupation: "",
@@ -34,6 +43,32 @@ const TutorsInfo = ({ open, handleClose,uploadDocumentOpen }) => {
     grades: [],
     expertise: [],
   };
+
+  // Dropdown options
+  var qualificationsOptions = useSelector(
+    (state) => state.qualificationsReducer?.qualificationsData?.data?.rows
+  );
+  var gradesOptions = useSelector(
+    (state) => state.gradesReducer?.gradesData?.rows
+  );
+  var expertiseOptions = useSelector(
+    (state) => state.expertiseReducer?.expertiseData?.rows
+  );
+  console.log(expertiseOptions, "expertiseOptions435");
+
+  useEffect(() => {
+    console.log(token, "TOKENNNN");
+    if (token && token !== null) {
+      dispatch(
+        expertise((res) => {
+          console.log(res, "expertiseOptionsexpertiseOptions");
+        })
+      );
+      dispatch(qualifications());
+      dispatch(grades());
+      dispatch(curriculums());
+    }
+  }, [token]);
 
   const validationSchema = Yup.object({
     qualifications: Yup.array().min(1, "Select at least one qualification"),
@@ -47,12 +82,13 @@ const TutorsInfo = ({ open, handleClose,uploadDocumentOpen }) => {
     initialValues,
     validationSchema,
     onSubmit: (values) => {
+      console.log(values, "Values");
+      setTutorsData(values)
       setIsSubmitting(true);
-      console.log(values);
       setTimeout(() => {
         setIsSubmitting(false);
         handleClose();
-        uploadDocumentOpen()
+        uploadDocumentOpen();
       }, 3000);
     },
   });
@@ -73,9 +109,11 @@ const TutorsInfo = ({ open, handleClose,uploadDocumentOpen }) => {
           borderRadius: "12px",
           p: { xs: 0, sm: 3 },
           textAlign: "center",
+          maxHeight: "90vh", // Set max height to 80% of the viewport
+          overflowY: "auto",
         }}
       >
-           <Typography
+        <Typography
           sx={{
             fontFamily: "Metropolis",
             fontSize: { xs: "20px", sm: "24px" },
@@ -100,30 +138,66 @@ const TutorsInfo = ({ open, handleClose,uploadDocumentOpen }) => {
           {/* Qualifications */}
           <Box sx={{ width: "420px", mx: "auto", textAlign: "left", mb: 3 }}>
             <Typography
-              sx={{ fontSize: "16px", fontWeight: 700, color: "#000000", mb: 1 }}
+              sx={{
+                fontSize: "16px",
+                fontWeight: 700,
+                color: "#000000",
+                mb: 1,
+              }}
             >
               Qualifications*
             </Typography>
             <FormControl fullWidth>
               <InputLabel>Choose your qualifications</InputLabel>
               <Select
-                multiple
-                name="qualifications"
-                value={formik.values.qualifications}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                input={<OutlinedInput label="Choose your qualifications" />}
-                renderValue={(selected) => selected.join(", ")}
-              >
-                {qualificationsOptions.map((qualification) => (
-                  <MenuItem key={qualification} value={qualification}>
-                    <Checkbox
-                      checked={formik.values.qualifications.indexOf(qualification) > -1}
-                    />
-                    <ListItemText primary={qualification} />
-                  </MenuItem>
-                ))}
-              </Select>
+  multiple
+  name="qualifications"
+  value={formik.values.qualifications.map((qual) => qual.id)} // Store only the IDs for the select
+  onChange={(event) => {
+    const {
+      target: { value },
+    } = event;
+
+    // Transform the selected values into an array of objects
+    const selectedQualifications = value
+      .map((qualId) => {
+        // Find the selected qualification in qualificationsOptions
+        const selectedQualification = qualificationsOptions.find(
+          (qual) => qual.id === qualId
+        );
+        return selectedQualification
+          ? { id: selectedQualification.id, name: selectedQualification.name }
+          : null;
+      })
+      .filter(Boolean); // Filter out null values
+    console.log(selectedQualifications, "selectedQualifications");
+    formik.setFieldValue("qualifications", selectedQualifications); // Update Formik state with an array of objects
+  }}
+  onBlur={formik.handleBlur}
+  input={<OutlinedInput label="Choose your qualifications" />}
+  renderValue={(selected) => {
+    // Render the names of the selected qualifications
+    return selected
+      .map((qualId) => {
+        const qualification = qualificationsOptions.find((q) => q.id === qualId);
+        return qualification ? qualification.name : "";
+      })
+      .join(", ");
+  }}
+>
+  {qualificationsOptions &&
+    qualificationsOptions.map((qualification) => (
+      <MenuItem key={qualification.id} value={qualification.id}>
+        <Checkbox
+          checked={formik.values.qualifications.some(
+            (selectedQual) => selectedQual.id === qualification.id
+          )} // Check if the qualification is selected
+        />
+        <ListItemText primary={qualification.name} />
+      </MenuItem>
+    ))}
+</Select>
+
             </FormControl>
             {formik.touched.qualifications && formik.errors.qualifications && (
               <Typography sx={{ color: "red", fontSize: "12px", mt: 1 }}>
@@ -135,7 +209,12 @@ const TutorsInfo = ({ open, handleClose,uploadDocumentOpen }) => {
           {/* Occupation */}
           <Box sx={{ width: "420px", mx: "auto", textAlign: "left", mb: 3 }}>
             <Typography
-              sx={{ fontSize: "16px", fontWeight: 700, color: "#000000", mb: 1 }}
+              sx={{
+                fontSize: "16px",
+                fontWeight: 700,
+                color: "#000000",
+                mb: 1,
+              }}
             >
               Occupation*
             </Typography>
@@ -146,7 +225,9 @@ const TutorsInfo = ({ open, handleClose,uploadDocumentOpen }) => {
               onBlur={formik.handleBlur}
               placeholder="Enter your occupation"
               fullWidth
-              error={formik.touched.occupation && Boolean(formik.errors.occupation)}
+              error={
+                formik.touched.occupation && Boolean(formik.errors.occupation)
+              }
               helperText={formik.touched.occupation && formik.errors.occupation}
               sx={{
                 borderRadius: "6px",
@@ -158,7 +239,12 @@ const TutorsInfo = ({ open, handleClose,uploadDocumentOpen }) => {
           {/* Total Years of Experience */}
           <Box sx={{ width: "420px", mx: "auto", textAlign: "left", mb: 3 }}>
             <Typography
-              sx={{ fontSize: "16px", fontWeight: 700, color: "#000000", mb: 1 }}
+              sx={{
+                fontSize: "16px",
+                fontWeight: 700,
+                color: "#000000",
+                mb: 1,
+              }}
             >
               Total Years of Experience*
             </Typography>
@@ -169,7 +255,9 @@ const TutorsInfo = ({ open, handleClose,uploadDocumentOpen }) => {
               onBlur={formik.handleBlur}
               placeholder="Enter your total years of experience"
               fullWidth
-              error={formik.touched.experience && Boolean(formik.errors.experience)}
+              error={
+                formik.touched.experience && Boolean(formik.errors.experience)
+              }
               helperText={formik.touched.experience && formik.errors.experience}
               sx={{
                 borderRadius: "6px",
@@ -181,7 +269,12 @@ const TutorsInfo = ({ open, handleClose,uploadDocumentOpen }) => {
           {/* Grades */}
           <Box sx={{ width: "420px", mx: "auto", textAlign: "left", mb: 3 }}>
             <Typography
-              sx={{ fontSize: "16px", fontWeight: 700, color: "#000000", mb: 1 }}
+              sx={{
+                fontSize: "16px",
+                fontWeight: 700,
+                color: "#000000",
+                mb: 1,
+              }}
             >
               Which grades are you providing tutoring for?*
             </Typography>
@@ -190,20 +283,50 @@ const TutorsInfo = ({ open, handleClose,uploadDocumentOpen }) => {
               <Select
                 multiple
                 name="grades"
-                value={formik.values.grades}
-                onChange={formik.handleChange}
+                value={formik.values.grades.map((grade) => grade.id)} // Store only the IDs for the select
+                onChange={(event) => {
+                  const {
+                    target: { value },
+                  } = event;
+
+                  // Transform the selected values into an array of objects
+                  const selectedGrades = value
+                    .map((gradeId) => {
+                      // Find the selected grade in gradesOptions
+                      const selectedGrade = gradesOptions.find(
+                        (grade) => grade.id === gradeId
+                      );
+                      return selectedGrade
+                        ? { id: selectedGrade.id, name: selectedGrade.name }
+                        : null;
+                    })
+                    .filter(Boolean); // Filter out null values
+                  console.log(selectedGrades, "selectedGrades");
+                  formik.setFieldValue("grades", selectedGrades); // Update Formik state with an array of objects
+                }}
                 onBlur={formik.handleBlur}
                 input={<OutlinedInput label="Choose grades" />}
-                renderValue={(selected) => selected.join(", ")}
+                renderValue={(selected) => {
+                  // Render the names of the selected grades
+                  return selected
+                    .map((gradeId) => {
+                      const grade = gradesOptions.find((g) => g.id === gradeId);
+                      return grade ? grade.name : "";
+                    })
+                    .join(", ");
+                }}
               >
-                {gradesOptions.map((grade) => (
-                  <MenuItem key={grade} value={grade}>
-                    <Checkbox
-                      checked={formik.values.grades.indexOf(grade) > -1}
-                    />
-                    <ListItemText primary={grade} />
-                  </MenuItem>
-                ))}
+                {gradesOptions &&
+                  gradesOptions.map((grade) => (
+                    <MenuItem key={grade.id} value={grade.id}>
+                      <Checkbox
+                        checked={formik.values.grades.some(
+                          (selectedGrade) => selectedGrade.id === grade.id
+                        )} // Check if the grade is selected
+                      />
+                      <ListItemText primary={grade.name} />
+                    </MenuItem>
+                  ))}
               </Select>
             </FormControl>
             {formik.touched.grades && formik.errors.grades && (
@@ -216,30 +339,67 @@ const TutorsInfo = ({ open, handleClose,uploadDocumentOpen }) => {
           {/* Areas of Expertise */}
           <Box sx={{ width: "420px", mx: "auto", textAlign: "left", mb: 3 }}>
             <Typography
-              sx={{ fontSize: "16px", fontWeight: 700, color: "#000000", mb: 1 }}
+              sx={{
+                fontSize: "16px",
+                fontWeight: 700,
+                color: "#000000",
+                mb: 1,
+              }}
             >
               Expertise in*
             </Typography>
             <FormControl fullWidth>
               <InputLabel>Select areas of expertise</InputLabel>
               <Select
-                multiple
-                name="expertise"
-                value={formik.values.expertise}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                input={<OutlinedInput label="Select areas of expertise" />}
-                renderValue={(selected) => selected.join(", ")}
-              >
-                {expertiseOptions.map((expertise) => (
-                  <MenuItem key={expertise} value={expertise}>
-                    <Checkbox
-                      checked={formik.values.expertise.indexOf(expertise) > -1}
-                    />
-                    <ListItemText primary={expertise} />
-                  </MenuItem>
-                ))}
-              </Select>
+  multiple
+  name="expertise"
+  value={formik.values.expertise.map((exp) => exp.id)} // Store only the IDs for the select
+  onChange={(event) => {
+    const {
+      target: { value },
+    } = event;
+    console.log(value, "expertiseexpertise");
+
+    // Transform the selected values into an array of objects
+    const selectedExpertise = value
+      .map((expId) => {
+        // Find the selected expertise in expertiseOptions
+        const selectedExp = expertiseOptions.find((exp) => exp.id === expId);
+        return selectedExp
+          ? { id: selectedExp.id, name: selectedExp.name }
+          : null;
+      })
+      .filter(Boolean); // Filter out null values
+
+    // Update Formik values
+    formik.setFieldValue("expertise", selectedExpertise);
+    console.log(selectedExpertise, "expertiseexpertise123");
+  }}
+  onBlur={formik.handleBlur}
+  input={<OutlinedInput label="Select areas of expertise" />}
+  renderValue={(selected) => {
+    // Render the names of the selected expertise
+    return selected
+      .map((expId) => {
+        const exp = expertiseOptions.find((e) => e.id === expId);
+        return exp ? exp.name : "";
+      })
+      .join(", ");
+  }}
+>
+  {expertiseOptions &&
+    expertiseOptions.map((expertise) => (
+      <MenuItem key={expertise.id} value={expertise.id}>
+        <Checkbox
+          checked={formik.values.expertise.some(
+            (exp) => exp.id === expertise.id
+          )}
+        />
+        <ListItemText primary={expertise.name} />
+      </MenuItem>
+    ))}
+</Select>
+
             </FormControl>
             {formik.touched.expertise && formik.errors.expertise && (
               <Typography sx={{ color: "red", fontSize: "12px", mt: 1 }}>

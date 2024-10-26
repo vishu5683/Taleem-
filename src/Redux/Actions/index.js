@@ -239,20 +239,23 @@ export const forgetPassword = (value, callback) => {
 // qualifications:"qualifications",
 // grades:"grades",
 // curriculums:"curriculums",
-export const expertise = () => {
+export const expertise = (callback) => {
    return (dispatch) => {
      Utils.api.getApiCall(
        Utils.EndPoint.expertise,
        "",
        (resData) => {
-         console.log(resData,"resData")
-         if (resData.status === 200) {
+         if (resData.status) {
+           console.log(resData,"resDataresData")
+           callback(resData?.data)
            dispatch({
              type: Utils.actionName.expertise,
              payload: {
-               expertiseData: resData.data,
+               expertiseData: resData?.data,
              },
-           });
+            });
+            console.log(resData,"expertiseOptions123")
+            callback(resData?.data)
          } else {
          }
        },
@@ -261,6 +264,78 @@ export const expertise = () => {
      );
    };
  }
+
+ export const qualifications = (callback) => {
+  return (dispatch) => {
+    Utils.api.getApiCall(
+      Utils.EndPoint.qualifications,
+      "",
+      (resData) => {
+        console.log(resData,"resData")
+        if (resData.status) {
+          dispatch({
+            type: Utils.actionName.qualifications,
+            payload: {
+              qualificationsData: resData,
+            },
+          });
+          callback(resData?.data)
+        } else {
+        }
+      },
+      (error) => {
+      }
+    );
+  };
+}
+
+export const grades = (callback) => {
+  return (dispatch) => {
+    Utils.api.getApiCall(
+      Utils.EndPoint.grades,
+      "",
+      (resData) => {
+        console.log(resData,"resData")
+        if (resData.status) {
+          dispatch({
+            type: Utils.actionName.grades,
+            payload: {
+              gradesData: resData?.data,
+            },
+          });
+          callback(resData?.data)
+        } else {
+        }
+      },
+      (error) => {
+      }
+    );
+  };
+}
+
+export const curriculums = (callback) => {
+  return (dispatch) => {
+    Utils.api.getApiCall(
+      Utils.EndPoint.curriculums,
+      "",
+      (resData) => {
+        console.log(resData?.data,"resData")
+        if (resData.status) {
+          dispatch({
+            type: Utils.actionName.curriculums,
+            payload: {
+              curriculumsData: resData?.data,
+            },
+          });
+          callback(resData?.data)
+        } else {
+        }
+      },
+      (error) => {
+      }
+    );
+  };
+}
 
 
 export const setFormData = (data) => ({

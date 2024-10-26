@@ -65,8 +65,10 @@ const OtpScreen = ({
 
     dispatch(
       verifyMobileOtpLogin(payload, (res) => {
+        console.log(res?.data?.data?.token,"RESSS")
         if (res?.status == 200) {
-          
+          localStorage.setItem("token", res?.data?.data?.token);
+          localStorage.setItem("user", JSON.stringify(res?.data?.data));
           if (data?.type == "signup" && data?.user == 3) {
             handleClose();
             tutorsInfoOpen();

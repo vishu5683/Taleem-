@@ -37,7 +37,7 @@ const SignUp = ({
     email: "",
     mobile_no: "",
     gender: "",
-    user_type: isStudent == 1 ? "1" : isStudent == 2 ? "2" : "3",
+    user_type: `${isStudent}`,
     dob: "",
     country_code: "91",
   };
@@ -64,11 +64,10 @@ const SignUp = ({
         signup(values, (val) => {
           console.log(val, "resss");
           if (val?.data?.data?.token !== "") {
-            localStorage.setItem("token", val?.data?.data?.token);
             localStorage.setItem("user", isStudent);
             setData({
               token: val?.data?.data?.token,
-              user: isStudent,
+              user: `${isStudent}`,
               type: "signup",
               ismob: true,
               data: values?.mobile_no,

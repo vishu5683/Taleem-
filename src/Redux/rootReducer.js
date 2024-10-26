@@ -7,10 +7,16 @@ import {
   sendMobileOtpLoginReducer,
   verifyMobileOtpLoginReducer,
   expertiseReducer,
-  
+  curriculumsReducer,
+  gradesReducer,
+  qualificationsReducer,
 } from "./Reducers";
 import loginFormReducer from "./Reducers/signupFormReducer";
-import { HomeReducer, getCategoryWithProductReducer,productReducer, } from "./Reducers/HomeReducers";
+import {
+  HomeReducer,
+  getCategoryWithProductReducer,
+  productReducer,
+} from "./Reducers/HomeReducers";
 
 let reducers = {
   verifyMobileOtpSignupReducer,
@@ -24,6 +30,9 @@ let reducers = {
   HomeReducer,
   productReducer,
   expertiseReducer,
+  curriculumsReducer,
+  qualificationsReducer,
+  gradesReducer,
 };
 
 const rootReducer = combineReducers({

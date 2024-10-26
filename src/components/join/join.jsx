@@ -25,6 +25,7 @@ const Join = () => {
   const [tutorsInfoOpen, setTutorsInfoOpen] = useState(false); // state for TutorsInfo
   const [uploadDocumentOpen, setUploadDocumentOpen] = useState(false); // state for UploadDocument
   const [welcomeScreenOpen, setWelcomeScreenOpen] = useState(false); // state for WelcomeScreen
+  const [tutorsData, setTutorsData] = useState({});
 
   const handleTutorsInfoSubmit = () => {
     setTutorsInfoOpen(false); // Close the TutorsInfo popup
@@ -156,6 +157,7 @@ const Join = () => {
                 },
               }}
               onClick={() => {
+                console.log("3");
                 handleOpen();
                 setStudent(3);
               }}
@@ -215,18 +217,26 @@ const Join = () => {
       <TutorsInfo
         open={tutorsInfoOpen}
         handleClose={() => setTutorsInfoOpen(false)}
-        handleSubmit={handleTutorsInfoSubmit} // New popup for TutorsInfo
+        // handleSubmit={handleTutorsInfoSubmit} // New popup for TutorsInfo
         data={data}
         setData={setData}
-        uploadDocumentOpen={()=>{setUploadDocumentOpen(true)}}
+        uploadDocumentOpen={() => {
+          setUploadDocumentOpen(true);
+        }}
+        tutorsData={tutorsData}
+        setTutorsData={setTutorsData}
       />
       <UploadDocument
         open={uploadDocumentOpen}
-        handleClose={() => {setUploadDocumentOpen(false);setWelcomeScreenOpen(true)}}
+        handleClose={() => {
+          setUploadDocumentOpen(false);
+          setWelcomeScreenOpen(true);
+        }}
         handleSubmit={handleUploadDocumentSubmit} // New popup for UploadDocument
         data={data}
         setData={setData}
-        
+        tutorsData={tutorsData}
+        setTutorsData={setTutorsData}
       />
       <WelcomeScreen
         open={welcomeScreenOpen}

@@ -13,6 +13,11 @@ import { useDispatch } from "react-redux";
 const UploadDocumentsForm = ({
   open,
   handleClose,
+  handleSubmit,
+  data,
+  setData,
+  tutorsData,
+  setTutorsData,
 }) => {
   const dispatch = useDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -34,7 +39,7 @@ const UploadDocumentsForm = ({
     validationSchema,
     onSubmit: (values) => {
       setIsSubmitting(true);
-
+console.log(tutorsData,"tutorsData")
       const formData = new FormData();
       formData.append("academic_document", values.academic_document);
       formData.append("address_proof", values.address_proof);
@@ -69,6 +74,8 @@ const UploadDocumentsForm = ({
           borderRadius: "12px",
           p: { xs: 0, sm: 3 },
           textAlign: "center",
+          maxHeight: "90vh", // Set max height to 80% of the viewport
+          overflowY: "auto",
         }}
       >
         {/* Cancel Button */}

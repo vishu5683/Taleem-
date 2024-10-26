@@ -2,7 +2,7 @@ import Utils from '.';
 import toast, { Toaster } from "react-hot-toast";
 
 const headers = {
-  'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+  'Authorization': `Bearer ${localStorage.getItem('token')}`,
   // 'Content-Type': 'application/json',
 };
 
@@ -158,15 +158,36 @@ const postApiCall = (
 
 const getApiCall = (
   endPoint,
-  params= '',
+  params = '',
   successCallback,
   errorCallback,
-  isArrayBuffer=false
+  isArrayBuffer = false
 ) => {
-  Utils.constants.axios
-    .get(Utils.constants.API_URL + endPoint + params, { headers: headers, responseType: isArrayBuffer?"arraybuffer":"json"})
+  const myHeaders = new Headers();
+  myHeaders.append(
+    "Authorization",
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDcsImlhdCI6MTcyOTkyOTMwOCwiZXhwIjoxNzMwMDE1NzA4fQ.VBLaLnXLfmGOZJIh5WepAOrzSsbL53xDrpBMoGAuZgk"
+  );
+
+  const requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow",
+  };
+
+  fetch(
+    Utils.constants.API_URL + endPoint + params,
+    requestOptions
+  )
     .then((response) => {
-      successCallback(response);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json(); // Parse JSON response here
+    })
+    .then((result) => {
+      // console.log(result); // Log the parsed result
+      successCallback(result); // Call the success callback with the result
     })
     .catch((error) => {
       if (error.code === 'ECONNABORTED') {
@@ -197,6 +218,49 @@ const getApiCall = (
       }
     });
 };
+
+  // Utils.constants.axios
+  //   .get(Utils.constants.API_URL + endPoint + params, { headers: {
+  //     'Authorization': `Bearer ${localStorage.getItem('token')}`,
+  //     'Content-Type': 'application/json',
+  //   }
+  //     , responseType: isArrayBuffer?"arraybuffer":"json"
+  //   })
+  //   .then((response) => {
+  //     successCallback(response);
+  //   })
+  //   .catch((error) => {
+  //     if (error.code === 'ECONNABORTED') {
+  //       let payload = {
+  //         statusCode: 408,
+  //       };
+  //       errorCallback(payload);
+  //     } else if (error.response) {
+  //       let data = error.response.data;
+  //       if (data.code === 401) {
+  //         logOutApiCall();
+  //       }
+  //       if (checkUserValidation(data)) {
+  //         // If user session expired
+  //         Utils.showAlert(2, data.message || '');
+  //         setTimeout(() => {
+  //           logOutApiCall();
+  //         }, 1000);
+  //       } else {
+  //         errorCallback(error.response);
+  //       }
+  //     } else if (!error.response) {
+  //       let payload = {
+  //         statusCode: -1,
+  //         message: 'Please try again later',
+  //       };
+  //       errorCallback(payload);
+  //     }
+  //   });
+// };
+
+
+
 
 const putApiCall = (
   endPoint,
