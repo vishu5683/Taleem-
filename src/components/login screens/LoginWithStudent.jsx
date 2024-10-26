@@ -498,43 +498,68 @@ const LoginWithStudent = ({
             Continue as
           </Typography>
           <FormControl variant="outlined" sx={{ minWidth: "100px" }}>
-            {isStudent !== 3 ? (
-              <Select
-                value={role}
-                onChange={handleChange}
-                sx={{
-                  fontSize: "16px",
-                  color: "#737373",
-                  background:
-                    "linear-gradient(105.04deg, #C6FFC9 -25.33%, #D4EBFF 100%)",
-                  borderRadius: "50px",
-                  height: "32px",
-                  "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                }}
-                inputProps={{ "aria-label": "Select Role" }}
-              >
-                <MenuItem value="student">Student</MenuItem>
-                <MenuItem value="parent">Parent</MenuItem>
-              </Select>
-            ) : (
-              <Select
-                value={role}
-                onChange={handleChange}
-                sx={{
-                  fontSize: "16px",
-                  color: "#737373",
-                  background:
-                    "linear-gradient(105.04deg, #EBBE49 -25.33%, #FFC7C6 100%)",
-                  borderRadius: "50px",
-                  height: "32px",
-                  "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                }}
-                inputProps={{ "aria-label": "Select Role" }}
-              >
-                <MenuItem value="tutor">Tutor</MenuItem>
-              </Select>
-            )}
-          </FormControl>
+  {isStudent !== 3 ? (
+    <Select
+      value={role}
+      onChange={handleChange}
+      sx={{
+        fontSize: "16px",
+        color: "#737373",
+        background:
+          "linear-gradient(105.04deg, #C6FFC9 -25.33%, #D4EBFF 100%)",
+        borderRadius: "50px",
+        height: "32px",
+        "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+        "& .MuiPaper-root": {
+          background:
+            "linear-gradient(105.04deg, #C6FFC9 -25.33%, #D4EBFF 100%)",
+        },
+      }}
+      inputProps={{ "aria-label": "Select Role" }}
+      MenuProps={{
+        PaperProps: {
+          sx: {
+            background:
+              "linear-gradient(105.04deg, #C6FFC9 -25.33%, #D4EBFF 100%)",
+          },
+        },
+      }}
+    >
+      <MenuItem value="student">Student</MenuItem>
+      <MenuItem value="parent">Parent</MenuItem>
+    </Select>
+  ) : (
+    <Select
+      value={role}
+      onChange={handleChange}
+      sx={{
+        fontSize: "16px",
+        color: "#737373",
+        background:
+          "linear-gradient(105.04deg, #EBBE49 -25.33%, #FFC7C6 100%)",
+        borderRadius: "50px",
+        height: "32px",
+        "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+        "& .MuiPaper-root": {
+          background:
+            "linear-gradient(105.04deg, #EBBE49 -25.33%, #FFC7C6 100%)",
+        },
+      }}
+      inputProps={{ "aria-label": "Select Role" }}
+      MenuProps={{
+        PaperProps: {
+          sx: {
+            background:
+              "linear-gradient(105.04deg, #EBBE49 -25.33%, #FFC7C6 100%)",
+          },
+        },
+      }}
+    >
+      <MenuItem value="tutor">Tutor</MenuItem>
+    </Select>
+  )}
+</FormControl>
+
         </Box>
 
         {/* Mobile Number Input */}

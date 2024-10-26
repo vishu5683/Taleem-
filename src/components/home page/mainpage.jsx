@@ -171,26 +171,29 @@ const MainPage = () => {
 
         {/* Image Grid Section */}
         <Grid container spacing={2} sx={{ mb: 4 }} justifyContent="space-between">
-          {[{ img: img1, route: '/academic' }, { img: img2, route: null }, { img: img3, route: '/coursedetails' }].map(
-            (item, index) => (
-              <Grid item xs={12} sm={4} md={4} key={index} display="flex" justifyContent="center">
-                <Box
-                  component="img"
-                  src={item.img}
-                  alt={`Image ${index + 1}`}
-                  onClick={() => item.route && handleImageClick(item.route)}
-                  sx={{
-                    width: { xs: '100%', sm: '80%', md: '70%' },
-                    maxWidth: '250px',
-                    height: 'auto',
-                    borderRadius: '11.75px',
-                    cursor: 'pointer',
-                  }}
-                />
-              </Grid>
-            )
-          )}
-        </Grid>
+  {[
+    { img: img1, route: '/academic' },
+    { img: img2, route: '/choosecategory' }, // Updated route for the second image
+    { img: img3, route: '/coursecategory' }, // Updated route for the third image
+  ].map((item, index) => (
+    <Grid item xs={12} sm={4} md={4} key={index} display="flex" justifyContent="center">
+      <Box
+        component="img"
+        src={item.img}
+        alt={`Image ${index + 1}`}
+        onClick={() => item.route && handleImageClick(item.route)}
+        sx={{
+          width: { xs: '100%', sm: '80%', md: '70%' },
+          maxWidth: '250px',
+          height: 'auto',
+          borderRadius: '11.75px',
+          cursor: 'pointer',
+        }}
+      />
+    </Grid>
+  ))}
+</Grid>
+
 
         {/* First Class Banner */}
         <ClassBanner

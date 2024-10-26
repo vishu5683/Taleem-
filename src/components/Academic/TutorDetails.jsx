@@ -5,24 +5,35 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import StarBorderIcon from '@mui/icons-material/Star';
 import girl from '../../assets/course card/girl.png';
 import pic1 from "../../assets/schedule classes/Ellipse 36 (1).svg";
-
+import { Link } from 'react-router-dom';
 const TutorDetails = () => {
   return (
     <Box sx={{ padding: { xs: '10px 20px', sm: '20px 50px', md: '20px 100px' } }}>
       {/* Breadcrumbs */}
       <Typography
-        variant="body2"
-        sx={{
-          fontWeight: 400,
-          fontSize: { xs: '10px', md: '12px' },
-          color: '#737373',
-          marginBottom: '8px',
-          textAlign: 'left',
-        }}
-      >
-        Home &gt; Recreational &gt; Tutors Listing &gt;{' '}
-        <span style={{ fontWeight: 700, color: 'black' }}>Tutors Details</span>
-      </Typography>
+      variant="body2"
+      sx={{
+        fontWeight: 400,
+        fontSize: { xs: '10px', md: '12px' },
+        color: '#737373',
+        marginBottom: '8px',
+        textAlign: 'left',
+      }}
+    >
+      <Link to="/" style={{ textDecoration: 'none', color: '#737373' }}>
+        Home
+      </Link>{' '}
+      &gt;{' '}
+      <Link to="/recreational" style={{ textDecoration: 'none', color: '#737373' }}>
+        Recreational
+      </Link>{' '}
+      &gt;{' '}
+      <Link to="/tutors-listing" style={{ textDecoration: 'none', color: '#737373' }}>
+        Tutors Listing
+      </Link>{' '}
+      &gt;{' '}
+      <span style={{ fontWeight: 700, color: 'black' }}>Tutors Details</span>
+    </Typography>
 
       {/* Tutor Card */}
       <Card

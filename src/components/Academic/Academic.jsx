@@ -8,6 +8,7 @@ import monitorIcon from "../../assets/academic/monitor.svg";
 import Pic1 from "../../assets/academic/fi_1274998.svg";
 import Pic2 from "../../assets/academic/fi_9119089.svg";
 import { useNavigate } from 'react-router-dom';  // Import useNavigate
+import { Link } from 'react-router-dom';
 
 const grades = [
   { label: "Primary", icon: boardIcon },
@@ -64,18 +65,37 @@ const Academic = () => {
       <Box sx={{ maxWidth: "1145px", margin: "0 auto" }}>
         {/* Breadcrumb */}
         <Typography
-          variant="body2"
-          sx={{
-            fontWeight: 400,
-            fontSize: "12px",
-            color: "#737373",
-            marginBottom: "16px",
-            textAlign: "left",
-          }}
-        >
-          Home &gt; Academic &gt;{' '}
-          <span style={{ fontWeight: 700 ,color:"black"}}>Choose your grade</span>
-        </Typography>
+      variant="body2"
+      sx={{
+        fontWeight: 400,
+        fontSize: '12px',
+        color: '#737373',
+        marginBottom: '16px',
+        textAlign: 'left',
+      }}
+    >
+      <Link
+        to="/home"
+        style={{
+          textDecoration: 'none',
+          color: '#737373',
+        }}
+      >
+        Home
+      </Link>
+      {' > '}
+      <Link
+        to="/academic"
+        style={{
+          textDecoration: 'none',
+          color: '#737373',
+        }}
+      >
+        Academic
+      </Link>
+      {' > '}
+      <span style={{ fontWeight: 700, color: 'black' }}>Choose your grade</span>
+    </Typography>
 
         {/* Promotional Banner */}
         <PromotionalBanner

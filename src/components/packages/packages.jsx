@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Typography, Button } from '@mui/material';
 
+
 const Packages = () => {
   const [selected, setSelected] = useState('online');
 
@@ -151,8 +152,9 @@ const Packages = () => {
               sx={{
                 width: '207px',
                 height: '48px',
-                fontWeight: 500,
+                fontWeight: 550,
                 fontSize:"16px",
+                textTransform: "none",
                 backgroundColor: '#40A39B', // Primary green background
                 color: '#FFFFFF', // White text
                 borderRadius: '8px ',

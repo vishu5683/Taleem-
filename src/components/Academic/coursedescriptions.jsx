@@ -5,8 +5,11 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import banner from '../../assets/course card/banner.png';
 import girl from '../../assets/course card/girl.png';
-
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 const CourseDescriptions = () => {
+  const navigate = useNavigate();
+
   return (
     <Box
       sx={{
@@ -15,18 +18,29 @@ const CourseDescriptions = () => {
     >
       {/* Breadcrumbs */}
       <Typography
-        variant="body2"
-        sx={{
-          fontWeight: 400,
-          fontSize: { xs: '10px', md: '12px' },
-          color: '#737373',
-          marginBottom: '16px',
-          textAlign: 'left',
-        }}
-      >
-        Home &gt; All Courses &gt; Course Listing &gt;{' '}
-        <span style={{ fontWeight: 700 ,color:"black"}}>Course Details</span>
-      </Typography>
+      variant="body2"
+      sx={{
+        fontWeight: 400,
+        fontSize: { xs: '10px', md: '12px' },
+        color: '#737373',
+        marginBottom: '16px',
+        textAlign: 'left',
+      }}
+    >
+      <Link to="/" style={{ textDecoration: 'none', color: '#737373' }}>
+        Home
+      </Link>{' '}
+      &gt;{' '}
+      <Link to="/courses" style={{ textDecoration: 'none', color: '#737373' }}>
+        All Courses
+      </Link>{' '}
+      &gt;{' '}
+      <Link to="/courses/listing" style={{ textDecoration: 'none', color: '#737373' }}>
+        Course Listing
+      </Link>{' '}
+      &gt;{' '}
+      <span style={{ fontWeight: 700, color: 'black' }}>Course Details</span>
+    </Typography>
 
       {/* Banner Image */}
       <Box
@@ -189,39 +203,41 @@ const CourseDescriptions = () => {
 
         {/* Right Side - Action Buttons */}
         <Box sx={{ display: 'flex', flexDirection: { xs: 'row', md: 'column' }, gap: '10px' }}>
-          <Button
-            variant="outlined"
-            sx={{
-              borderColor: '#40A39B',
-              color: '#40A39B',
-              fontWeight: 500,
-              textTransform: 'none',
-              '&:hover': {
-                borderColor: '#359c87',
-                backgroundColor: 'transparent',
-              },
-              width: { xs: 'auto', md: '150px' },
-            }}
-          >
-            View Profile
-          </Button>
+      <Button
+        variant="outlined"
+        sx={{
+          borderColor: '#40A39B',
+          color: '#40A39B',
+          fontWeight: 500,
+          textTransform: 'none',
+          '&:hover': {
+            borderColor: '#359c87',
+            backgroundColor: 'transparent',
+          },
+          width: { xs: 'auto', md: '150px' },
+        }}
+        onClick={() => navigate('/tutordetail')}  // Navigate to Tutor Detail page
+      >
+        View Profile
+      </Button>
 
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: '#40A39B',
-              color: '#ffffff',
-              fontWeight: 500,
-              textTransform: 'none',
-              '&:hover': {
-                backgroundColor: '#359c87',
-              },
-              width: { xs: 'auto', md: '150px' },
-            }}
-          >
-            Book Tutor
-          </Button>
-        </Box>
+      <Button
+        variant="contained"
+        sx={{
+          backgroundColor: '#40A39B',
+          color: '#ffffff',
+          fontWeight: 500,
+          textTransform: 'none',
+          '&:hover': {
+            backgroundColor: '#359c87',
+          },
+          width: { xs: 'auto', md: '150px' },
+        }}
+        onClick={() => navigate('/bookyourtutor')}  // Navigate to Book Tutor page
+      >
+        Book Tutor
+      </Button>
+    </Box>
       </Card>
     </Box>
   );

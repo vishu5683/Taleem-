@@ -1,5 +1,8 @@
 import { lazy } from "react";
 import MyClasses from "../components/sidebar options/myclasses";
+import Categories from "../components/Academic/categories";
+import CourseCategories from "../components/Academic/CourseCategories";
+import TutorDetails from "../components/Academic/TutorDetails";
 const NotFound=lazy(() => import("../components/notfound"));
 // Lazy imports for your existing components
 const Home = lazy(() => import("../components/pages/LoginHomepage"));
@@ -264,6 +267,27 @@ const ROUTES = [
     path: "/notifications",
     id: 23,
     Component: NotificationPage,
+    isPrivate: false,
+  },
+  {
+    name: "Recreational",
+    path: "/choosecategory",
+    id: 23,
+    Component: Categories,
+    isPrivate: false,
+  },
+  {
+    name: "Course",
+    path: "/coursecategory",
+    id: 23,
+    Component: CourseCategories,
+    isPrivate: false,
+  },
+  {
+    name: "TutorDetail",
+    path: "/tutordetail",
+    id: 23,
+    Component: TutorDetails,
     isPrivate: false,
   },
 ];

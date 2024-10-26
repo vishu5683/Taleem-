@@ -4,7 +4,7 @@ import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import SchoolIcon from '@mui/icons-material/School';
 import { useTheme } from '@mui/material/styles';
-
+import { Link } from 'react-router-dom';
 const NotificationPage = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -34,9 +34,29 @@ const NotificationPage = () => {
 
   return (
     <div style={{ padding: '20px', marginLeft: isSmallScreen ? '10px' : '50px', marginRight: isSmallScreen ? '10px' : '50px' }}>
-      <Typography variant="h6" style={{ fontWeight: 700, marginBottom: '16px', fontSize: isSmallScreen ? '14px' : '18px' }}>
-        Home &gt; Notifications
-      </Typography>
+      <Typography
+      variant="h6"
+      style={{
+        fontWeight: 700,
+        marginBottom: '16px',
+        fontSize: isSmallScreen ? '14px' : '18px',
+      }}
+    >
+      <Link
+        to="/home"
+        style={{
+          textDecoration: 'none',
+          fontWeight: 400,
+          fontSize: '12px',
+          color: '#737373',
+        }}
+      >
+        Home
+      </Link>
+      <span style={{ fontWeight: 400, fontSize: '12px', color: '#000000' }}>
+        {' > Notifications'}
+      </span>
+    </Typography>
       <Typography variant="h4" style={{ fontWeight: 700, fontSize: isSmallScreen ? '24px' : '32px', marginBottom: '24px' }}>
         Notifications
       </Typography>
