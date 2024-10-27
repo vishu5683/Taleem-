@@ -18,6 +18,9 @@ const ActionName = {
      qualifications:"qualifications",
      grades:"grades",
      curriculums:"curriculums",
+
+     //Profile
+     getProfile:"getProfile",
     
 };
 

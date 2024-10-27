@@ -25,6 +25,7 @@ const SignUp = ({
   setData,
   otpOpen,
   setOtpOpen,
+  signupOpen,
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -41,14 +42,13 @@ const SignUp = ({
     dob: "",
     country_code: "91",
   };
-
+useEffect(()=>{localStorage.clear()},[])
   // Yup validation schema
   const validationSchema = Yup.object({
     name: Yup.string().required("Full name is required"),
     email: Yup.string().email("Invalid email format").optional(),
-    mobile_no: Yup.string()
-      .required("Mobile number is required"),
-      // .matches(/^[0-9]{10}$/, "Must be exactly 10 digits"),
+    mobile_no: Yup.string().required("Mobile number is required"),
+    // .matches(/^[0-9]{10}$/, "Must be exactly 10 digits"),
     gender: Yup.string().required("Please select a gender"),
     dob: Yup.string().required("Date of birth is required"),
   });
@@ -60,9 +60,18 @@ const SignUp = ({
     onSubmit: (values) => {
       setIsSubmitting(true); // Disable the submit button after submission
       values.country_code = countryCode;
+      console.log(values, "resss", isStudent);
+      let payload = {
+        name: values?.name,
+        email: values?.email,
+        mobile_no: values?.mobile_no,
+        gender: values?.gender,
+        user_type: `${isStudent}`,
+        dob: values?.dob,
+        country_code: values?.country_code,
+      };
       dispatch(
-        signup(values, (val) => {
-          console.log(val, "resss");
+        signup(payload, (val) => {
           if (val?.data?.data?.token !== "") {
             localStorage.setItem("user", isStudent);
             setData({
@@ -71,6 +80,7 @@ const SignUp = ({
               type: "signup",
               ismob: true,
               data: values?.mobile_no,
+              user_type: `${isStudent}`,
             });
             // navigate("/home");
             setOtpOpen(true);
@@ -208,7 +218,6 @@ const SignUp = ({
               country={"in"}
               value={formik.values.mobile_no}
               onChange={(phone, country) => {
-
                 setCountryCode(country.dialCode);
                 formik.setFieldValue(
                   "mobile_no",
@@ -346,7 +355,22 @@ const SignUp = ({
               }}
             />
           </Box>
-
+          <Typography
+            onClick={() => {
+              signupOpen(true);
+              handleClose();
+            }}
+            sx={{
+              fontSize: "18px",
+              fontWeight: 400,
+              color: "#737373",
+              mt: 2,
+              cursor: "pointer",
+            }}
+          >
+            Already have an account?{" "}
+            <span style={{ color: "#40A39B" }}>Login</span>
+          </Typography>
           {/* Submit Button */}
           <Button
             type="submit"

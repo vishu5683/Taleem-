@@ -3,12 +3,21 @@ import { AppBar, Toolbar, Typography, Menu, MenuItem, Button, Box, IconButton, D
 import { Menu as MenuIcon, ExpandMore } from '@mui/icons-material';
 import { Link } from 'react-router-dom';  // Import Link from react-router-dom
 import logo from '../../assets/navbar/nav logo.png';
+import SignUp from "../login screens/SignUp";
+import LoginWithStudent from "../login screens/LoginWithStudent";
 
 const Navbar = () => {
-  const [anchorElPrices, setAnchorElPrices] = useState(null);
-  const [anchorElLanguage, setAnchorElLanguage] = useState(null);
-  const [mobileOpen, setMobileOpen] = useState(false);
-
+    const [data, setData] = useState();
+   const [isStudent, setStudent] = useState(1);
+   const [anchorElPrices, setAnchorElPrices] = useState(null);
+   const [anchorElLanguage, setAnchorElLanguage] = useState(null);
+   const [mobileOpen, setMobileOpen] = useState(false);
+   const [otpOpen, setOtpOpen] = useState(false);
+   const [signUpOpen, setSignUpOpen] = useState(false);
+   const [open, setOpen] = useState(false);
+   const [tutorsInfoOpen, setTutorsInfoOpen] = useState(false);
+   const handleOpen = () => setOpen(true);
+ const handleClose = () => setOpen(false);
   const handleOpenPrices = (event) => {
     setAnchorElPrices(event.currentTarget);
   };
@@ -56,6 +65,10 @@ const Navbar = () => {
             borderColor: '#EBBE49',
             color: '#EBBE49',
           }}
+          onClick={() => {
+            setSignUpOpen(true);
+            setStudent(1);
+          }}
         >
           Join as a tutor
         </Button>
@@ -71,6 +84,10 @@ const Navbar = () => {
             '&:hover': {
               backgroundColor: '#37a393',
             },
+          }}
+          onClick={() => {
+            handleOpen();
+            setStudent(3);
           }}
         >
           Book a tutor
@@ -201,6 +218,10 @@ const Navbar = () => {
               fontSize: '16px',
               color: '#EBBE49',
             }}
+            onClick={() => {
+              setSignUpOpen(true);
+              setStudent(1);
+            }}
           >
             Join as a tutor
           </Button>
@@ -219,6 +240,10 @@ const Navbar = () => {
               '&:hover': {
                 backgroundColor: '#37a393',
               },
+            }}
+            onClick={() => {
+              handleOpen();
+              setStudent(3);
             }}
           >
             Book a tutor
@@ -242,6 +267,32 @@ const Navbar = () => {
       >
         {drawer}
       </Drawer>
+       <SignUp
+        open={signUpOpen}
+        handleClose={() => setSignUpOpen(false)}
+        isStudent={isStudent}
+        data={data}
+        setData={setData}
+        otpOpen={otpOpen}
+        setOtpOpen={setOtpOpen}
+        handleSubmit={() => {
+          setSignUpOpen(false);
+        }}
+        signupOpen={setOpen}
+      />
+        <LoginWithStudent
+        open={open}
+        handleClose={handleClose}
+        isStudent={isStudent}
+        data={data}
+        setData={setData}
+        otpOpen={otpOpen}
+        setOtpOpen={setOtpOpen}
+        signUpOpen={signUpOpen}
+        setSignUpOpen={setSignUpOpen}
+        // loginWithEmailOpen={loginWithEmailOpen}
+        signupOpen={setOpen}
+      />
     </AppBar>
   );
 };

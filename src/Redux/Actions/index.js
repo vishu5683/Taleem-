@@ -7,7 +7,6 @@ export const sendMobileOtpSignup = (value, callback) => {
       `${Utils.EndPoint.sendMobileOtpSignup}`,
       value,
       (responseData) => {
-        console.log(responseData);
         dispatch({
           type: Utils.actionName.sendMobileOtpSignup,
           payload: { ...value, Response: responseData?.data },
@@ -179,6 +178,8 @@ export const verifyMobileOtpLogin = (value, callback) => {
       `${Utils.EndPoint.verifyMobileOtpLogin}`,
       value,
       (responseData) => {
+        console.log(responseData?.data?.data?.token,"OTPTOKEN");
+        localStorage.setItem("token",responseData?.data?.data?.token)
         dispatch({
           type: Utils.actionName.verifyMobileOtpLogin,
           payload: { ...value, Response: responseData?.data },
@@ -325,6 +326,30 @@ export const curriculums = (callback) => {
             type: Utils.actionName.curriculums,
             payload: {
               curriculumsData: resData?.data,
+            },
+          });
+          callback(resData?.data)
+        } else {
+        }
+      },
+      (error) => {
+      }
+    );
+  };
+}
+
+export const getProfile = (callback) => {
+  return (dispatch) => {
+    Utils.api.getApiCall(
+      Utils.EndPoint.getProfile,
+      "",
+      (resData) => {
+        console.log(resData,"resData")
+        if (resData.status) {
+          dispatch({
+            type: Utils.actionName.getProfile,
+            payload: {
+              getProfileData: resData?.data,
             },
           });
           callback(resData?.data)

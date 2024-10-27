@@ -164,11 +164,12 @@ const getApiCall = (
   isArrayBuffer = false
 ) => {
   const myHeaders = new Headers();
+  const token= localStorage.getItem("token")
   myHeaders.append(
     "Authorization",
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDcsImlhdCI6MTcyOTkyOTMwOCwiZXhwIjoxNzMwMDE1NzA4fQ.VBLaLnXLfmGOZJIh5WepAOrzSsbL53xDrpBMoGAuZgk"
+    `Bearer ${token}`
   );
-
+ 
   const requestOptions = {
     method: "GET",
     headers: myHeaders,

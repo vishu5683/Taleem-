@@ -15,5 +15,8 @@ const EndPoint = {
     qualifications:"qualifications",
     grades:"grades",
     curriculums:"curriculums",
+
+    //Profile api's
+    getProfile:"profile-details",
 };
 export default EndPoint;

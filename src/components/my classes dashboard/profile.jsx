@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Button, Typography, Divider } from '@mui/material';
 import { Phone, Mail } from '@mui/icons-material'; 
 import ProfileBanner from '../common comps/profilebanners'; 
@@ -7,10 +7,17 @@ import MyClassLayout from './MyClassLayout';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import SchoolIcon from '@mui/icons-material/School';
 import HomeIcon from '@mui/icons-material/Home';
+import { useDispatch,useSelector } from 'react-redux';
+import { getProfile } from '../../Redux/Actions';
 
 const Profile = () => {
   const navigate = useNavigate(); // Initialize navigate hook
+const dispatch=useDispatch();
 
+var getProfileData= useSelector(
+  (state) => state.getProfileReducer?.getProfileData
+);
+useEffect(()=>{dispatch(getProfile())},[])
   // Function to handle "Edit" button click and navigate to the profile update route
   const handleEditClick = () => {
     navigate('/profileupdate'); // Navigate to /profileupdate
@@ -48,7 +55,7 @@ const Profile = () => {
               fontSize: { xs: '1.2rem', sm: '1.5rem' }, // Responsive font size
             }}
           >
-            Naseem Chikitani
+            {getProfileData?.name}
           </Typography>
 
           <Button
@@ -77,12 +84,12 @@ const Profile = () => {
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: { xs: '10px', sm: '20px' }, padding: { xs: '0 8px', sm: '0 16px' } }}>
           <Box sx={{ display: 'flex', alignItems: 'center', color: '#737373', marginBottom: '8px', flexDirection: { xs: 'column', sm: 'row' }, gap: { xs: '4px', sm: '0' } }}>
             <Phone sx={{ marginRight: { sm: '18px' } }} />
-            <Typography variant="body1" sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}>+463 634 6774</Typography>
+            <Typography variant="body1" sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}>+{getProfileData?.mobile_no}</Typography>
           </Box>
 
           <Box sx={{ display: 'flex', alignItems: 'center', color: '#737373', marginBottom: '35px', flexDirection: { xs: 'column', sm: 'row' }, gap: { xs: '4px', sm: '0' } }}>
             <Mail sx={{ marginRight: { sm: '8px' } }} />
-            <Typography variant="body1" sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}>daniela@gmail.com</Typography>
+            <Typography variant="body1" sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}>{getProfileData?.email || "NA"}</Typography>
           </Box>
 
           <Divider sx={{ width: '100%', backgroundColor: '#D9D9D9', marginBottom: '20px' }} />

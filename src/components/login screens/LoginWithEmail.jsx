@@ -44,6 +44,8 @@ const LoginWithEmail = ({
     }
   }, [isStudent]);
 
+  useEffect(()=>{localStorage.clear()},[])
+
   const handleChange = (event) => setRole(event.target.value);
   const handleEmailChange = (event) => setEmail(event.target.value);
 

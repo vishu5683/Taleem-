@@ -157,7 +157,6 @@ const Join = () => {
                 },
               }}
               onClick={() => {
-                console.log("3");
                 handleOpen();
                 setStudent(3);
               }}
@@ -178,8 +177,8 @@ const Join = () => {
         setOtpOpen={setOtpOpen}
         signUpOpen={signUpOpen}
         setSignUpOpen={setSignUpOpen}
-        loginWithEmailOpen={loginWithEmailOpen}
-        setLoginWithEmailOpen={setLoginWithEmailOpen}
+        tutorsInfoOpen={tutorsInfoOpen}
+        setTutorsInfoOpen={setTutorsInfoOpen}
       />
       <OtpScreen
         open={otpOpen}
@@ -213,6 +212,7 @@ const Join = () => {
         handleSubmit={() => {
           setSignUpOpen(false);
         }}
+        signupOpen={setOpen}
       />
       <TutorsInfo
         open={tutorsInfoOpen}
