@@ -215,7 +215,7 @@ useEffect(()=>{localStorage.clear()},[])
               Mobile Number*
             </Typography>
             <PhoneInput
-              country={"in"}
+              country={"om"}
               value={formik.values.mobile_no}
               onChange={(phone, country) => {
                 setCountryCode(country.dialCode);

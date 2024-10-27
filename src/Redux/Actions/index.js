@@ -74,16 +74,16 @@ export const signup = (value, callback) => {
           payload: { ...value, Response: responseData?.data },
         });
         if (responseData?.status == 200) {
-          if(responseData?.data?.status){
-          toast.success(`${responseData?.data?.message}`, {
-            position: "top-center",
-          });
-          callback(responseData);
-        }else{
-          toast.error(`${responseData?.data?.message}`, {
-            position: "top-center",
-          });
-        }
+          if (responseData?.data?.status) {
+            toast.success(`${responseData?.data?.message}`, {
+              position: "top-center",
+            });
+            callback(responseData);
+          } else {
+            toast.error(`${responseData?.data?.message}`, {
+              position: "top-center",
+            });
+          }
         } else {
           toast.error(`${responseData?.data?.message}`, {
             position: "top-center",
@@ -178,17 +178,23 @@ export const verifyMobileOtpLogin = (value, callback) => {
       `${Utils.EndPoint.verifyMobileOtpLogin}`,
       value,
       (responseData) => {
-        console.log(responseData?.data?.data?.token,"OTPTOKEN");
-        localStorage.setItem("token",responseData?.data?.data?.token)
-        dispatch({
-          type: Utils.actionName.verifyMobileOtpLogin,
-          payload: { ...value, Response: responseData?.data },
-        });
+        console.log(responseData?.data?.message, "OTPTOKEN");
         if (responseData?.status == 200) {
-          toast.success(`${responseData?.data?.message}`, {
-            position: "top-center",
-          });
-          callback(responseData);
+          if (responseData?.data?.status) {
+            dispatch({
+              type: Utils.actionName.verifyMobileOtpLogin,
+              payload: { ...value, Response: responseData?.data },
+            });
+            localStorage.setItem("token", responseData?.data?.data?.token);
+            toast.success(`${responseData?.data?.message}`, {
+              position: "top-center",
+            });
+            callback(responseData);
+          } else {
+            toast.error(`${responseData?.data?.message}`, {
+              position: "top-center",
+            });
+          }
         } else {
           toast.error(`${responseData?.data?.message}`, {
             position: "top-center",
@@ -241,38 +247,37 @@ export const forgetPassword = (value, callback) => {
 // grades:"grades",
 // curriculums:"curriculums",
 export const expertise = (callback) => {
-   return (dispatch) => {
-     Utils.api.getApiCall(
-       Utils.EndPoint.expertise,
-       "",
-       (resData) => {
-         if (resData.status) {
-           console.log(resData,"resDataresData")
-           callback(resData?.data)
-           dispatch({
-             type: Utils.actionName.expertise,
-             payload: {
-               expertiseData: resData?.data,
-             },
-            });
-            console.log(resData,"expertiseOptions123")
-            callback(resData?.data)
-         } else {
-         }
-       },
-       (error) => {
-       }
-     );
-   };
- }
+  return (dispatch) => {
+    Utils.api.getApiCall(
+      Utils.EndPoint.expertise,
+      "",
+      (resData) => {
+        if (resData.status) {
+          console.log(resData, "resDataresData");
+          callback(resData?.data);
+          dispatch({
+            type: Utils.actionName.expertise,
+            payload: {
+              expertiseData: resData?.data,
+            },
+          });
+          console.log(resData, "expertiseOptions123");
+          callback(resData?.data);
+        } else {
+        }
+      },
+      (error) => {}
+    );
+  };
+};
 
- export const qualifications = (callback) => {
+export const qualifications = (callback) => {
   return (dispatch) => {
     Utils.api.getApiCall(
       Utils.EndPoint.qualifications,
       "",
       (resData) => {
-        console.log(resData,"resData")
+        console.log(resData, "resData");
         if (resData.status) {
           dispatch({
             type: Utils.actionName.qualifications,
@@ -280,15 +285,14 @@ export const expertise = (callback) => {
               qualificationsData: resData,
             },
           });
-          callback(resData?.data)
+          callback(resData?.data);
         } else {
         }
       },
-      (error) => {
-      }
+      (error) => {}
     );
   };
-}
+};
 
 export const grades = (callback) => {
   return (dispatch) => {
@@ -296,7 +300,7 @@ export const grades = (callback) => {
       Utils.EndPoint.grades,
       "",
       (resData) => {
-        console.log(resData,"resData")
+        console.log(resData, "resData");
         if (resData.status) {
           dispatch({
             type: Utils.actionName.grades,
@@ -304,15 +308,14 @@ export const grades = (callback) => {
               gradesData: resData?.data,
             },
           });
-          callback(resData?.data)
+          callback(resData?.data);
         } else {
         }
       },
-      (error) => {
-      }
+      (error) => {}
     );
   };
-}
+};
 
 export const curriculums = (callback) => {
   return (dispatch) => {
@@ -320,7 +323,7 @@ export const curriculums = (callback) => {
       Utils.EndPoint.curriculums,
       "",
       (resData) => {
-        console.log(resData?.data,"resData")
+        console.log(resData?.data, "resData");
         if (resData.status) {
           dispatch({
             type: Utils.actionName.curriculums,
@@ -328,15 +331,14 @@ export const curriculums = (callback) => {
               curriculumsData: resData?.data,
             },
           });
-          callback(resData?.data)
+          callback(resData?.data);
         } else {
         }
       },
-      (error) => {
-      }
+      (error) => {}
     );
   };
-}
+};
 
 export const getProfile = (callback) => {
   return (dispatch) => {
@@ -344,7 +346,7 @@ export const getProfile = (callback) => {
       Utils.EndPoint.getProfile,
       "",
       (resData) => {
-        console.log(resData,"resData")
+        console.log(resData, "resData");
         if (resData.status) {
           dispatch({
             type: Utils.actionName.getProfile,
@@ -352,16 +354,14 @@ export const getProfile = (callback) => {
               getProfileData: resData?.data,
             },
           });
-          callback(resData?.data)
+          callback(resData?.data);
         } else {
         }
       },
-      (error) => {
-      }
+      (error) => {}
     );
   };
-}
-
+};
 
 export const setFormData = (data) => ({
   type: Utils.actionName.SET_FORM_DATA,

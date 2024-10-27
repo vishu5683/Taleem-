@@ -37,19 +37,43 @@ const OtpScreen = ({
     console.log(data);
   }, []);
 
+  // const handleChange = (index, value) => {
+  //   if (value.length <= 1) {
+  //     const newOtp = [...otp];
+  //     newOtp[index] = value;
+  //     setOtp(newOtp);
+
+  //     // Move focus to the next input field
+  //     if (value && index < otp.length - 1) {
+  //       otpRefs.current[index + 1].focus();
+  //     }
+  //   }
+  // };
+
+  // const handleKeyDown = (e, index) => {
+  //   // Handle backspace to shift focus to the previous input field
+  //   if (e.key === "Backspace" && index > 0 && !otp[index]) {
+  //     otpRefs.current[index - 1].focus();
+  //   }
+  // };
+
   const handleChange = (index, value) => {
     if (value.length <= 1) {
       const newOtp = [...otp];
       newOtp[index] = value;
       setOtp(newOtp);
-
+  
       // Move focus to the next input field
       if (value && index < otp.length - 1) {
         otpRefs.current[index + 1].focus();
       }
+  
+      // If the OTP is complete, verify it automatically
+      // if (newOtp.every((digit) => digit)) {
+      //   handleVerify();
+      // }
     }
   };
-
   const handleKeyDown = (e, index) => {
     // Handle backspace to shift focus to the previous input field
     if (e.key === "Backspace" && index > 0 && !otp[index]) {
@@ -59,7 +83,7 @@ const OtpScreen = ({
 
   const handleVerify = () => {
     let payload = {
-      otp: "1234",
+      otp: otp.join(''),
       type: data?.ismob ? "mobile_no" : "email",
       field_value: data?.data,
       action: data?.type,
@@ -81,9 +105,6 @@ const OtpScreen = ({
         }
       })
     );
-
-    // Here you can add any OTP verification logic
-    // For now, we'll just navigate to /home
   };
 
   const handleReverify = () => {
