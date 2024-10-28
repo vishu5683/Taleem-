@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Box,
   Typography,
@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { verifyMobileOtpLogin } from "../../Redux/Actions";
 import toast from "react-hot-toast";
+import CountdownTimer from "../reusables/countdownTimer";
 
 const OtpScreen = ({
   open,
@@ -27,25 +28,52 @@ const OtpScreen = ({
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const otpRefs = useRef([]); // Create a ref array to store OTP input references
-  const [otp, setOtp] = React.useState(Array(4).fill("")); // Initialize OTP state
-
+  const [otp, setOtp] = useState(Array(4).fill("")); // Initialize OTP state
+  const [isDisplayResend, setIsDisplayResend] = useState(false);
+  const handleComplete = () => {
+    setIsDisplayResend(true);
+  };
   useEffect(() => {
     console.log(data);
   }, []);
+
+  // const handleChange = (index, value) => {
+  //   if (value.length <= 1) {
+  //     const newOtp = [...otp];
+  //     newOtp[index] = value;
+  //     setOtp(newOtp);
+
+  //     // Move focus to the next input field
+  //     if (value && index < otp.length - 1) {
+  //       otpRefs.current[index + 1].focus();
+  //     }
+  //   }
+  // };
+
+  // const handleKeyDown = (e, index) => {
+  //   // Handle backspace to shift focus to the previous input field
+  //   if (e.key === "Backspace" && index > 0 && !otp[index]) {
+  //     otpRefs.current[index - 1].focus();
+  //   }
+  // };
 
   const handleChange = (index, value) => {
     if (value.length <= 1) {
       const newOtp = [...otp];
       newOtp[index] = value;
       setOtp(newOtp);
-
+  
       // Move focus to the next input field
       if (value && index < otp.length - 1) {
         otpRefs.current[index + 1].focus();
       }
+  
+      // If the OTP is complete, verify it automatically
+      // if (newOtp.every((digit) => digit)) {
+      //   handleVerify();
+      // }
     }
   };
-
   const handleKeyDown = (e, index) => {
     // Handle backspace to shift focus to the previous input field
     if (e.key === "Backspace" && index > 0 && !otp[index]) {
@@ -54,9 +82,8 @@ const OtpScreen = ({
   };
 
   const handleVerify = () => {
-    console.log(data, "HERE");
     let payload = {
-      otp: "1234",
+      otp: otp.join(''),
       type: data?.ismob ? "mobile_no" : "email",
       field_value: data?.data,
       action: data?.type,
@@ -65,7 +92,6 @@ const OtpScreen = ({
 
     dispatch(
       verifyMobileOtpLogin(payload, (res) => {
-        console.log(res?.data?.data?.token,"RESSS")
         if (res?.status == 200) {
           localStorage.setItem("token", res?.data?.data?.token);
           localStorage.setItem("user", JSON.stringify(res?.data?.data));
@@ -79,6 +105,45 @@ const OtpScreen = ({
         }
       })
     );
+  };
+
+  const handleReverify = () => {
+    let payload = {
+      otp: "1234",
+      type: data?.ismob ? "mobile_no" : "email",
+      field_value: data?.data,
+      action: data?.type,
+      token: data?.token, // recieved in sendOtp api
+    };
+
+    // dispatch(
+    //   sendMobileOtpSignup(payload, (res) => {
+    //     setData({
+    //       token: res?.data?.data?.token,
+    //       user: isStudent,
+    //       type: "login",
+    //       ismob: true,
+    //       data: mobileNumber,
+    //     });
+    //     setOtpOpen(true);
+    //   })
+    // );
+
+    // dispatch(
+    //   verifyMobileOtpLogin(payload, (res) => {
+    //     if (res?.status == 200) {
+    //       localStorage.setItem("token", res?.data?.data?.token);
+    //       localStorage.setItem("user", JSON.stringify(res?.data?.data));
+    //       if (data?.type == "signup" && data?.user == 3) {
+    //         handleClose();
+    //         tutorsInfoOpen();
+    //       } else {
+    //         navigate("/home", { isStudent });
+    //       }
+    //     } else {
+    //     }
+    //   })
+    // );
 
     // Here you can add any OTP verification logic
     // For now, we'll just navigate to /home
@@ -168,7 +233,6 @@ const OtpScreen = ({
           ))}
         </Stack>
 
-        {/* Timer and Resend */}
         <Box
           display="flex"
           justifyContent="space-between"
@@ -179,14 +243,21 @@ const OtpScreen = ({
             color="text.secondary"
             fontSize={{ xs: "12px", sm: "14px" }}
           >
-            00:30
+            <CountdownTimer time="30" handleComplete={handleComplete} />
           </Typography>
-          <Typography
-            color="#40A39B"
-            sx={{ cursor: "pointer", fontSize: { xs: "12px", sm: "14px" } }}
-          >
-            Don't receive Yet? Resend
-          </Typography>
+          {/* {isDisplayResend && ( */}
+            <Typography
+              color="#B4B4B4"
+              sx={{ cursor: "pointer", fontSize: { xs: "12px", sm: "14px" } }}
+              onClick={() => {
+                handleVerify();
+                handleComplete();
+              }}
+            >
+              Don't receive Yet?
+              <span style={isDisplayResend ? {color:"#40A39B"} : {color:"#B4B4B4"}}>Resend</span> 
+            </Typography>
+          {/* )} */}
         </Box>
 
         {/* Verify OTP Button */}

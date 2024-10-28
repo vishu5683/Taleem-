@@ -1,5 +1,5 @@
 import Utils from "../../Utils";
-const { sendMobileOtpSignup,expertise, verifyMobileOtpSignup, signup ,login,verifyMobileOtpLogin,sendMobileOtpLogin,forgetPassword,qualifications,grades,curriculums} = Utils.actionName;
+const { sendMobileOtpSignup,expertise,getProfile, verifyMobileOtpSignup, signup ,login,verifyMobileOtpLogin,sendMobileOtpLogin,forgetPassword,qualifications,grades,curriculums} = Utils.actionName;
 let initialState = [];
 
 export const expertiseReducer = (state = initialState, action) => {
@@ -10,6 +10,17 @@ export const expertiseReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export const getProfileReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case getProfile:
+      return { ...state, ...action.payload };
+    default:
+      return state;
+  }
+};
+
+
 
 export const gradesReducer = (state = initialState, action) => {
   switch (action.type) {

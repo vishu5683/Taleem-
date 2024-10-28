@@ -10,6 +10,7 @@ import {
   curriculumsReducer,
   gradesReducer,
   qualificationsReducer,
+  getProfileReducer,
 } from "./Reducers";
 import loginFormReducer from "./Reducers/signupFormReducer";
 import {
@@ -32,6 +33,7 @@ let reducers = {
   expertiseReducer,
   curriculumsReducer,
   qualificationsReducer,
+  getProfileReducer,
   gradesReducer,
 };
 
