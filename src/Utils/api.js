@@ -263,20 +263,75 @@ const getApiCall = (
 
 
 
+// const putApiCall = (
+//   endPoint,
+//   params,
+//   successCallback,
+//   errorCallback,
+//   headerType
+// ) => {
+//   if (headerType === 'multi') {
+//     headers['Content-Type'] = 'multipart/form-data';
+//   }
+//   Utils.constants.axios
+//     .put(endPoint, params, { headers: headers })
+//     .then((response) => {
+//       successCallback(response);
+//     })
+//     .catch((error) => {
+//       if (error.code === 'ECONNABORTED') {
+//         let payload = {
+//           statusCode: 408,
+//         };
+//         errorCallback(payload);
+//       } else if (error.response) {
+//         let data = error.response.data;
+//         if (checkUserValidation(data)) {
+//           Utils.showAlert(2, data.message || '');
+//           setTimeout(() => {
+//             logOutApiCall();
+//           }, 1000);
+//         } else {
+//           errorCallback(error.response);
+//         }
+//       } else if (!error.response) {
+//         let payload = {
+//           statusCode: -1,
+//           message: 'Please try again later',
+//         };
+//         errorCallback(payload);
+//       }
+//     });
+// };
+
 const putApiCall = (
   endPoint,
-  params,
+  body = {},
   successCallback,
   errorCallback,
-  headerType
+  isArrayBuffer = false
 ) => {
-  if (headerType === 'multi') {
-    headers['Content-Type'] = 'multipart/form-data';
-  }
-  Utils.constants.axios
-    .put(endPoint, params, { headers: headers })
+  const myHeaders = new Headers();
+  const token = localStorage.getItem("token");
+  myHeaders.append("Authorization", `Bearer ${token}`);
+  myHeaders.append("Content-Type", "application/json");
+
+  const requestOptions = {
+    method: "PUT",
+    headers: myHeaders,
+    body: JSON.stringify(body), // Stringify the body for PUT request
+    redirect: "follow",
+  };
+
+  fetch(Utils.constants.API_URL + endPoint, requestOptions)
     .then((response) => {
-      successCallback(response);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then((result) => {
+      successCallback(result);
     })
     .catch((error) => {
       if (error.code === 'ECONNABORTED') {
@@ -286,6 +341,9 @@ const putApiCall = (
         errorCallback(payload);
       } else if (error.response) {
         let data = error.response.data;
+        if (data.code === 401) {
+          logOutApiCall();
+        }
         if (checkUserValidation(data)) {
           Utils.showAlert(2, data.message || '');
           setTimeout(() => {
@@ -294,7 +352,7 @@ const putApiCall = (
         } else {
           errorCallback(error.response);
         }
-      } else if (!error.response) {
+      } else {
         let payload = {
           statusCode: -1,
           message: 'Please try again later',
@@ -303,6 +361,7 @@ const putApiCall = (
       }
     });
 };
+
 
 const api = {
   postApiCall,
