@@ -35,7 +35,7 @@ const ReviewPopup = () => {
               textAlign: 'left',
             }}
           >
-            Rate your student
+            Rate your teacher
           </Typography>
       {/* Close Button - Positioned at the top right */}
       <IconButton
@@ -120,7 +120,7 @@ const ReviewPopup = () => {
                 marginBottom: '16px',
               }}
             >
-              Rate your student
+              Rate your teacher
             </Typography>
 
             <Box sx={{ display: 'flex', justifyContent: 'center', gap: '8px' }}>

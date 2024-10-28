@@ -8,8 +8,9 @@ import tutor1 from "../../assets/explore/Rectangle 52398 (1).svg";
 import tutor2 from "../../assets/explore/Rectangle 52398 (3).svg";
 import tutor3 from "../../assets/explore/Rectangle 52398.svg";
 import FilterModal from './filter';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+
 const TutorListing = () => {
   const tutors = [
     { imageSrc: tutor1, name: 'Fenton Martin' },
@@ -21,6 +22,7 @@ const TutorListing = () => {
   ];
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -29,37 +31,38 @@ const TutorListing = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
-  const navigate = useNavigate();  // Initialize navigate hook
 
   const handleViewAll = () => {
-    navigate('/tutorlistingext');  // Navigate to the /tutorlisting route
+    navigate('/tutorlistingext');
   };
-  return (
 
-    
+  const handleCardClick = () => {
+    navigate('/tutordetail');
+  };
+
+  return (
     <Box sx={{ padding: '20px' }}>
       <Box sx={{ maxWidth: '1145px', margin: '0 auto' }}>
-      <Typography
-      variant="body2"
-      sx={{
-        fontWeight: 400,
-        fontSize: '12px',
-        color: '#737373',
-        marginBottom: '16px',
-        textAlign: 'left',
-      }}
-    >
-      <Link to="/" style={{ textDecoration: 'none', color: '#737373' }}>
-        Home
-      </Link>{' '}
-      &gt;{' '}
-      <Link to="/academic" style={{ textDecoration: 'none', color: '#737373' }}>
-        Academic
-      </Link>{' '}
-      &gt;{' '}
-      <span style={{ fontWeight: 700, color: 'black' }}>Tutors Listing</span>
-    </Typography>
-
+        <Typography
+          variant="body2"
+          sx={{
+            fontWeight: 400,
+            fontSize: '12px',
+            color: '#737373',
+            marginBottom: '16px',
+            textAlign: 'left',
+          }}
+        >
+          <Link to="/" style={{ textDecoration: 'none', color: '#737373' }}>
+            Home
+          </Link>{' '}
+          &gt;{' '}
+          <Link to="/academic" style={{ textDecoration: 'none', color: '#737373' }}>
+            Academic
+          </Link>{' '}
+          &gt;{' '}
+          <span style={{ fontWeight: 700, color: 'black' }}>Tutors Listing</span>
+        </Typography>
 
         <PromotionalBanner
           sx={{
@@ -105,7 +108,6 @@ const TutorListing = () => {
             />
           </Box>
 
-          {/* Trigger modal on button click */}
           <Button
             onClick={handleOpenModal}
             sx={{
@@ -146,26 +148,27 @@ const TutorListing = () => {
         <Grid container spacing={2}>
           {tutors.map((tutor, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
-              <TutorCard
-                imageSrc={tutor.imageSrc}
-                name={tutor.name}
-                subject="Maths’ Tutors in University"
-                location="Doha, Qatar"
-                sx={{
-                  width: '367px',
-                  height: '497px',
-                  borderRadius: '18px',
-                  border: '1px solid #E6E6E6',
-                }}
-              />
+              <Box onClick={handleCardClick} sx={{ cursor: 'pointer' }}>
+                <TutorCard
+                  imageSrc={tutor.imageSrc}
+                  name={tutor.name}
+                  subject="Maths’ Tutors in University"
+                  location="Doha, Qatar"
+                  sx={{
+                    width: '367px',
+                    height: '497px',
+                    borderRadius: '18px',
+                    border: '1px solid #E6E6E6',
+                  }}
+                />
+              </Box>
             </Grid>
           ))}
         </Grid>
 
         <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
           <Button
-
-onClick={handleViewAll}
+            onClick={handleViewAll}
             sx={{
               width: '272px',
               height: '48px',
@@ -173,7 +176,6 @@ onClick={handleViewAll}
               color: '#FFFFFF',
               borderRadius: '8px',
               border: '1px solid #40A39B',
-           
               textTransform: 'none',
               fontWeight: 600,
               padding: '14px 16px',
@@ -187,7 +189,6 @@ onClick={handleViewAll}
         </Box>
       </Box>
 
-      {/* Filter Modal Component */}
       <FilterModal open={isModalOpen} handleClose={handleCloseModal} />
     </Box>
   );

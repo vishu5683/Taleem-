@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, MenuItem, Typography, Divider, Avatar, Modal } from '@mui/material';
 import { ChevronRight } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
-import avatarImage from '../../assets/navbar/image.png'; // Ensure the path is correct
-import ManageProfileModal from '../my classes dashboard/manageprofile'; // Import the modal component
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import avatarImage from '../../assets/navbar/image.png';
+import ManageProfileModal from '../my classes dashboard/manageprofile';
+import { getProfile } from '../../Redux/Actions';
 
 const SidebarMyClasses = () => {
   const [openModal, setOpenModal] = useState(false);
-  const navigate = useNavigate(); // Hook to handle navigation
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const menuItems = [
+  const getProfileData = useSelector((state) => state.getProfileReducer?.getProfileData);
+
+  useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
+
+  // Define menu items for student and tutor
+  const studentMenuItems = [
     { label: 'My Classes', route: '/myclasses' },
     { label: 'My Calendar', route: '/mycalendar' },
     { label: 'Manage Profile', action: 'openModal' },
@@ -19,35 +29,40 @@ const SidebarMyClasses = () => {
     { label: 'Contact Us', route: '/contactus' },
   ];
 
-  // Function to handle modal open and close
-  const handleOpenModal = () => {
-    setOpenModal(true);
-  };
+  const tutorMenuItems = [
+    { label: 'Earnings', route: '/earnings' },
+    { label: 'Rate Card', route: '/ratecard' },
+    { label: 'Chats', route: '/chats' },
+    { label: 'Documents', route: '/documents' },
+    { label: 'FAQs', route: '/faq' },
+    { label: 'Contact Us', route: '/contactus' },
+  ];
 
-  const handleCloseModal = () => {
-    setOpenModal(false);
-  };
+  // Select the menu items based on user_type
+  const menuItems = getProfileData?.user_type === 3 ? tutorMenuItems : studentMenuItems;
 
-  // Handle item clicks
+  const handleOpenModal = () => setOpenModal(true);
+  const handleCloseModal = () => setOpenModal(false);
+
   const handleItemClick = (item) => {
     if (item.route) {
-      navigate(item.route); // Navigate to the respective route
+      navigate(item.route);
     } else if (item.action === 'openModal') {
-      handleOpenModal(); // Open the modal for "Manage Profile"
+      handleOpenModal();
     }
   };
 
   return (
     <Box
       sx={{
-        width: { xs: '100%', sm: '320px', md: '360px' }, // Responsive width
+        width: { xs: '100%', sm: '320px', md: '360px' },
         background: 'linear-gradient(105.04deg, #C6FFC9 -25.33%, #D4EBFF 100%)',
-        padding: { xs: '12px', sm: '16px' }, // Adjusted padding for mobile
+        padding: { xs: '12px', sm: '16px' },
         borderRadius: '8px',
         display: 'flex',
         flexDirection: 'column',
         gap: '8px',
-        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)', // Adds a subtle shadow for better appearance
+        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
       }}
     >
       {/* User Profile Section */}
@@ -63,8 +78,8 @@ const SidebarMyClasses = () => {
       >
         <Avatar src={avatarImage} sx={{ width: 56, height: 56, marginRight: '12px' }} />
         <Box>
-          <Typography sx={{ fontWeight: 500, fontSize: { xs: '14px', sm: '16px' } }}>Naseem</Typography>
-          <Typography sx={{ fontSize: { xs: '12px', sm: '14px' }, color: '#737373' }}>naseem@gmail.com</Typography>
+          <Typography sx={{ fontWeight: 500, fontSize: { xs: '14px', sm: '16px' } }}>{getProfileData?.name}</Typography>
+          <Typography sx={{ fontSize: { xs: '12px', sm: '14px' }, color: '#737373' }}>{getProfileData?.email}</Typography>
           <Box
             sx={{
               display: 'flex',
@@ -73,7 +88,7 @@ const SidebarMyClasses = () => {
               marginTop: '8px',
               color: '#4A90E2',
             }}
-            onClick={() => navigate('/profile')} // Navigate to the profile page
+            onClick={() => navigate('/profile')}
           >
             <Typography sx={{ fontSize: { xs: '12px', sm: '14px' }, fontWeight: 500 }}>View Profile</Typography>
             <ChevronRight sx={{ marginLeft: '4px' }} />
@@ -94,7 +109,7 @@ const SidebarMyClasses = () => {
               gap: '8px',
               cursor: 'pointer',
             }}
-            onClick={() => handleItemClick(item)} // Handle item click based on the item
+            onClick={() => handleItemClick(item)}
           >
             {item.label}
             <ChevronRight />
@@ -104,14 +119,8 @@ const SidebarMyClasses = () => {
       ))}
 
       {/* Manage Profile Modal */}
-      <Modal
-        open={openModal}
-        onClose={handleCloseModal} // Make sure onClose works
-        aria-labelledby="manage-profile-modal"
-        aria-describedby="manage-profile-modal-description"
-      >
+      <Modal open={openModal} onClose={handleCloseModal}>
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-          {/* Pass the handleCloseModal function to ManageProfileModal */}
           <ManageProfileModal onClose={handleCloseModal} />
         </Box>
       </Modal>

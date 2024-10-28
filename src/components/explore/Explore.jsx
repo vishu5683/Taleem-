@@ -43,21 +43,22 @@ const Explore = () => {
         }}
       >
         {/* Left Arrow - Hidden on small screens */}
-        <IconButton
-          sx={{
-            display: { xs: 'none', md: 'inline-flex' },
-            backgroundColor: '#FFFFFF',
-            border: '2px solid #737373',
-            color: '#737373',
-            borderRadius: '50%',
-            '&:hover': {
-              backgroundColor: '#F0F0F0',
-            },
-            marginRight: '10px',
-          }}
-        >
-          <ArrowBackIos />
-        </IconButton>
+        <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+          <IconButton
+            sx={{
+              backgroundColor: '#FFFFFF',
+              border: '2px solid #737373',
+              color: '#737373',
+              borderRadius: '50%',
+              '&:hover': {
+                backgroundColor: '#F0F0F0',
+              },
+              marginRight: '10px',
+            }}
+          >
+            <ArrowBackIos />
+          </IconButton>
+        </Box>
 
         {/* Cards Section */}
         <Box
@@ -89,21 +90,22 @@ const Explore = () => {
         </Box>
 
         {/* Right Arrow - Hidden on small screens */}
-        <IconButton
-          sx={{
-            display: { xs: 'none', md: 'inline-flex' },
-            backgroundColor: '#FFFFFF',
-            border: '2px solid #737373',
-            color: '#737373',
-            borderRadius: '50%',
-            '&:hover': {
-              backgroundColor: '#F0F0F0',
-            },
-            marginLeft: '10px',
-          }}
-        >
-          <ArrowForwardIos />
-        </IconButton>
+        <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+          <IconButton
+            sx={{
+              backgroundColor: '#FFFFFF',
+              border: '2px solid #737373',
+              color: '#737373',
+              borderRadius: '50%',
+              '&:hover': {
+                backgroundColor: '#F0F0F0',
+              },
+              marginLeft: '10px',
+            }}
+          >
+            <ArrowForwardIos />
+          </IconButton>
+        </Box>
       </Box>
 
       {/* Explore All Button */}

@@ -85,7 +85,7 @@ const Footer = () => {
           >
             Quick Links
           </Typography>
-          {['My Class', 'Academic', 'Recreational', 'Up Coming Class'].map((text) => (
+          {['My Classes', 'Academic', 'Recreational', 'Up Coming Class'].map((text) => (
             <Link
               key={text}
               component={RouterLink} // Use RouterLink for navigation

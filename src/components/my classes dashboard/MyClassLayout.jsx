@@ -40,7 +40,7 @@ const MyClassLayout = ({ children }) => {
           <Link underline="hover" color="inherit" href="/" sx={{ fontSize: '13px', fontWeight: 400 }}>
             Home
           </Link>
-          <Typography color="#737373" sx={{ fontSize: '13px', fontWeight: 600,color:"black" }}>
+          <Typography color="#737373" sx={{ fontSize: '13px', fontWeight: 600, color: 'black' }}>
             Class
           </Typography>
         </Breadcrumbs>
@@ -50,8 +50,8 @@ const MyClassLayout = ({ children }) => {
           sx={{
             display: 'flex',
             flexDirection: {
-              xs: 'column', // For mobile and small screens (xs breakpoint)
-              md: 'row', // For medium and larger screens
+              xs: 'column',
+              md: 'row',
             },
             gap: '86px',
           }}
@@ -60,8 +60,8 @@ const MyClassLayout = ({ children }) => {
           <Box
             sx={{
               width: {
-                xs: '100%', // Full width on small screens
-                md: '300px', // Sidebar width on larger screens
+                xs: '100%',
+                md: '300px',
               },
             }}
           >
@@ -75,7 +75,7 @@ const MyClassLayout = ({ children }) => {
               backgroundColor: '#fff',
               borderRadius: '8px',
               boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
-              padding: '16px', // Add padding for content area
+              padding: '16px',
             }}
           >
             {children}
