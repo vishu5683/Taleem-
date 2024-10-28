@@ -1,9 +1,9 @@
 import React from 'react';
-import { Box, Typography, IconButton } from '@mui/material'; // Import Box here
+import { Box, Typography, IconButton } from '@mui/material';
 import tutor1 from "../../assets/explore/Rectangle 52398 (1).svg";
 import tutor2 from "../../assets/explore/Rectangle 52398 (3).svg";
 import tutor3 from "../../assets/explore/Rectangle 52398.svg";
-import TutorCard from '../card'; // Reusable TutorCard component
+import TutorCard from '../card';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 
 const Explore = () => {
@@ -42,12 +42,13 @@ const Explore = () => {
           gap: '16px',
         }}
       >
-        {/* Left Arrow */}
+        {/* Left Arrow - Hidden on small screens */}
         <IconButton
           sx={{
+            display: { xs: 'none', md: 'inline-flex' },
             backgroundColor: '#FFFFFF',
-            border: '2px solid #737373', // Primary green border
-            color: '#737373', // Primary green arrow
+            border: '2px solid #737373',
+            color: '#737373',
             borderRadius: '50%',
             '&:hover': {
               backgroundColor: '#F0F0F0',
@@ -87,12 +88,13 @@ const Explore = () => {
           />
         </Box>
 
-        {/* Right Arrow */}
+        {/* Right Arrow - Hidden on small screens */}
         <IconButton
           sx={{
+            display: { xs: 'none', md: 'inline-flex' },
             backgroundColor: '#FFFFFF',
-            border: '2px solid #737373', // Primary green border
-            color: '#737373', // Primary green arrow
+            border: '2px solid #737373',
+            color: '#737373',
             borderRadius: '50%',
             '&:hover': {
               backgroundColor: '#F0F0F0',
@@ -111,7 +113,7 @@ const Explore = () => {
           sx={{
             width: '190px',
             height: '48px',
-            backgroundColor: '#FFFFFF', // Primary green background
+            backgroundColor: '#FFFFFF',
             color: '#40A39B',
             borderRadius: '8px',
             border: '1px solid #40A39B',
