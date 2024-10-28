@@ -245,18 +245,19 @@ const OtpScreen = ({
           >
             <CountdownTimer time="30" handleComplete={handleComplete} />
           </Typography>
-          {isDisplayResend && (
+          {/* {isDisplayResend && ( */}
             <Typography
-              color="#40A39B"
+              color="#B4B4B4"
               sx={{ cursor: "pointer", fontSize: { xs: "12px", sm: "14px" } }}
               onClick={() => {
                 handleVerify();
                 handleComplete();
               }}
             >
-              Don't receive Yet? Resend
+              Don't receive Yet?
+              <span style={isDisplayResend ? {color:"#40A39B"} : {color:"#B4B4B4"}}>Resend</span> 
             </Typography>
-          )}
+          {/* )} */}
         </Box>
 
         {/* Verify OTP Button */}

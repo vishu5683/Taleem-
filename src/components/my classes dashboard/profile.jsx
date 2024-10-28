@@ -99,7 +99,7 @@ useEffect(()=>{dispatch(getProfile())},[])
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
               <HomeIcon sx={{ marginRight: '8px', color: '#737373' }} />
               <Typography variant="body1" sx={{ fontWeight: 600, color: 'black', fontSize: { xs: '0.875rem', sm: '1rem' } }}>
-                Address: <span style={{ fontWeight: 400, color: '#737373' }}>89123 Keshawn Valleys</span>
+                Address: <span style={{ fontWeight: 400, color: '#737373' }}>{getProfileData?.address || "NA"}</span>
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -111,6 +111,11 @@ useEffect(()=>{dispatch(getProfile())},[])
           </Box>
         </Box>
       </Box>
+      {getProfileData?.user_type==3 && (
+        <Box className="bg-[#EBFFFC] h-12 p-4 pb-8 rounded-lg mt-8" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'left'}}>
+          <Typography>Meeting Preferences</Typography>
+        </Box>
+      )}
     </MyClassLayout>
   );
 };
