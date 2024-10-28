@@ -5,7 +5,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import profileImage from '../../assets/profile/image.svg';
 import MyClassLayout from './MyClassLayout';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProfile } from '../../Redux/Actions';
+import { getProfile ,updateProfile} from '../../Redux/Actions';
 import { useNavigate } from 'react-router-dom';
 
 const ProfileUpdate = () => {
@@ -14,23 +14,35 @@ const ProfileUpdate = () => {
     const getProfileData = useSelector((state) => state.getProfileReducer?.getProfileData);
     
     const [formData, setFormData] = useState({
-        fullName: 'Naseem Chikitani',
-        mobileNumber: '+123-456-678',
-        email: 'naseem@xyz.com',
-        address: '89123 Keshawn Valleys',
-        grade: '10th'
+        fullName: '',
+        mobileNumber: '',
+        email: '',
+        address: '',
+        grade: ''
     });
     const [errors, setErrors] = useState({});
 
     useEffect(() => {
         dispatch(getProfile());
-    }, [dispatch]);
+    }, []);
+
+    useEffect(()=>{
+        if(getProfileData){
+            setFormData({
+                fullName: getProfileData?.name,
+                mobileNumber: getProfileData?.mobile_no,
+                email: getProfileData?.email,
+                address: getProfileData?.address,
+                grade: ''
+            })
+        }
+    },[getProfileData])
 
     const validate = () => {
         const newErrors = {};
         if (!formData.fullName) newErrors.fullName = 'Full Name is required';
         if (!formData.mobileNumber) newErrors.mobileNumber = 'Mobile Number is required';
-        if (!formData.email) newErrors.email = 'Email ID is required';
+        // if (!formData.email) newErrors.email = 'Email ID is required';
         if (formData.email && !/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email format is invalid';
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -45,7 +57,18 @@ const ProfileUpdate = () => {
 
     const handleSubmit = () => {
         if (validate()) {
-            console.log("Form data:", formData); // Here you can update the state in Redux or send it to an API
+            let payload=
+            {
+            name: formData?.fullName,
+            // email: formData?.email,
+                // "mobile_no: "1234567891",
+            address: formData?.address,
+            gender: getProfileData?.gender,
+            grades:getProfileData?.grades,
+            // dob: "2024-09-11T10:23:02.396Z",
+            }
+            dispatch(updateProfile(payload,()=>{console.log("POST API CALL")}));
+            console.log(getProfileData,"Form data:", formData); // Here you can update the state in Redux or send it to an API
             navigate('/profile');
         }
     };
@@ -77,7 +100,7 @@ const ProfileUpdate = () => {
                                 Full Name
                             </Typography>
                             <TextField
-                                placeholder="Naseem Chikitani"
+                                placeholder="Enter Name"
                                 value={formData.fullName}
                                 onChange={handleChange('fullName')}
                                 fullWidth
@@ -94,7 +117,7 @@ const ProfileUpdate = () => {
                                 Mobile Number
                             </Typography>
                             <TextField
-                                placeholder="+123-456-678"
+                                placeholder="Enter Mobile Number"
                                 value={formData.mobileNumber}
                                 onChange={handleChange('mobileNumber')}
                                 fullWidth
@@ -109,12 +132,12 @@ const ProfileUpdate = () => {
                     </Box>
 
                     <Box sx={{ display: 'flex', gap: '16px', marginBottom: '16px' }}>
-                        <Box sx={{ flex: 1 }}>
+             {/*            <Box sx={{ flex: 1 }}>
                             <Typography sx={{ fontSize: '18px', fontWeight: 500, marginBottom: '8px' }}>
                                 Email ID
                             </Typography>
                             <TextField
-                                placeholder="naseem@xyz.com"
+                                placeholder="Enter Email"
                                 value={formData.email}
                                 onChange={handleChange('email')}
                                 fullWidth
@@ -125,13 +148,13 @@ const ProfileUpdate = () => {
                                     style: { height: '48px', fontSize: '16px', fontWeight: 400, color: '#737373' }
                                 }}
                             />
-                        </Box>
+                        </Box> */}
                         <Box sx={{ flex: 1 }}>
                             <Typography sx={{ fontSize: '18px', fontWeight: 500, marginBottom: '8px' }}>
                                 Address
                             </Typography>
                             <TextField
-                                placeholder="89123 Keshawn Valleys"
+                                placeholder="Enter Address"
                                 value={formData.address}
                                 onChange={handleChange('address')}
                                 fullWidth
@@ -148,7 +171,7 @@ const ProfileUpdate = () => {
                             Select Grade
                         </Typography>
                         <TextField
-                            placeholder="10th"
+                            placeholder="Enter Grade"
                             value={formData.grade}
                             onChange={handleChange('grade')}
                             select
@@ -164,6 +187,7 @@ const ProfileUpdate = () => {
                                 style: { height: '48px', fontSize: '16px', fontWeight: 400, color: '#737373' }
                             }}
                         >
+                            
                             <MenuItem value="9th">9th</MenuItem>
                             <MenuItem value="10th">10th</MenuItem>
                             <MenuItem value="11th">11th</MenuItem>

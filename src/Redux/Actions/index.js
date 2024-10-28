@@ -363,6 +363,29 @@ export const getProfile = (callback) => {
   };
 };
 
+
+export const updateProfile = (data,callback) => {
+  return (dispatch) => {
+    Utils.api.putApiCall(
+      Utils.EndPoint.getProfile,
+      data,
+      (resData) => {
+        if (resData.status) {
+          dispatch({
+            type: Utils.actionName.updateProfile,
+            payload: {
+              updateProfileData: resData?.data,
+            },
+          });
+          callback(resData?.data);
+        } else {
+        }
+      },
+      (error) => {}
+    );
+  };
+};
+
 export const setFormData = (data) => ({
   type: Utils.actionName.SET_FORM_DATA,
   payload: data,
