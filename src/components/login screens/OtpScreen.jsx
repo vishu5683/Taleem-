@@ -34,8 +34,8 @@ const OtpScreen = ({
     setIsDisplayResend(true);
   };
   useEffect(() => {
-    console.log(data);
-  }, []);
+    console.log(data,"valueDATA");
+  }, [data]);
 
   // const handleChange = (index, value) => {
   //   if (value.length <= 1) {
@@ -88,6 +88,7 @@ const OtpScreen = ({
       field_value: data?.data,
       action: data?.type,
       token: data?.token, // recieved in sendOtp api
+      country_code:data?.country_code,
     };
 
     dispatch(

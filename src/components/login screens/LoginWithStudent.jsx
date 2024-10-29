@@ -54,9 +54,10 @@ const LoginWithStudent = ({
   const handleChange = (event) => setRole(event.target.value);
 
   const handleGetStarted = () => {
+    const phoneWithoutCountryCode = mobileNumber.replace(new RegExp(`^\\+?${countryCode}`), '');
     let payload = {
       type: "mobile_no",
-      field_value: mobileNumber,
+      field_value: phoneWithoutCountryCode,
       country_code: countryCode,
       action: "login",
     };
@@ -69,7 +70,8 @@ const LoginWithStudent = ({
           user: isStudent,
           type: "login",
           ismob: true,
-          data: mobileNumber,
+          data: phoneWithoutCountryCode,
+          country_code: countryCode,
         });
         setOtpOpen(true);
       })
@@ -250,11 +252,10 @@ const LoginWithStudent = ({
           <PhoneInput
             country={"om"} // Set default country code
             value={mobileNumber}
-            onChange={(phone) => {
+            onChange={(phone,country) => {
               setMobileNumber(phone);
               // Extract country code from the phone input
-              const code = phone.replace(/[^0-9]/g, "").substring(0, 3);
-              setCountryCode(code); // Update country code
+              setCountryCode(country.dialCode); // Update country code
             }}
             placeholder="Enter your mobile number"
             inputStyle={{
