@@ -9,7 +9,7 @@ const LoggedInFooter = () => {
           className="text-black" 
           sx={{  fontWeight: 550, fontSize: '15px' }}
         >
-          Copyright © 2024 Taleem. All rights reserved.
+          Copyright © 2024 Taleem. All rights reserved
         </Typography>
         <div className="flex items-center space-x-4">
           <Link 

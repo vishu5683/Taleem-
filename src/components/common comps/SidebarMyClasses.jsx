@@ -39,7 +39,7 @@ const SidebarMyClasses = () => {
   ];
 
   // Select the menu items based on user_type
-  const menuItems = getProfileData?.user_type == 3 ? tutorMenuItems : studentMenuItems;
+  const menuItems = getProfileData?.user_type == 1 ? tutorMenuItems : studentMenuItems;
 
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
