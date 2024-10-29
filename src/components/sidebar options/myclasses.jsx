@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -6,8 +6,11 @@ import MyClassLayout from "../my classes dashboard/MyClassLayout";
 import calIcon from "../../assets/schedule classes/cal.png";
 import watchIcon from "../../assets/schedule classes/watch.png";
 import profileIcon from "../../assets/schedule classes/profile.png";
+import { useDispatch, useSelector } from "react-redux";
+import { getProfile } from "../../Redux/Actions";
 
-const tabs = ["All", "Online", "Face to Face", "Open session"];
+const myTabs = ["All", "Online", "Face to Face", "Open session"];
+const myTutorTabs= ["All", "Online", "Face to Face"];
 const classes = [
   {
     title: "Craft and Art Classes - For Beginner’s",
@@ -37,7 +40,22 @@ const IconText = ({ icon, text, value, alt, iconStyle = {} }) => (
 
 const ClassBox = ({ title, categories, time, session, teacher, selectedTab }) => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
+const [tabs,setTabs]=useState(myTabs);
+  var getProfileData = useSelector(
+    (state) => state.getProfileReducer?.getProfileData
+  );
+  useEffect(() => {
+    dispatch(getProfile());
+  }, []);
+  useEffect(()=>{
+    if(getProfileData?.user_type == 3 ){
+      setTabs(myTutorTabs)
+    }
+    else{
+      setTabs(myTabs)
+    }
+  },[getProfileData])
   const handleClick = () => {
     if (selectedTab === "Face to Face") {
       navigate("/classdetailf2f");
@@ -110,7 +128,26 @@ const ClassBox = ({ title, categories, time, session, teacher, selectedTab }) =>
 };
 
 const MyClasses = () => {
-  const [selectedTab, setSelectedTab] = useState("All");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+const [tabs,setTabs]=useState(myTabs);
+const [selectedTab, setSelectedTab] = useState("All");
+
+  var getProfileData = useSelector(
+    (state) => state.getProfileReducer?.getProfileData
+  );
+  useEffect(() => {
+    dispatch(getProfile());
+  }, []);
+  useEffect(()=>{
+    if(getProfileData?.user_type == 3 ){
+      setTabs(myTutorTabs)
+    }
+    else{
+      setTabs(myTabs)
+    }
+  },[getProfileData])
+
 
   return (
     <MyClassLayout>
