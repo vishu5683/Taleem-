@@ -3,8 +3,9 @@ import { Box, Typography, IconButton, Modal, Button } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Close';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
+import AddNewDocument from './AddNewDocument';
 
-const DocumentModal = ({ open, handleClose }) => {
+const DocumentModal = ({ open, handleClose, handleAddNew }) => {
   return (
     <Modal open={open} onClose={handleClose} aria-labelledby="document-modal">
       <Box
@@ -52,13 +53,11 @@ const DocumentModal = ({ open, handleClose }) => {
             justifyContent="space-between"
             bgcolor="#EBFFFC"
             borderRadius="18px"
-           
             p={2}
             mt={3}
+            mb={5}
           >
-            {/* Content Column */}
-            <Box display="flex" flexDirection="column" gap={1} mb={2}>
-              {/* Label Section */}
+            <Box display="flex" flexDirection="column" gap={1} mb={1}>
               <Box
                 sx={{
                   bgcolor: '#EBBE49',
@@ -68,16 +67,14 @@ const DocumentModal = ({ open, handleClose }) => {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                   width:"142px",
+                  width: '142px',
                   fontWeight: '450',
-                  fontSize:"14px",
-                  mb:1
+                  fontSize: '14px',
+                  mb: 1,
                 }}
               >
                 {label}
               </Box>
-
-              {/* Icon and Document Name */}
               <Box display="flex" alignItems="center" gap={1}>
                 <InsertPhotoIcon sx={{ color: '#737373' }} />
                 <Typography color="black" fontWeight="500" fontSize="18px">
@@ -85,8 +82,6 @@ const DocumentModal = ({ open, handleClose }) => {
                 </Typography>
               </Box>
             </Box>
-
-            {/* More Options Icon at Bottom-Right Corner */}
             <IconButton
               sx={{
                 position: 'absolute',
@@ -98,26 +93,65 @@ const DocumentModal = ({ open, handleClose }) => {
             </IconButton>
           </Box>
         ))}
+
+        {/* Add New Documents Button */}
+        <Button
+          sx={{
+            width: '100%',
+            height: '48px',
+            bgcolor: '#40A39B',
+            color: 'white',
+            padding: '14px 16px',
+            gap: '8px',
+            borderRadius: '8px',
+            mt: 3,
+          }}
+          onClick={handleAddNew}
+        >
+          Add New Documents
+        </Button>
       </Box>
     </Modal>
   );
 };
 
 const App = () => {
-  const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [showAddNew, setShowAddNew] = useState(false);
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpenModal(true);
+  const handleClose = () => {
+    setOpenModal(false);
+    setShowAddNew(false);
+  };
+
+  const handleAddNew = () => {
+    setShowAddNew(true);
+  };
 
   return (
     <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
-      {/* Button to open DocumentModal */}
       <Button variant="contained" onClick={handleOpen}>
         Open Documents
       </Button>
 
-      {/* DocumentModal component */}
-      <DocumentModal open={open} handleClose={handleClose} />
+      {/* Show either DocumentModal or AddNewDocument */}
+      {showAddNew ? (
+        <Modal open={showAddNew} onClose={handleClose} aria-labelledby="add-document-modal">
+          <Box
+            sx={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+            }}
+          >
+            <AddNewDocument handleClose={handleClose} />
+          </Box>
+        </Modal>
+      ) : (
+        <DocumentModal open={openModal} handleClose={handleClose} handleAddNew={handleAddNew} />
+      )}
     </Box>
   );
 };
