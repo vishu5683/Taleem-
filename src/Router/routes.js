@@ -32,7 +32,9 @@ const AddAccountModal = lazy(() => import("../components/my classes dashboard/Ad
 const ManageProfileModal = lazy(() => import("../components/my classes dashboard/manageprofile"));
 const Profile = lazy(() => import("../components/my classes dashboard/profile"));
 const ProfileUpdate = lazy(() => import("../components/my classes dashboard/updateprofile"));
-const TestUI= lazy(() => import("../components/Tutor/ratecards/AddRateCards"));
+const AddRateCard= lazy(() => import("../components/Tutor/ratecards/AddRateCards"));
+const AcademicRatecard= lazy(() => import("../components/Tutor/ratecards/ratecard"));
+const TestUI= lazy(() => import("../components/Tutor/ratecards/ratecard"));
 const StatusTutor = lazy(() => import("../components/sidebar options/StatusTutor"));
 const ReviewPopup = lazy(() => import("../components/sidebar options/ReviewPopup"));
 const ClassesLink = lazy(() => import("../components/sidebar options/ClassesLink"));
@@ -105,25 +107,39 @@ const ROUTES = [
     isPrivate: true,
   },
   {
+    name: "AcademicRatecard",
+    path: "/academic_ratecard",
+    id: 2,
+    Component: AcademicRatecard ,
+    isPrivate: false,
+  },
+  {
+    name: "AddRateCard",
+    path: "/add_rate_card/:id",
+    id: 2,
+    Component: AddRateCard ,
+    isPrivate: false,
+  },
+  {
     name: "Test UI",
     path: "/testui",
     id: 2,
     Component: TestUI ,
-    isPrivate: true,
+    isPrivate: false,
   },
   {
     name: "Privacy Policy",
     path: "/privacypolicy",
     id: 3,
     Component: PrivacyPolicy,
-    isPrivate: true,
+    isPrivate: false,
   },
   {
     name: "Contact Us",
     path: "/contactus",
     id: 4,
     Component: ContactUs,
-    isPrivate: true,
+    isPrivate: false,
   },
   {
     name: "My Class",
@@ -139,7 +155,7 @@ const ROUTES = [
     path: "/faq",
     id: 6,
     Component: FaqSidebar,
-    isPrivate: true,
+    isPrivate: false,
   },
   {
     name: "Add Account",

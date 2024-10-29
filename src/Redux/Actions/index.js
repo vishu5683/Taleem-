@@ -173,6 +173,7 @@ export const sendMobileOtpLogin = (value, callback) => {
 };
 
 export const verifyMobileOtpLogin = (value, callback) => {
+  console.log(value,"value")
   return (dispatch) => {
     Utils.api.postApiCall(
       `${Utils.EndPoint.verifyMobileOtpLogin}`,

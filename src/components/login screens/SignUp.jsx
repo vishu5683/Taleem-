@@ -60,11 +60,12 @@ useEffect(()=>{localStorage.clear()},[])
     onSubmit: (values) => {
       setIsSubmitting(true); // Disable the submit button after submission
       values.country_code = countryCode;
-      console.log(values, "resss", isStudent);
+      const phoneWithoutCountryCode = values?.mobile_no.replace(new RegExp(`^\\+?${values?.country_code}`), '');
+      console.log(values, "resss", phoneWithoutCountryCode);
       let payload = {
         name: values?.name,
         email: values?.email,
-        mobile_no: values?.mobile_no,
+        mobile_no: phoneWithoutCountryCode,
         gender: values?.gender,
         user_type: `${isStudent}`,
         dob: values?.dob,
@@ -79,8 +80,9 @@ useEffect(()=>{localStorage.clear()},[])
               user: `${isStudent}`,
               type: "signup",
               ismob: true,
-              data: values?.mobile_no,
+              data: phoneWithoutCountryCode,
               user_type: `${isStudent}`,
+              country_code:values?.country_code,
             });
             // navigate("/home");
             setOtpOpen(true);
@@ -219,12 +221,14 @@ useEffect(()=>{localStorage.clear()},[])
               value={formik.values.mobile_no}
               onChange={(phone, country) => {
                 setCountryCode(country.dialCode);
+                
                 formik.setFieldValue(
                   "mobile_no",
                   phone
                   // .replace(/^[0-9]{2}/, "")
                 );
               }}
+             
               inputProps={{
                 name: "mobile_no",
                 required: true,
