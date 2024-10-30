@@ -20,6 +20,8 @@ const Profile = () => {
   useEffect(() => {
     dispatch(getProfile());
   }, []);
+
+  
   // Function to handle "Edit" button click and navigate to the profile update route
   const handleEditClick = () => {
     navigate("/profileupdate"); // Navigate to /profileupdate

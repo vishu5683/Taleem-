@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Grid, Box, Typography, Button, IconButton } from '@mui/material';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -10,6 +10,8 @@ import PromotionalBanner from "../common comps/promotionalbanner";
 import img1 from "../../assets/homepage/12.svg";
 import img2 from "../../assets/homepage/34.svg";
 import img3 from "../../assets/homepage/56.svg";
+import { getProfile } from '../../Redux/Actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 // Reusable ClassBanner Component
 const ClassBanner = ({ title, grade, date, teacher, location, buttonText }) => (
@@ -71,7 +73,14 @@ const ClassBanner = ({ title, grade, date, teacher, location, buttonText }) => (
 
 const MainPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const getProfileData = useSelector(
+    (state) => state.getProfileReducer?.getProfileData
+  );
 
+  useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
   const handleImageClick = (route) => {
     navigate(route);
   };
@@ -108,9 +117,9 @@ const MainPage = () => {
         >
           {/* Left-aligned content in a column layout */}
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0, ml: { xs: 0, md: 3 } }}>
-            <Typography variant="h6" fontWeight="500" fontSize="16px" color="black">
-              Hello Naseem
-            </Typography>
+          <Typography variant="h6" fontWeight="500" fontSize="16px" color="black">
+      Hello {getProfileData?.name}
+    </Typography>
             <Typography variant="body2" fontWeight="400" fontSize="12px" color="black">
               Grade Detail
             </Typography>

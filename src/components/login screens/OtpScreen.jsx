@@ -12,7 +12,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { verifyMobileOtpLogin } from "../../Redux/Actions";
-import toast from "react-hot-toast";
 import CountdownTimer from "../reusables/countdownTimer";
 
 const OtpScreen = ({
@@ -27,126 +26,80 @@ const OtpScreen = ({
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const otpRefs = useRef([]); // Create a ref array to store OTP input references
-  const [otp, setOtp] = useState(Array(4).fill("")); // Initialize OTP state
+  const otpRefs = useRef([]);
+  const [otp, setOtp] = useState(Array(4).fill(""));
   const [isDisplayResend, setIsDisplayResend] = useState(false);
-  const handleComplete = () => {
-    setIsDisplayResend(true);
+
+  const startTimer = () => {
+    setIsDisplayResend(false); // Disable the resend button
   };
+
+  const handleComplete = () => {
+    setIsDisplayResend(true); // Enable the resend button after 30 seconds
+  };
+
   useEffect(() => {
-  }, [data]);
-
-  // const handleChange = (index, value) => {
-  //   if (value.length <= 1) {
-  //     const newOtp = [...otp];
-  //     newOtp[index] = value;
-  //     setOtp(newOtp);
-
-  //     // Move focus to the next input field
-  //     if (value && index < otp.length - 1) {
-  //       otpRefs.current[index + 1].focus();
-  //     }
-  //   }
-  // };
-
-  // const handleKeyDown = (e, index) => {
-  //   // Handle backspace to shift focus to the previous input field
-  //   if (e.key === "Backspace" && index > 0 && !otp[index]) {
-  //     otpRefs.current[index - 1].focus();
-  //   }
-  // };
+    startTimer(); // Start the timer on component load
+  }, []);
 
   const handleChange = (index, value) => {
-    if (value.length <= 1) {
+    if (/^\d$/.test(value)) { // Allow only numbers
       const newOtp = [...otp];
       newOtp[index] = value;
       setOtp(newOtp);
-  
-      // Move focus to the next input field
-      if (value && index < otp.length - 1) {
+
+      // Move focus to the next input field if not the last input
+      if (index < otp.length - 1 && value !== "") {
         otpRefs.current[index + 1].focus();
       }
-  
-      // If the OTP is complete, verify it automatically
-      // if (newOtp.every((digit) => digit)) {
-      //   handleVerify();
-      // }
     }
   };
+
   const handleKeyDown = (e, index) => {
-    // Handle backspace to shift focus to the previous input field
-    if (e.key === "Backspace" && index > 0 && !otp[index]) {
-      otpRefs.current[index - 1].focus();
+    if (e.key === "Backspace") {
+      const newOtp = [...otp];
+      newOtp[index] = ""; // Clear the current input
+      setOtp(newOtp);
+
+      // Move focus to the previous input field if it exists
+      if (index > 0) {
+        otpRefs.current[index - 1].focus();
+      }
+    } else if (e.key === "Enter" && index === otp.length - 1) {
+      // Trigger OTP verification when Enter is pressed on the last input
+      handleVerify();
     }
+  };
+
+  const handleResend = () => {
+    startTimer(); // Restart the timer when "Resend" is clicked
+    // Implement your resend OTP logic here
   };
 
   const handleVerify = () => {
     let payload = {
-      otp: otp.join(''),
+      otp: otp.join(""),
       type: data?.ismob ? "mobile_no" : "email",
       field_value: data?.data,
       action: data?.type,
-      token: data?.token, // recieved in sendOtp api
-      country_code:data?.country_code,
+      token: data?.token,
+      country_code: data?.country_code,
     };
 
     dispatch(
       verifyMobileOtpLogin(payload, (res) => {
-        if (res?.status == 200) {
+        if (res?.status === 200) {
           localStorage.setItem("token", res?.data?.data?.token);
           localStorage.setItem("user", JSON.stringify(res?.data?.data));
-          if (data?.type == "signup" && data?.user == 3) {
+          if (data?.type === "signup" && data?.user === 3) {
             handleClose();
             tutorsInfoOpen();
           } else {
             navigate("/home", { isStudent });
           }
-        } else {
         }
       })
     );
-  };
-
-  const handleReverify = () => {
-    let payload = {
-      otp: "1234",
-      type: data?.ismob ? "mobile_no" : "email",
-      field_value: data?.data,
-      action: data?.type,
-      token: data?.token, // recieved in sendOtp api
-    };
-
-    // dispatch(
-    //   sendMobileOtpSignup(payload, (res) => {
-    //     setData({
-    //       token: res?.data?.data?.token,
-    //       user: isStudent,
-    //       type: "login",
-    //       ismob: true,
-    //       data: mobileNumber,
-    //     });
-    //     setOtpOpen(true);
-    //   })
-    // );
-
-    // dispatch(
-    //   verifyMobileOtpLogin(payload, (res) => {
-    //     if (res?.status == 200) {
-    //       localStorage.setItem("token", res?.data?.data?.token);
-    //       localStorage.setItem("user", JSON.stringify(res?.data?.data));
-    //       if (data?.type == "signup" && data?.user == 3) {
-    //         handleClose();
-    //         tutorsInfoOpen();
-    //       } else {
-    //         navigate("/home", { isStudent });
-    //       }
-    //     } else {
-    //     }
-    //   })
-    // );
-
-    // Here you can add any OTP verification logic
-    // For now, we'll just navigate to /home
   };
 
   return (
@@ -168,7 +121,6 @@ const OtpScreen = ({
           textAlign: "center",
         }}
       >
-        {/* Cancel Button */}
         <IconButton
           onClick={handleClose}
           sx={{
@@ -184,7 +136,6 @@ const OtpScreen = ({
           <CloseIcon sx={{ color: "#5F6368" }} />
         </IconButton>
 
-        {/* Title */}
         <Typography
           variant="h6"
           fontWeight={700}
@@ -194,7 +145,6 @@ const OtpScreen = ({
           Enter OTP
         </Typography>
 
-        {/* Description */}
         <Typography
           variant="body1"
           mb={3}
@@ -205,7 +155,6 @@ const OtpScreen = ({
           mobile number.
         </Typography>
 
-        {/* OTP Input Fields */}
         <Stack
           direction="row"
           spacing={1}
@@ -245,22 +194,25 @@ const OtpScreen = ({
           >
             <CountdownTimer time="30" handleComplete={handleComplete} />
           </Typography>
-          {/* {isDisplayResend && ( */}
-            <Typography
-              color="#B4B4B4"
-              sx={{ cursor: "pointer", fontSize: { xs: "12px", sm: "14px" } }}
-              onClick={() => {
-                handleVerify();
-                handleComplete();
-              }}
-            >
-              Don't receive Yet?
-              <span style={isDisplayResend ? {color:"#40A39B"} : {color:"#B4B4B4"}}>Resend</span> 
-            </Typography>
-          {/* )} */}
+          <Typography
+            color={isDisplayResend ? "#40A39B" : "#B4B4B4"}
+            sx={{
+              cursor: isDisplayResend ? "pointer" : "default",
+              fontSize: { xs: "12px", sm: "14px" },
+            }}
+            onClick={() => {
+              if (isDisplayResend) {
+                handleResend();
+              }
+            }}
+          >
+            Don’t receive yet?{" "}
+            <span style={{ color: isDisplayResend ? "#40A39B" : "#B4B4B4" }}>
+              Resend
+            </span>
+          </Typography>
         </Box>
 
-        {/* Verify OTP Button */}
         <Button
           fullWidth
           onClick={handleVerify}

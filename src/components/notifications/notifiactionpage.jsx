@@ -53,7 +53,7 @@ const NotificationPage = () => {
       >
         Home
       </Link>
-      <span style={{ fontWeight: 400, fontSize: '12px', color: '#000000' }}>
+      <span style={{ fontWeight: 700, fontSize: '12px', color: '#000000' }}>
         {' > Notifications'}
       </span>
     </Typography>

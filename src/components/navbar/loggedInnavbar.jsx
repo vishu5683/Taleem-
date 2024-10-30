@@ -19,6 +19,8 @@ import logo from '../../assets/navbar/nav logo.png';
 import avatarImage from '../../assets/navbar/image.png';
 import DropdownProfileMenu from './DropdownProfileMenu';
 import NotificationPopup from './NotificationPopup.jsx';
+import { getProfile } from '../../Redux/Actions/index.js';
+import { useDispatch, useSelector } from 'react-redux';
 
 const LoggedInNavbar = () => {
   const location = useLocation();
@@ -27,6 +29,15 @@ const LoggedInNavbar = () => {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
 
   const navigate = useNavigate(); // Initialize navigate
+  const dispatch = useDispatch();
+  const getProfileData = useSelector(
+    (state) => state.getProfileReducer?.getProfileData
+  );
+
+  useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
+
 
   const handleOpenLanguage = (event) => {
     setAnchorElLanguage(event.currentTarget);
@@ -185,7 +196,10 @@ const LoggedInNavbar = () => {
             <Notifications />
           </IconButton>
           <Avatar alt="Naseem" src={avatarImage} sx={{ marginLeft: '8px' }} />
-          <DropdownProfileMenu userName="Naseem" onClose={closeModals} />
+          <DropdownProfileMenu 
+      userName={getProfileData?.name} 
+      onClose={closeModals} 
+    />
         </Box>
 
         {/* Mobile Menu Icon */}
