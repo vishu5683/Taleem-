@@ -1,6 +1,8 @@
 import React from 'react';
-import { Box, Typography, TextField, IconButton } from '@mui/material';
+import { Box, Typography, IconButton } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import WatchLaterIcon from '@mui/icons-material/WatchLater';
+import AddIcon from '@mui/icons-material/Add';
 
 const BookYourSession = () => {
   return (
@@ -83,9 +85,68 @@ const BookYourSession = () => {
       </Box>
 
       {/* Availability Label */}
-      <Typography fontWeight="500" fontSize="14px">
+      <Typography fontWeight="500" fontSize="14px" mt={2}>
         Add your time for Online availability
       </Typography>
+
+      {/* Time Slot Box with Add Button */}
+      <Box display="flex" alignItems="center" gap={1} mt={1}>
+        {/* Time Slot Box */}
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+          sx={{
+            width: '673px',
+            padding: '10px 12px',
+            bgcolor: '#EBFFFC',
+            borderRadius: '8px',
+          }}
+        >
+          {/* Time Icon and Time Text */}
+          <Box display="flex" alignItems="center" gap={1}>
+            <WatchLaterIcon sx={{ fontSize: '19px', color: '#737373' }} />
+            <Typography fontSize="14px" color="#737373">
+              01:30 PM - 02:30 PM
+            </Typography>
+          </Box>
+
+          {/* Daily Dropdown Box */}
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+            sx={{
+              width: '65px',
+              padding: '5px 7px',
+              bgcolor: '#FFFFFF',
+              borderRadius: '8px',
+              border: '1px solid #737373',
+            }}
+          >
+            <Typography fontSize="12px" color="#737373">
+              Daily
+            </Typography>
+            <KeyboardArrowDownIcon sx={{ fontSize: '18px', color: '#737373' }} />
+          </Box>
+        </Box>
+
+        {/* Add Button */}
+        <IconButton
+          sx={{
+            width: '46px',
+            height: '46px',
+            bgcolor: '#40A39B',
+            borderRadius: '8px',
+            color: 'white',
+            '&:hover': {
+              bgcolor: '#369487',
+            },
+          }}
+        >
+          <AddIcon />
+        </IconButton>
+      </Box>
     </Box>
   );
 };
