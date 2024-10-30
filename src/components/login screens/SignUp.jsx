@@ -76,6 +76,7 @@ useEffect(()=>{localStorage.clear()},[])
           if (val?.data?.data?.token !== "") {
             localStorage.setItem("user", isStudent);
             setData({
+              ...payload,
               token: val?.data?.data?.token,
               user: `${isStudent}`,
               type: "signup",

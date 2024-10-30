@@ -23,6 +23,7 @@ const ActionName = {
      getProfile:"getProfile",
      updateProfile:"updateProfile",
      updateTutorProfile:"updateTutorProfile",
+     updateTutorDocument:"updateTutorDocument",
 };
 
 export default ActionName;

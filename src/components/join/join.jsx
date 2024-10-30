@@ -166,7 +166,7 @@ const Join = () => {
           </Box>
         </Box>
       </Box>
-      <button onClick={()=>{ setUploadDocumentOpen(true);}}>Here</button>
+      {/* <button onClick={()=>{ setUploadDocumentOpen(true);}}>Here</button> */}
       {/* Modal Component */}
       <LoginWithStudent
         open={open}

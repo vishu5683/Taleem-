@@ -18,6 +18,7 @@ const EndPoint = {
 
     //Profile api's
     getProfile:"profile-details",
-    updateTutorProfile:"update-tutor-profile",
+    updateTutorProfile:"tutor/update-tutor-profile",
+    updateTutorDocument:"tutor/documents",
 };
 export default EndPoint;
