@@ -34,7 +34,6 @@ const OtpScreen = ({
     setIsDisplayResend(true);
   };
   useEffect(() => {
-    console.log(data,"valueDATA");
   }, [data]);
 
   // const handleChange = (index, value) => {

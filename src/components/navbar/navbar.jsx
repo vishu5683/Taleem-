@@ -87,7 +87,7 @@ const Navbar = () => {
           }}
           onClick={() => {
             handleOpen();
-            setStudent(3);
+            setStudent(1);
           }}
         >
           Book a tutor
@@ -243,7 +243,7 @@ const Navbar = () => {
             }}
             onClick={() => {
               handleOpen();
-              setStudent(3);
+              setStudent(1);
             }}
           >
             Book a tutor

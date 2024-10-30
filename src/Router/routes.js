@@ -33,6 +33,7 @@ const ManageProfileModal = lazy(() => import("../components/my classes dashboard
 const Profile = lazy(() => import("../components/my classes dashboard/profile"));
 const ProfileUpdate = lazy(() => import("../components/my classes dashboard/updateprofile"));
 const AddRateCard= lazy(() => import("../components/Tutor/ratecards/AddRateCards"));
+const rateCard= lazy(() => import("../components/Tutor/ratecards/ratecard"));
 const AcademicRatecard= lazy(() => import("../components/Tutor/ratecards/ratecard"));
 const TestUI= lazy(() => import("../components/Tutor/ratecards/ratecard"));
 const StatusTutor = lazy(() => import("../components/sidebar options/StatusTutor"));
@@ -104,22 +105,30 @@ const ROUTES = [
     path: "/termsofservice",
     id: 2,
     Component: Terms,
-    isPrivate: true,
+    isPrivate: false,
   },
   {
     name: "AcademicRatecard",
     path: "/academic_ratecard",
     id: 2,
     Component: AcademicRatecard ,
-    isPrivate: false,
+    isPrivate: true,
   },
   {
     name: "AddRateCard",
     path: "/add_rate_card/:id",
     id: 2,
     Component: AddRateCard ,
-    isPrivate: false,
+    isPrivate: true,
   },
+  {
+    name: "rateCard",
+    path: "/ratecard",
+    id: 2,
+    Component: rateCard ,
+    isPrivate: true,
+  },
+  
   {
     name: "Test UI",
     path: "/testui",

@@ -273,7 +273,7 @@ const LoginWithEmail = ({
 
         {/* Google Login */}
         <Button
-          onClick={() => console.log("Login with Google")}
+          onClick={() => alert("Comming Soon")}
           sx={{
             backgroundColor: "transparent",
             color: "#242424",

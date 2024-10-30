@@ -49,12 +49,17 @@ const LoginWithStudent = ({
     }
   }, [isStudent]);
 
-  useEffect(()=>{localStorage.clear()},[])
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
 
   const handleChange = (event) => setRole(event.target.value);
 
   const handleGetStarted = () => {
-    const phoneWithoutCountryCode = mobileNumber.replace(new RegExp(`^\\+?${countryCode}`), '');
+    const phoneWithoutCountryCode = mobileNumber.replace(
+      new RegExp(`^\\+?${countryCode}`),
+      ""
+    );
     let payload = {
       type: "mobile_no",
       field_value: phoneWithoutCountryCode,
@@ -196,6 +201,7 @@ const LoginWithStudent = ({
               >
                 <MenuItem value="student">Student</MenuItem>
                 <MenuItem value="parent">Parent</MenuItem>
+                <MenuItem value="tutor">Tutor</MenuItem>
               </Select>
             ) : (
               <Select
@@ -225,6 +231,8 @@ const LoginWithStudent = ({
                 }}
               >
                 <MenuItem value="tutor">Tutor</MenuItem>
+                <MenuItem value="student">Student</MenuItem>
+                <MenuItem value="parent">Parent</MenuItem>
               </Select>
             )}
           </FormControl>
@@ -252,7 +260,7 @@ const LoginWithStudent = ({
           <PhoneInput
             country={"om"} // Set default country code
             value={mobileNumber}
-            onChange={(phone,country) => {
+            onChange={(phone, country) => {
               setMobileNumber(phone);
               // Extract country code from the phone input
               setCountryCode(country.dialCode); // Update country code
@@ -286,7 +294,7 @@ const LoginWithStudent = ({
 
         {/* Google Login Button */}
         <Button
-          onClick={() => console.log("Login with Google")}
+          onClick={() => alert("Comming Soon")}
           sx={{
             backgroundColor: "transparent",
             color: "#242424",

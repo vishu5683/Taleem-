@@ -54,10 +54,8 @@ const TutorsInfo = ({
   var expertiseOptions = useSelector(
     (state) => state.expertiseReducer?.expertiseData?.rows
   );
-  console.log(expertiseOptions, "expertiseOptions435");
 
   useEffect(() => {
-    console.log(token, "TOKENNNN");
     if (token && token !== null) {
       dispatch(
         expertise((res) => {

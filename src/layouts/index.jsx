@@ -7,7 +7,7 @@ import LoggedInFooter from '../components/footer/loggedInFooter';
 import LoggedInNavbar from "../components/navbar/loggedInnavbar"
 const Layout = ({ children }) => {
   const location = useLocation();
-  const noLayoutRoutes = ['/']; 
+  const noLayoutRoutes = ['/','/termsofservice','/privacypolicy','/contactus']; 
 
   const shouldDisplayLayout = !noLayoutRoutes.includes(location.pathname);
 
