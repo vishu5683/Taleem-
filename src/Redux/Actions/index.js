@@ -387,6 +387,28 @@ export const updateProfile = (data,callback) => {
   };
 };
 
+export const updateTutorProfile = (data,callback) => {
+  return (dispatch) => {
+    Utils.api.putApiCall(
+      Utils.EndPoint.getProfile,
+      data,
+      (resData) => {
+        if (resData.status) {
+          dispatch({
+            type: Utils.actionName.updateTutorProfile,
+            payload: {
+              updateTutorProfileData: resData?.data,
+            },
+          });
+          callback(resData?.data);
+        } else {
+        }
+      },
+      (error) => {}
+    );
+  };
+};
+
 export const setFormData = (data) => ({
   type: Utils.actionName.SET_FORM_DATA,
   payload: data,

@@ -21,12 +21,14 @@ import {
   expertise,
   grades,
   qualifications,
+  updateTutorProfile,
 } from "../../Redux/Actions";
 import Utils from "../../Utils";
 
 const TutorsInfo = ({
   open,
   handleClose,
+  data,setData,
   uploadDocumentOpen,
   tutorsData,
   setTutorsData,
@@ -80,9 +82,45 @@ const TutorsInfo = ({
     initialValues,
     validationSchema,
     onSubmit: (values) => {
+      let payload={
+        name: "Tutor 7799",
+   qualification: [
+          {
+           id: 2,
+           name: "Post Graduate"
+          }
+      ],
+   occupation: "teacher",
+   experience: "15",
+   grades: [
+          {
+           id: 1,
+           name: "Primary"
+          },
+                 {
+           id: 2,
+           name: "Secondary"
+          }
+      ],
+   other_grades: "",
+   expertise: [
+          {
+           id: 1,
+           name: "Mathematics"
+          },
+          {
+           id: 2,
+           name: "Algebra"
+          }
+      ],
+   academic_document: "test",
+   address_proof: "",
+   id_photo: "testing"
+  }
       console.log(values, "Values");
       setTutorsData(values)
       setIsSubmitting(true);
+      dispatch(updateTutorProfile(values))
       setTimeout(() => {
         setIsSubmitting(false);
         handleClose();
@@ -160,7 +198,7 @@ const TutorsInfo = ({
     const selectedQualifications = value
       .map((qualId) => {
         // Find the selected qualification in qualificationsOptions
-        const selectedQualification = qualificationsOptions.find(
+        const selectedQualification = qualificationsOptions?.find(
           (qual) => qual.id === qualId
         );
         return selectedQualification

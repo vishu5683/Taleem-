@@ -22,6 +22,7 @@ const ActionName = {
      //Profile
      getProfile:"getProfile",
      updateProfile:"updateProfile",
+     updateTutorProfile:"updateTutorProfile",
 };
 
 export default ActionName;
