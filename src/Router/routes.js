@@ -34,7 +34,7 @@ const Profile = lazy(() => import("../components/my classes dashboard/profile"))
 const ProfileUpdate = lazy(() => import("../components/my classes dashboard/updateprofile"));
 const AddRateCard= lazy(() => import("../components/Tutor/ratecards/AddRateCards"));
 const AcademicRatecard= lazy(() => import("../components/Tutor/ratecards/ratecard"));
-const TestUI= lazy(() => import("../components/Tutor/ratecards/ratecard"));
+const TestUI= lazy(() => import("../components/Tutor/bookyoursessions/BookYourSession"));
 const StatusTutor = lazy(() => import("../components/sidebar options/StatusTutor"));
 const ReviewPopup = lazy(() => import("../components/sidebar options/ReviewPopup"));
 const ClassesLink = lazy(() => import("../components/sidebar options/ClassesLink"));
