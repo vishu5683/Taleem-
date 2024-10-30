@@ -387,25 +387,50 @@ export const updateProfile = (data,callback) => {
   };
 };
 
-export const updateTutorProfile = (data,callback) => {
+export const updateTutorProfile = (data,func,callback) => {
   return (dispatch) => {
     Utils.api.putApiCall(
-      Utils.EndPoint.getProfile,
+      Utils.EndPoint.updateTutorProfile,
       data,
       (resData) => {
         if (resData.status) {
+          callback(resData?.data);
           dispatch({
             type: Utils.actionName.updateTutorProfile,
             payload: {
               updateTutorProfileData: resData?.data,
             },
           });
-          callback(resData?.data);
         } else {
         }
       },
       (error) => {}
     );
+    func();
+  };
+};
+
+export const updateTutorDocument = (data,func,callback) => {
+  console.log(data,"sdghisbdjhkasbdjhk")
+  return (dispatch) => {
+    Utils.api.putApiCall(
+      Utils.EndPoint.updateTutorDocument,
+      data,
+      (resData) => {
+        if (resData.status) {
+          callback(resData?.data);
+          dispatch({
+            type: Utils.actionName.updateTutorDocument,
+            payload: {
+              updateTutorDocumentData: resData?.data,
+            },
+          });
+        } else {
+        }
+      },
+      (error) => {}
+    );
+    func()
   };
 };
 
