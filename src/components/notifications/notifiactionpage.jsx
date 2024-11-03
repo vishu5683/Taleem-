@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Typography, useMediaQuery } from '@mui/material';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import SchoolIcon from '@mui/icons-material/School';
 import { useTheme } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProfile } from '../../Redux/Actions';
+
 const NotificationPage = () => {
+  const dispatch = useDispatch();
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
+  const getProfileData = useSelector(
+    (state) => state.getProfileReducer?.getProfileData
+  );
+
+  useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
+
+  // Render notifications only after profile data is loaded
+  if (!getProfileData) return null;
 
   const notifications = [
     { message: "100 Riyals money added in your wallet", time: "today", type: "wallet" },
@@ -35,28 +49,28 @@ const NotificationPage = () => {
   return (
     <div style={{ padding: '20px', marginLeft: isSmallScreen ? '10px' : '50px', marginRight: isSmallScreen ? '10px' : '50px' }}>
       <Typography
-      variant="h6"
-      style={{
-        fontWeight: 700,
-        marginBottom: '16px',
-        fontSize: isSmallScreen ? '14px' : '18px',
-      }}
-    >
-      <Link
-        to="/home"
+        variant="h6"
         style={{
-          textDecoration: 'none',
-          fontWeight: 400,
-          fontSize: '12px',
-          color: '#737373',
+          fontWeight: 700,
+          marginBottom: '16px',
+          fontSize: isSmallScreen ? '14px' : '18px',
         }}
       >
-        Home
-      </Link>
-      <span style={{ fontWeight: 700, fontSize: '12px', color: '#000000' }}>
-        {' > Notifications'}
-      </span>
-    </Typography>
+        <Link
+          to="/home"
+          style={{
+            textDecoration: 'none',
+            fontWeight: 400,
+            fontSize: '12px',
+            color: '#737373',
+          }}
+        >
+          Home
+        </Link>
+        <span style={{ fontWeight: 700, fontSize: '12px', color: '#000000' }}>
+          {' > Notifications'}
+        </span>
+      </Typography>
       <Typography variant="h4" style={{ fontWeight: 700, fontSize: isSmallScreen ? '24px' : '32px', marginBottom: '24px' }}>
         Notifications
       </Typography>
@@ -75,6 +89,7 @@ const NotificationPage = () => {
             padding: isSmallScreen ? '16px' : '0 24px',
             gap: '16px',
             justifyContent: isSmallScreen ? 'center' : 'space-between',
+            bgcolor: getProfileData?.user_type === "3" ? '#EBFFFC' : '#FFFFFF',  // Ensure user_type is checked as string
           }}
         >
           <Box sx={{ display: 'flex', alignItems: 'center', gap: '16px' }}>

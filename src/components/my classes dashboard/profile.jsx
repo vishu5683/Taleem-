@@ -211,12 +211,30 @@ const Profile = () => {
         </Box>
       </Box>
       {getProfileData?.user_type == 3 && (
-        <Box
-          className="bg-[#EBFFFC] h-12 p-4 pb-8 rounded-lg mt-8"
-          sx={{ display: "flex", flexDirection: "column", alignItems: "left" }}
-        >
-          <Typography>Meeting Preferences</Typography>
-        </Box>
+    
+
+      <Box
+        sx={{
+          width: '100%',
+          height: '76px',
+          backgroundColor: '#EBFFFC', // Background color
+          borderRadius: '12px', // Border radius
+          padding: '16px', // Padding for internal spacing
+          display: 'flex',
+          justifyContent: 'space-between', // Align text to the left and arrow to the right
+          alignItems: 'center', // Center vertically
+          marginTop: '35px', // Add margin-top equivalent to your `mt-8`
+        }}
+      >
+        {/* Left-side text */}
+        <Typography sx={{ fontWeight: 530, fontSize: '19px' }}>
+          Meeting Preference
+        </Typography>
+      
+        {/* Right arrow icon */}
+        <ArrowForwardIcon sx={{ fontSize: '24px', color: 'black' }} />
+      </Box>
+      
       )}
     </MyClassLayout>
   );
