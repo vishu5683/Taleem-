@@ -13,6 +13,7 @@ import {
   getStudentProfile,
   getTutorProfile,
 } from "../../Redux/Actions";
+import ArrowForwardIcon from '@mui/icons-material/KeyboardArrowRight';
 
 const Profile = () => {
   const navigate = useNavigate(); // Initialize navigate hook
