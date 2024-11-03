@@ -251,7 +251,7 @@ const OtpScreen = ({
               color="#B4B4B4"
               sx={{ cursor: "pointer", fontSize: { xs: "12px", sm: "14px" } }}
               onClick={() => {
-                handleVerify();
+                // handleVerify();
                 handleComplete();
               }}
             >

@@ -24,6 +24,8 @@ const ActionName = {
      updateProfile:"updateProfile",
      updateTutorProfile:"updateTutorProfile",
      updateTutorDocument:"updateTutorDocument",
+     getTutorProfile:"getTutorProfile",
+     getStudentProfile:"getStudentProfile",
 };
 
 export default ActionName;

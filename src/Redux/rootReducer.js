@@ -11,6 +11,8 @@ import {
   gradesReducer,
   qualificationsReducer,
   getProfileReducer,
+  getTutorProfileReducer,
+  getStudentProfileReducer,
 } from "./Reducers";
 import loginFormReducer from "./Reducers/signupFormReducer";
 import {
@@ -35,6 +37,8 @@ let reducers = {
   qualificationsReducer,
   getProfileReducer,
   gradesReducer,
+  getTutorProfileReducer,
+  getStudentProfileReducer,
 };
 
 const rootReducer = combineReducers({

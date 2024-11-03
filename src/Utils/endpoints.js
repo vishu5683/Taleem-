@@ -18,6 +18,8 @@ const EndPoint = {
 
     //Profile api's
     getProfile:"profile-details",
+    getTutorProfile:"tutor/tutor-profile",
+    getStudentProfile:"student/student-detail",
     updateTutorProfile:"tutor/update-tutor-profile",
     updateTutorDocument:"tutor/documents",
 };

@@ -12,6 +12,7 @@ import OtpScreen from "../login screens/OtpScreen";
 import TutorsInfo from "../registerTutot/tutorInfo";
 import UploadDocument from "../registerTutot/uploadDocs";
 import WelcomeScreen from "../registerTutot/welcomeScreen";
+import { useTranslation } from "react-i18next";
 
 const Join = () => {
   const [open, setOpen] = useState(false);
@@ -26,6 +27,7 @@ const Join = () => {
   const [uploadDocumentOpen, setUploadDocumentOpen] = useState(false); // state for UploadDocument
   const [welcomeScreenOpen, setWelcomeScreenOpen] = useState(false); // state for WelcomeScreen
   const [tutorsData, setTutorsData] = useState({});
+  const { t, i18n } = useTranslation();
 
   const handleTutorsInfoSubmit = () => {
     setTutorsInfoOpen(false); // Close the TutorsInfo popup
@@ -39,6 +41,7 @@ const Join = () => {
 
   return (
     <Box className="join-container">
+       {/* <h1>{t('welcome')}</h1> */}
       {/* Get Started Heading */}
       <Typography
         sx={{
@@ -50,7 +53,7 @@ const Join = () => {
           color: "#40A39B",
         }}
       >
-        <span style={{ color: "#000000" }}>GET</span> Started!
+        <span style={{ color: "#000000" }}>{t('Get')}</span> {t('Started')}!
       </Typography>
 
       {/* Join with Students/Parents & Tutor */}
@@ -65,7 +68,7 @@ const Join = () => {
           color: "#737373",
         }}
       >
-        Join with Student/Parents & Tutor
+      {t('Join with Student')}
       </Typography>
 
       {/* Image Section */}
@@ -92,7 +95,7 @@ const Join = () => {
                 color: "#FFFFFF",
               }}
             >
-              Student / Parent
+              {t('Student')}/{t('Parent')}
             </Typography>
             <Button
               onClick={() => {
@@ -113,7 +116,7 @@ const Join = () => {
                 },
               }}
             >
-              Get Started
+              {t('Get Started')}
             </Button>
           </Box>
         </Box>
@@ -140,7 +143,7 @@ const Join = () => {
                 color: "#FFFFFF",
               }}
             >
-              Tutor
+              {t('Tutor')}
             </Typography>
             <Button
               sx={{
@@ -161,7 +164,7 @@ const Join = () => {
                 setStudent(3);
               }}
             >
-              Get Started
+              {t('Get Started')}
             </Button>
           </Box>
         </Box>
