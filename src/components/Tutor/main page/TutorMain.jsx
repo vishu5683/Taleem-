@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { Box, Typography, Button, Grid } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
 import PromotionalBanner from '../../common comps/promotionalbanner';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import SchoolIcon from '@mui/icons-material/School';
+import { useNavigate } from 'react-router-dom';
 import pic1 from "../../../assets/tutor main page/pic1.png";
 import pic2 from "../../../assets/tutor main page/pic2.png";
 import pic3 from "../../../assets/tutor main page/pic3.png";
 import pic4 from "../../../assets/tutor main page/pic4.png";
 import pic5 from "../../../assets/tutor main page/pic5.png";
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import SchoolIcon from '@mui/icons-material/School';
 
 const TabButton = ({ label, selected, onClick }) => (
   <Box
@@ -33,69 +34,72 @@ const TabButton = ({ label, selected, onClick }) => (
 );
 
 const ClassBanner = ({ title, grade, date, teacher, location, buttonText }) => (
-    <Box
-      sx={{
-        backgroundColor: 'white',
-        width: '100%',
-        borderRadius: '8px',
-        border: '1px solid #ccc',
-        display: 'flex',
-        flexDirection: { xs: 'column', md: 'row' },
-        justifyContent: 'space-between',
-        padding: '16px',
-        mb: 4,
-        position: 'relative', // Ensure positioning is possible
-      }}
-    >
-      <Box>
-        <Typography variant="h6" fontSize="16px" fontWeight="500" color="black">
-          {title}
-        </Typography>
-        <Typography variant="body2" fontSize="14px" fontWeight="400" color="black" mb={1}>
-          {grade}
-        </Typography>
-        <Box display="flex" flexDirection="column" gap={1} mt={1} color="#737373">
-          <Box display="flex" alignItems="center" gap={1}>
-            <CalendarTodayIcon style={{ width: '11px', height: '11px' }} />
-            <Typography variant="body2">{date}</Typography>
-          </Box>
-          <Box display="flex" alignItems="center" gap={1}>
-            <AccountCircleIcon style={{ width: '11px', height: '11px' }} />
-            <Typography variant="body2">{teacher}</Typography>
-          </Box>
-          <Box display="flex" alignItems="center" gap={1}>
-            <SchoolIcon style={{ width: '11px', height: '11px' }} />
-            <Typography variant="body2">{location}</Typography>
-          </Box>
+  <Box
+    sx={{
+      backgroundColor: 'white',
+      width: { xs: '100%', sm: '90%', md: '1143px' },
+      borderRadius: '8px',
+      border: '1px solid #ccc',
+      display: 'flex',
+      flexDirection: { xs: 'column', md: 'row' },
+      justifyContent: 'space-between',
+      padding: '16px',
+      mb: 4,
+      position: 'relative',
+    }}
+  >
+    <Box>
+      <Typography variant="h6" fontSize="16px" fontWeight="500" color="black">
+        {title}
+      </Typography>
+      <Typography variant="body2" fontSize="14px" fontWeight="400" color="black" mb={1}>
+        {grade}
+      </Typography>
+      <Box display="flex" flexDirection="column" gap={1} mt={1} color="#737373">
+        <Box display="flex" alignItems="center" gap={1}>
+          <CalendarTodayIcon style={{ width: '11px', height: '11px' }} />
+          <Typography variant="body2">{date}</Typography>
+        </Box>
+        <Box display="flex" alignItems="center" gap={1}>
+          <AccountCircleIcon style={{ width: '11px', height: '11px' }} />
+          <Typography variant="body2">{teacher}</Typography>
+        </Box>
+        <Box display="flex" alignItems="center" gap={1}>
+          <SchoolIcon style={{ width: '11px', height: '11px' }} />
+          <Typography variant="body2">{location}</Typography>
         </Box>
       </Box>
-      <Button
-        variant="contained"
-        sx={{
-          backgroundColor: '#40A39B',
-          borderRadius: '8px',
-          textTransform: 'none',
-          fontWeight: '500',
-          height: '36px',
-          position: { xs: 'static', md: 'absolute' }, // Static on small screens, absolute on larger ones
-          bottom: '16px',
-          right: '16px',
-          width: '100%',
-          maxWidth: { md: '228px' },
-          mt: { xs: 2, md: 0 }, // Space above the button on small screens
-        }}
-      >
-        {buttonText}
-      </Button>
     </Box>
-  );
-  
+    <Button
+      variant="contained"
+      sx={{
+        backgroundColor: '#40A39B',
+        borderRadius: '8px',
+        textTransform: 'none',
+        fontWeight: '500',
+        height: '36px',
+        position: { xs: 'static', md: 'absolute' },
+        bottom: '16px',
+        right: '16px',
+        width: '100%',
+        maxWidth: { md: '228px' },
+      }}
+    >
+      {buttonText}
+    </Button>
+  </Box>
+);
 
 const TutorMain = () => {
   const [selectedTab, setSelectedTab] = useState(0);
+  const navigate = useNavigate();
 
   const handleTabChange = (index) => {
     setSelectedTab(index);
+  };
+
+  const handleBoxClick = (path) => {
+    navigate(path);
   };
 
   return (
@@ -135,6 +139,7 @@ const TutorMain = () => {
               Setup your rate card and schedule
             </Typography>
           </Box>
+
           <Button
             variant="contained"
             sx={{
@@ -156,31 +161,43 @@ const TutorMain = () => {
           </Button>
         </Box>
 
-        <Grid container spacing={2} mb={3}>
-          {[pic1, pic2, pic3, pic4, pic5].map((pic, index) => (
-            <Grid item xs={6} sm={4} md={2.4} key={index}>
+        <Box
+          sx={{
+            display: 'flex',
+            gap: '10px',
+            justifyContent: 'space-between',
+            mb: 3,
+            overflowX: 'auto',
+            padding: { xs: '0', md: '10px 0' }
+          }}
+        >
+          {[{pic: pic1, path: '/myclasses'}, {pic: pic2, path: '/ratecard'}, {pic: pic3, path: '/schedulestudent'}, {pic: pic4, path: '/comingsoon'}, {pic: pic5, path: '/tutorpackages'}].map((item, index) => (
+            <Box
+              key={index}
+              onClick={() => handleBoxClick(item.path)}
+              sx={{
+                width: '161px',
+                height: '105px',
+                backgroundColor: '#C6FFC9',
+                borderRadius: '11.75px',
+                display: 'flex',
+                alignItems: 'center',
+                paddingLeft: '20px',
+                cursor: 'pointer'
+              }}
+            >
               <Box
+                component="img"
+                src={item.pic}
+                alt={`icon-${index + 1}`}
                 sx={{
-                  width: '100%',
-                  height: '105px',
-                  backgroundColor: '#C6FFC9',
-                  borderRadius: '11.75px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  padding: '3px',
+                  maxWidth: '90%',
+                  maxHeight: '90%',
                 }}
-              >
-                <Box
-                  component="img"
-                  src={pic}
-                  alt={`icon-${index + 1}`}
-                  sx={{ maxWidth: '100%', maxHeight: '100%' }}
-                />
-              </Box>
-            </Grid>
+              />
+            </Box>
           ))}
-        </Grid>
+        </Box>
 
         <Typography
           sx={{
@@ -199,7 +216,6 @@ const TutorMain = () => {
             gap: '7px',
             justifyContent: 'center',
             mb: 3,
-            flexWrap: 'wrap',
           }}
         >
           {['All', 'Online', 'Face to Face', 'Group Sessions'].map((label, index) => (

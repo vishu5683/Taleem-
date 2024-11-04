@@ -3,7 +3,7 @@ import { Grid, Box, Typography, Button, IconButton } from '@mui/material';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SchoolIcon from '@mui/icons-material/School';
-import EditIcon from '@mui/icons-material/Edit';
+import EditIcon from '@mui/icons-material/ModeEditOutlineTwoTone';
 import { useNavigate } from 'react-router-dom';
 import PromotionalBanner from "../common comps/promotionalbanner";
 
@@ -139,7 +139,7 @@ const MainPage = () => {
                   justifyContent: 'center',
                 }}
               >
-                <Typography fontSize="12px" fontWeight="500" color="#4E4E4E">
+                <Typography fontSize="14px" fontWeight="400" color="#4E4E4E">
                   Primary
                 </Typography>
               </Box>
@@ -157,7 +157,7 @@ const MainPage = () => {
                   justifyContent: 'center',
                 }}
               >
-                <Typography fontSize="12px" fontWeight="500" color="#4E4E4E">
+                <Typography fontSize="14px" fontWeight="400" color="#4E4E4E">
                   6th
                 </Typography>
               </Box>
@@ -203,7 +203,17 @@ const MainPage = () => {
   ))}
 </Grid>
 
-
+<Typography
+  variant="h5"
+  sx={{
+    fontWeight: 600,
+    fontSize: '16px',
+    mb: 4,
+    textAlign: 'center',
+  }}
+>
+  Ongoing Class
+</Typography>
         {/* First Class Banner */}
         <ClassBanner
           title="Algebra for Primary Students"

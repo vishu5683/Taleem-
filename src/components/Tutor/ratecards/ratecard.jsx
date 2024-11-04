@@ -150,6 +150,7 @@
 import React, { useState } from 'react';
 import { Typography, Button, Box, Tabs, Tab } from '@mui/material';
 import MyClassLayout from '../../my classes dashboard/MyClassLayout';
+import { useNavigate } from 'react-router-dom';
 
 const RateCardItem = ({ title, details, isMultiline }) => (
   <Box
@@ -206,7 +207,8 @@ const RateCardItem = ({ title, details, isMultiline }) => (
 
 const RateCard = () => {
   const [selectedTab, setSelectedTab] = useState(0);
-
+  const navigate = useNavigate();
+  const id = 123; 
   const handleTabChange = (event, newValue) => setSelectedTab(newValue);
 
   // Sample data for each rate card
@@ -245,51 +247,62 @@ const RateCard = () => {
 
   return (
     <MyClassLayout>
-      <Box display="flex" flexDirection="column" alignItems="center" p={3} sx={{ fontFamily: 'Arial, sans-serif' }}>
+      <Box display="flex" flexDirection="column"  p={3} sx={{ fontFamily: 'Arial, sans-serif' }}>
         <Box display="flex" justifyContent="space-between" alignItems="center" width="100%" mb={2}>
           <Typography variant="h5" fontWeight="bold">Rate Card</Typography>
-          <Button 
-            variant="contained" 
-            sx={{
-              backgroundColor: '#40A39B',
-              color: '#fff',
-              borderRadius: "8px",
-              textTransform: "none",
-              padding: '10px 20px',
-              '&:hover': { backgroundColor: '#35948A' },
-            }}
-          >
-            Add Rate Card
-          </Button>
+          <Button
+      variant="contained"
+      sx={{
+        backgroundColor: '#40A39B',
+        color: '#fff',
+        borderRadius: '8px',
+        textTransform: 'none',
+        padding: '10px 20px',
+        '&:hover': { backgroundColor: '#35948A' },
+      }}
+      onClick={() => navigate(`/add_rate_card/${id}`)}
+    >
+      Add Rate Card
+    </Button>
         </Box>
 
         <Tabs
-          value={selectedTab}
-          onChange={handleTabChange}
-          indicatorColor="primary"
-          textColor="inherit"
-          sx={{
-            '& .MuiTab-root': {
-              color: '#737373',
-              textTransform: 'none',
-              borderRadius: "17px",
-              border:0,
-              padding: '5px 16px',
-              alignSelf:'flex-start'
-            },
-            '& .Mui-selected': {
-              backgroundColor: '#40A39B',
-              color: '#fff',
-            },
-            '& .MuiTabs-flexContainer': {
-              gap: 2,
-            },
-          }}
-        >
-          {['Academic', 'Recreational', 'Courses'].map((tabLabel, index) => (
-            <Tab key={tabLabel} label={tabLabel} />
-          ))}
-        </Tabs>
+  value={selectedTab}
+  onChange={handleTabChange}
+  textColor="inherit"
+  sx={{
+    '& .MuiTab-root': {
+      color: '#737373',
+      textTransform: 'none',
+      fontSize: '12px',          // Text size
+      fontWeight: 400,           // Text weight
+      borderRadius: '17px',
+      backgroundColor: '#fff',
+      border: '1px solid #E6E6E6', // Border color
+      padding: '3px 16px',       // Reduced padding to adjust height
+      minWidth: '108px',
+      height: 'auto',            // Slightly reduced height
+      alignSelf: 'flex-start',
+    },
+    '& .Mui-selected': {
+      backgroundColor: '#40A39B', // Green background for selected tab
+      color: '#000',              // Black text color on selected tab
+    },
+    '& .MuiTabs-flexContainer': {
+      justifyContent: 'flex-start',
+      gap: 2,
+    },
+    '& .MuiTabs-indicator': {
+      display: 'none', // Remove underline
+    },
+  }}
+>
+  {['Academic', 'Recreational', 'Courses'].map((tabLabel) => (
+    <Tab key={tabLabel} label={tabLabel} />
+  ))}
+</Tabs>
+
+
 
         {/* Display each Rate Card */}
         {rateCardData.map((card, index) => (

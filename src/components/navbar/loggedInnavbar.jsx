@@ -29,6 +29,16 @@ const LoggedInNavbar = () => {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
 
   const navigate = useNavigate(); // Initialize navigate
+
+
+  const handleRedirect = () => {
+    navigate('/myclasses');
+  };
+
+  const handleRedirectStudent = () => {
+    navigate('/schedulestudent');
+  };
+
   const dispatch = useDispatch();
   const getProfileData = useSelector(
     (state) => state.getProfileReducer?.getProfileData
@@ -150,13 +160,21 @@ const LoggedInNavbar = () => {
             Home
           </Typography>
 
-          <Typography variant="body1" sx={{ fontWeight: 400, fontSize: '16px', cursor: 'pointer' }}>
-            My Bookings
-          </Typography>
+          <Typography
+      variant="body1"
+      sx={{ fontWeight: 400, fontSize: '16px', cursor: 'pointer' }}
+      onClick={handleRedirect}
+    >
+      My Bookings
+    </Typography>
 
-          <Typography variant="body1" sx={{ fontWeight: 400, fontSize: '16px', cursor: 'pointer' }}>
-            Schedule
-          </Typography>
+    <Typography
+      variant="body1"
+      sx={{ fontWeight: 400, fontSize: '16px', cursor: 'pointer' }}
+      onClick={handleRedirectStudent}
+    >
+      Schedule
+    </Typography>
 
           <Box>
             <Typography
@@ -173,7 +191,7 @@ const LoggedInNavbar = () => {
               onClose={handleCloseLanguage}
             >
               <MenuItem onClick={closeModals}>English</MenuItem>
-              <MenuItem onClick={closeModals}>French</MenuItem>
+              <MenuItem onClick={closeModals}>Arabic</MenuItem>
             </Menu>
           </Box>
         </Box>

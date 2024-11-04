@@ -214,27 +214,30 @@ const Profile = () => {
       {getProfileData?.user_type == 3 && (
     
 
-      <Box
-        sx={{
-          width: '100%',
-          height: '76px',
-          backgroundColor: '#EBFFFC', // Background color
-          borderRadius: '12px', // Border radius
-          padding: '16px', // Padding for internal spacing
-          display: 'flex',
-          justifyContent: 'space-between', // Align text to the left and arrow to the right
-          alignItems: 'center', // Center vertically
-          marginTop: '35px', // Add margin-top equivalent to your `mt-8`
-        }}
-      >
-        {/* Left-side text */}
-        <Typography sx={{ fontWeight: 530, fontSize: '19px' }}>
-          Meeting Preference
-        </Typography>
-      
-        {/* Right arrow icon */}
-        <ArrowForwardIcon sx={{ fontSize: '24px', color: 'black' }} />
-      </Box>
+    <Box
+    sx={{
+      width: '100%',
+      height: '76px',
+      backgroundColor: '#EBFFFC',
+      borderRadius: '12px',
+      padding: '16px',
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginTop: '35px',
+      cursor: 'pointer', // Change cursor to pointer for better UX
+      '&:hover': { backgroundColor: '#DFF9F6' }, // Optional hover effect
+    }}
+    onClick={() => navigate('/meetingpreference')}
+  >
+    {/* Left-side text */}
+    <Typography sx={{ fontWeight: 530, fontSize: '19px' }}>
+      Meeting Preference
+    </Typography>
+
+    {/* Right arrow icon */}
+    <ArrowForwardIcon sx={{ fontSize: '24px', color: 'black' }} />
+  </Box>
       
       )}
     </MyClassLayout>

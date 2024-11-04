@@ -3,6 +3,7 @@ import { Box, Typography, Button, Divider } from '@mui/material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import EditIcon from '@mui/icons-material/Edit';
 import MyClassLayout from '../../my classes dashboard/MyClassLayout';
+import { useNavigate } from 'react-router-dom';
 
 const TabButton = ({ label, selected, onClick }) => (
   <Box
@@ -28,6 +29,7 @@ const TabButton = ({ label, selected, onClick }) => (
 const TutorPackages = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [expandedPackage, setExpandedPackage] = useState(null);
+  const navigate = useNavigate();
 
   const handleTabChange = (index) => {
     setSelectedTab(index);
@@ -52,21 +54,22 @@ const TutorPackages = () => {
         >
           <Typography sx={{ fontWeight: 600, fontSize: { xs: '20px', md: '24px' } }}>Packages</Typography>
           <Button
-            sx={{
-              width: { xs: '100%', sm: '186px' },
-              height: '44px',
-              padding: '12px 16px',
-              borderRadius: '8px',
-              backgroundColor: '#40A39B',
-              color: 'white',
-              mt: { xs: 2, sm: 0 },
-              '&:hover': {
-                backgroundColor: '#36a088',
-              },
-            }}
-          >
-            Add Package
-          </Button>
+      sx={{
+        width: { xs: '100%', sm: '186px' },
+        height: '44px',
+        padding: '12px 16px',
+        borderRadius: '8px',
+        backgroundColor: '#40A39B',
+        color: 'white',
+        mt: { xs: 2, sm: 0 },
+        '&:hover': {
+          backgroundColor: '#36a088',
+        },
+      }}
+      onClick={() => navigate('/addpackage')}
+    >
+      Add Package
+    </Button>
         </Box>
 
         {/* Tabs */}

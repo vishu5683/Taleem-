@@ -1,10 +1,23 @@
 import { lazy } from "react";
+// Component imports
 import MyClasses from "../components/sidebar options/myclasses";
 import Categories from "../components/Academic/categories";
 import CourseCategories from "../components/Academic/CourseCategories";
 import TutorDetails from "../components/Academic/TutorDetails";
-const NotFound=lazy(() => import("../components/notfound"));
-// Lazy imports for your existing components
+import ScheduleStudent from "../components/Tutor/bookyoursessions/ScheduleStudent";
+import ChatNotificationsPage from "../components/Tutor/chats/chatsListing";
+import AddPackage from "../components/Tutor/tutor packages/addpackage";
+import TutorMain from "../components/Tutor/main page/TutorMain";
+import Sessions from "../components/Tutor/bookyoursessions/Sessions";
+import AddNewDocument from "../components/Tutor/documents/AddNewDocument";
+import BookYourSession from "../components/Tutor/bookyoursessions/BookYourSession";
+import ChatBox from "../components/Tutor/chats/chats";
+import TutorPackages from "../components/Tutor/tutor packages/tutorpackages";
+import ComingSoon from "../components/toastalert";
+import MeetingPreference from "../components/Tutor/meeting preference/MeetingPreference";
+
+// Lazy-loaded imports
+const NotFound = lazy(() => import("../components/notfound"));
 const Home = lazy(() => import("../components/pages/LoginHomepage"));
 const LandingPage = lazy(() => import("../components/pages/LandingPage"));
 const Terms = lazy(() => import("../components/policies and links/terms"));
@@ -13,7 +26,6 @@ const ContactUs = lazy(() => import("../components/policies and links/contactus"
 const myclass = lazy(() => import("../components/my classes dashboard/myclass"));
 const NotificationPage = lazy(() => import("../components/notifications/notifiactionpage"));
 
-// Lazy imports for academic components
 const Academic = lazy(() => import("../components/Academic/Academic"));
 const BookingSuccessful = lazy(() => import("../components/Academic/bookingsuccessful"));
 const BookNowModal = lazy(() => import("../components/Academic/booknowmodal"));
@@ -26,23 +38,24 @@ const BookYourTutorPayment = lazy(() => import("../components/Academic/paymentpa
 const TutorListing = lazy(() => import("../components/Academic/tutorlisting"));
 const TutorListingExt = lazy(() => import("../components/Academic/TutorListingExt"));
 const F2FSession = lazy(() => import("../components/Academic/f2fsessions"));
-// Lazy imports for your other new components
+
 const FaqSidebar = lazy(() => import("../components/sidebar options/faqssidebar"));
 const AddAccountModal = lazy(() => import("../components/my classes dashboard/AddAccountModal"));
 const ManageProfileModal = lazy(() => import("../components/my classes dashboard/manageprofile"));
 const Profile = lazy(() => import("../components/my classes dashboard/profile"));
 const ProfileUpdate = lazy(() => import("../components/my classes dashboard/updateprofile"));
-const AddRateCard= lazy(() => import("../components/Tutor/ratecards/AddRateCards"));
-const rateCard= lazy(() => import("../components/Tutor/ratecards/ratecard"));
-const AcademicRatecard= lazy(() => import("../components/Tutor/ratecards/ratecard"));
+const AddRateCard = lazy(() => import("../components/Tutor/ratecards/AddRateCards"));
+const rateCard = lazy(() => import("../components/Tutor/ratecards/ratecard"));
+const AcademicRatecard = lazy(() => import("../components/Tutor/ratecards/AddRateCardDetailed"));
 
-const TestUI= lazy(() => import("../components/Tutor/bookyoursessions/Sessions"));
+const TestUI = lazy(() => import("../components/Tutor/main page/TutorMain"));
 
 const StatusTutor = lazy(() => import("../components/sidebar options/StatusTutor"));
 const ReviewPopup = lazy(() => import("../components/sidebar options/ReviewPopup"));
 const ClassesLink = lazy(() => import("../components/sidebar options/ClassesLink"));
 const ClassDetails = lazy(() => import("../components/sidebar options/ClassDetails"));
 const ClassDetailF2F = lazy(() => import("../components/sidebar options/ClassDetailF2F"));
+
 
 
 const ROUTES = [
@@ -72,6 +85,83 @@ const ROUTES = [
     path: "/statustutor",
     id: 3,
     Component: StatusTutor,
+    isPrivate: true,
+  },
+  {
+    name: "Coming Soon",
+    path: "/comingsoon",
+    id: 5,
+    Component: ComingSoon,
+    isPrivate: true,
+  },
+  {
+    name: "Sessions",
+    path: "/sessions",
+    id: 1,
+    Component: Sessions,
+    isPrivate: true,
+  },
+  {
+    name: "Schedule Student",
+    path: "/schedulestudent",
+    id: 2,
+    Component: ScheduleStudent,
+    isPrivate: true,
+  },
+  {
+    name: "Book Your Session",
+    path: "/bookyoursession",
+    id: 3,
+    Component: BookYourSession,
+    isPrivate: true,
+  },
+  {
+    name: "Tutor Main",
+    path: "/tutormain",
+    id: 4,
+    Component: TutorMain,
+    isPrivate: true,
+  },
+  {
+    name: "Chat Notifications",
+    path: "/chatnotifications",
+    id: 5,
+    Component: ChatNotificationsPage,
+    isPrivate: true,
+  },
+  {
+    name: "Add New Document",
+    path: "/addnewdocument",
+    id: 6,
+    Component: AddNewDocument,
+    isPrivate: true,
+  },
+  {
+    name: "Chat Box",
+    path: "/chatbox",
+    id: 7,
+    Component: ChatBox,
+    isPrivate: true,
+  },
+  {
+    name: "Add Package",
+    path: "/addpackage",
+    id: 8,
+    Component: AddPackage,
+    isPrivate: true,
+  },
+  {
+    name: "Meeting Preference",
+    path: "/meetingpreference",
+    id: 9,
+    Component: MeetingPreference,
+    isPrivate: true,
+  },
+  {
+    name: "Tutor Packages",
+    path: "/tutorpackages",
+    id: 9,
+    Component: TutorPackages,
     isPrivate: true,
   },
   {

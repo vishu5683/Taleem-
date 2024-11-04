@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Typography, IconButton, Modal, Button } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Close';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -129,12 +129,14 @@ const App = () => {
     setShowAddNew(true);
   };
 
+  // Trigger the modal to open based on a condition or event in the app
+  useEffect(() => {
+    // Example: Open modal when component mounts
+    handleOpen();
+  }, []);
+
   return (
     <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
-      <Button variant="contained" onClick={handleOpen}>
-        Open Documents
-      </Button>
-
       {/* Show either DocumentModal or AddNewDocument */}
       {showAddNew ? (
         <Modal open={showAddNew} onClose={handleClose} aria-labelledby="add-document-modal">

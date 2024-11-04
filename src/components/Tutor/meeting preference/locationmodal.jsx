@@ -55,9 +55,9 @@ const LocationModal = ({ open, onClose }) => {
           src={img1}
           alt="Map View"
           sx={{
-            width: '209px',
-            height: '100%',
-            transform: 'rotate(90deg)',
+            width: '95%',
+            height: '50%',
+           
             marginTop: '16px',
             borderRadius: '8px',
           }}
@@ -65,27 +65,43 @@ const LocationModal = ({ open, onClose }) => {
 
         {/* Address Input */}
         <TextField
-          fullWidth
-          variant="outlined"
-          placeholder="Address"
-          sx={{
-            width: '816px',
-            height: '98px',
-            marginTop: '16px',
-            padding: '8px 12px',
-            borderRadius: '6px',
-            '& .MuiOutlinedInput-root': {
-              borderColor: '#737373',
-            },
-          }}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <LocationOnIcon sx={{ color: '#737373' }} />
-              </InputAdornment>
-            ),
-          }}
-        />
+  fullWidth
+  variant="outlined"
+  placeholder="Address"
+  multiline
+  minRows={2} // Ensures at least two lines are visible
+  sx={{
+    width: '816px',
+    marginTop: '16px',
+    padding: '8px 12px',
+    borderRadius: '6px',
+    '& .MuiOutlinedInput-root': {
+      borderColor: '#40A39B', // Border color
+      '&:hover fieldset': {
+        borderColor: '#40A39B', // Border color on hover
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#40A39B', // Border color when focused
+      },
+      alignItems: 'flex-start', // Align content at the top
+    },
+    '& .MuiOutlinedInput-input': {
+      padding: '10px', // Adjust padding for multiline input
+    },
+    '& .MuiInputAdornment-root': {
+      position: 'absolute', // Position the icon absolutely
+      left: 10, // Align to the right
+      top: 10, // Align to the top
+    },
+  }}
+  InputProps={{
+    startAdornment: (
+      <InputAdornment position="start">
+        <LocationOnIcon sx={{ color: '#FFC7C6' }} />
+      </InputAdornment>
+    ),
+  }}
+/>
 
         {/* Save Button */}
         <Button

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, Typography, Slider, Button, IconButton } from '@mui/material';
 import MyClassLayout from '../../my classes dashboard/MyClassLayout';
 import EditIcon from '@mui/icons-material/Edit';
+import LocationModal from './locationmodal'; // Importing the existing LocationModal
 
 // Reusable component for each meeting point box
 const MeetingPointBox = ({ pointNumber, address }) => (
@@ -51,23 +52,22 @@ const MeetingPointBox = ({ pointNumber, address }) => (
 
 const MeetingPreference = () => {
   const [distance, setDistance] = useState(25); // Initial slider value
+  const [modalOpen, setModalOpen] = useState(false); // State for modal
 
   // Handle slider change
   const handleSliderChange = (event, newValue) => {
     setDistance(newValue);
   };
 
+  // Handle opening and closing of the modal
+  const handleOpenModal = () => setModalOpen(true);
+  const handleCloseModal = () => setModalOpen(false);
+
   return (
     <MyClassLayout>
       <Box sx={{ padding: '24px' }}>
         {/* Page Title */}
-        <Typography
-          sx={{
-            fontWeight: 700,
-            fontSize: '32px',
-            marginBottom: '16px',
-          }}
-        >
+        <Typography sx={{ fontWeight: 700, fontSize: '32px', marginBottom: '16px' }}>
           Meeting Preference
         </Typography>
 
@@ -84,7 +84,6 @@ const MeetingPreference = () => {
             justifyContent: 'space-between',
           }}
         >
-          {/* Booking Preference Label */}
           <Typography sx={{ fontWeight: 700, fontSize: '14px' }}>Booking Preference radius</Typography>
 
           {/* Range Slider with Dynamic Distance */}
@@ -135,6 +134,7 @@ const MeetingPreference = () => {
         >
           <Typography sx={{ fontWeight: 700, fontSize: '16px' }}>Meeting Point</Typography>
           <Button
+            onClick={handleOpenModal}
             sx={{
               backgroundColor: '#40A39B',
               color: '#fff',
@@ -144,7 +144,7 @@ const MeetingPreference = () => {
               fontSize: '16px',
               width: '35%',
               height: '44px',
-              textTransform:"none",
+              textTransform: "none",
               '&:hover': { backgroundColor: '#368f80' },
             }}
           >
@@ -162,6 +162,9 @@ const MeetingPreference = () => {
           address={`West Bay Complex\nB, Next to City Center Mall, West Bay, Doha, Qatar`}
         />
       </Box>
+
+      {/* Location Modal */}
+      <LocationModal open={modalOpen} onClose={handleCloseModal} />
     </MyClassLayout>
   );
 };
