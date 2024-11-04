@@ -99,7 +99,9 @@ const OtpScreen = ({
           if (data?.type == "signup" && data?.user == 3) {
             handleClose();
             tutorsInfoOpen();
-          } else {
+          } else if(data?.user == 3){
+            navigate("/tutorMain", { isStudent });
+          }else{
             navigate("/home", { isStudent });
           }
         } else {

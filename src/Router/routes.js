@@ -6,6 +6,7 @@ import TutorDetails from "../components/Academic/TutorDetails";
 const NotFound=lazy(() => import("../components/notfound"));
 // Lazy imports for your existing components
 const Home = lazy(() => import("../components/pages/LoginHomepage"));
+const tutorMain = lazy(() => import("../components/home page/tutorMain"));
 const LandingPage = lazy(() => import("../components/pages/LandingPage"));
 const Terms = lazy(() => import("../components/policies and links/terms"));
 const PrivacyPolicy = lazy(() => import("../components/policies and links/privacypolicy"));
@@ -58,6 +59,14 @@ const ROUTES = [
     Component: LandingPage,
     isPrivate: false,
   },
+  {
+    name: "tutorMain",
+    path: "/tutorMain",
+    id: 1,
+    Component: tutorMain,
+    isPrivate: false,
+  },
+  
   {
     name: "NotFound",
     path: "*",
