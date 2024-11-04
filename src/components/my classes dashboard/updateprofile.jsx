@@ -13,7 +13,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import profileImage from "../../assets/profile/image.svg";
 import MyClassLayout from "./MyClassLayout";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfile, updateProfile } from "../../Redux/Actions";
+import { getProfile, getTutorProfile, updateProfile } from "../../Redux/Actions";
 import { useNavigate } from "react-router-dom";
 
 const ProfileUpdate = () => {
@@ -21,6 +21,13 @@ const ProfileUpdate = () => {
   const navigate = useNavigate();
   const getProfileData = useSelector(
     (state) => state.getProfileReducer?.getProfileData
+  );
+
+  var  profileTutorData = useSelector(
+    (state) => state.getTutorProfileReducer?.getTutorProfileData?.profileData
+  );
+  var  profileStudentData = useSelector(
+    (state) => state.getStudentProfileReducer?.getStudentProfileData?.profileData
   );
 
   const [formData, setFormData] = useState({
@@ -37,7 +44,14 @@ const ProfileUpdate = () => {
   }, []);
 
   useEffect(() => {
+    
     if (getProfileData) {
+      if (getProfileData?.user_type == 3) {
+        dispatch(getTutorProfile());
+       
+      } else {
+        dispatch(getStudentProfile());
+      }
       setFormData({
         fullName: getProfileData?.name,
         mobileNumber: getProfileData?.mobile_no,

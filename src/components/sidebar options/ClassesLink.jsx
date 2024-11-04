@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography, Grid, Button } from '@mui/material';
 import SchoolIcon from '@mui/icons-material/School';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import CalendarTodayIcon from '@mui/icons-material/CalendarMonth';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import LanguageIcon from '@mui/icons-material/Language';
 import ChatIcon from '@mui/icons-material/Chat';
@@ -117,55 +117,57 @@ const ClassesLink = () => {
 
         {/* Meeting and Passcode Box in a Row */}
         <Box
-          sx={{
-            width: '100%',
-            backgroundColor: '#40A39B',
-            borderRadius: '16px',
-            padding: '16px',
-            color: '#fff',
-            display: 'flex',
-            justifyContent: { xs: 'center', sm: 'space-between' },
-            flexDirection: { xs: 'column', sm: 'row' },
-            textAlign: { xs: 'center', sm: 'left' },
-            marginBottom: '20px', // Adding margin bottom
-          }}
-        >
-          <Box mb={{ xs: '16px', sm: '0' }}>
-            {/* Meeting ID */}
-            <Typography variant="body1" sx={{ fontWeight: 600 }}>
-              Meeting ID
-            </Typography>
-            <Typography
-              variant="h6"
-              sx={{
-                fontWeight: 600,
-                fontSize: '24px',
-                lineHeight: '28px',
-                letterSpacing: '4px',
-              }}
-            >
-              739 8493 8775
-            </Typography>
-          </Box>
+  sx={{
+    width: '100%',
+    backgroundColor: '#40A39B',
+    borderRadius: '16px',
+    padding: '16px',
+    color: '#fff',
+    display: 'flex',
+    justifyContent: 'flex-start', // Align side by side
+    gap: '60px', // Add gap between the boxes
+    flexDirection: { xs: 'column', sm: 'row' },
+    textAlign: { xs: 'center', sm: 'left' },
+    marginBottom: '20px', // Adding margin bottom
+  }}
+>
+  <Box mb={{ xs: '16px', sm: '0' }}>
+    {/* Meeting ID */}
+    <Typography variant="body1" sx={{ fontWeight: 400 }}>
+      Meeting ID
+    </Typography>
+    <Typography
+      variant="h6"
+      sx={{
+        fontWeight: 600,
+        fontSize: '24px',
+        lineHeight: '28px',
+        letterSpacing: '4px',
+      }}
+    >
+      739 8493 8775
+    </Typography>
+  </Box>
 
-          <Box>
-            {/* Passcode */}
-            <Typography variant="body1" sx={{ fontWeight: 600 }}>
-              Passcode
-            </Typography>
-            <Typography
-              variant="h6"
-              sx={{
-                fontWeight: 600,
-                fontSize: '24px',
-                letterSpacing: '4px',
-                lineHeight: '28px',
-              }}
-            >
-              8kB7DR
-            </Typography>
-          </Box>
-        </Box>
+  <Box>
+    {/* Passcode */}
+    <Typography variant="body1" sx={{ fontWeight: 400 }}>
+      Passcode
+    </Typography>
+    <Typography
+      variant="h6"
+      sx={{
+        fontWeight: 600,
+        fontSize: '24px',
+        letterSpacing: '4px',
+        lineHeight: '28px',
+      }}
+    >
+      8kB7DR
+    </Typography>
+  </Box>
+</Box>
+
 
         {/* Profile Section */}
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexDirection: { xs: 'column', sm: 'row' } }}>

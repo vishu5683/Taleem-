@@ -8,18 +8,43 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 import SchoolIcon from "@mui/icons-material/School";
 import HomeIcon from "@mui/icons-material/Home";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfile } from "../../Redux/Actions";
+import {
+  getProfile,
+  getStudentProfile,
+  getTutorProfile,
+} from "../../Redux/Actions";
+import ArrowForwardIcon from '@mui/icons-material/KeyboardArrowRight';
 
 const Profile = () => {
   const navigate = useNavigate(); // Initialize navigate hook
   const dispatch = useDispatch();
 
+  var  profileTutorData = useSelector(
+    (state) => state.getTutorProfileReducer?.getTutorProfileData?.profileData
+  );
+  var  profileStudentData = useSelector(
+    (state) => state.getStudentProfileReducer?.getStudentProfileData?.profileData
+  );
   var getProfileData = useSelector(
     (state) => state.getProfileReducer?.getProfileData
   );
+
   useEffect(() => {
     dispatch(getProfile());
   }, []);
+  useEffect(() => {
+    if (getProfileData?.user_type == 3) {
+      dispatch(getTutorProfile());
+     
+    } else {
+      dispatch(getStudentProfile());
+    }
+  }, [getProfileData]);
+
+  useEffect(()=>{
+    console.log(profileTutorData,"profileTutorData")
+  },[profileTutorData])
+
   // Function to handle "Edit" button click and navigate to the profile update route
   const handleEditClick = () => {
     navigate("/profileupdate"); // Navigate to /profileupdate
@@ -57,7 +82,7 @@ const Profile = () => {
               fontSize: { xs: "1.2rem", sm: "1.5rem" }, // Responsive font size
             }}
           >
-            {getProfileData?.name}
+            {getProfileData?.user_type==3 ? profileTutorData?.name : profileStudentData?.name}
           </Typography>
 
           <Button
@@ -107,7 +132,7 @@ const Profile = () => {
               variant="body1"
               sx={{ fontSize: { xs: "0.875rem", sm: "1rem" } }}
             >
-              +{getProfileData?.mobile_no}
+              +{getProfileData?.user_type==3 ? profileTutorData?.mobile_no : profileStudentData?.mobile_no}
             </Typography>
           </Box>
 
@@ -126,7 +151,7 @@ const Profile = () => {
               variant="body1"
               sx={{ fontSize: { xs: "0.875rem", sm: "1rem" } }}
             >
-              {getProfileData?.email || "NA"}
+              {getProfileData?.user_type==3 ? profileTutorData?.email : profileStudentData?.email}
             </Typography>
           </Box>
 
@@ -161,7 +186,8 @@ const Profile = () => {
               >
                 Address:{" "}
                 <span style={{ fontWeight: 400, color: "#737373" }}>
-                  {getProfileData?.address || "NA"}
+              {getProfileData?.user_type ==3? profileTutorData?.address : profileStudentData?.address}
+              
                 </span>
               </Typography>
             </Box>
@@ -177,7 +203,8 @@ const Profile = () => {
               >
                 Grade:{" "}
                 <span style={{ fontWeight: 400, color: "#737373" }}>
-                  12th, Primary
+                {getProfileData?.user_type==3 ? profileTutorData?.grade : profileStudentData?.grade}
+
                 </span>
               </Typography>
             </Box>
@@ -185,12 +212,30 @@ const Profile = () => {
         </Box>
       </Box>
       {getProfileData?.user_type == 3 && (
-        <Box
-          className="bg-[#EBFFFC] h-12 p-4 pb-8 rounded-lg mt-8"
-          sx={{ display: "flex", flexDirection: "column", alignItems: "left" }}
-        >
-          <Typography>Meeting Preferences</Typography>
-        </Box>
+    
+
+      <Box
+        sx={{
+          width: '100%',
+          height: '76px',
+          backgroundColor: '#EBFFFC', // Background color
+          borderRadius: '12px', // Border radius
+          padding: '16px', // Padding for internal spacing
+          display: 'flex',
+          justifyContent: 'space-between', // Align text to the left and arrow to the right
+          alignItems: 'center', // Center vertically
+          marginTop: '35px', // Add margin-top equivalent to your `mt-8`
+        }}
+      >
+        {/* Left-side text */}
+        <Typography sx={{ fontWeight: 530, fontSize: '19px' }}>
+          Meeting Preference
+        </Typography>
+      
+        {/* Right arrow icon */}
+        <ArrowForwardIcon sx={{ fontSize: '24px', color: 'black' }} />
+      </Box>
+      
       )}
     </MyClassLayout>
   );

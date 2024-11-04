@@ -3,12 +3,21 @@ import { Box, Menu, MenuItem, Typography, Divider, Avatar } from '@mui/material'
 import { ExpandMore, ChevronRight } from '@mui/icons-material';
 import { useLocation, useNavigate } from 'react-router-dom'; // Import useNavigate for routing
 import avatarImage from '../../assets/navbar/image.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProfile } from '../../Redux/Actions';
 
 const DropdownProfileMenu = ({ userName, userEmail }) => {
   const navigate = useNavigate(); // Initialize the navigate hook
   const location = useLocation();
   const [anchorEl, setAnchorEl] = useState(null);
+  const dispatch = useDispatch();
+  const getProfileData = useSelector(
+    (state) => state.getProfileReducer?.getProfileData
+  );
 
+  useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
   const handleOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -90,7 +99,9 @@ const DropdownProfileMenu = ({ userName, userEmail }) => {
         >
           <Avatar src={avatarImage} sx={{ width: 56, height: 56, marginRight: '12px' }} />
           <Box>
-            <Typography sx={{ fontWeight: 500, fontSize: '16px' }}>Naseem</Typography>
+          <Typography sx={{ fontWeight: 500, fontSize: '16px' }}>
+      {getProfileData?.name}
+    </Typography>
             <Typography sx={{ fontSize: '14px', color: '#737373' }}>naseem@gmail.com</Typography>
             <Box
               sx={{

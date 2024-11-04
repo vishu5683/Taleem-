@@ -318,6 +318,7 @@ import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
+import { updateTutorDocument } from "../../Redux/Actions";
 // import { uploadDocuments } from "../../Redux/Actions"; // hypothetical action for file upload
 
 const UploadDocumentsForm = ({
@@ -348,18 +349,26 @@ const UploadDocumentsForm = ({
     initialValues,
     validationSchema,
     onSubmit: (values) => {
+      console.log(values,"DFGADSGSDSDA")
       setIsSubmitting(true);
       const formData = new FormData();
+
       formData.append("academic_document", values.academic_document);
       formData.append("address_proof", values.address_proof);
       formData.append("id_photo", values.id_photo);
 
-      // dispatch(
-      //   uploadDocuments(formData, () => {
+      const payload={
+     id_photo: JSON.stringify(values.id_photo),
+     address_proof: JSON.stringify(values.address_proof),
+     academic_document: JSON.stringify(values.academic_document)
+    }
+
+      dispatch(
+        updateTutorDocument(payload, () => {
           setIsSubmitting(false);
           handleClose();
-      //   })
-      // );
+        })
+      );
     },
   });
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Typography, Grid, Button, Divider, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import SchoolIcon from '@mui/icons-material/School';
@@ -6,12 +6,14 @@ import CalendarTodayIcon from '@mui/icons-material/CalendarMonth';
 import LanguageIcon from '@mui/icons-material/Language';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import PromotionalBanner from '../common comps/promotionalbanner';
+import { getProfile } from '../../Redux/Actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 // Reusable component for class details items
 const ClassDetailItem = ({ icon: Icon, label, value }) => (
   <Box display="flex" alignItems="center" sx={{ flexDirection: { xs: 'column', sm: 'row' }, textAlign: { xs: 'center', sm: 'start' } }}>
     <Icon sx={{ color: '#EBBE49', mr: { sm: '8px' }, mb: { xs: '4px', sm: '0' } }} />
-    <Typography variant="body1" sx={{ fontWeight: 400, fontSize: { xs: '12px', sm: '14px' }, color: '#737373' }}>
+    <Typography variant="body1" sx={{ fontWeight: 400, fontSize: { xs: '12px', sm: '14px' }, color: '#1A1A1A' }}>
       {label}: {value}
     </Typography>
   </Box>
@@ -35,6 +37,15 @@ const CustomDivider = () => (
 const ClassDetails = () => {
   const [expandedAccordion, setExpandedAccordion] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const getProfileData = useSelector(
+    (state) => state.getProfileReducer?.getProfileData
+  );
+
+  useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
 
   const handleAccordionToggle = (index) => {
     setExpandedAccordion((prevIndex) => (prevIndex === index ? false : index));
@@ -226,21 +237,24 @@ const ClassDetails = () => {
             </Typography>
 
             <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <Button
-                onClick={handleJoinClass}
-                sx={{
-                  fontWeight: 600,
-                  fontSize: '14px',
-                  color: '#fff',
-                  backgroundColor: '#40A39B',
-                  textTransform: 'capitalize',
-                  padding: '8px 16px',
-                  borderRadius: '6px',
-                  '&:hover': { backgroundColor: '#359387' },
-                }}
-              >
-                Join
-              </Button>
+            <Button
+      onClick={handleJoinClass}
+      sx={{
+        fontWeight: 400,
+        fontSize: "14px",
+        color: "#fff",
+        backgroundColor: "#40A39B",
+        textTransform: "capitalize",
+        width: "159px", // Fixed width
+        height: "28px", // Fixed height
+        padding: "7px 16px", // Updated padding
+        borderRadius: "8px", // Updated border-radius
+        "&:hover": { backgroundColor: "#359387" },
+      }}
+    >
+      {getProfileData?.user_type === 3 ? "Start Class" : "Join"}
+    </Button>
+
             </Box>
           </AccordionDetails>
         </Accordion>
