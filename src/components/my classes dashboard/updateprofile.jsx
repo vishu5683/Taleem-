@@ -43,24 +43,24 @@ const ProfileUpdate = () => {
     dispatch(getProfile());
   }, []);
 
-  useEffect(() => {
+  // useEffect(() => {
     
-    if (getProfileData) {
-      if (getProfileData?.user_type == 3) {
-        dispatch(getTutorProfile());
+  //   if (getProfileData) {
+  //     if (getProfileData?.user_type == 3) {
+  //       dispatch(getTutorProfile());
        
-      } else {
-        dispatch(getStudentProfile());
-      }
-      setFormData({
-        fullName: getProfileData?.name,
-        mobileNumber: getProfileData?.mobile_no,
-        email: getProfileData?.email,
-        address: getProfileData?.address,
-        grade: "",
-      });
-    }
-  }, [getProfileData]);
+  //     } else {
+  //       dispatch(getStudentProfile());
+  //     }
+  //     setFormData({
+  //       fullName: getProfileData?.name,
+  //       mobileNumber: getProfileData?.mobile_no,
+  //       email: getProfileData?.email,
+  //       address: getProfileData?.address,
+  //       grade: "",
+  //     });
+  //   }
+  // }, [getProfileData]);
 
   const validate = () => {
     const newErrors = {};

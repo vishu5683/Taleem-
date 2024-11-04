@@ -5,10 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import avatarImage from '../../assets/navbar/image.png';
 import ManageProfileModal from '../my classes dashboard/manageprofile';
+import DocumentModal from '../Tutor/documents/DocumentModal'; // Adjust path if needed
 import { getProfile } from '../../Redux/Actions';
 
 const SidebarMyClasses = () => {
-  const [openModal, setOpenModal] = useState(false);
+  const [openManageProfileModal, setOpenManageProfileModal] = useState(false);
+  const [openDocumentModal, setOpenDocumentModal] = useState(false); // New state for Document modal
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -22,33 +24,38 @@ const SidebarMyClasses = () => {
   const studentMenuItems = [
     { label: 'My Classes', route: '/myclasses' },
     { label: 'My Calendar', route: '/mycalendar' },
-    { label: 'Manage Profile', action: 'openModal' },
+    { label: 'Manage Profile', action: 'openManageProfileModal' },
     { label: 'Terms of Services', route: '/termsofservice' },
     { label: 'FAQs', route: '/faq' },
     { label: 'Rating & Feedbacks', route: '/feedbacks' },
     { label: 'Contact Us', route: '/contactus' },
+ 
   ];
 
   const tutorMenuItems = [
-    { label: 'Earnings', route: '/earnings' },
+    { label: 'Earnings', route: '/comingsoon' },
     { label: 'Rate Card', route: '/ratecard' },
-    { label: 'Chats', route: '/chats' },
-    { label: 'Documents', route: '/documents' },
+    { label: 'Chats', route: '/chatnotifications' },
+    { label: 'Documents', action: 'openDocumentModal' }, // Add action for Documents modal
     { label: 'FAQs', route: '/faq' },
     { label: 'Contact Us', route: '/contactus' },
   ];
 
-  // Select the menu items based on user_type
   const menuItems = getProfileData?.user_type == 3 ? tutorMenuItems : studentMenuItems;
 
-  const handleOpenModal = () => setOpenModal(true);
-  const handleCloseModal = () => setOpenModal(false);
+  const handleOpenManageProfileModal = () => setOpenManageProfileModal(true);
+  const handleCloseManageProfileModal = () => setOpenManageProfileModal(false);
+
+  const handleOpenDocumentModal = () => setOpenDocumentModal(true);
+  const handleCloseDocumentModal = () => setOpenDocumentModal(false);
 
   const handleItemClick = (item) => {
     if (item.route) {
       navigate(item.route);
-    } else if (item.action === 'openModal') {
-      handleOpenModal();
+    } else if (item.action === 'openManageProfileModal') {
+      handleOpenManageProfileModal();
+    } else if (item.action === 'openDocumentModal') {
+      handleOpenDocumentModal();
     }
   };
 
@@ -119,9 +126,16 @@ const SidebarMyClasses = () => {
       ))}
 
       {/* Manage Profile Modal */}
-      <Modal open={openModal} onClose={handleCloseModal}>
+      <Modal open={openManageProfileModal} onClose={handleCloseManageProfileModal}>
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-          <ManageProfileModal onClose={handleCloseModal} />
+          <ManageProfileModal onClose={handleCloseManageProfileModal} />
+        </Box>
+      </Modal>
+
+      {/* Document Modal */}
+      <Modal open={openDocumentModal} onClose={handleCloseDocumentModal}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+          <DocumentModal onClose={handleCloseDocumentModal} />
         </Box>
       </Modal>
     </Box>

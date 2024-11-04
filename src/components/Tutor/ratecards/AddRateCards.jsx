@@ -3,11 +3,12 @@ import { Typography, Box, Button, TextField } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import DoneIcon from '@mui/icons-material/Done';
 import MyClassLayout from '../../my classes dashboard/MyClassLayout';
+import { useNavigate } from 'react-router-dom';
 
 const AddRateCards = () => {
   const [selectedButton, setSelectedButton] = useState(null);
   const [selectedSession, setSelectedSession] = useState(null);
-
+  const navigate = useNavigate();
   const handleButtonClick = (button) => setSelectedButton(button);
   const handleSessionSelect = (session) => setSelectedSession(session);
 
@@ -174,19 +175,20 @@ fontWeight:"400",
             Cancel
           </Button>
           <Button
-            variant="contained"
-            sx={{
-              width: '186px',
-              height: '44px',
-              borderRadius: '8px',
-              backgroundColor: '#40A39B',
-              color: '#fff',
-              fontWeight: '500',
-              textTransform: 'none',
-            }}
-          >
-            Save
-          </Button>
+      variant="contained"
+      sx={{
+        width: '186px',
+        height: '44px',
+        borderRadius: '8px',
+        backgroundColor: '#40A39B',
+        color: '#fff',
+        fontWeight: '500',
+        textTransform: 'none',
+      }}
+      onClick={() => navigate('/academic_ratecard')}
+    >
+      Save
+    </Button>
         </Box>
       </Box>
     </MyClassLayout>

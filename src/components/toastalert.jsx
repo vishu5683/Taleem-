@@ -1,19 +1,58 @@
 import React from 'react';
-import { Snackbar, Alert } from '@mui/material';
+import { Box, Typography, Button, Paper } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useNavigate } from 'react-router-dom';
 
-const ToastAlert = ({ open, onClose, severity = 'info', message = 'Coming Soon!' }) => {
+const ComingSoon = () => {
+  const navigate = useNavigate();
+
   return (
-    <Snackbar
-      open={open}
-      autoHideDuration={3000} // Automatically hides after 3 seconds
-      onClose={onClose}
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} // Position of the toast
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100vh',
+        padding: 3,
+        backgroundColor: '#f5f5f5',
+      }}
     >
-      <Alert onClose={onClose} severity={severity} sx={{ width: '100%' }}>
-        {message}
-      </Alert>
-    </Snackbar>
+      <Paper
+        elevation={4}
+        sx={{
+          padding: 5,
+          borderRadius: '16px',
+          textAlign: 'center',
+          maxWidth: '600px',
+          width: '90%',
+        }}
+      >
+        <Typography variant="h3" sx={{ fontWeight: 'bold', color: '#333', mb: 1 }}>
+          Coming Soon!
+        </Typography>
+        <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+          This page is currently under development. We’re working hard to bring it to you soon!
+        </Typography>
+        <Button
+          variant="contained"
+          color="primary"
+          startIcon={<ArrowBackIcon />}
+          onClick={() => navigate(-1)} // Go back to the previous page
+          sx={{
+            mt: 2,
+            textTransform: 'none',
+            padding: '10px 24px',
+            fontSize: '16px',
+            borderRadius: '8px',
+            boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+          }}
+        >
+          Go Back
+        </Button>
+      </Paper>
+    </Box>
   );
 };
 
-export default ToastAlert;
+export default ComingSoon;

@@ -1,9 +1,12 @@
 import React from 'react';
 import { Box, Typography, Avatar, Paper } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import MyClassLayout from '../../my classes dashboard/MyClassLayout';
 import avatarImage from "../../../assets/chats/image.png";
 
 const NotificationBox = () => {
+  const navigate = useNavigate();
+
   return (
     <Paper
       elevation={3}
@@ -15,7 +18,9 @@ const NotificationBox = () => {
         padding: '20px 32px',
         gap: '16px',
         borderRadius: '20px',
+        cursor: 'pointer', // Add cursor pointer for clickable effect
       }}
+      onClick={() => navigate('/ChatBox')} // Navigate to /ChatBox on click
     >
       <Avatar
         src={avatarImage}
@@ -37,16 +42,14 @@ const NotificationBox = () => {
   );
 };
 
-const NotificationsPage = () => {
+const ChatNotificationsPage = () => {
   return (
     <MyClassLayout>
       <Box sx={{ padding: '32px' }}>
-        {/* Title */}
         <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 3 }}>
           Chats
         </Typography>
         
-        {/* Notification Boxes */}
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <NotificationBox />
           <NotificationBox />
@@ -58,4 +61,4 @@ const NotificationsPage = () => {
   );
 };
 
-export default NotificationsPage;
+export default ChatNotificationsPage;
