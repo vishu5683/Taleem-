@@ -364,6 +364,54 @@ export const getProfile = (callback) => {
   };
 };
 
+export const getTutorProfile = (callback) => {
+  return (dispatch) => {
+    Utils.api.getApiCall(
+      Utils.EndPoint.getTutorProfile,
+      "",
+      (resData) => {
+        console.log(resData, "resData");
+        if (resData.status) {
+          dispatch({
+            type: Utils.actionName.getTutorProfile,
+            payload: {
+              getTutorProfileData: resData?.data,
+            },
+          });
+          callback(resData?.data);
+        } else {
+        }
+      },
+      (error) => {}
+    );
+  };
+};
+
+
+export const getStudentProfile = (callback) => {
+  return (dispatch) => {
+    Utils.api.getApiCall(
+      Utils.EndPoint.getStudentProfile,
+      "",
+      (resData) => {
+        console.log(resData, "resData");
+        if (resData.status) {
+          dispatch({
+            type: Utils.actionName.getStudentProfile,
+            payload: {
+              getStudentProfileData: resData?.data,
+            },
+          });
+          callback(resData?.data);
+        } else {
+        }
+      },
+      (error) => {}
+    );
+  };
+};
+
+
 
 export const updateProfile = (data,callback) => {
   return (dispatch) => {

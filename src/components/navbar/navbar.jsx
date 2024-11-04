@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';  // Import Link from react-router-dom
 import logo from '../../assets/navbar/nav logo.png';
 import SignUp from "../login screens/SignUp";
 import LoginWithStudent from "../login screens/LoginWithStudent";
+import LanguageDropDown from './languageDropDown';
+import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
     const [data, setData] = useState();
@@ -16,6 +18,11 @@ const Navbar = () => {
    const [signUpOpen, setSignUpOpen] = useState(false);
    const [open, setOpen] = useState(false);
    const [tutorsInfoOpen, setTutorsInfoOpen] = useState(false);
+   const { t, i18n } = useTranslation();
+
+  const changeLanguage = (language) => {
+    i18n.changeLanguage(language);
+  };
    const handleOpen = () => setOpen(true);
  const handleClose = () => setOpen(false);
   const handleOpenPrices = (event) => {
@@ -183,7 +190,7 @@ const Navbar = () => {
           </Typography>
 
           {/* Language Dropdown */}
-          <Box>
+          {/* <Box>
             <Typography
               variant="body1"
               onClick={handleOpenLanguage}
@@ -200,7 +207,46 @@ const Navbar = () => {
               <MenuItem onClick={handleCloseLanguage}>English</MenuItem>
               <MenuItem onClick={handleCloseLanguage}>Arabic</MenuItem>
             </Menu>
-          </Box>
+          </Box> */}
+              <Box>
+      <Typography
+        variant="body1"
+        onClick={handleOpenLanguage}
+        sx={{
+          fontWeight: 400,
+          fontSize: "16px",
+          lineHeight: "20px",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        Language
+        <ExpandMore />
+      </Typography>
+      <Menu
+        anchorEl={anchorElLanguage}
+        open={Boolean(anchorElLanguage)}
+        onClose={handleCloseLanguage}
+      >
+        <MenuItem
+          onClick={(e) => {
+            changeLanguage("en");
+            handleCloseLanguage(e);
+          }}
+        >
+          English
+        </MenuItem>
+        <MenuItem
+          onClick={(e) => {
+            changeLanguage("fr");
+            handleCloseLanguage(e);
+          }}
+        >
+          Arabic
+        </MenuItem>
+      </Menu>
+    </Box>
         </Box>
 
         {/* Desktop Buttons */}

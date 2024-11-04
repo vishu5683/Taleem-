@@ -3,6 +3,7 @@ import { Box, Typography, Grid, InputBase, Button, useMediaQuery, useTheme } fro
 import { styled } from '@mui/system';
 import SearchIcon from '@mui/icons-material/Search'; // MUI icon for search
 import bgimg from '../../assets/hero sec/Banner1.png';
+import { useTranslation } from 'react-i18next';
 
 // Styled component for background image
 const HeroSectionWrapper = styled(Box)(({ theme }) => ({
@@ -61,6 +62,7 @@ const SearchButton = styled(Button)(({ theme }) => ({
 }));
 
 const HeroSection = () => {
+  const { t, i18n } = useTranslation();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // Check if device is mobile
 
@@ -75,9 +77,10 @@ const HeroSection = () => {
               fontSize={{ xs: '24px', sm: '32px', md: '48px' }} // Reduced font size for phones
               lineHeight="1.2"
             >
-              Connect with your <br />
+              {/* Connect with your <br />
               Perfect Tutor <br />
-              for learning.
+              for learning. */}
+              {t('Connect with your')}
             </Typography>
             <Typography
               variant="body1"
@@ -85,9 +88,10 @@ const HeroSection = () => {
               fontSize={{ xs: '12px', sm: '16px', md: '18px' }} // Smaller font size on phones
               mt={2}
             >
-              Accelerate your professional growth with <br />
+              {/* Accelerate your professional growth with <br />
               1:1 expert guidance of <br />
-              28,409+ tutors in our community.
+              28,409+ tutors in our community. */}
+               {t('Accelarate')}
             </Typography>
 
             {/* Conditionally render Search Box on non-mobile devices */}
